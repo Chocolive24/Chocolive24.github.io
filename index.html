@@ -304,8 +304,8 @@ void QuadTree::Clear() noexcept
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Create the root node.
-The first thing we need to create for the quad-tree is the root node.<br>
-The root node will encompass all the colliders in the world and serve as the basis for the sub-division. To find the size of the root node, we need to search for the body with the smallest X position and the body with the smallest Y position, then similarly we need to search for the body with the largest X position and the body with the largest Y position. We know from this search that there are no bodies outside the rectangle created by these 4 positions.<br>
+The first thing I need to create for the quad-tree is the root node.<br>
+The root node will encompass all the colliders in the world and serve as the basis for the sub-division. To find the size of the root node, I need to search for the body with the smallest X position and the body with the smallest Y position, then similarly we need to search for the body with the largest X position and the body with the largest Y position. We know from this search that there are no bodies outside the rectangle created by these 4 positions.<br>
 
 QuadTree.h
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -663,19 +663,19 @@ Visually, there's a huge difference since the implementation of the quad-tree. L
 
 ![One frame of the version without broad phase.](images/noBroadFrame.png width) ![One frame of the version with broad phase.](images/QuadTreeUniquePtrFrame.png)<br><br>
 
-Sample              | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
---------------------|-----------|--------------|--------------|-------------|
-without broad phase |748.86     |  758.77      |   132.85     | 14          |
-with broad phase    |27.57      |  27.25       |   3.41       | 203         |
+| Sample              | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
+| --------------------|-----------|--------------|--------------|-------------|
+| without broad phase |748.86     |  758.77      |   132.85     | 14          |
+| with broad phase    |27.57      |  27.25       |   3.41       | 203         |
 [Table: Comparisons of narrow-phase statistics between the non-quad-tree and quad-tree versions.]
 
 The above values can be obtained directly using Tracy. However, we can't say with these values if there is a significant difference between the means of two groups, although here the result seems fairly obvious given the huge difference between the statistics.
 Normally, to prove that there is a significant difference, we need to use the student t-test. This test compares two groups and assesses whether the observed differences between them are likely due to random chance or if they are statistically significant.
 The t-test defines a P value, usually at 5%, which is the probability that the null hypothesis is correct. If the test result is smaller than P (5%), this means that the null hypothesis has almost no chance of being correct. So let's do a t-test on our values to find out the probability that the version of my engine without broad phase is better than the one with.
 
-P(T<=t) two-tail |
------------------|
-2.33e-17         |
+| P(T<=t) two-tail |
+|------------------|
+| 2.33e-17         |
 [Table: Student T-Test Values using P = 5%.]
 
 The "P" result of the T-Test proves that the probability that the version without broad phase is better is extremely close to 0. This tells us that there is indeed a significant time difference between the two versions, but it doesn't tell us by how much.<br> 
@@ -700,11 +700,11 @@ The three main part in the broad phase are:
 
 Here is the different execution time of each part of the broad phase:
 
-Function name       | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
---------------------|-----------|--------------|--------------|-------------|
-Clear               |0.123      |  0.102       |   0.063      | 203         |
-Insert colliders    |3.23       |  3.17        |   0.494      | 203         |
-Calculate pairs     |2.59       |  2.53        |   0.477      | 203         |
+| Function name       | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
+|---------------------|-----------|--------------|--------------|-------------|
+| Clear               |0.123      |  0.102       |   0.063      | 203         |
+| Insert colliders    |3.23       |  3.17        |   0.494      | 203         |
+| Calculate pairs     |2.59       |  2.53        |   0.477      | 203         |
 [Table: Statistics of each part of the broad phase]
 
 The longest part is the "Insert" one. So let's analyse and investigate it. Perhaps there is something to do with the allocations of that part of the quad-tree.
@@ -969,10 +969,10 @@ There are still a few allocations, but far fewer than before. The few remaining 
 Let's see if this change reduces the execution time of the Insert function:<br>
 Note that the values are in nanoseconds because this is a very small function and it is easier to represent the values with a smaller unit in this case.
 
-Sample (Insert function)        | Mean (ns) | Median (ns)  | Std dev (ns) | Observations|
---------------------------------|-----------|--------------|--------------|-------------|
-with vector                     |149        |  68          |   717        | 200         |
-with array                      |117        |  72          |   1039       | 178         |
+| Sample (Insert function)        | Mean (ns) | Median (ns)  | Std dev (ns) | Observations|
+|---------------------------------|-----------|--------------|--------------|-------------|
+| with vector                     |149        |  68          |   717        | 200         |
+| with array                      |117        |  72          |   1039       | 178         |
 [Table: Comparisons of narrow-phase statistics between the non-quad-tree and quad-tree versions.]
 
 |P(T<=t) two-tail |
