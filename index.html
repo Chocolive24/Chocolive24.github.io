@@ -209,7 +209,7 @@ Okay that's cool, like that we avoid unessary checks. At least as long as there 
 To be more efficient, I can subdivide the world recursively to have as few comparisons as possible. It will greatly reduces the number of potential collider pair to manage.<br>
 This method of space subdivision is called "quad-tree". We can represent a quad-tree as a tree with a root node with 4 children nodes that have 4 children nodes too etc recursively:
 
-![Here I recursively subdivided the space in function of the position of the colliders.<br> In this specific case the number of collider pair to check is equal to 0<br> because each collider is in a different subspace.](images/RecursiveSubDivision.png height=300px) ![Quad-tree representation](images/quadTree.png height=300px)
+![Here I recursively subdivided the space in function of the position of the colliders.<br> In this specific case the number of collider pair to check is equal to 0<br> because each collider is in a different subspace.](images/RecursiveSubDivision.png height=300px) ![Quad-tree representation](images/quadTree.png width=500px height=300px)
 
 Before implementing a quad-tree in my engine, there is a last thing to take in considereration. It is the case where two colliders are perfectly between several sub-spaces. If I add them in each of the subspaces they touch, I'll check them several times in several subspaces. This would duplicate the pair in the different nodes and give us a bad result. That's why, in this case, it's better to add these colliders to the parent node.
 
