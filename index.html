@@ -202,12 +202,12 @@ One way to do it is to subdivide the current world space in 4 subspaces and then
 
 ![Here the colliders are in different subspaces so I don't check if they overlap](images/2CirclesInDifferentZones.png height=300px) ![Here I only check if the colliders in the zone 2 overlap](images/2CirclesInZone2.png height=300px)
 
-Okay that's cool, like that we avoid unessary checks. At least as long as there aren't too many colliders in the same zone.
+Okay that's cool, like that I avoid unessary checks. At least as long as there aren't too many colliders in the same zone.
 
 ![Here there are 4 colliders in zone 2, which makes me want to redivide this zone into 4 subspaces](images/4CirclesInZone2.png height=300px)
 
 To be more efficient, I can subdivide the world recursively to have as few comparisons as possible. It will greatly reduces the number of potential collider pair to manage.<br>
-This method of space subdivision is called "quad-tree". We can represent a quad-tree as a tree with a root node with 4 children nodes that have 4 children nodes too etc recursively:
+This method of space subdivision is called "quad-tree". I can represent a quad-tree as a tree with a root node with 4 children nodes that have 4 children nodes too etc recursively:
 
 ![Here I recursively subdivided the space in function of the position of the colliders.<br> In this specific case the number of collider pair to check is equal to 0<br> because each collider is in a different subspace.](images/RecursiveSubDivision.png height=300px) ![Quad-tree representation](images/quadTree.png width=500px height=300px)
 
@@ -222,7 +222,7 @@ Quad-tree implementation
 In the rest of the blog post, you'll often see types and functions from a namespace called "Math". This namespace contains everything you need to calculate intersections of geometric shapes and other useful notions.<br>
 If you really don't understand what certain types or functions do, I'll let you have a look at the source code: https://github.com/Chocolive24/PhysicsEngine/tree/master/libs/math/include
 
-So to implement a quad-tree we need 2 classes.<br>
+So to implement a quad-tree I need 2 classes.<br>
 The first one is a QuadNode class (I did a struct because all elements need to be public) that will looks like that:<br>
 Note that the pointers I use to create child nodes are of type "UniquePtr", which is my custom type that allows me to trace my allocations. You can replace them with "std::unique_ptr". If you're interested in how this class is implemented, here's the source code: https://github.com/Chocolive24/PhysicsEngine/blob/master/common/include/UniquePtr.h
 
@@ -305,7 +305,7 @@ void QuadTree::Clear() noexcept
 
 ### Create the root node.
 The first thing I need to create for the quad-tree is the root node.<br>
-The root node will encompass all the colliders in the world and serve as the basis for the sub-division. To find the size of the root node, I need to search for the body with the smallest X position and the body with the smallest Y position, then similarly we need to search for the body with the largest X position and the body with the largest Y position. We know from this search that there are no bodies outside the rectangle created by these 4 positions.<br>
+The root node will encompass all the colliders in the world and serve as the basis for the sub-division. To find the size of the root node, I need to search for the body with the smallest X position and the body with the smallest Y position, then similarly we need to search for the body with the largest X position and the body with the largest Y position. I know from this search that there are no bodies outside the rectangle created by these 4 positions.<br>
 
 QuadTree.h
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -369,7 +369,7 @@ void World::resolveBroadPhase() noexcept
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Insert colliders in the quad-tree.
-The next step is to insert the colliders into our quad-tree.  Each collider will be inserted recursively from the root node.
+The next step is to insert the colliders into my quad-tree.  Each collider will be inserted recursively from the root node.
 To find out in which node a collider should be placed, I store the colliders in rectangular form, then add them to the node they overlap. Obviously, if a collider overlaps several nodes, it remains in the parent node.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -384,7 +384,7 @@ struct SimplifiedCollider
 };
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-![representation of simplified colliders to detect in which node we have to insert them](images/SimplifiedColliders.png height=300px)
+![representation of simplified colliders to detect in which node I have to insert them](images/SimplifiedColliders.png height=300px)
 
 I use 2 methods to insert colliders. A public method that takes a simplified collider and inserts it into the root node. This ensures that I never insert a collider anywhere other than the first node.<br>
 The other method is private and will be called recursively to insert colliders in the correct subspaces if they have been created.
@@ -507,7 +507,7 @@ void QuadTree::insertInNode(QuadNode& node,
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Then in my resolveBroadPhase method I simply iterate over all the colliders in my world, create their collider in simplified form and call the public "Insert" method. At the very end of my broad phase, I ask my quad-tree to calculate the possible peers, so I only have to ask to retrieve them in my narrow phase.
+Then in my resolveBroadPhase method I simply iterate over all the colliders in my world, create their collider in simplified form and call the public "Insert" method. At the very end of my broad phase, I ask my quad-tree to calculate the possible pairs, so I only have to ask to retrieve them in my narrow phase.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 
@@ -552,7 +552,7 @@ Then in my resolveBroadPhase method I simply iterate over all the colliders in m
 
 ### Calculate all possible pair of colliders.
 
-The last step in our quad-tree is to extract all possible pairs of overlapping colliders. To do this, we need to go down the tree from the root node and compare each collider in the parent node with all its children, then do the same thing again, going down the tree recursively to pass through all the nodes. To do this I have 3 methods.<br>
+The last step in my quad-tree is to extract all possible pairs of overlapping colliders. To do this, I need to go down the tree from the root node and compare each collider in the parent node with all its children, then do the same thing again, going down the tree recursively to pass through all the nodes. To do this I have 3 methods.<br>
 The first method is public and allows the world to call for the creation of possible pairs. This method will then call the second method, which is private and will be called recursively on each node. The last method is also private and allows you to descend recursively on each child of a parent node to compare each collider of the parent with those of the children.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -630,7 +630,7 @@ The first method is public and allows the world to call for the creation of poss
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now I simply need to replace my for loops in my "detectColliderPairs" method (which I call resolveNarrowPhase now) by a range loop threw the vector of possible pairs of the quad-tree.
-The rest of the code is the same, i try to find each possible pair in my unordered_set and activate the correct trigger events.
+The rest of the code is the same, I try to find each possible pair in my unordered_set and activate the correct trigger events.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 void World::resolveNarrowPhase() noexcept
@@ -686,11 +686,11 @@ To know the magnitude of this difference, we need to calculate the confidence in
 |753.6127898           |  12.37144189        |   26.72687524        | 726.8859145      | 780.339665         |
 [Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
 
-Our confidence interval therefore lies between 726 ms and 780 ms. This means that in the worst case, we gain 726 ms with the broad phase, and in the best case, 780 ms. We've proved that this addition statistically improves the program.
+The confidence interval therefore lies between 726 ms and 780 ms. This means that in the worst case, we gain 726 ms with the broad phase, and in the best case, 780 ms. We've proved that this addition statistically improves the program.
 
 Optimization of the quad-tree.
 ==============================================================
-We have greatly reduced the execution time for collider pair detection. However, the time it takes to my engine to update is still over 16ms, which I don't like. What can we improve in the code? First, let's look at the execution times of the different broad phase parts:<br>
+I have greatly reduced the execution time for collider pair detection. However, the time it takes to my engine to update is still over 16ms, which I don't like. What can I improve in the code ? First, let's look at the execution times of the different broad phase parts:<br>
 The three main part in the broad phase are:
 - Clear to quad-tree
 - Insert colliders in the quad-tree.
@@ -733,7 +733,7 @@ node.Children[3] = MakeUnique<QuadNode>(_heapAllocator, _heapAllocator);
 Making memory allocations for each frame is definitely not the best idea. Whenever it's possible to allocate memory at the beginning of the program and reuse the same memory block until the end, it's crucial to do so. How can I allocate all the memory required for the children nodes at quad-tree initialization?
 
 ### Pre-allocate all children nodes.
-So we need to know how many nodes we need in the program. The number of nodes can vary, but we can know the maximum number of nodes. In fact, the quad-tree has a max depth that stops recursion. Using this max depth, we can know the maximum number of nodes and pre-allocate an equivalent amount at the start of the program.<br>
+So I need to know how many nodes I need in the program. The number of nodes can vary, but I can know the maximum number of nodes. In fact, the quad-tree has a max depth that stops recursion. Using this max depth, I can know the maximum number of nodes and pre-allocate an equivalent amount at the start of the program.<br>
 The calcul is : 4^0 + 4^1 + 4^2 ... + \(4^{maxDepth}\).<br>
 This gives the sum of each maximum node number on each level of the quad-tree, which is the maxmium of node possible. To store the memory of all these nodes, I'll use a vector to call the resize function to directly create empty nodes and then perform push_back() easily. I also need a node index to find out where to place the chidlren nodes in memory. <br>
 
@@ -753,7 +753,8 @@ private:
 
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-So now the "Init" method will resize my vector with the maximum amount of node memory using a method that calculates this amount. In addition, the "Init" method reserves the maximum number of colliders (+ 1 to allow detection that we need to divide the node space) in each child's vector of colliders. Finally, it also reserves an amount of memory in the vector of possible pairs. For the time being, there's no mathematical way of knowing in advance the maximum amount of peers possible. That's why this value is totally arbitrary and I estimate it at three times the total number of nodes in the quad-tree.
+
+So now the "Init" method will resize my vector with the maximum amount of node memory using a method that calculates this amount. In addition, the "Init" method reserves the maximum number of colliders (+ 1 to allow detection that I need to divide the node space) in each child's vector of colliders. Finally, it also reserves an amount of memory in the vector of possible pairs. For the time being, there's no mathematical way of knowing in advance the maximum amount of pairs possible. That's why this value is totally arbitrary and I estimate it at three times the total number of nodes in the quad-tree.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 template< typename T >
@@ -787,7 +788,7 @@ constexpr T QuadCount(T depth)
  }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that we've reserved the necessary memory for our quad-tree, we need to assign the children to these memory locations in the vector. The child nodes that were previously "UniquePtr" will now become simple raw pointers to locations in the node vector.<br>
+Now that I have reserved the necessary memory for my quad-tree, I need to assign the children to these memory locations in the vector. The child nodes that were previously "UniquePtr" will now become simple raw pointers to locations in the node vector.<br>
 
 QuadTree.h -> QuadNode struct
 
@@ -841,11 +842,11 @@ void QuadTree::Clear() noexcept
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Let's see if we've shortened the execution time of these various functions:
+Let's see if I have shortened the execution time of these various functions:
 
 ![One frame after the pre-allocation of data in the quad-tree.](images/PreAllocFrame.png)
 
-There is cleary less allocations as you can see on the image. We removed the large portion of allocations that formed a "V" at the beginning of the frame. Let's analyse the statistics of the version 1 of the sample (without pre-allocation) and the version 2 (with pre-allocation):
+There is cleary less allocations as you can see on the image. I removed the large portion of allocations that formed a "V" at the beginning of the frame. Let's analyse the statistics of the version 1 of the sample (without pre-allocation) and the version 2 (with pre-allocation):
 
 | Sample version      | Function name       | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 |---------------------|---------------------|-----------|--------------|--------------|-------------|
@@ -920,7 +921,7 @@ The allocations are made by the vector of remaining colliders.
  }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Because I don't know how many colliders will have to remain in the parent node, I decided to make a vector to store them. The problem is that a vector dynamically allocates memory and it has a cost. Instead of allocating memory on the heap, let's try to allocate on the stack. Why not using an array instead of the vector ? We can directly set the size of the array to the max number of colliders (+ 1 for the last collider added) inside a node to make sure you have the right amount of memory, even in the worst-case scenario. It doesn't matter if you allocate more memory than you need, because it's taken from the stack. At the end of the function's scope, this memory will be restored, so let's make use of it.
+Because I don't know how many colliders will have to remain in the parent node, I decided to make a vector to store them. The problem is that a vector dynamically allocates memory and it has a cost. Instead of allocating memory on the heap, let's try to allocate on the stack. Why not using an array instead of the vector ? I can directly set the size of the array to the max number of colliders (+ 1 for the last collider added) inside a node to make sure you have the right amount of memory, even in the worst-case scenario. It doesn't matter if you allocate more memory than you need, because it's taken from the stack. At the end of the function's scope, this memory will be restored, so let's make use of it.
 
 Use array instead of vector:
 
@@ -1092,8 +1093,8 @@ Current code:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 But now I generate the collider pairs with my quad-tree. There will never be the same pair twice. So why not use a vector ?<br>
-The problem with a vector is knowing which colliders to keep or not in the current pairs. But if we think about it carefully, in each frame, the colliders which overlap are the current new peers of the world. I just have to store them in a vector then, for each of the peers that touch each other, I just have to look if I already have this pair or not and activate the TriggerEnter event in this case.
-Then I traverse the vector through old pairs and I see if they are part of the new pairs currently in overlap. If this is not the case, I activate the TriggerExit event. Finally I set the value of the old or new peers at the end of the frame:<br>
+The problem with a vector is knowing which colliders to keep or not in the current pairs. But if I think about it carefully, in each frame, the colliders which overlap are the current new pairs of the world. I just have to store them in a vector then, for each of the pairs that touch each other, I just have to look if I already have this pair or not and activate the TriggerEnter event in this case.
+Then I traverse the vector through old pairs and I see if they are part of the new pairs currently in overlap. If this is not the case, I activate the TriggerExit event. Finally I set the value of the old or new pairs at the end of the frame:<br>
 
 New code:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -1195,14 +1196,14 @@ I used tracy's "ZoneValue" option to display the size of my possible pair vector
 
 ![The number of pairs over which the narrow phase iterate on a frame -> 98502](images/100000Pairs.png)
 
-We need to find a way to filter out pairs that really have overlap potential in the quad-tree.<br>
+I need to find a way to filter out pairs that really have overlap potential in the quad-tree.<br>
 Currently the quad-tree works as follows:
 The colliders of the parent nodes are compared with all the colliders of the child nodes. However, most of these comparisons are useless because the collider in question can be very far from the colliders of child nodes. Maybe it's easier to understand with a diagram:
 
-![Case where we generate useless pairs](images/OptiCase.png)
+![Case where I generate useless pairs](images/OptiCase.png)
 
-So to avoid creating useless pairs, we can only interest the pair of colliders which have their simplified shape which overlaps. 
-This way we avoid a large number of unnecessary comparisons and can reduce our memory accesses:
+So to avoid creating useless pairs, I can only interest the pair of colliders which have their simplified shape which overlaps. 
+This way we avoid a large number of unnecessary comparisons and can reduce my memory accesses:
 
 QuadTree.cpp -> calculateNodePossiblePairs()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -1314,12 +1315,15 @@ Let's take a look at the time saved when executing the world's "Update" function
 |808.3191733           |  23.20918389        |   47.70716026        | 760.612013       | 856.0263335        |
 [Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
 
+With all the changes made to my engine I saved between 760ms and 856ms. I'm satisfied with the result.
 The main factors making my program slow were memory allocations and accesses. I was able to save a lot of time on my frames by allocating as much memory as possible at the start of the program to avoid allocating as much as possible during the update. I was also able to save a lot of time by doing a bigger sort on the colldier pairs I was generating, which shortened the time spent searching for data in memory. As a result, my code is more real time safe and, above all, much faster to execute. 
 
+Well, I think I've talked enough
+
 Thank you very much for taking the time to read my blog post. 
-Here's the source code of my project if you're curious:
-You can also check out my game projects on my itch.io page:
-I think I've said all I had to say. Thanks again, bye!
+Here's the source code of my project if you're curious: https://github.com/Chocolive24/PhysicsEngine
+
+You can also check out my game projects on my itch.io page: https://itch.io/profile/chocolive
 
 Pachoud Olivier - Games Programmer student at Sae Institute Geneva
 
