@@ -1,6 +1,128 @@
 <meta charset="utf-8" emacsmode="-*- markdown -*-"><style class="fallback">body{visibility:hidden}</style><link rel="stylesheet" href="../css_templates/blue_template.css">
 
-                            **The protocole I created for my turn-based game.**
+                            **The network protocole of my C++ turn-based game.**
 
-Hello, I recently learned the basics of graphics programming using the OpenGL API as part of a course module at SAE Insitute Geneva.
-I've managed to create a 3D scene using several techniques and functionalities, as follows:
+Hello, I recently learned the basics of network programming in a course module at SAE Institute Geneva. 
+I had to put this knowledge into practice to create a small turn-based network game using the SFML library and TCP sockets, 
+all in three weeks. 
+So I created my very first network protocol to communicate data between the various clients of my game and my server.
+
+I chose to make a 8-ball pool game using my own 2D physics engine. 
+I've set up a lobby system that allows several games to be played simultaneously by several clients on the server. 
+I also have a database that stores the username and elo of each player connecting to the game.
+
+![Demo of my 8-ball pool <br> It shows two players (blue and red windows) playing a game in network](videos/demo.mp4)
+
+I'm only going to present the protocol I've created for my game, based on Tcp sockets supplied by SFML. 
+I'm only going to talk about the application layer, since my protocol is located there.
+If you're interested in the transport and network layers, please refer to the SFML documentation.
+With that being said, let's get into it.
+
+Packet types.
+===============================================================================
+
+The basis of my protocol is an enum called PacketType, 
+which differentiates the different packets and allows correct interaction with each of them.
+
+PacketType:
+
+- kNone 
+- kClientIdentification,
+- kJoinLobby,
+- KStartGame,
+- kNewTurn,
+- KCueBallVelocity,
+- kEndGame,
+- kEloUpdated,
+
+The first piece of data contained in a packet is always a PacketType so that the way in which the rest of the packet's 
+data is read can be adapted. <br>
+Here is a small example in pseudo-code for sending a packet:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+sf::Packet my_packet{};
+my_packet << PacketType << any_type_of_data;
+client_network_interface_->SendPacket(my_packet);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+And here is a small example in pseudo-code for receiving and decoding a packet:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+sf::Packet received_packet;
+const auto packet_type = client_network_interface_->ReceivePacket(received_packet);
+switch (packet_type) {
+  case PacketType::kNone:
+    std::cerr << "Packet received has no type. \n";
+    break;
+  case PacketType::kJoinLobby:
+  case PacketType::kClientIdentification: 
+  case PacketType::kEloUpdated:
+  case PacketType::KStartGame:
+  case PacketType::kNewTurn:
+  case PacketType::KCueBallVelocity:
+  case PacketType::kEndGame:
+    // Do what whatever you need to do
+    break;
+  default:
+    break;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Client connection and identification.
+===============================================================================
+
+When a user launches the client application, it connects its socket to the server using SFML-Network. 
+Once the connection has been made, the client application is in the user identification state. 
+In other words, the application asks the user to identify himself by giving a use name. 
+
+![Demo of client identification in my app.](gifs/client_identification.gif width=300 height=450)
+
+When the user has typed a name, a packet of type kClientIdentification containing the name string is sent to the server. The server then makes an HTTP request to the database to retrieve the player's elo. There are two scenarios.
+
+1. The username is already in the database, so the server retrieves the player's elo.
+2. The username is not in the database, so the server creates a new player with this name and a base elo of 1000. 
+
+The server then sends the client a packet of type kClientIdentification containing the client's username and elo. 
+When the client receive this packet the client-application switches to the main-menu state.
+This mechanism for returning the same type of packet guarantees that the client is properly logged in and identified, 
+and that he can now use his application freely. 
+It also makes it possible to reuse an existing packet type limit the size of the PacketType enumeration.
+
+Joining a lobby.
+===============================================================================
+
+TODO: gif de deux joueurs clickant sur play pour joindre un lobby.
+
+Starting a game.
+===============================================================================
+
+In-game packet communications.
+===============================================================================
+
+TODO: parler de la physics et du vieux bug.
+
+End of game and update of players' elo.
+===============================================================================
+
+Conclusion.
+===============================================================================
+
+Sending packets.
+===============================================================================
+
+My protocol uses sf::Packet, which is an object that provides a safe and easy way of serializing data so that it can be sent 
+over the network using sockets. 
+As mentioned above, the first piece of data to be included in a packet is a PacketType. 
+Let's take a look at how packets are sent from the client-side and the server-side
+
+Client-side.
+-------------------------------------------------------------------------------
+
+Server-side.
+-------------------------------------------------------------------------------
+
+
+Receiving packets.
+===============================================================================
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js?" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
