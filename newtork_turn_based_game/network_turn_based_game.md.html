@@ -134,6 +134,21 @@ simulate the physics. The more the game last, the more the physics desyncrhoniza
 End of game and update of players' elo.
 ===============================================================================
 
+The last part of my protocole consists in ending the game and updating the elo of each player.
+If you are not a beginner in network, you know that you must let the client less control on the game state possible 
+otherwise the user could change the code and cheat on your game. But when I created my game, as I said, it was the my first
+time writing network code and I sadly did that the client tells the server that he wons. So when a player has put the last 
+ball in a hole, he sends a packet of type kEndGame with a boolean value telling telling that he won. The server receive the packet
+and send a kEndGame packet with a "false" value to the other client to tell him that he lost.
+
+Then the server updates the elo of each client in the database based on their result and sends a packet of type kEloUpdated
+to each client with their new elo. When the client receive the kEloUpdated packet, it activtes the end game menu. 
+
+In the case where a player quite the game before it is finished, the other player automatically win the game and 
+both player's elo are updated.
+
+![Demo of a player winning the game + the ability to restart a game easily.](videos/end_game.mp4)
+
 Conclusion.
 ===============================================================================
 
