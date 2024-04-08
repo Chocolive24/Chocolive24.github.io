@@ -90,21 +90,54 @@ It also makes it possible to reuse an existing packet type limit the size of the
 
 Joining a lobby.
 ===============================================================================
+When the user presses the play button on the main menu, this sends a KJoinLobby packet to the server containing his username.
+The server will look for the first free lobby and add to it a ClientData object containing the player's username and 
+the port number on which the packets arrive.
 
-TODO: gif de deux joueurs clickant sur play pour joindre un lobby.
+Once the sucessfuly player has been added to the lobby, the server sends back a packet of type kJoinLobby 
+so that the client is aware that it is indeed in a lobby, and the application switches to lobby GUI and state.
+
+![Demo of two clients joining a lobby.](gifs/lobby.gif height=450)
 
 Starting a game.
 ===============================================================================
 
+When the server adds a second customer to a lobby, the lobby is complete and a game can be started. 
+The server will create a packet of type kStartGame containing the value "true" and a player index for each client. 
+The "true" value is used by the client to initialize its game, and the player index is used to differentiate between the players, 
+giving them different colors (blue and red), for example.
+The server also send a packet of type kNewTurn to the first player to enables him to play. 
+The clients simply retreive the data of the packet, their application initialize a new game object, switch to game state
+and the 8-ball pool game can start.
+
 In-game packet communications.
 ===============================================================================
 
-TODO: parler de la physics et du vieux bug.
+There is only two different packet types used in my gameplay logic. <br> 
+You already know the first one which is a 
+kNewTurn packet. This packet only contains a boolean to update the player logic that tells if the player can play or not.
+This packet is send to the server which will resend it to the other client when a player has played and the physics simulation 
+is finished (when all ball have a velocity lower than an epsilon value). <br> <br>
+
+The second packet type is KCueBallVelocity. A packet of this type is sent to the server when a client has strikes the ball.
+Something important is that the client don't simulates the physics right after striking the ball. It needs to wait for the 
+server's response to updates the physics a deterministic amount of time to have the exact same simulation as the other client.
+This server answer corresponds to antoher KCueBallVelocity sent to the two clients. So when a client receive this type of
+packet, it will update the physics until all balls have a velocity greater than an epsilon value.
+
+If the client don't wait for the server to simulate the physics, the would not have the same simulation. That's why
+this response from the server is very important.
+
+![Old version of my game when the clients don't wait the response from the server to 
+simulate the physics. The more the game last, the more the physics desyncrhonization can be seen.](videos/physics_bug.mp4)
 
 End of game and update of players' elo.
 ===============================================================================
 
 Conclusion.
+===============================================================================
+
+My network API documentation.
 ===============================================================================
 
 Sending packets.
