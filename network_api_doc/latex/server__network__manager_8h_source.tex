@@ -27,14 +27,15 @@
 \DoxyCodeLine{00027\ \ \ [[nodiscard]]\ \mbox{\hyperlink{types_8h_aa56ffd40edd0386c8b69e8b453cd6c54}{ReturnStatus}}\ \mbox{\hyperlink{class_server_network_manager_aab0f6bf5ecb6e5fdf4959f28ad3f99c0}{ListenToPort}}(\mbox{\hyperlink{types_8h_a7ae0c52260bc98d5cb0dde88976e1cac}{Port}}\ port)\ noexcept;}
 \DoxyCodeLine{00028\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_network_manager_a07d726b38ae75db62734dc1ea75838eb}{SendPacket}}(sf::Packet*\ packet,\ \mbox{\hyperlink{types_8h_a7ae0c52260bc98d5cb0dde88976e1cac}{Port}}\ client\_port)\ noexcept\ override;}
 \DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_network_manager_a6f8934d6aeebd48f0e1f6881abea2992}{PollEvents}}()\ noexcept\ override;}
-\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_network_manager_aab2a6a5774c53bb69f9050e10a53388e}{RemoveClient}}(std::unique\_ptr<sf::TcpSocket>\&\ client)\ noexcept;}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ private:}
-\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ PollClientsConnections()\ noexcept;}
-\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ PollClientsPackets()\ noexcept;}
-\DoxyCodeLine{00035\ \ \ std::vector<std::unique\_ptr<sf::TcpSocket>>\ clients\_\{\};}
-\DoxyCodeLine{00036\ \ \ sf::SocketSelector\ socket\_selector\_\{\};}
-\DoxyCodeLine{00037\ \ \ sf::TcpListener\ listener\_\{\};}
-\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ private:}
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{void}\ PollClientsConnections()\ noexcept;}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ PollClientsPackets()\ noexcept;}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{void}\ RemoveClient(std::unique\_ptr<sf::TcpSocket>\&\ client)\ noexcept;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ std::vector<std::unique\_ptr<sf::TcpSocket>>\ clients\_\{\};}
+\DoxyCodeLine{00037\ \ \ sf::SocketSelector\ socket\_selector\_\{\};}
+\DoxyCodeLine{00038\ \ \ sf::TcpListener\ listener\_\{\};}
+\DoxyCodeLine{00039\ \};}
 
 \end{DoxyCode}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Turn-based game network API documentation: network/include/server/server_network_manager.h Source File</title>
+<title>Network code documentation for my turn-based game: network/include/server/server_network_manager.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Turn-based game network API documentation<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Network code documentation for my turn-based game<span id="projectnumber">&#160;1.0</span>
    </div>
   </td>
  </tr>
@@ -109,15 +109,16 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_server_network_manager.html#aab0f6bf5ecb6e5fdf4959f28ad3f99c0">   27</a></span>  [[nodiscard]] <a class="code hl_enumeration" href="types_8h.html#aa56ffd40edd0386c8b69e8b453cd6c54">ReturnStatus</a> <a class="code hl_function" href="class_server_network_manager.html#aab0f6bf5ecb6e5fdf4959f28ad3f99c0">ListenToPort</a>(<a class="code hl_typedef" href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a> port) noexcept;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_server_network_manager.html#a07d726b38ae75db62734dc1ea75838eb">   28</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_server_network_manager.html#a07d726b38ae75db62734dc1ea75838eb">SendPacket</a>(sf::Packet* packet, <a class="code hl_typedef" href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a> client_port) noexcept override;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_server_network_manager.html#a6f8934d6aeebd48f0e1f6881abea2992">   29</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_server_network_manager.html#a6f8934d6aeebd48f0e1f6881abea2992">PollEvents</a>() noexcept override;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_server_network_manager.html#aab2a6a5774c53bb69f9050e10a53388e">   30</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_server_network_manager.html#aab2a6a5774c53bb69f9050e10a53388e">RemoveClient</a>(std::unique_ptr&lt;sf::TcpSocket&gt;&amp; client) noexcept;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>private:</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordtype">void</span> PollClientsConnections() noexcept;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordtype">void</span> PollClientsPackets() noexcept;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  std::vector&lt;std::unique_ptr&lt;sf::TcpSocket&gt;&gt; clients_{};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  sf::SocketSelector socket_selector_{};</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  sf::TcpListener listener_{};</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>private:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">void</span> PollClientsConnections() noexcept;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordtype">void</span> PollClientsPackets() noexcept;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordtype">void</span> RemoveClient(std::unique_ptr&lt;sf::TcpSocket&gt;&amp; client) noexcept;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  std::vector&lt;std::unique_ptr&lt;sf::TcpSocket&gt;&gt; clients_{};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  sf::SocketSelector socket_selector_{};</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  sf::TcpListener listener_{};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
 </div>
 <div class="ttc" id="aclass_server_network_interface_html"><div class="ttname"><a href="class_server_network_interface.html">ServerNetworkInterface</a></div><div class="ttdoc">ServerNetworkInterface is an interface to communicates with multiple clients.</div><div class="ttdef"><b>Definition</b> server_network_interface.h:11</div></div>
 <div class="ttc" id="aclass_server_network_manager_html"><div class="ttname"><a href="class_server_network_manager.html">ServerNetworkManager</a></div><div class="ttdoc">ServerNetworkManager is an implementation of the NetworkInterface which manages network communication...</div><div class="ttdef"><b>Definition</b> server_network_manager.h:16</div></div>
@@ -125,10 +126,9 @@ $(function() { codefold.init(0); });
 <div class="ttc" id="aclass_server_network_manager_html_a685dfe6a43812bc5d585ef7e1920eea2"><div class="ttname"><a href="class_server_network_manager.html#a685dfe6a43812bc5d585ef7e1920eea2">ServerNetworkManager::ServerNetworkManager</a></div><div class="ttdeci">constexpr ServerNetworkManager() noexcept=default</div></div>
 <div class="ttc" id="aclass_server_network_manager_html_a6f8934d6aeebd48f0e1f6881abea2992"><div class="ttname"><a href="class_server_network_manager.html#a6f8934d6aeebd48f0e1f6881abea2992">ServerNetworkManager::PollEvents</a></div><div class="ttdeci">void PollEvents() noexcept override</div><div class="ttdoc">PollEvents is a pure virtual method which must poll the network events such as client connections/dis...</div></div>
 <div class="ttc" id="aclass_server_network_manager_html_aab0f6bf5ecb6e5fdf4959f28ad3f99c0"><div class="ttname"><a href="class_server_network_manager.html#aab0f6bf5ecb6e5fdf4959f28ad3f99c0">ServerNetworkManager::ListenToPort</a></div><div class="ttdeci">ReturnStatus ListenToPort(Port port) noexcept</div></div>
-<div class="ttc" id="aclass_server_network_manager_html_aab2a6a5774c53bb69f9050e10a53388e"><div class="ttname"><a href="class_server_network_manager.html#aab2a6a5774c53bb69f9050e10a53388e">ServerNetworkManager::RemoveClient</a></div><div class="ttdeci">void RemoveClient(std::unique_ptr&lt; sf::TcpSocket &gt; &amp;client) noexcept</div></div>
 <div class="ttc" id="aserver__network__interface_8h_html"><div class="ttname"><a href="server__network__interface_8h.html">server_network_interface.h</a></div></div>
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
-<div class="ttc" id="atypes_8h_html_a7ae0c52260bc98d5cb0dde88976e1cac"><div class="ttname"><a href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a></div><div class="ttdeci">std::uint16_t Port</div><div class="ttdef"><b>Definition</b> types.h:16</div></div>
+<div class="ttc" id="atypes_8h_html_a7ae0c52260bc98d5cb0dde88976e1cac"><div class="ttname"><a href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a></div><div class="ttdeci">std::uint16_t Port</div><div class="ttdef"><b>Definition</b> types.h:19</div></div>
 <div class="ttc" id="atypes_8h_html_aa56ffd40edd0386c8b69e8b453cd6c54"><div class="ttname"><a href="types_8h.html#aa56ffd40edd0386c8b69e8b453cd6c54">ReturnStatus</a></div><div class="ttdeci">ReturnStatus</div><div class="ttdef"><b>Definition</b> types.h:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

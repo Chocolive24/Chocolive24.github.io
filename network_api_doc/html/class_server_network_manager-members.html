@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Turn-based game network API documentation: Member List</title>
+<title>Network code documentation for my turn-based game: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Turn-based game network API documentation<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Network code documentation for my turn-based game<span id="projectnumber">&#160;1.0</span>
    </div>
   </td>
  </tr>
@@ -87,16 +87,15 @@ $(function() {
   <tr class="odd"><td class="entry"><a class="el" href="class_server_network_manager.html#a6f8934d6aeebd48f0e1f6881abea2992">PollEvents</a>() noexcept override</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_server_network_interface.html#a7e20912b4dbfc7326dfe1f5e1201deb3">RegisterClientDisconnectionCallback</a>(const std::function&lt; void(Port client_port)&gt; &amp;callback)</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_server_network_interface.html#a7faace0a69e995fb47c8cf2ec2ef3bb7">RegisterPacketReceivedCallback</a>(const std::function&lt; void(ClientPacket *client_packet)&gt; &amp;callback)</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_server_network_manager.html#aab2a6a5774c53bb69f9050e10a53388e">RemoveClient</a>(std::unique_ptr&lt; sf::TcpSocket &gt; &amp;client) noexcept</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_manager.html#a07d726b38ae75db62734dc1ea75838eb">SendPacket</a>(sf::Packet *packet, Port client_port) noexcept override</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_server_network_interface.html#abc36a8f09d058c9ebe8bb725ae4587c4">ServerNetworkInterface</a>() noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_interface.html#a233b5059bb32b41ef73e3d1f4bdf3b4f">ServerNetworkInterface</a>(ServerNetworkInterface &amp;&amp;other) noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_server_network_interface.html#a6ffa8acd558234450c089feb31eb592e">ServerNetworkInterface</a>(const ServerNetworkInterface &amp;other) noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_manager.html#a685dfe6a43812bc5d585ef7e1920eea2">ServerNetworkManager</a>() noexcept=default</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_server_network_manager.html#ab5ed1f34b1852c750ecc707207d19394">ServerNetworkManager</a>(ServerNetworkManager &amp;&amp;other) noexcept=delete</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_manager.html#a31e4eb08e709a1b76875d50238411236">ServerNetworkManager</a>(const ServerNetworkManager &amp;other) noexcept=delete</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_server_network_interface.html#a582bb729bbb178af5c5d37c3a0bfad8f">~ServerNetworkInterface</a>() noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_manager.html#a975ca53d97bac3a5e756401e5beb4889">~ServerNetworkManager</a>() noexcept override=default</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_server_network_manager.html#a07d726b38ae75db62734dc1ea75838eb">SendPacket</a>(sf::Packet *packet, Port client_port) noexcept override</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_interface.html#abc36a8f09d058c9ebe8bb725ae4587c4">ServerNetworkInterface</a>() noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_server_network_interface.html#a233b5059bb32b41ef73e3d1f4bdf3b4f">ServerNetworkInterface</a>(ServerNetworkInterface &amp;&amp;other) noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_interface.html#a6ffa8acd558234450c089feb31eb592e">ServerNetworkInterface</a>(const ServerNetworkInterface &amp;other) noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_server_network_manager.html#a685dfe6a43812bc5d585ef7e1920eea2">ServerNetworkManager</a>() noexcept=default</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_manager.html#ab5ed1f34b1852c750ecc707207d19394">ServerNetworkManager</a>(ServerNetworkManager &amp;&amp;other) noexcept=delete</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_server_network_manager.html#a31e4eb08e709a1b76875d50238411236">ServerNetworkManager</a>(const ServerNetworkManager &amp;other) noexcept=delete</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_server_network_interface.html#a582bb729bbb178af5c5d37c3a0bfad8f">~ServerNetworkInterface</a>() noexcept=default</td><td class="entry"><a class="el" href="class_server_network_interface.html">ServerNetworkInterface</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_server_network_manager.html#a975ca53d97bac3a5e756401e5beb4889">~ServerNetworkManager</a>() noexcept override=default</td><td class="entry"><a class="el" href="class_server_network_manager.html">ServerNetworkManager</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -73,7 +73,7 @@ Client connection and identification.
 
 When a user launches the client application, it connects its socket to the server using SFML-Network. 
 Once the connection has been made, the client application is in the user identification state. 
-In other words, the application asks the user to identify himself by giving a use name. 
+In other words, the application asks the user to identify himself by giving a username. 
 
 ![Demo of client identification in my app.](gifs/client_identification.gif width=300 height=450)
 
@@ -102,31 +102,31 @@ so that the client is aware that it is indeed in a lobby, and the application sw
 Starting a game.
 ===============================================================================
 
-When the server adds a second customer to a lobby, the lobby is complete and a game can be started. 
-The server will create a packet of type kStartGame containing the value "true" and a player index for each client. 
-The "true" value is used by the client to initialize its game, and the player index is used to differentiate between the players, 
-giving them different colors (blue and red), for example.
-The server also send a packet of type kNewTurn to the first player to enables him to play. 
-The clients simply retreive the data of the packet, their application initialize a new game object, switch to game state
-and the 8-ball pool game can start.
+When the server adds a second user to a lobby, the lobby is complete and a game can be started. 
+The server creates a kStartGame package containing the value "true" and a player index for each client. 
+The "true" value is used by the client to initialize its game, and the player index is used to differentiate between players, 
+by giving them different colors (blue and red), for example.
+
+The server also sends a kNewTurn packet to the first player to enable him to play. 
+Clients simply receive the packet data, their application initializes a new game object, switches to the game state
+and the game of 8-ball billiards can begin.
 
 In-game packet communications.
 ===============================================================================
 
-There is only two different packet types used in my gameplay logic. <br> 
-You already know the first one which is a 
-kNewTurn packet. This packet only contains a boolean to update the player logic that tells if the player can play or not.
-This packet is send to the server which will resend it to the other client when a player has played and the physics simulation 
-is finished (when all ball have a velocity lower than an epsilon value). <br> <br>
+There are only two different types of packages used in my game logic. <br> 
+You're already familiar with the first, which is a 
+kNewTurn package. This packet contains only a boolean to update the player's logic, which says whether the player can play or not.
+This packet is sent to the server, which will send it back to the other client when a player has played and the physical simulation is complete (when all the balls have been hit). 
+is complete (when all balls have a speed below an epsilon value). <br>
 
-The second packet type is KCueBallVelocity. A packet of this type is sent to the server when a client has strikes the ball.
-Something important is that the client don't simulates the physics right after striking the ball. It needs to wait for the 
-server's response to updates the physics a deterministic amount of time to have the exact same simulation as the other client.
-This server answer corresponds to antoher KCueBallVelocity sent to the two clients. So when a client receive this type of
-packet, it will update the physics until all balls have a velocity greater than an epsilon value.
-
-If the client don't wait for the server to simulate the physics, the would not have the same simulation. That's why
-this response from the server is very important.
+The second type of packet is KCueBallVelocity. A packet of this type is sent to the server when a client has hit the ball.
+It's important that the client doesn't simulate physics immediately after hitting the ball. It must wait for the 
+response from the server to update the physics for a deterministic time so as to have exactly the same simulation as the other client.
+This server response corresponds to another KCueBallVelocity sent to both clients. So, when a client receives this type of
+it will update the physics until all the balls have a speed greater than an epsilon value.
+If the client doesn't wait for the server to simulate the physics, it won't get the same simulation. This is why this
+this server response is very important.
 
 ![Old version of my game when the clients don't wait the response from the server to 
 simulate the physics. The more the game last, the more the physics desyncrhonization can be seen.](videos/physics_bug.mp4)
@@ -134,18 +134,18 @@ simulate the physics. The more the game last, the more the physics desyncrhoniza
 End of game and update of players' elo.
 ===============================================================================
 
-The last part of my protocol consists in ending the game and updating the elo of each player.
-If you are not a beginner in network, you know that you must let the client less control on the game state possible 
-otherwise the user could change the code and cheat on your game. But when I created my game, as I said, it was the my first
-time writing network code and I sadly did that the client tells the server that he wons. So when a player has put the last 
-ball in a hole, he sends a packet of type kEndGame with a boolean value telling telling that he won. The server receive the packet
-and send a kEndGame packet with a "false" value to the other client to tell him that he lost.
+The last part of my protocol is to finish the game and update each player's elo.
+If you're not a network novice, you'll know that you need to give the client as little control as possible 
+over the state of the game, otherwise the user could modify the code and cheat on your game. 
+But when I created my game, as I said, it was the first time I'd written network code, and I unfortunately made it 
+so that the client would tell the server that it had won. So, when a player has put the last 
+in a hole, he sends a kEndGame packet with a Boolean value indicating that he has won. The server receives the
+packet and sends a kEndGame packet with a "false" value to the other client, telling it that he has lost.
 
-Then the server updates the elo of each client in the database based on their result and sends a packet of type kEloUpdated
-to each client with their new elo. When the client receive the kEloUpdated packet, it activtes the end game menu. 
-
-In the case where a player quite the game before it is finished, the other player automatically win the game and 
-both player's elo are updated.
+Next, the server updates each client's elo in the database according to his result and sends a packet of type kEloUpdated
+packet to each client with its new elo. When the client receives the kEloUpdated packet, it activates the end-of-game menu. 
+If one player leaves the game before it's over, the other player automatically wins the game and both players have their elo updated. 
+both players are updated.
 
 ![Demo of a player winning the game + the ability to restart a game easily.](videos/end_game.mp4)
 
@@ -155,14 +155,15 @@ Conclusion.
 My protocol is cleary not perfect. As I said before, the client has too much control on the game state 
 which is very unsafe. Despite that, I find the idea of ​​reusing the same type of packet to communicate in both directions 
 of the network (client->server server->client) smart enough not to double the number of variables in my enum.
+
 To upgrade my program I would make my server more authorative. It means that I would need to simulate the physics in 
 the server side too and check the physic state of the clients. Based on that, the server would be able to tell to which one the 
 turn is and which player won the game. 
 
-My network API documentation.
+My network code documentation.
 ===============================================================================
 
-If you are intersted in my network API for my game, you can check the documentation : <br>
-[turn-based game API documentation](../network_api_doc/html/index.html)
+If you are intersted in the network code I made for my game, you can check the documentation : <br>
+[turn-based game network code documentation](../network_api_doc/html/index.html)
 
 <!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js?" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>

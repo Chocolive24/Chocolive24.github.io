@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Turn-based game network API documentation: network/include/server/http_manager.h Source File</title>
+<title>Network code documentation for my turn-based game: network/include/server/http_manager.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Turn-based game network API documentation<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">Network code documentation for my turn-based game<span id="projectnumber">&#160;1.0</span>
    </div>
   </td>
  </tr>
@@ -87,32 +87,32 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="http__interface_8h.html">http_interface.h</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="foldopen" id="foldopen00005" data-start="{" data-end="};">
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="class_http_manager.html">    5</a></span><span class="keyword">class </span><a class="code hl_class" href="class_http_manager.html">HttpManager</a> final : <span class="keyword">public</span> <a class="code hl_class" href="class_http_interface.html">HttpInterface</a> {</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="class_http_manager.html#a713b1cffda7c23e5028aa7e8acfc1148">    7</a></span>  <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="class_http_manager.html#a713b1cffda7c23e5028aa7e8acfc1148">HttpManager</a>() noexcept = default;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_http_manager.html#a17ae121bce63efc8c1628202f87f3592">    8</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>(<a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp;&amp; other) noexcept = delete;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_http_manager.html#a141099133be6df38afbcf43ede1a2458">    9</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; operator=(<a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp;&amp; other) noexcept = delete;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_http_manager.html#a1c89429310b2962c02d4be337561e26a">   10</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>(const <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; other) noexcept = delete;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_http_manager.html#a55154bdfba209529986b7d9561851141">   11</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; operator=(const <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; other) noexcept = delete;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_http_manager.html#a1cb5f6a6073dd6011ac413c03763d5de">   12</a></span>  ~<a class="code hl_class" href="class_http_manager.html">HttpManager</a>() noexcept override = default;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_http_manager.html#a34e95756dc5be9e636b5ae948130f861">   14</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_http_manager.html#a34e95756dc5be9e636b5ae948130f861">RegisterHostAndPort</a>(std::string_view host, <a class="code hl_typedef" href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a> port) noexcept override;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_http_manager.html#a1c2ea327605a431295afae8643348c97">   15</a></span>  [[nodiscard]] std::<span class="keywordtype">string</span> <a class="code hl_function" href="class_http_manager.html#a1c2ea327605a431295afae8643348c97">Get</a>(std::string_view uri) noexcept override;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_http_manager.html#a791759e02eafef554edccc82c35253c8">   16</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_http_manager.html#a791759e02eafef554edccc82c35253c8">Post</a>(std::string_view uri, std::string_view json_body) noexcept override;</div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_http_manager.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="class_http_manager.html">HttpManager</a> final : <span class="keyword">public</span> <a class="code hl_class" href="class_http_interface.html">HttpInterface</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_http_manager.html#a713b1cffda7c23e5028aa7e8acfc1148">   11</a></span>  <span class="keyword">constexpr</span> <span class="keyword">explicit</span> <a class="code hl_function" href="class_http_manager.html#a713b1cffda7c23e5028aa7e8acfc1148">HttpManager</a>() noexcept = default;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_http_manager.html#a17ae121bce63efc8c1628202f87f3592">   12</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>(<a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp;&amp; other) noexcept = delete;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_http_manager.html#a141099133be6df38afbcf43ede1a2458">   13</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; operator=(<a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp;&amp; other) noexcept = delete;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_http_manager.html#a1c89429310b2962c02d4be337561e26a">   14</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>(const <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; other) noexcept = delete;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_http_manager.html#a55154bdfba209529986b7d9561851141">   15</a></span>  constexpr <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; operator=(const <a class="code hl_class" href="class_http_manager.html">HttpManager</a>&amp; other) noexcept = delete;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_http_manager.html#a1cb5f6a6073dd6011ac413c03763d5de">   16</a></span>  ~<a class="code hl_class" href="class_http_manager.html">HttpManager</a>() noexcept override = default;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>private:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  sf::Http http_{};</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_http_manager.html#a34e95756dc5be9e636b5ae948130f861">   18</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_http_manager.html#a34e95756dc5be9e636b5ae948130f861">RegisterHostAndPort</a>(std::string_view host, <a class="code hl_typedef" href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a> port) noexcept override;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_http_manager.html#a1c2ea327605a431295afae8643348c97">   19</a></span>  [[nodiscard]] std::<span class="keywordtype">string</span> <a class="code hl_function" href="class_http_manager.html#a1c2ea327605a431295afae8643348c97">Get</a>(std::string_view uri) noexcept override;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_http_manager.html#a791759e02eafef554edccc82c35253c8">   20</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="class_http_manager.html#a791759e02eafef554edccc82c35253c8">Post</a>(std::string_view uri, std::string_view json_body) noexcept override;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>private:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  sf::Http http_{};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
 </div>
 <div class="ttc" id="aclass_http_interface_html"><div class="ttname"><a href="class_http_interface.html">HttpInterface</a></div><div class="ttdoc">HttpInterface is an interface to perform GET and POST requests via the HTTP protocol....</div><div class="ttdef"><b>Definition</b> http_interface.h:11</div></div>
-<div class="ttc" id="aclass_http_manager_html"><div class="ttname"><a href="class_http_manager.html">HttpManager</a></div><div class="ttdef"><b>Definition</b> http_manager.h:5</div></div>
+<div class="ttc" id="aclass_http_manager_html"><div class="ttname"><a href="class_http_manager.html">HttpManager</a></div><div class="ttdoc">HttpManager is an implementation of the HttpInterface which enable to send Http GET and POST requests...</div><div class="ttdef"><b>Definition</b> http_manager.h:9</div></div>
 <div class="ttc" id="aclass_http_manager_html_a1c2ea327605a431295afae8643348c97"><div class="ttname"><a href="class_http_manager.html#a1c2ea327605a431295afae8643348c97">HttpManager::Get</a></div><div class="ttdeci">std::string Get(std::string_view uri) noexcept override</div></div>
 <div class="ttc" id="aclass_http_manager_html_a34e95756dc5be9e636b5ae948130f861"><div class="ttname"><a href="class_http_manager.html#a34e95756dc5be9e636b5ae948130f861">HttpManager::RegisterHostAndPort</a></div><div class="ttdeci">void RegisterHostAndPort(std::string_view host, Port port) noexcept override</div></div>
 <div class="ttc" id="aclass_http_manager_html_a713b1cffda7c23e5028aa7e8acfc1148"><div class="ttname"><a href="class_http_manager.html#a713b1cffda7c23e5028aa7e8acfc1148">HttpManager::HttpManager</a></div><div class="ttdeci">constexpr HttpManager() noexcept=default</div></div>
 <div class="ttc" id="aclass_http_manager_html_a791759e02eafef554edccc82c35253c8"><div class="ttname"><a href="class_http_manager.html#a791759e02eafef554edccc82c35253c8">HttpManager::Post</a></div><div class="ttdeci">void Post(std::string_view uri, std::string_view json_body) noexcept override</div></div>
 <div class="ttc" id="ahttp__interface_8h_html"><div class="ttname"><a href="http__interface_8h.html">http_interface.h</a></div></div>
-<div class="ttc" id="atypes_8h_html_a7ae0c52260bc98d5cb0dde88976e1cac"><div class="ttname"><a href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a></div><div class="ttdeci">std::uint16_t Port</div><div class="ttdef"><b>Definition</b> types.h:16</div></div>
+<div class="ttc" id="atypes_8h_html_a7ae0c52260bc98d5cb0dde88976e1cac"><div class="ttname"><a href="types_8h.html#a7ae0c52260bc98d5cb0dde88976e1cac">Port</a></div><div class="ttdeci">std::uint16_t Port</div><div class="ttdef"><b>Definition</b> types.h:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

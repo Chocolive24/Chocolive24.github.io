@@ -35,9 +35,7 @@ constexpr \mbox{\hyperlink{class_server_network_manager}{Server\+Network\+Manage
 void \mbox{\hyperlink{class_server_network_manager_a07d726b38ae75db62734dc1ea75838eb}{Send\+Packet}} (sf\+::\+Packet \texorpdfstring{$\ast$}{*}packet, \mbox{\hyperlink{types_8h_a7ae0c52260bc98d5cb0dde88976e1cac}{Port}} client\+\_\+port) noexcept override
 \item 
 void \mbox{\hyperlink{class_server_network_manager_a6f8934d6aeebd48f0e1f6881abea2992}{Poll\+Events}} () noexcept override
-\begin{DoxyCompactList}\small\item\em Poll\+Events is a pure virtual method which must poll the network events such as client connections/disconnections and client packets receiving. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_server_network_manager_aab2a6a5774c53bb69f9050e10a53388e}{Remove\+Client}} (std\+::unique\+\_\+ptr$<$ sf\+::\+Tcp\+Socket $>$ \&client) noexcept
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Poll\+Events is a pure virtual method which must poll the network events such as client connections/disconnections and client packets receiving. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_server_network_interface}{Server\+Network\+Interface}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -132,12 +130,6 @@ This method has to be overriden.
 
 
 Implements \mbox{\hyperlink{class_server_network_interface_ae82f43cd15dfd4d9827292ed7cdf2fc0}{Server\+Network\+Interface}}.
-
-\Hypertarget{class_server_network_manager_aab2a6a5774c53bb69f9050e10a53388e}\label{class_server_network_manager_aab2a6a5774c53bb69f9050e10a53388e} 
-\index{ServerNetworkManager@{ServerNetworkManager}!RemoveClient@{RemoveClient}}
-\index{RemoveClient@{RemoveClient}!ServerNetworkManager@{ServerNetworkManager}}
-\doxysubsubsection{\texorpdfstring{RemoveClient()}{RemoveClient()}}
-{\footnotesize\ttfamily void Server\+Network\+Manager\+::\+Remove\+Client (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ sf\+::\+Tcp\+Socket $>$ \&}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
 
 \Hypertarget{class_server_network_manager_a07d726b38ae75db62734dc1ea75838eb}\label{class_server_network_manager_a07d726b38ae75db62734dc1ea75838eb} 
 \index{ServerNetworkManager@{ServerNetworkManager}!SendPacket@{SendPacket}}

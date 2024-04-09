@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['api_20documentation_0',['MyNetwork API Documentation',['../index.html',1,'']]]
+  ['welcome_0',['Welcome !',['../index.html',1,'']]]
 ];
