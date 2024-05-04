@@ -1328,6 +1328,3 @@ Here's the source code of my project if you're curious: https://github.com/Choco
 You can also check out my game projects on my itch.io page: https://itch.io/profile/chocolive
 
 Pachoud Olivier - Games Programmer student at Sae Institute Geneva
-
-<style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
-<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>
