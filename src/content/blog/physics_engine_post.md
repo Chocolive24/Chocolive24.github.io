@@ -6,8 +6,6 @@ heroImage: "/physics_engine_opti/gifs/bouncing_shapes.gif"
 tags: ["Physics", "SAE", "Engine", "C++", "Optimization", "2D"]
 ---
 
-     	<meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="/physics_engine_opti/darkTemplate.css?">
-
 Hello, welcome to this blog dedicated to optimization. I'm a Swiss student at the Sae Institute in Geneva and as part of a graded assignment, we've been asked to program a 2D physics engine and optimize a part of it. This specific part is the detection of intersections between colliders in trigger state. We have a scene containing physical bodies to which colliders are attached in trigger mode. The aim is to make this scene with a thousand circles run as smoothly as possible.<br>
 In this blog, I'm going to do some research to optimize my engine, show and explain them, and then do some statistical tests to prove that the changes I've made do indeed make the program faster.<br>
 The software I will use to profile my engine is "Tracy": https://github.com/wolfpld/tracy<br>
