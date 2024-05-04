@@ -10,8 +10,8 @@ tags: ["Rollback", "Game", "SAE", "Network", "C++"]
 
 ## Technical direction.
 
-les library utilisées
-Photon
+For the network part of my game, I decided to use the [photon realtime](https://www.photonengine.com/realtime) library. I chose it because photon provides free servers that we can use via their library. But also because the library provides ready-made rooms and a ready-made client. Given that the project focuses on the implementation of a rollback system, this aspect of the library appealed to me in order to reduce the network code workload.
+
 raylib
 
 
