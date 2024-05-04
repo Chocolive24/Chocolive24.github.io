@@ -1,3 +1,11 @@
+---
+title: "Rollback Game"
+description: "How I implemented rollback in my game"
+pubDate: "May 01 2024"
+heroImage: "/splotch/icon.png"
+tags: ["Game", "SAE", "Network", "C++"]
+---
+
 <meta charset="utf-8" emacsmode="-*- markdown -*-"><style class="fallback">body{visibility:hidden}</style><link rel="stylesheet" href="../css_templates/blue_template.css">
 
                             **Rollback game.**
