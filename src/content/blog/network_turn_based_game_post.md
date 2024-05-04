@@ -15,7 +15,7 @@ I chose to make a 8-ball pool game using my own 2D physics engine.
 I've set up a lobby system that allows several games to be played simultaneously by several clients on the server. 
 I also have a database that stores the username and elo of each player connecting to the game.
 
-![Demo of my 8-ball pool <br> It shows two players (blue and red windows) playing a game in network](videos/demo.mp4)
+![Demo of my 8-ball pool <br> It shows two players (blue and red windows) playing a game in network](/network_turn_based_gamevideosdemo.mp4)
 
 I'm only going to present the protocol I've created for my game, based on Tcp sockets supplied by SFML. 
 I'm only going to talk about the application layer, since my protocol is located there.
@@ -77,7 +77,7 @@ When a user launches the client application, it connects its socket to the serve
 Once the connection has been made, the client application is in the user identification state. 
 In other words, the application asks the user to identify himself by giving a username. 
 
-![Demo of client identification in my app.](gifs/client_identification.gif width=300 height=450)
+![Demo of client identification in my app.](/network_turn_based_game/gifs/client_identification.gif width=300 height=450)
 
 When the user has typed a name, a packet of type kClientIdentification containing the name string is sent to the server. The server then makes an HTTP request to the database to retrieve the player's elo. There are two scenarios.
 
@@ -99,7 +99,7 @@ the port number on which the packets arrive.
 Once the sucessfuly player has been added to the lobby, the server sends back a packet of type kJoinLobby 
 so that the client is aware that it is indeed in a lobby, and the application switches to lobby GUI and state.
 
-![Demo of two clients joining a lobby.](gifs/lobby.gif height=450)
+![Demo of two clients joining a lobby.](/network_turn_based_game/gifs/lobby.gif height=450)
 
 # Starting a game.
 
@@ -129,7 +129,7 @@ If the client doesn't wait for the server to simulate the physics, it won't get 
 this server response is very important.
 
 ![Old version of my game when the clients don't wait the response from the server to 
-simulate the physics. The more the game last, the more the physics desyncrhonization can be seen.](videos/physics_bug.mp4)
+simulate the physics. The more the game last, the more the physics desyncrhonization can be seen.](/network_turn_based_game/videos/physics_bug.mp4)
 
 # End of game and update of players' elo.
 
@@ -146,7 +146,7 @@ packet to each client with its new elo. When the client receives the kEloUpdated
 If one player leaves the game before it's over, the other player automatically wins the game and both players have their elo updated. 
 both players are updated.
 
-![Demo of a player winning the game + the ability to restart a game easily.](videos/end_game.mp4)
+![Demo of a player winning the game + the ability to restart a game easily.](/network_turn_based_game/videos/end_game.mp4)
 
 # Conclusion.
 

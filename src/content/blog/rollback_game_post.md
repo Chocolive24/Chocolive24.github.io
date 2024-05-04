@@ -3,15 +3,16 @@ title: "How did I implement rollback for my online game in C++."
 description: "A post about my online game made in C++ using rollback technique."
 pubDate: "May 01 2024"
 heroImage: "/splotch/icon.png"
-tags: ["Game", "SAE", "Network", "C++"]
+tags: ["Rollback", "Game", "SAE", "Network", "C++"]
 ---
 
 ## Intro
 
 ## Technical direction.
 
-    les library utilisées
-    le type de jeu.
+les library utilisées
+Photon
+raylib
 
 
 ## Project architecture.
