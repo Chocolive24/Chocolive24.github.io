@@ -1,6 +1,6 @@
 ---
-title: "Rollback Game"
-description: "How I implemented rollback in my game"
+title: "How did I implement rollback for my online game in C++."
+description: "description"
 pubDate: "May 01 2024"
 heroImage: "/splotch/icon.png"
 tags: ["Game", "SAE", "Network", "C++"]
@@ -8,34 +8,27 @@ tags: ["Game", "SAE", "Network", "C++"]
 
 <meta charset="utf-8" emacsmode="-*- markdown -*-"><style class="fallback">body{visibility:hidden}</style><link rel="stylesheet" href="../css_templates/blue_template.css">
 
-                            **Rollback game.**
+# How did I implement rollback for my online game in C++ ?
 
-Intro
-===============================================================================
+## Intro
 
-Technical direction.
-===============================================================================
+## Technical direction.
 
     les library utilisées
     le type de jeu.
 
 
-Project architecture.
-===============================================================================
+## Project architecture.
 
-Different executables
--------------------------------------------------------------------------------
+## Different executables
 
-    intro qui parle de la class Engine.
+intro qui parle de la class Engine.
 
-    Simulation application.
-    -------------------------------------------------------------------------------
+### Simulation application.
 
-    Client application.
-    -------------------------------------------------------------------------------
+### Client application.
 
-    Split screen application.
-    -------------------------------------------------------------------------------
+### Split screen application.
 
 Systems.
 -------------------------------------------------------------------------------
