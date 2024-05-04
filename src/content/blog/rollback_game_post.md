@@ -40,7 +40,6 @@ intro qui parle de la class Engine.
 ## Rollback implementation.
 
 ### Systems separation.
--------------------------------------------------------------------------------
 
     Input system
     LocalGameManager
