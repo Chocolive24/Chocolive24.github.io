@@ -15,7 +15,7 @@ I chose to make a 8-ball pool game using my own 2D physics engine.
 I've set up a lobby system that allows several games to be played simultaneously by several clients on the server. 
 I also have a database that stores the username and elo of each player connecting to the game.
 
-![Demo of my 8-ball pool <br> It shows two players (blue and red windows) playing a game in network](/network_turn_based_gamevideosdemo.mp4)
+![Demo of my 8-ball pool <br> It shows two players (blue and red windows) playing a game in network](/network_turn_based_game/videos/demo.mp4)
 
 I'm only going to present the protocol I've created for my game, based on Tcp sockets supplied by SFML. 
 I'm only going to talk about the application layer, since my protocol is located there.
