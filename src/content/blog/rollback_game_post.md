@@ -1,6 +1,6 @@
 ---
 title: "How did I implement rollback for my online game in C++."
-description: "description"
+description: "A post about my online game made in C++ using rollback technique."
 pubDate: "May 01 2024"
 heroImage: "/splotch/icon.png"
 tags: ["Game", "SAE", "Network", "C++"]
