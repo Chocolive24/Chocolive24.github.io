@@ -253,8 +253,9 @@ for (int i = 0; i < 6; i++) {
 
 As before the front faces are culled to avoid Peter Panning and there is the result of the shadow cubemap:
 
-<img src="/3d_scene/images/point_right_shadow_map.png" alt="X+" width="200" height="200" border="1"> <img src="/3d_scene/images/point_left_shadow_map.png" alt="X-" width="200" height="200" border="1"> <img src="/3d_scene/images/point_up_shadow_map.png" alt="Y+" width="200" height="200" border="1">
-<img src="/3d_scene/images/point_down_shadow_map.png" alt="Y-" width="200" height="200" border="1"> <img src="/3d_scene/images/point_front_shadow_map.png" alt="Z+" width="200" height="200" border="1"> <img src="/3d_scene/images/point_back_shadow_map.png" alt="Z-" width="200" height="200" border="1">
+| ![X+](/3d_scene/images/point_right_shadow_map.png){: width="200" height="200" border="1" alt="X+"} | ![X-](/3d_scene/images/point_left_shadow_map.png){: width="200" height="200" border="1" alt="X-"} | ![Y+](/3d_scene/images/point_up_shadow_map.png){: width="200" height="200" border="1" alt="Y+"} |
+|---|---|---|
+| ![Y-](/3d_scene/images/point_down_shadow_map.png){: width="200" height="200" border="1" alt="Y-"} | ![Z+](/3d_scene/images/point_front_shadow_map.png){: width="200" height="200" border="1" alt="Z+"} | ![Z-](/3d_scene/images/point_back_shadow_map.png){: width="200" height="200" border="1" alt="Z-"} |
 
 
 The depth maps are upside down because of the way OpenGL cube maps work. 
