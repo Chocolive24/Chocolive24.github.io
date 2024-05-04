@@ -6,8 +6,6 @@ heroImage: "/splotch/icon.png"
 tags: ["Game", "SAE", "Network", "C++"]
 ---
 
-# How did I implement rollback for my online game in C++ ?
-
 ## Intro
 
 ## Technical direction.

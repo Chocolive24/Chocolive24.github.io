@@ -6,8 +6,6 @@ heroImage: "/3d_scene/images/scene_cover.png"
 tags: ["OpenGL", "Computer Graphcis", "3D", "SAE", "Engine", "C++"]
 ---
 
-# How I created an OpenGL 3D scene.
-
 Hello, I recently learned the basics of graphics programming using the OpenGL API as part of a course module at SAE Insitute Geneva.
 I've managed to create a 3D scene using several techniques and functionalities, as follows:
 
