@@ -184,7 +184,7 @@ void World::detectColliderPairs() noexcept
 To demonstrate that the collider trigger system works, I've made a sample that instantiates objects with random velocities and trigger colliders. The objects are initially red and turn green when they overlap another object.<br>
 Let's take a look at how this sample runs with 3 different total numbers of colliders, once with 100 colliders, then 500 and finally with 1000 colliders. :<br>
 
-![100 circle colliders](gifs/100Circles.gif width=250px height=200px) ![500 circle colliders](gifs/500Circles.gif width=250px height=200px) ![1000 circle colliders](gifs/1000Circles.gif width=250px height=200px)
+![100 circle colliders](physics_engine_opti/gifs/100Circles.gif width=250px height=200px) ![500 circle colliders](physics_engine_opti/gifs/500Circles.gif width=250px height=200px) ![1000 circle colliders](physics_engine_opti/gifs/1000Circles.gif width=250px height=200px)
 
 As you can see, the sample runs fine with 100 objects, is a bit slow with 500 objects and very slow with 1000 objects. From now and till the end of this blogpost I'll use the sample with 1000 objects as a reference to compare the execution speed of my program after each optimization I make. My goal is to run my sample with 1000 objects or more.
 
@@ -199,25 +199,25 @@ Sub-dividing the world with a quad-tree.
 --------------------------------------------------------------
 For the moment, I'm comparing each collider with each other, even if they're far apart. It means that if a collider is in the bottom-left-corner of the world space and another one is in the up-right-corner, my function would compare them. But it is cleary uneccassary to check this pair.
 
-![Example where it's unecessary to check for an overlap](images/farAwayCircles.png height=300px)
+![Example where it's unecessary to check for an overlap](physics_engine_opti/images/farAwayCircles.png height=300px)
 
 It would be nice if I compare only the colliders that are in a same zone of the world space. So I need to subdivide the world space to have less check to do.<br>
 One way to do it is to subdivide the current world space in 4 subspaces and then compare only colliders in their subspace with other colliders in that subspace.
 
-![Here the colliders are in different subspaces so I don't check if they overlap](images/2CirclesInDifferentZones.png height=300px) ![Here I only check if the colliders in the zone 2 overlap](images/2CirclesInZone2.png height=300px)
+![Here the colliders are in different subspaces so I don't check if they overlap](physics_engine_opti/images/2CirclesInDifferentZones.png height=300px) ![Here I only check if the colliders in the zone 2 overlap](physics_engine_opti/images/2CirclesInZone2.png height=300px)
 
 Okay that's cool, like that I avoid unessary checks. At least as long as there aren't too many colliders in the same zone.
 
-![Here there are 4 colliders in zone 2, which makes me want to redivide this zone into 4 subspaces](images/4CirclesInZone2.png height=300px)
+![Here there are 4 colliders in zone 2, which makes me want to redivide this zone into 4 subspaces](physics_engine_opti/images/4CirclesInZone2.png height=300px)
 
 To be more efficient, I can subdivide the world recursively to have as few comparisons as possible. It will greatly reduces the number of potential collider pair to manage.<br>
 This method of space subdivision is called "quad-tree". I can represent a quad-tree as a tree with a root node with 4 children nodes that have 4 children nodes too etc recursively:
 
-![Here I recursively subdivided the space in function of the position of the colliders.<br> In this specific case the number of collider pair to check is equal to 0<br> because each collider is in a different subspace.](images/RecursiveSubDivision.png height=300px) ![Quad-tree representation](images/quadTree.png width=500px height=300px)
+![Here I recursively subdivided the space in function of the position of the colliders.<br> In this specific case the number of collider pair to check is equal to 0<br> because each collider is in a different subspace.](physics_engine_opti/images/RecursiveSubDivision.png height=300px) ![Quad-tree representation](physics_engine_opti/images/quadTree.png width=500px height=300px)
 
 Before implementing a quad-tree in my engine, there is a last thing to take in considereration. It is the case where two colliders are perfectly between several sub-spaces. If I add them in each of the subspaces they touch, I'll check them several times in several subspaces. This would duplicate the pair in the different nodes and give us a bad result. That's why, in this case, it's better to add these colliders to the parent node.
 
-![Special case: Here there are colliders between the zone 1 and 3.<br> If I put them in both zone 1 and zone 3 there would be a duplication of the pair.](images/SpecialCaseBlack.png height=300px) ![Instead I put them in the parent node, here it is the node 0](images/SpecialCase.png height=300px)
+![Special case: Here there are colliders between the zone 1 and 3.<br> If I put them in both zone 1 and zone 3 there would be a duplication of the pair.](physics_engine_opti/images/SpecialCaseBlack.png height=300px) ![Instead I put them in the parent node, here it is the node 0](physics_engine_opti/images/SpecialCase.png height=300px)
 
 Well, I don't think I've forgotten anything. I'll try to implement a quad-tree in my program.
 
@@ -388,7 +388,7 @@ struct SimplifiedCollider
 };
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-![representation of simplified colliders to detect in which node I have to insert them](images/SimplifiedColliders.png height=300px)
+![representation of simplified colliders to detect in which node I have to insert them](physics_engine_opti/images/SimplifiedColliders.png height=300px)
 
 I use 2 methods to insert colliders. A public method that takes a simplified collider and inserts it into the root node. This ensures that I never insert a collider anywhere other than the first node.<br>
 The other method is private and will be called recursively to insert colliders in the correct subspaces if they have been created.
@@ -661,11 +661,11 @@ Statistics after broad phase implementation
 So let's compare the old sample without the quad-tree and the new one with the quad-tree.<br>
 I created a function that draws the quad-tree by going down in each node recursively and that draws its boundary. You can check the sample's source code to see how I did if you want to do it too: https://github.com/Chocolive24/PhysicsEngine/blob/master/samples/src/TriggerColliderSample.cpp
 
-![1000 colliders without quad-tree](gifs/1000Circles.gif width=250px height=200px) ![1000 colliders with quad-tree](gifs/QuadTreeUniquePtr.gif width=250px height=200px) 
+![1000 colliders without quad-tree](physics_engine_opti/gifs/1000Circles.gif width=250px height=200px) ![1000 colliders with quad-tree](physics_engine_opti/gifs/QuadTreeUniquePtr.gif width=250px height=200px) 
 
 Visually, there's a huge difference since the implementation of the quad-tree. Let's compare the values of these two samples with tracy and calculate how much faster the second version is.
 
-![One frame of the version without broad phase.](images/noBroadFrame.png width) ![One frame of the version with broad phase.](images/QuadTreeUniquePtrFrame.png)<br><br>
+![One frame of the version without broad phase.](physics_engine_opti/images/noBroadFrame.png width) ![One frame of the version with broad phase.](physics_engine_opti/images/QuadTreeUniquePtrFrame.png)<br><br>
 
 | Sample              | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 | --------------------|-----------|--------------|--------------|-------------|
@@ -700,7 +700,7 @@ The three main part in the broad phase are:
 - Insert colliders in the quad-tree.
 - Calculate all possible pairs of colliders.
 
-![The broad phase functions in a frame.](images/QuadTreeUniquePtrFrame.png)
+![The broad phase functions in a frame.](physics_engine_opti/images/QuadTreeUniquePtrFrame.png)
 
 Here is the different execution time of each part of the broad phase:
 
@@ -717,7 +717,7 @@ Memory usage optimization
 --------------------------------------------------------------
 If we take a closer look at the "Insert" section, which is the longest, we see that there is a lot of allocations. There is a high number of deallocation in the clear part and a lot of allocation in the insert part. It because we are deleting and recreating unique pointers each time. This as a cost:
 
-![The allocation pattern of the broad phase.](images/UniquePtrAllocation.png)
+![The allocation pattern of the broad phase.](physics_engine_opti/images/UniquePtrAllocation.png)
 
 This allocations are made at each frame when we create the children nodes:<br>
 
@@ -848,7 +848,7 @@ void QuadTree::Clear() noexcept
 
 Let's see if I have shortened the execution time of these various functions:
 
-![One frame after the pre-allocation of data in the quad-tree.](images/PreAllocFrame.png)
+![One frame after the pre-allocation of data in the quad-tree.](physics_engine_opti/images/PreAllocFrame.png)
 
 There is cleary less allocations as you can see on the image. I removed the large portion of allocations that formed a "V" at the beginning of the frame. Let's analyse the statistics of the version 1 of the sample (without pre-allocation) and the version 2 (with pre-allocation):
 
@@ -882,7 +882,7 @@ Note that the "Insert colliders" and "Calculate pairs" sections are about 1ms fa
 
 The results are good, but if you look at the frame image, there are still a few allocations being made at the beginning of the broad phase.
 
-![The calls to the "Insert" function zoomed.](images/remainColAlloc.png)
+![The calls to the "Insert" function zoomed.](physics_engine_opti/images/remainColAlloc.png)
 
 I think that I have a new goal. Let's try to remove those allocations.
 
@@ -968,7 +968,7 @@ for (const auto& col : remainingColliders)
 
 Let's open Tracy and see if we've solved the problem:
 
-![The call to the "Insert" function zoomed after replacing vector with array.](images/remainArray.png)
+![The call to the "Insert" function zoomed after replacing vector with array.](physics_engine_opti/images/remainArray.png)
 
 There are still a few allocations, but far fewer than before. The few remaining allocations are due to the fact that the deepest nodes will have a collision vector greater than the maximum number of colliders a node can contain before subdividing. This quantity therefore exceeds that reserved at the start of the program.<br>
 Let's see if this change reduces the execution time of the Insert function:<br>
@@ -1018,7 +1018,7 @@ Reduce narrow-phase execution.
 ==============================================================
 Now that the broad phase is fine as it is, let's take a closer look at the narrow phase:
 
-![One frame traced with tracy](images/UnorderedFrame.png)
+![One frame traced with tracy](physics_engine_opti/images/UnorderedFrame.png)
 
 | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 |-----------|--------------|--------------|-------------|
@@ -1171,7 +1171,7 @@ _colliderPairs = newPairs;
 
 Let's look at the statistics to see if our change is profitable:
 
-![One frame using a vector instead of an unordered_set.](images/VectorFrame.png)
+![One frame using a vector instead of an unordered_set.](physics_engine_opti/images/VectorFrame.png)
 
 | resolveNarrowPhase  | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 |---------------------|-----------|--------------|--------------|-------------|
@@ -1198,13 +1198,13 @@ To find an element in a data structure such as the vector, you have to go throug
 
 I used tracy's "ZoneValue" option to display the size of my possible pair vector coming out of the quad-tree:
 
-![The number of pairs over which the narrow phase iterate on a frame -> 98502](images/100000Pairs.png)
+![The number of pairs over which the narrow phase iterate on a frame -> 98502](physics_engine_opti/images/100000Pairs.png)
 
 I need to find a way to filter out pairs that really have overlap potential in the quad-tree.<br>
 Currently the quad-tree works as follows:
 The colliders of the parent nodes are compared with all the colliders of the child nodes. However, most of these comparisons are useless because the collider in question can be very far from the colliders of child nodes. Maybe it's easier to understand with a diagram:
 
-![Case where I generate useless pairs](images/OptiCase.png)
+![Case where I generate useless pairs](physics_engine_opti/images/OptiCase.png)
 
 So to avoid creating useless pairs, I can only interest the pair of colliders which have their simplified shape which overlaps. 
 This way we avoid a large number of unnecessary comparisons and can reduce my memory accesses:
@@ -1247,7 +1247,7 @@ for (const auto& nodeSimplCol : node.Colliders)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 Let's look at how many possible pairs are generated now:
 
-![The new number of pairs over which the narrow phase iterate on a frame -> 2184](images/2184Pairs.png)
+![The new number of pairs over which the narrow phase iterate on a frame -> 2184](physics_engine_opti/images/2184Pairs.png)
 
 Oh wow, this significantly reduces memory accesses. It's time to do the statistical tests to see how much time this saves us:
 
@@ -1272,7 +1272,7 @@ Final state of the narrow phase.
 --------------------------------------------------------------
 We have greatly improved the execution speed of the narrow phase. Let's analyze the statistical differences between the first implementation of the narrow phase and the last.
 
-![One frame with the final version of the narrow phase](images/FullOptiFrame.png)
+![One frame with the final version of the narrow phase](physics_engine_opti/images/FullOptiFrame.png)
 
 | resolveNarrowPhase   | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 |---------------------|-----------|--------------|--------------|-------------|
@@ -1295,12 +1295,12 @@ Conclusion
 ==============================================================
 Let's compare the state of the program before and after the optimizations applied to it:
 
-![1000 circle colliders before optimizations.](gifs/1000Circles.gif width=250px height=200px) ![1000 circle colliders after optimizations.](gifs/FullOpti.gif width=250px height=200px)
+![1000 circle colliders before optimizations.](physics_engine_opti/gifs/1000Circles.gif width=250px height=200px) ![1000 circle colliders after optimizations.](physics_engine_opti/gifs/FullOpti.gif width=250px height=200px)
 
 GIFs are at 30 fps, so it's hard to tell whether the right-hand version is actually fluid. So let's have a look at some frame images from Tracy:
 
-![One frame of the version without optimizations.](images/noBroadFrame.png) 
-![One frame with the final version of the narrow phase](images/FullOptiFrame.png)
+![One frame of the version without optimizations.](physics_engine_opti/images/noBroadFrame.png) 
+![One frame with the final version of the narrow phase](physics_engine_opti/images/FullOptiFrame.png)
 
 Let's take a look at the time saved when executing the world's "Update" function:
 
