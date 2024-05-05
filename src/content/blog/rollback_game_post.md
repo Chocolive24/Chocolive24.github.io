@@ -62,12 +62,21 @@ The last module in my program is the application module. This consists of an int
 
 The SimulationApplication is an application that runs two client instances using the SimulationNetwork implementation. The application has two render textures to give one to each client, which in turn gives it to its GameRenderer, so that each client's game is drawn separately but from the same window. This application is essential for debugging and testing the game, as it requires no Internet connection and can simulate extreme network scenarios.
 
-### Split screen application.
-
-<video controls width="500">
+<video controls>
   <source src="/rollback_game/videos/simul_app.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<p>The simulationApplication running two clients in the same window.</p>
+
+By the way, this application was extremely useful when I was making my rollback prototypes, so I could access the debugger on both clients at the same time.
+
+<video controls>
+  <source src="/rollback_game/videos/test_rollback.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>The rollback prototype using the SimulationApplication.</p>
+
+### Split screen application.
 
 The SplitScreenApplication is very similar to the SimulationApplication in that it also instantiates two clients in the same window, but this time the clients have the network implementation using photon. This allows me to test my game in the real-life scenario for which it was originally designed, without having to open two separate executable files.
 
@@ -84,7 +93,11 @@ LocalGameManager
 PlayerManager
 ProjectileManager
 
+frame tracy qui montre les différents system update
+
 ## Resimulate the game.
+
+parler des methodes Rollback pour copier un ancien état.
 
 Why not une frame sans confirm frame qui prouve le probleme de ressimuler depuis la frame 0.
 Show tracy frames.
