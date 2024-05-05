@@ -14,15 +14,19 @@ For the graphics and audio of my game, I chose raylib as my library. My aim is t
 
 # Project architecture.
 
+Before talking about how I implemented rollback in my game, I'd like to present the architecture of my project. Rollback requires a clean code architecture that clearly separates the different systems in the program. During rollback, only the game's logic systems need to be resimulated, while graphics, audio and other systems must be managed separately so as not to encroach on the rollback.<br>
+Here's how I've organized my program:
+
 ![My project architecture.](/rollback_game/images/rollback_project_architecture.png)
 
-My project follows the Model-View-Controller architecture to clearly separate the different systems in my game.
+From a global point of view, 4 main modules stand out. The game module follows a Model-View-Controller design pattern. The network module is isolated in its own corner, and it's up to the other modules of the program to communicate with it. The client module, which brings together the logic of the game, the network and the graphics. Finally, there's the application execution module, which is at the top of the hierarchy and will execute one of the available applications.<br>
+I'll go through each of these modules in a little more detail.
 
 ## Game.
 
-## Network.
+![The game module.](/rollback_game/images/game_module.png)
 
-## Client.
+The game module follows the Model-View-Controller architecture to clearly separate the different systems in my game.
 
 The controller part consists of an input manager whose role is to transmit user inputs to the model so that it can update itself. I'll come back to this in more detail when I talk about implementing rollback. 
 
@@ -30,13 +34,27 @@ The Model part refers to all the code controlling the logic and state of the gam
 The entire network code layer is added via the OnlineGameManager class, which inherits directly from LocalGameManager by adding a pointer to a network interface and a RollbackManager, which I'll talk about later.
 This separation between the network code and the game logic code allows me to have a game that can be played online as well as locally. This is very useful for testing and debugging the game without being dependent on an Internet connection.
 
-Finally, the View section consists of a GameRender with a pointer to a LocalGameManager, to be able to directly read all game state data and draw it on screen.
+Finally, the View section consists of a GameRender with a pointer to a LocalGameManager to be able to directly read all game state data and draw it on screen.
 
-render qui point game
+## Network.
+
+![The network module.](/rollback_game/images/network_module.png)
+
+The network module is quite small, not least because photon encapsulates all the code that sets up the network connections. What's important in this module is the NetworkInterface. Indeed, if a class or module in my program needs to communicate via the network, it will pass through a pointer to an interface rather than directly to an implementation. This allows me to have several possible network implementations without having to change the rest of my program. 
+
+The first implementation of the interface is called "SimulationNetwork" and is a mock. It's a fake network that I simulate by modifying the network delay and the percentage of lost packets. This allows me to test my game without an Internet connection, but also to test the robustness of my rollback code in more or less extreme scenarios.
+
+The second implementation is called NetworkManager and is simply the network code used to run the online game via the photon realtime API.
+
+## Client.
+
+![The client module.](/rollback_game/images/app_module.png)
+
+The client module simply consists of a single class linking the various systems seen so far. Its main attributes are the OnlineGameManager, the GameRenderer and a pointer to the network interface. Here too, the network interface pointer enables the client to act in exactly the same way, regardless of the behavior of the network implementation it is given. The client class acts globally as a kind of application. The advantage of this design choice is that I can instantiate two clients in a single executable without having to run two separate ones.
 
 ## Different executables.
 
-intro qui parle de la class Engine.
+![The application module.](/rollback_game/images/game_module.png)
 
 ### Simulation application.
 
