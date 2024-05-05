@@ -48,19 +48,32 @@ The second implementation is called NetworkManager and is simply the network cod
 
 ## Client.
 
-![The client module.](/rollback_game/images/app_module.png)
+![The client module.](/rollback_game/images/client_module.png)
 
 The client module simply consists of a single class linking the various systems seen so far. Its main attributes are the OnlineGameManager, the GameRenderer and a pointer to the network interface. Here too, the network interface pointer enables the client to act in exactly the same way, regardless of the behavior of the network implementation it is given. The client class acts globally as a kind of application. The advantage of this design choice is that I can instantiate two clients in a single executable without having to run two separate ones.
 
 ## Different executables.
 
-![The application module.](/rollback_game/images/game_module.png)
+![The application module.](/rollback_game/images/app_module.png)
+
+The last module in my program is the application module. This consists of an interface called Application and an Engine class which owns the program window and a pointer to an application. The Engine is therefore the program's main class, which can execute any application given to it. So, in a simple, modular way, I can code several application uses for my game. I'm going to describe the three applications I used to develop my game.
 
 ### Simulation application.
 
-### Client application.
+The SimulationApplication is an application that runs two client instances using the SimulationNetwork implementation. The application has two render textures to give one to each client, which in turn gives it to its GameRenderer, so that each client's game is drawn separately but from the same window. This application is essential for debugging and testing the game, as it requires no Internet connection and can simulate extreme network scenarios.
 
 ### Split screen application.
+
+<video controls width="500">
+  <source src="/rollback_game/videos/simul_app.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+The SplitScreenApplication is very similar to the SimulationApplication in that it also instantiates two clients in the same window, but this time the clients have the network implementation using photon. This allows me to test my game in the real-life scenario for which it was originally designed, without having to open two separate executable files.
+
+### Client application.
+
+Finally the ClientApplication is the target build application which consists of a client using the photon network implementation. This is the executable that is built in release and put online for anyone to play with.
 
 # Rollback implementation.
 
@@ -70,7 +83,6 @@ Input system
 LocalGameManager
 PlayerManager
 ProjectileManager
-Rappel sur le game renderer qui est à part.
 
 ## Resimulate the game.
 
