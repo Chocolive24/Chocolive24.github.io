@@ -161,7 +161,7 @@ turn is and which player won the game.
 # My network code documentation.
 
 If you are intersted in the network code I made for my game, you can check the documentation : <br>
-[turn-based game network code documentation](../network_api_doc/html/index.html)
+[turn-based game network code documentation](/network_api_doc/html/index.html)
 
 # Download the game.
 
