@@ -93,15 +93,15 @@ Finally the ClientApplication is the target build application which consists of 
 # Rollback implementation.
 
 Now let's talk about the main topic: rollback.
-To implement this technique in a program, there are, in my opinion, four prerequisites.
+To implement this technique in a program, there are, in my opinion, 4 prerequisites.
 
-The first is the game's update function(s) should not depend on any graphics or audio system as mentioned above, but should also not depend directly on the input system. It's not up to the game to go and read the inputs; the game must rely on the inputs it's given to update itself, without knowing whether this input is an old input or a new one. By isolating the update from the game, the same function can be used to either rollback to the past or simulate the current frame to advance the simulation.
+1. The game's update function(s) should not depend on any graphics or audio system as mentioned above, but should also not depend directly on the input system. It's not up to the game to go and read the inputs; the game must rely on the inputs it's given to update itself, without knowing whether this input is an old input or a new one. By isolating the update from the game, the same function can be used to either rollback to the past or simulate the current frame to advance the simulation.
 
-The second is to be able to store inputs with the frame number at which they were made, so as to be able to read old inputs during a rollback. The protocol used to send inputs to the network must also have low latency and ensure that all inputs are received.
+2. Be able to store inputs with the frame number at which they were made, so as to be able to read old inputs during a rollback. The protocol used to send inputs to the network must also have low latency and ensure that all inputs are received.
 
-The third, we need to be able to copy the state of the game and all the systems influencing it. During a rollback, we want to resimulate the game from a past state, so we need to copy the values of this state to be able to go back in time correctly.
+3. Be able to copy the state of the game and all the systems influencing it. During a rollback, we want to resimulate the game from a past state, so we need to copy the values of this state to be able to go back in time correctly.
 
-Finally, the last prerequisite is to be able to confirm frames once all inputs to a frame have been received. This will allow 
+4. Be able to confirm frames once all inputs to a frame have been received. This will allow 
 the simulation to move forward and avoid rollbacks from the very first frame of the game.<br>
 It is also important to perform a checksum of the state of the game between the different clients during frame confirmation, to ensure that the integrity of the simulation is preserved.
 
@@ -191,19 +191,22 @@ This function is based on the id of the input profile used to determine which ke
 
 Now the OnlineGameManager can read the local inputs through this function, give them to the RollbackManager and then give them to the game before calling FixedUpdate:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-const auto input = input::GetPlayerInput(input_profile_id_);
-rollback_manager_.SetLocalPlayerInput(input, player_id_);
+// This is a pseudo-code example of how it globally works.
+
+const auto input = input::GetPlayerInput(input_profile_id_); // Read inputs from input system.
+rollback_manager_.SetLocalPlayerInput(input, player_id_); // Give them to the rollback
 
 for (PlayerId player_id = 0; player_id < game_constants::kMaxPlayerCount;
     player_id++) {
-    const auto input = rollback_manager_.GetLastPlayerInput(player_id);
-    SetPlayerInput(input, player_id);
+    const auto input = rollback_manager_.GetLastPlayerInput(player_id); // Retreive inputs from the rollback.
+    SetPlayerInput(input, player_id); // Give the inputs to the game.
 }
 
-LocalGameManager::FixedUpdate();
+LocalGameManager::FixedUpdate(); // Update the game now that the inputs are set.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+I always use the RollbackManager to set the game's inputs, as it knows both local inputs and remotes. The rollback's GetLastPlayerInput method gives me a player's last input. If it's a remote player, then it gives me the last input received, assuming it hasn't changed.
 
-And in the LocalGameManager's FixeUpdate, the PlayerManager can update players based on the inputs set for it.
+So now in the LocalGameManager's FixeUpdate, the PlayerManager can update players based on the inputs set for it.
 Here I'll show you the PlayerManager's Move method, which is just one of several player update methods:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 void PlayerManager::Move(const Player& player) const noexcept {
@@ -245,17 +248,8 @@ void PlayerManager::Move(const Player& player) const noexcept {
     body.ApplyForce(val);
   }
 }
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-In this way, during a rollback, the RollbackManager can set player inputs to old inputs without the PlayerManager having to worry about which input to read. 
-
-
-PlayerManager
-ProjectileManager
-
-LocalGameManager
-
-frame tracy qui montre les différents system update
+I've thus separated the input system from the game, allowing me to reuse the same FixedUpdate function no matter which frame is being simulated. In this way, during a rollback, the RollbackManager can set player inputs to old inputs without the PlayerManager having to worry about which input to read. 
 
 ## Trace inputs and send them to the network
 
