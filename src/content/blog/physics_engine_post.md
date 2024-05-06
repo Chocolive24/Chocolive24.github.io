@@ -3,7 +3,7 @@ title: "The optimizations I made to my 2D C++ physics engine"
 description: "A Post about the different optimization technics I applied to my 2D physics engine made in C++."
 pubDate: "Nov 13 2023"
 heroImage: "/physics_engine_opti/gifs/bouncing_shapes.gif"
-tags: ["Physics", "SAE", "Engine", "C++", "Optimization", "2D"]
+tags: ["Physics", "Optimization", "C++", "Engine", "2D", "SAE"]
 ---
 
 Hello, welcome to this blog dedicated to optimization. I'm a Swiss student at the Sae Institute in Geneva and as part of a graded assignment, we've been asked to program a 2D physics engine and optimize a part of it. This specific part is the detection of intersections between colliders in trigger state. We have a scene containing physical bodies to which colliders are attached in trigger mode. The aim is to make this scene with a thousand circles run as smoothly as possible.<br>
