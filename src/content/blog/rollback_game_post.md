@@ -189,7 +189,10 @@ PlayerInput GetPlayerInput(int input_profile_id) noexcept {
 
 This function is based on the id of the input profile used to determine which keyboard keys and mouse buttons are associated with game actions. This allows me to play both players in a game locally with a single keyboard. By using the bitwise operator "|=" I'm able to encode all the frame's actions in a single number that I return and give to my game as well as sending it over the network.
 
-Now the OnlineGameManager can read the local inputs through this function, give them to the RollbackManager and then give them to the game before calling FixedUpdate:
+So that my game doesn't depend directly on inputs, I've chosen to store them in my RollbackManager. The latter has an array of arrays storing all the inputs from all the players. Two methods are used to add values to this array: SetLocalPlayerInput() and SetRemotePlayerInput().<br>
+My RollbackManager also has an array containing the latest inputs received from each player. If the player is local, his last input will always be the input of the current frame. If the player is remote, his last input will be the last one received from the network, assuming it hasn't changed.
+
+So now the OnlineGameManager can read the local input through the GetPlayerInput() function, give it to the RollbackManager and then give the last input of each player to the game before calling FixedUpdate:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 // This is a pseudo-code example of how it globally works.
 
@@ -204,7 +207,6 @@ for (PlayerId player_id = 0; player_id < game_constants::kMaxPlayerCount;
 
 LocalGameManager::FixedUpdate(); // Update the game now that the inputs are set.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-I always use the RollbackManager to set the game's inputs, as it knows both local inputs and remotes. The rollback's GetLastPlayerInput method gives me a player's last input. If it's a remote player, then it gives me the last input received, assuming it hasn't changed.
 
 So now in the LocalGameManager's FixeUpdate, the PlayerManager can update players based on the inputs set for it.
 Here I'll show you the PlayerManager's Move method, which is just one of several player update methods:
@@ -253,8 +255,97 @@ I've thus separated the input system from the game, allowing me to reuse the sam
 
 ## Trace inputs and send them to the network
 
-parler de FrameInput
-parler de comment ils sont envoyés et lu via le réseau.
+Now that the game update function has been isolated, we can move on to the next step, which is to send the inputs over the network. The aim is for each player to send his inputs every frame, and for the other player to receive them as quickly as possible. This is why the UDP protocol is an ideal candidate for a scenario like this. However, we need to take into account the non-reliability of UDP so that the game can run correctly. 
+We need to anticipate two cases:
+1. Packets not arriving in the right order
+2. Packet loss
+
+This means that when we receive an input from the network, in both cases we have no way of ensuring that this input is the one we need and not another. This is why we need a way of differentiating inputs by their frame number, so that we don't miss a single one. In my code, I have a class called [FrameInput](https://github.com/Chocolive24/rollback_game/blob/master/game/include/input.h) which has an input and a frame number as attributes. I've made sure that this class is serializable by photon events, which makes for a terrifying piece of code that I'll let you take a look at if you feel like it.
+
+Then, to prevent packet loss, I've decided that I won't send just one input per frame, but all the inputs I'm not sure have been received. This way, if a packet is lost, the next packet contains the lost inputs as well as the new ones.
+
+Now, let's take a closer look at how I manage network input.<br>
+As I said above, my RollbackManager is responsible for all player inputs. But it also has the frame information needed to track the inputs correctly, as follows:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+  // FrameNbr is a typedef for a short.
+  // I initialize them to -1 to put them in a disabled state at the start of the program.
+
+  /**
+   * \brief The frame nbr of the local client.
+   */
+  FrameNbr current_frame_ = -1;
+
+  /**
+   * \brief The frame number of the last time a remote input was received.
+   */
+  FrameNbr last_remote_input_frame_ = -1;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once an input array has been received from the network and decoded, a simple check is made by comparing the frame number of the last input in the received array with the frame number of the last frame in which inputs were received. If the frame number is smaller than or equal to the number of the last frame where inputs were received, this means that the network event is older and therefore contains no new inputs. In this case, we don't give this array to the RollbackManager.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+  if (remote_frame_inputs.back().frame_nbr() <
+      rollback_manager_.last_remote_input_frame()) {
+    // received old input, no need to give it to the RollbackManager.
+    return;
+  }
+
+  rollback_manager_.SetRemotePlayerInput(remote_frame_inputs, other_client_id);
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+
+If the frame number of the last input in the array is larger, then we have at least one new input. As we don't know how many inputs are missing, I give the entire input array as a parameter to the SetRemotePlayerInput method, which will then perform the necessary operations to retrieve the correct inputs.
+
+The method begins by retrieving the last FrameInput in the array. In the easiest scenario, I simply call my array's back() method to retrieve this input, since it's smaller than the current frame. However, if the latter is larger than the current frame, then I'll assume that the last input is the one at the current frame location, so as not to store inputs that are ahead of the local simulation. I solved the problem in this way for ease of use, as I didn't want to have to deal with inputs that were ahead of time.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+// Retrieve the last new remote frame input.
+auto last_new_remote_input = new_remote_inputs.back();
+
+// If the last remote input frame is greater than the current frame, adjust
+// last_new_remote_input.
+if (last_new_remote_input.frame_nbr() > current_frame_) {
+  const auto& current_frame_it =
+      std::find_if(new_remote_inputs.begin(), new_remote_inputs.end(),
+                   [this](const input::FrameInput& frame_input) {
+                     return frame_input.frame_nbr() == current_frame_;
+                   });
+  last_new_remote_input = *current_frame_it;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Now that I know the last input I'm missing, I need to know the first one I'm missing in order to have the complete range of missing inputs. Since I know the number of the last frame in which an input was received, all I have to do is add 1 to this value and do a std::find_if on the remote input array to find the iterator of the first input I'm missing. 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+// Find the position of the first missing input
+auto missing_input_it = std::find_if(
+    new_remote_inputs.begin(), new_remote_inputs.end(),
+    [this](const input::FrameInput& frame_input) {
+    return frame_input.frame_nbr() == last_remote_input_frame_ + 1;
+    });
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+I'll then use this iterator in a for loop going from last_remote_input_frame_ + 1 to the frame number of the last input I'm missing in the remote table, in order to add all these inputs to the corresponding slots in my huge input array in my RollbackManager. It's also at this point that I can check whether the new inputs differ from the last ones I stored. If all the new inputs are identical to the last received, then there's no need to rollback. In the opposite case, a rollback is necessary because we've simulated the game with the ma
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+bool must_rollback = false;
+
+// Iterate over the missing inputs and update the inputs array
+for (FrameNbr frame = last_remote_input_frame_ + 1;
+    frame <= last_new_remote_input.frame_nbr(); frame++) {
+    // Get the input for the current frame
+    const auto input = missing_input_it->input();
+
+    // Check if rollback is necessary
+    if (last_remote_input_frame_ > -1 && input != last_inputs_[player_id].input()) {
+        must_rollback = true;
+    }
+
+    // Update the inputs array
+    inputs_[player_id][frame] = *missing_input_it;
+
+    // Move to the next missing input
+    ++missing_input_it;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
 
 ## Resimulate the game.
 
