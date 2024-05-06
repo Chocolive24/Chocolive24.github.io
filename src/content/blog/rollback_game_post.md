@@ -1,10 +1,15 @@
 ---
-title: "How did I implement rollback for my online game in C++."
+title: "How did I implement rollback for my online C++ game."
 description: "A post about my online game made in C++ using rollback technique."
 pubDate: "May 01 2024"
 heroImage: "/rollback_game/images/rollback_project_architecture.png"
 tags: ["Rollback", "Network", "C++", "Game", "2D", "SAE"]
 ---
+
+Hi welcome, I recently managed to create an online C++ game using rollback balalal
+le jeu rollback utilise notre propre moteur physique
+projet SAE
+etc 
 
 # Technical direction.
 
@@ -411,6 +416,9 @@ It was therefore indeed useful to make a clear distinction between the different
 Now that the code is done let's open Tracy Profiler to take a closer look at how rollback is handled in the program:
 ![One frame with rollback but...](/rollback_game/images/no_confirm_frame.png)
 
+Ah yes it's true, I don't confirm any frame, which means that I constantly rollback from frame 0...
+Here my program crashed because too many inputs were sent over the network, otherwise the 700 updates that you see on the screen would have been carried out without problem in 3.57ms which means that I am far from having performance problems with my game despite huge rollback. It's better than nothing...
+
 ## Confirm frames.
 
 The last step for the rollback to work correctly is frame confirmation. This will fix the problem linked to the fact that the rollback resimulates from frame 0 constantly. 
@@ -418,7 +426,7 @@ To be able to confirm a frame, you must have received all the inputs for the sai
 
 The only things I had to add to my RollbackManager are the frame number of the last confirmed frame, the frame number of the frame that needs to be confirmed and a function that advances the state of the confirmed game manager.
 
-This makes frame confirmation quite simple on the master client side since it can directly confirm a frame when it receives input. Its only additional responsibility is to send the checksum of its simulation by the confirmed frame to the other client.
+This makes frame confirmation quite simple on the master client side since it can directly confirm all the frames until the frame number of last remote input received. Its only additional responsibility is to send the checksum of its simulation by the confirmed frame to the other client.
 The frame confirmation code is very simple, just simulate a frame with the confirmed_game_manager and update the frame numbers of the confirmed frame and the frame to confirm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 Checksum RollbackManager::ConfirmFrame() noexcept {
@@ -462,8 +470,17 @@ if (rollback_manager_.last_remote_input_frame() < frame_inputs.back().frame_nbr(
 
 Once up to date, it will confirm its frame and compare its checksum with that of the master client. If the checksum does not match, the client will crash which will end the game because the integrity of the simulation is not respected. Otherwise it will simply continue its simulation.
 
+Now that the confirm frame code is there, let's look again at a screen of a frame where the rollback is executed:
 ![A frame where rollback was applied (correctly this time)](/rollback_game/images/rollback_frame.png)
 
-Show tracy frames.
+Ah there you go, it's clearly better like that. <br>
+The rollback is indeed executed in the OnInputReceived function which is the function called when a remote input is received. The state returns to the last state confirmed via the Rollback method then we can see that the program resimulates four frames on this screenshot. <br>
+After correcting the simulation, we confirm the frames to be confirmed (two in the case of this screenshot) then we send the frame confirmation events. After taking care of the received events, it's time to send our inputs to the network via the SendInputEvent method.<br>
+Finally the update of the current frame is executed at the very end.
+
+Let's take a closer look at the statistics of the SimulateUntilCurrentFrame() method.
+![stats)](/rollback_game/images/rollback_stats.png)
+
+The function takes on average 64.22 microseconds to execute which is not bad given that my implementation is quite naive and does not seek to be as optimized as possible. It's not nothing either especially since my game is not very demanding in terms of logic but it is also part of the rollback overhead. Regardless, I still have some room to run before I have performance issues.
 
 # Conclusion
