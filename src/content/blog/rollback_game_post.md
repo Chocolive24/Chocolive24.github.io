@@ -292,8 +292,7 @@ Once an input array has been received from the network and decoded, a simple che
 
   rollback_manager_.SetRemotePlayerInput(remote_frame_inputs, other_client_id);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-If the frame number of the last input in the array is larger, then we have at least one new input. As we don't know how many inputs are missing, I give the entire input array as a parameter to the SetRemotePlayerInput method, which will then perform the necessary operations to retrieve the correct inputs.
-
+If the frame number of the last input in the array is larger, then we have at least one new input. As we don't know how many inputs are missing, I give the entire input array as a parameter to the SetRemotePlayerInput method, which will then perform the necessary operations to retrieve the correct inputs.<br>
 The method begins by retrieving the last FrameInput in the array. In the easiest scenario, I simply call my array's back() method to retrieve this input, since it's smaller than the current frame. However, if the latter is larger than the current frame, then I'll assume that the last input is the one at the current frame location, so as not to store inputs that are ahead of the local simulation. I solved the problem in this way for ease of use, as I didn't want to have to deal with inputs that were ahead of time.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 // Retrieve the last new remote frame input.
@@ -368,12 +367,87 @@ In this way I am able to compensate for the non-reliability of UDP and I am able
 
 ## Resimulate the game.
 
-parler des methodes Rollback pour copier un ancien état.
+So far I have setup my code so that it is easy to rollback. It's time to find out if all my work was really worth it. Since I have properly separated the different systems of my program, I should be easily able to resimulate old frames to correct the simulation in the event that inputs have been incorrectly anticipated.<br>
+First of all I need to change the variables that describe the state of my game so that they correspond to the last state that could be confirmed in order to simulate a return in time. For this I store in my RollbackManager a pointer to my LocalGameManager which I named "current_game_manager_"
 
-Why not une frame sans confirm frame qui prouve le probleme de ressimuler depuis la frame 0.
-Show tracy frames.
+Then I need to store the last confirmed state of the game to be able to copy its values ​​when a rollback is performed.
+To do this I have an instance of LocalGameManager which is only updated when a frame confirmation is performed. Since frame confirmation is not yet coded, this means that rollbacks will currently take place from frame 0 to the current frame.
+
+My implementation for copying values ​​from confirmed state is quite naive. I created a Rollback() method for each of my systems which takes a parameter of the confirmed state of the game to copy the values:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+void LocalGameManager::Rollback(const LocalGameManager& game_manager) noexcept {
+  game_state_.world = game_manager.game_state_.world;
+  game_state_.world.SetContactListener(this);
+  game_state_.player_manager.Rollback(game_manager.game_state_.player_manager);
+  game_state_.projectile_manager.Rollback(game_manager.game_state_.projectile_manager);
+
+  game_state_.is_game_finished = game_manager.game_state_.is_game_finished;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+It is therefore very easy for me to resimulate the frames going from the last confirmed frame to the current frame when a rollback is necessary.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+void RollbackManager::SimulateUntilCurrentFrame() const noexcept {
+  current_game_manager_->Rollback(confirmed_game_manager_);
+
+  for (FrameNbr frame = static_cast<FrameNbr>(confirmed_frame_ + 1); 
+      frame < current_frame_; frame++) {
+    for (PlayerId player_id = 0; player_id < game_constants::kMaxPlayerCount;
+         player_id++) {
+      const auto input = inputs_[player_id][frame];
+      current_game_manager_->SetPlayerInput(input, player_id);
+    }
+
+    current_game_manager_->FixedUpdate();
+  }
+
+  // The Fixed update of the current frame is made in the main loop after polling
+  // received events from network.
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+It was therefore indeed useful to make a clear distinction between the different systems of my game, this makes the rollback code much simpler to create.
+
+//TODO Frame tracy qui montre qu'on confirme rien.
 
 ## Confirm frames.
+
+The last step for the rollback to work correctly is frame confirmation. This will fix the problem linked to the fact that the rollback resimulates from frame 0 constantly. 
+To be able to confirm a frame, you must have received all the inputs for the said frame. Because I use photon, my network architecture is peer-to-peer. This is why I decided that it is up to the master client to confirm the frames when it receives input from the network.
+
+The only things I had to add to my RollbackManager are the frame number of the last confirmed frame, the frame number of the frame that needs to be confirmed and a function that advances the state of the confirmed game manager.
+
+This makes frame confirmation quite simple on the master client side since it can directly confirm a frame when it receives input. Its only additional responsibility is to send the checksum of its simulation by the confirmed frame to the other client.
+The frame confirmation code is very simple, just simulate a frame with the confirmed_game_manager and update the frame numbers of the confirmed frame and the frame to confirm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+Checksum RollbackManager::ConfirmFrame() noexcept {
+  for (PlayerId player_id = 0; player_id < game_constants::kMaxPlayerCount;
+       player_id++) {
+    const auto input = inputs_[player_id][frame_to_confirm_];
+    confirmed_game_manager_.SetPlayerInput(input, player_id);
+  }
+
+  confirmed_game_manager_.FixedUpdate();
+  const auto checksum = confirmed_game_manager_.ComputeChecksum();
+
+  confirmed_frame_++;
+  frame_to_confirm_++;
+
+  return checksum;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As with the Rollback() methods, I created one ComputeChecksum() method per subsystem. This allows you to have greater control when you want to debug the case where a checksum does not match between the two clients.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+Checksum LocalGameManager::ComputeChecksum() const noexcept {
+  Checksum checksum = 0;
+
+  checksum += game_state_.player_manager.ComputeChecksum();
+  checksum += game_state_.projectile_manager.ComputeChecksum();
+
+  return checksum;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Show tracy frames.
 
