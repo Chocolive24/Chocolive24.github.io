@@ -108,7 +108,7 @@ It is also important to perform a checksum of the state of the game between the 
 ## Isolate the game update and seperate the different game logic systems.
 
 I've already shown and explained the separation of the graphics and logic parts of my game, but I've also taken the trouble to separate my game's logic into several subsystems to make it easier to implement rollback. So I have a PlayerManager which updates players according to their inputs, and a ProjectileManager which updates projectiles. Both are managed by the LocalGameManager, which also adds the physical layer to the game logic.
-But as mentioned above, inputs must not be read directly into the game update, otherwise the rollback won't be able to read old inputs. That's why I've created a separate input system for my game, which will read the inputs and pass them on to the RollbackManager, which will give it the right inputs for the frame being simulated/resimulated.
+But as mentioned above, inputs must not be read directly into the game update, otherwise the rollback won't be able to read old inputs. That's why I've created a separate input system for my game, which will read the inputs and pass them on to the RollbackManager, which will give the right inputs for the frame being simulated/resimulated.
 
 I decided to store the inputs in a std::uint8_t, assigning each input to a different bit, for two reasons. The first is that storing the value of all inputs in different bits of a single number makes it easy to read the inputs using the bitwise "&" operator while giving my game only one number to read. <br>
 The second is that a std::uint8_t only takes up a single byte of memory, which is important given that the inputs will be sent to the network every frame.
@@ -408,7 +408,8 @@ void RollbackManager::SimulateUntilCurrentFrame() const noexcept {
 
 It was therefore indeed useful to make a clear distinction between the different systems of my game, this makes the rollback code much simpler to create.
 
-//TODO Frame tracy qui montre qu'on confirme rien.
+Now that the code is done let's open Tracy Profiler to take a closer look at how rollback is handled in the program:
+![One frame with rollback but...](/rollback_game/images/no_confirm_frame.png)
 
 ## Confirm frames.
 
@@ -448,6 +449,20 @@ Checksum LocalGameManager::ComputeChecksum() const noexcept {
   return checksum;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+So once the checksum has been calculated, the naive implementation would like us to directly send a frame confirmation packet in TCP with the checksum value and the frame number. However, this would mean that we would have to be careful on the other client's side to be sure to have received all the inputs up to this frame to be confirmed before actually confirming it. To avoid having to deal with this problem, I decided that the master client would add its inputs since the last confirmed frame to its frame confirmation packet. This allows the other client to catch up on the inputs and be able to directly confirm the frame.
+
+Now on the other client's side, a simple check is carried out to find out if it has all the inputs necessary for confirmation of the frame. If this is not the case, it will add them to its RollbackManager via the SetRemotePlayerInput() method and will perform a rollback if necessary.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+// If we did not receive the inputs before the frame to confirm, add them.
+if (rollback_manager_.last_remote_input_frame() < frame_inputs.back().frame_nbr()) {
+    rollback_manager_.SetRemotePlayerInput(frame_inputs, other_client_id);
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Once up to date, it will confirm its frame and compare its checksum with that of the master client. If the checksum does not match, the client will crash which will end the game because the integrity of the simulation is not respected. Otherwise it will simply continue its simulation.
+
+![A frame where rollback was applied (correctly this time)](/rollback_game/images/rollback_frame.png)
 
 Show tracy frames.
 
