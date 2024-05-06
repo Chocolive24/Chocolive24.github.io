@@ -3,7 +3,7 @@ title: "How did I implement rollback for my online game in C++."
 description: "A post about my online game made in C++ using rollback technique."
 pubDate: "May 01 2024"
 heroImage: "/rollback_game/images/rollback_project_architecture.png"
-tags: ["Rollback", "Game", "SAE", "Network", "C++"]
+tags: ["Rollback", "Network", "C++", "Game", "2D", "SAE"]
 ---
 
 # Technical direction.
@@ -19,10 +19,10 @@ Here's how I've organized my program:
 
 ![My project architecture.](/rollback_game/images/rollback_project_architecture.png)
 
-From a global point of view, 4 main modules stand out. The game module follows a Model-View-Controller design pattern. The network module is isolated in its own corner, and it's up to the other modules of the program to communicate with it. The client module, which brings together the logic of the game, the network and the graphics. Finally, there's the application execution module, which is at the top of the hierarchy and will execute one of the available applications.<br>
+From a global point of view, 4 main modules stand out. The game module (red/green/yellow) follows a Model-View-Controller design pattern. The network module (blue) is isolated in its own corner, and it's up to the other modules of the program to communicate with it. The client module (khaki), which brings together the logic of the game, the network and the graphics. Finally, there's the application module (gray), which is at the top of the hierarchy and will execute one of the available applications.<br>
 I'll go through each of these modules in a little more detail.
 
-## Game.
+## Game module.
 
 ![The game module.](/rollback_game/images/game_module.png)
 
@@ -36,7 +36,7 @@ This separation between the network code and the game logic code allows me to ha
 
 Finally, the View section consists of a GameRender with a pointer to a LocalGameManager to be able to directly read all game state data and draw it on screen.
 
-## Network.
+## Network module.
 
 ![The network module.](/rollback_game/images/network_module.png)
 
@@ -46,13 +46,13 @@ The first implementation of the interface is called "SimulationNetwork" and is a
 
 The second implementation is called NetworkManager and is simply the network code used to run the online game via the photon realtime API.
 
-## Client.
+## Client module.
 
 ![The client module.](/rollback_game/images/client_module.png)
 
 The client module simply consists of a single class linking the various systems seen so far. Its main attributes are the OnlineGameManager, the GameRenderer and a pointer to the network interface. Here too, the network interface pointer enables the client to act in exactly the same way, regardless of the behavior of the network implementation it is given. The client class acts globally as a kind of application. The advantage of this design choice is that I can instantiate two clients in a single executable without having to run two separate ones.
 
-## Different executables.
+## Application module and its different executables.
 
 ![The application module.](/rollback_game/images/app_module.png)
 
@@ -66,7 +66,7 @@ The SimulationApplication is an application that runs two client instances using
   <source src="/rollback_game/videos/simul_app.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-<p>The simulationApplication running two clients in the same window.</p>
+<p>The simulationApplication running two clients in the same window using the mock network.</p>
 
 By the way, this application was extremely useful when I was making my rollback prototypes, so I could access the debugger on both clients at the same time.
 
@@ -78,13 +78,34 @@ By the way, this application was extremely useful when I was making my rollback 
 
 ### Split screen application.
 
-The SplitScreenApplication is very similar to the SimulationApplication in that it also instantiates two clients in the same window, but this time the clients have the network implementation using photon. This allows me to test my game in the real-life scenario for which it was originally designed, without having to open two separate executable files.
+The SplitScreenApplication is very similar to the SimulationApplication in that it also instantiates two clients in the same window, but this time the clients have the network implementation using photon. This allows me to test my game in the real-life scenario for which it was originally designed, locally on one machine without having to open two separate executable files.
+
+<video controls>
+  <source src="/rollback_game/videos/spli_screen_app.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<p>The SplitScreenApplication running two clients in the same window using the network.</p>
 
 ### Client application.
 
 Finally the ClientApplication is the target build application which consists of a client using the photon network implementation. This is the executable that is built in release and put online for anyone to play with.
 
 # Rollback implementation.
+
+Now let's talk about the main topic: rollback.
+To implement this technique in a program, there are, in my opinion, four prerequisites.
+
+The first is to be able to store inputs with the frame number at which they were made, so as to be able to read old inputs during a rollback.
+
+The second is that the game update functions must not depend on any graphic or audio aspect as mentioned above, but also must not directly read the inputs themselves. Given that the program will be resimulating old frames during a rollback, the game must not itself read inputs in its update, as it would be reading current inputs and not those from the past. It's up to the RollbackManager to give the inputs to the game, as it stores the inputs and can fetch them from the right frame.
+
+Thirdly, we need to be able to copy the state of the game and all the systems influencing it. During a rollback, we want to resimulate the game from a past state, so we need to copy the values of this state to be able to go back in time correctly.
+
+Finally, the last prerequisite is to be able to confirm frames once all inputs to a frame have been received. This will allow 
+the simulation to move forward and avoid rollbacks from the very first frame of the game.<br>
+It is also important to perform a checksum of the state of the game between the different clients during frame confirmation, to ensure that the integrity of the simulation is preserved.
+
+## Input system
 
 ## Systems separation.
 
