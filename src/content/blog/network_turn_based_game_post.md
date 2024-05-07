@@ -84,7 +84,7 @@ Once the connection has been made, the client application is in the user identif
 In other words, the application asks the user to identify himself by giving a username. 
 
 <div style="text-align:center">
-  <img src="/network_turn_based_game/gifs/client_identification.gif" width="200" height="100" alt="Demo of client identification in my app." />
+  <img src="/network_turn_based_game/gifs/client_identification.gif" width="200" height="200" alt="Demo of client identification in my app." />
   <p style="margin-top: -30px"><em>Demo of client identification in my app.</em></p>
 </div>
 

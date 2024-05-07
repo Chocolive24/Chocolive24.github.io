@@ -552,9 +552,14 @@ The function takes on average 64.22 microseconds to execute which is not bad giv
 
 Here's a gameplay of my game using the network with the final rollback implementation:
 
-VIDEO:
+<div style="text-align:center">
+  <video controls>
+    <source src="/rollback_game/videos/gameplay.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
-There's absolutely no latency, and the game feels like it's playing in real time. This is the proof in the pudding that rollback is a powerful technique for simulating online games with a true game feel. However, as we've seen, it's also a fairly costly technique in terms of computation and effort to implement. The different game systems need to be clearly separated, the input protocol needs to be very robust to anticipate worst-case scenarios, and the overall code architecture needs to be impeccable to ensure that the rollback works properly.<br> 
+Apart from a few visible rollbacks, the game seems to run in real time (although I recorded the video while connected via a shared connection on my phone). This is the proof that rollback is a powerful technic for simulating online games with a true game feel. However, as we've seen, it's also a fairly costly technique in terms of computation and effort to implement. The different game systems need to be clearly separated, the input protocol needs to be very robust to anticipate worst-case scenarios, and the overall code architecture needs to be impeccable to ensure that the rollback works properly.<br> 
 To successfully implement rollback in your game, you need to have built your code architecture with rollback in mind. It's far too complicated to add rollback after months of development on a game with no prerequisites. That's why you need to think long and hard about which technique to use to ensure the integrity of your game's simulation before you start developing your online game. <br> 
 Rollback is not the best technique to use in every game. Games that don't have a true game feel have no interest in using rollback; it's better to use input delay or other techniques.
 
