@@ -424,7 +424,7 @@ It was therefore indeed useful to make a clear distinction between the different
 Now that the code is done let's open Tracy Profiler to take a closer look at how rollback is handled in the program:
 <div style="text-align:center">
   <img src="/rollback_game/images/no_confirm_frame.png" alt="One frame with rollback but..." />
-  <p style="margin-top: -10px">One frame with rollback but...</p>
+  <p style="margin-top: -30px">One frame with rollback but...</p>
 </div>
 
 
