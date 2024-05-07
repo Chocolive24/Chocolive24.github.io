@@ -414,7 +414,8 @@ void RollbackManager::SimulateUntilCurrentFrame() const noexcept {
 It was therefore indeed useful to make a clear distinction between the different systems of my game, this makes the rollback code much simpler to create.
 
 Now that the code is done let's open Tracy Profiler to take a closer look at how rollback is handled in the program:
-![One frame with rollback but...](/rollback_game/images/no_confirm_frame.png "Optional title")
+![One frame with rollback but...](/rollback_game/images/no_confirm_frame.png)
+*One frame with rollback but...*
 
 Ah yes it's true, I don't confirm any frame, which means that I constantly rollback from frame 0...
 Here my program crashed because too many inputs were sent over the network, otherwise the 700 updates that you see on the screen would have been carried out without problem in 3.57ms which means that I am far from having performance problems with my game despite huge rollback. It's better than nothing...
