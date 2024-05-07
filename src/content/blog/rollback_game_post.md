@@ -11,13 +11,25 @@ le jeu rollback utilise notre propre moteur physique
 projet SAE
 etc 
 
-# Table of Contents
+# Contents
 
 - [Technical direction](#technical-direction)
 - [Project architecture](#project-architecture)
   - [Game module](#game-module)
-- [Center](#center)
-- [Color](#color)
+  - [Network module](#network-module)
+  - [Client module](#client-module)
+  - [Application module and its different executables](#application-module-and-its-different-executables)
+    - [Simulation application](#simulation-application)
+    - [Split screen application](#split-screen-application)
+    - [Client application](#client-application)
+- [Rollback implementation](#rollback-implementation)
+  - [Isolate the game update and seperate the different game logic systems](#isolate-the-game-update-and-seperate-the-different-game-logic-systems)
+  - [Trace inputs and send them to the network](#trace-inputs-and-send-them-to-the-network)
+  - [Resimulate the game](#resimulate-the-game)
+  - [Confirm frames](#confirm-frames)
+- [Conclusion](#conclusion)
+
+# Technical direction.
 
 For the network part of my game, I decided to use the [photon realtime](https://www.photonengine.com/realtime) library. I chose it because photon provides free servers that we can use via their library. But also because the library provides ready-made rooms and a ready-made client. Given that the project focuses on the implementation of a rollback system, this aspect of the library appealed to me in order to reduce the network code workload.
 
