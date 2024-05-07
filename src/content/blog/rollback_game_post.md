@@ -42,7 +42,7 @@ From the various tools and implementation choices made for my project to the rol
 
 For the network part of my game, I decided to use the [photon realtime](https://www.photonengine.com/realtime) library. I chose it because photon provides free servers that we can use via their library. But also because the library provides ready-made rooms and a ready-made client. Given that the project focuses on the implementation of a rollback system, this aspect of the library appealed to me in order to reduce the network code workload.
 
-For the graphics and audio of my game, I chose raylib as my library. My aim is to make my game playable on a web browser, and raylib is compatible with HTML5 like the emscripten version of photon realtime. What's more, raylib is easy to learn and use.
+For the graphics and audio of my game, I chose [raylib](https://www.raylib.com/) as my library. My aim is to make my game playable on a web browser, and raylib is compatible with HTML5 like the emscripten version of photon realtime. What's more, raylib is easy to learn and use.
 
 # Project architecture.
 
