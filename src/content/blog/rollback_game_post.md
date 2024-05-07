@@ -6,10 +6,13 @@ heroImage: "/rollback_game/images/rollback_project_architecture.png"
 tags: ["Rollback", "Network", "C++", "Game", "2D", "SAE"]
 ---
 
-Hi welcome, I recently managed to create an online C++ game using rollback balalal
-le jeu rollback utilise notre propre moteur physique
-projet SAE
-etc 
+Hello, for the past month, as part of a graded assignment for the SAE Institute university, I've been developing an online multiplayer game in C++ using rollback. The project lasted a month and we were asked, using our network knowledge and our own 2D physics engine developed earlier in the year, to create an online game with a real gaming atmosphere using rollback. 
+
+Here's a quick gameplay of my game in real conditions:
+
+In this post I'll talk about my implementation of rollback in my project. As this technique is very hard to set up and requires a lot of prerequisites in terms of project architecture, I put a lot of effort into having a clean and optimal code architecture for its development.
+
+From the various tools and implementation choices made for my project to the rollback implementation itself, we'll look at the technical challenges encountered when using this technique for your online game.
 
 # Contents
 
@@ -40,14 +43,19 @@ For the graphics and audio of my game, I chose raylib as my library. My aim is t
 Before talking about how I implemented rollback in my game, I'd like to present the architecture of my project. Rollback requires a clean code architecture that clearly separates the different systems in the program. During rollback, only the game's logic systems need to be resimulated, while graphics, audio and other systems must be managed separately so as not to encroach on the rollback. You also need to be able to create tools and applications to easily debug your code when you're networking, and even more so when you're rollback. That's why I've included 3 separate executables in my project, simulating the game in different ways, to help me debug my code. I'll talk briefly about each one below.<br>
 So here's what my project's code architecture looks like:
 
-![My project architecture.](/rollback_game/images/rollback_project_architecture.png)
+<div style="text-align:center">
+  <img src="/rollback_game/images/rollback_project_architecture.png" alt="My project architecture" />
+  <p style="margin-top: -30px"><em>My project architecture<em></p>
+</div>
 
 From a global point of view, 4 main modules stand out. The game module (red/green/yellow) follows a Model-View-Controller design pattern. The network module (blue) is isolated in its own corner, and it's up to the other modules of the program to communicate with it. The client module (khaki), which brings together the logic of the game, the network and the graphics. Finally, there's the application module (gray), which is at the top of the hierarchy and will execute one of the available applications.<br>
 I'll go through each of these modules in a little more detail.
 
 ## Game module.
-
-![The game module.](/rollback_game/images/game_module.png)
+<div style="text-align:center">
+  <img src="/rollback_game/images/game_module.png" alt="The game module." />
+  <p style="margin-top: -30px"><em>The game module.</em></p>
+</div>
 
 The game module follows the Model-View-Controller architecture to clearly separate the different systems in my game.
 
@@ -511,9 +519,12 @@ Here's a gameplay of my game using the network with the final rollback implement
 
 VIDEO:
 
-There's absolutely no latency, and the game feels like it's playing in real time. This is the proof in the pudding that rollback is a powerful technique for simulating online games with a true game feel. However, as we've seen, it's also a fairly costly technique in terms of computation and effort to implement. The different game systems need to be clearly separated, the input protocol needs to be very robust to anticipate worst-case scenarios, and the overall code architecture needs to be impeccable to ensure that the rollback works properly. To successfully implement rollback in your game, you need to have built your code architecture with rollback in mind. It's far too complicated to add rollback after months of development on a game with no prerequisites. That's why you need to think long and hard about which technique to use to ensure the integrity of your game's simulation before you start developing your online game. Rollback is not the best technique to use in every game. Games that don't have a true game feel have no interest in using rollback; it's better to use input delay or other techniques.
+There's absolutely no latency, and the game feels like it's playing in real time. This is the proof in the pudding that rollback is a powerful technique for simulating online games with a true game feel. However, as we've seen, it's also a fairly costly technique in terms of computation and effort to implement. The different game systems need to be clearly separated, the input protocol needs to be very robust to anticipate worst-case scenarios, and the overall code architecture needs to be impeccable to ensure that the rollback works properly.<br> 
+To successfully implement rollback in your game, you need to have built your code architecture with rollback in mind. It's far too complicated to add rollback after months of development on a game with no prerequisites. That's why you need to think long and hard about which technique to use to ensure the integrity of your game's simulation before you start developing your online game. <br> 
+Rollback is not the best technique to use in every game. Games that don't have a true game feel have no interest in using rollback; it's better to use input delay or other techniques.
 
 The implementation I've shown you is very naive and could obviously be optimized and improved. Unfortunately, I haven't had the time to go into it in depth yet.
 
 Thank you for taking the time to read this post, I hope I've made myself clear and that it has widened your field of vision on the subject of rollback implementation in a game.
+
 Here's the link to the github repo if you're interested: https://github.com/Chocolive24/rollback_game
