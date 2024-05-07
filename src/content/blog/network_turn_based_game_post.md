@@ -84,7 +84,7 @@ Once the connection has been made, the client application is in the user identif
 In other words, the application asks the user to identify himself by giving a username. 
 
 <div style="text-align:center">
-  <img src="/network_turn_based_game/gifs/client_identification.gif" alt="Demo of client identification in my app." height="422px" />
+  <img src="/network_turn_based_game/gifs/client_identification.gif" alt="Demo of client identification in my app." height="450px" />
   <p style="margin-top: -30px"><em>Demo of client identification in my app.</em></p>
 </div>
 
@@ -108,7 +108,10 @@ the port number on which the packets arrive.
 Once the sucessfuly player has been added to the lobby, the server sends back a packet of type kJoinLobby 
 so that the client is aware that it is indeed in a lobby, and the application switches to lobby GUI and state.
 
-![Demo of two clients joining a lobby.](/network_turn_based_game/gifs/lobby.gif height=450)
+<div style="text-align:center">
+  <img src="/network_turn_based_game/gifs/lobby.gif" alt="Demo of two clients joining a lobby." height="450px" />
+  <p style="margin-top: -30px"><em>Demo of two clients joining a lobby.</em></p>
+</div>
 
 # Starting a game.
 
@@ -137,8 +140,14 @@ it will update the physics until all the balls have a speed greater than an epsi
 If the client doesn't wait for the server to simulate the physics, it won't get the same simulation. This is why this
 this server response is very important.
 
-![Old version of my game when the clients don't wait the response from the server to 
-simulate the physics. The more the game last, the more the physics desyncrhonization can be seen.](/network_turn_based_game/videos/physics_bug.mp4)
+<div style="text-align:center">
+  <video controls>
+    <source src="/network_turn_based_game/videos/physics_bug.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top: -30px"><em>Old version of my game when the clients don't wait the response from the server to 
+simulate the physics. The more the game last, the more the physics desyncrhonization can be seen.</em></p>
+</div>
 
 # End of game and update of players' elo.
 
@@ -155,7 +164,13 @@ packet to each client with its new elo. When the client receives the kEloUpdated
 If one player leaves the game before it's over, the other player automatically wins the game and both players have their elo updated. 
 both players are updated.
 
-![Demo of a player winning the game + the ability to restart a game easily.](/network_turn_based_game/videos/end_game.mp4)
+<div style="text-align:center">
+  <video controls>
+    <source src="/network_turn_based_game/videos/end_game.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top: -30px"><em>Demo of a player winning the game + the ability to restart a game easily.</em></p>
+</div>
 
 # Conclusion.
 
