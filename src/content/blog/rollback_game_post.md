@@ -9,6 +9,12 @@ tags: ["Rollback", "Network", "C++", "Game", "2D", "SAE"]
 Hello, for the past month, as part of a graded assignment for the SAE Institute university, I've been developing an online multiplayer game in C++ using rollback. The project lasted a month and we were asked, using our network knowledge and our own 2D physics engine developed earlier in the year, to create an online game with true game feel using rollback. 
 
 Here's a quick gameplay of my game in real conditions:
+<div style="text-align:center">
+  <video controls>
+    <source src="/rollback_game/videos/gameplay.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 In this post I'll talk about my implementation of rollback in my project. As this technique is very hard to set up and requires a lot of prerequisites in terms of project architecture, I put a lot of effort into having a clean and optimal code architecture for its development.
 
