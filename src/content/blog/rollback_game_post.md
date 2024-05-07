@@ -2,7 +2,7 @@
 title: "How did I implement rollback for my online C++ game."
 description: "A post about my online game made in C++ using rollback technique."
 pubDate: "May 01 2024"
-heroImage: "/rollback_game/images/rollback_project_architecture.png"
+heroImage: "/rollback_game/gifs/gameplay.gif"
 tags: ["Rollback", "Network", "C++", "Game", "2D", "SAE"]
 ---
 
