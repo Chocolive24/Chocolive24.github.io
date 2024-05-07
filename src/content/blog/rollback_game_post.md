@@ -51,7 +51,7 @@ So here's what my project's code architecture looks like:
 From a global point of view, 4 main modules stand out. The game module (red/green/yellow) follows a Model-View-Controller design pattern. The network module (blue) is isolated in its own corner, and it's up to the other modules of the program to communicate with it. The client module (khaki), which brings together the logic of the game, the network and the graphics. Finally, there's the application module (gray), which is at the top of the hierarchy and will execute one of the available applications.<br>
 I'll go through each of these modules in a little more detail.
 
-## Game module.¨
+## Game module.
 
 <div style="text-align:center">
   <img src="/rollback_game/images/game_module.png" alt="The game module." />
@@ -113,25 +113,37 @@ The SimulationApplication is an application that runs two client instances using
 
 By the way, this application was extremely useful when I was making my rollback prototypes, so I could access the debugger on both clients at the same time.
 
-<video controls>
-  <source src="/rollback_game/videos/test_rollback.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<p>The rollback prototype using the SimulationApplication.</p>
+<div style="text-align:center">
+  <video controls>
+    <source src="/rollback_game/videos/test_rollback.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top: -30px"><em>The rollback prototype using the SimulationApplication.</em></p>
+</div>
 
 ### Split screen application.
 
 The SplitScreenApplication is very similar to the SimulationApplication in that it also instantiates two clients in the same window, but this time the clients have the network implementation using photon. This allows me to test my game in the real-life scenario for which it was originally designed, locally on one machine without having to open two separate executable files.
 
-<video controls>
-  <source src="/rollback_game/videos/split_screen_app.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<p>The SplitScreenApplication running two clients in the same window using the network.</p>
+<div style="text-align:center">
+  <video controls>
+    <source src="/rollback_game/videos/split_screen_app.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top: -30px"><em>The SplitScreenApplication running two clients in the same window using the network.</em></p>
+</div>
 
 ### Client application.
 
 Finally the ClientApplication is the target build application which consists of a client using the photon network implementation. This is the executable that is built in release and put online for anyone to play with.
+
+<div style="text-align:center">
+  <video controls>
+    <source src="/rollback_game/videos/client_app.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top: -30px"><em>Two ClientApplication each running one client using the network.</em></p>
+</div>
 
 # Rollback implementation.
 
@@ -151,7 +163,8 @@ It is also important to perform a checksum of the state of the game between the 
 ## Isolate the game update and seperate the different game logic systems.
 
 I've already shown and explained the separation of the graphics and logic parts of my game, but I've also taken the trouble to separate my game's logic into several subsystems to make it easier to implement rollback. So I have a PlayerManager which updates players according to their inputs, and a ProjectileManager which updates projectiles. Both are managed by the LocalGameManager, which also adds the physical layer to the game logic.
-But as mentioned above, inputs must not be read directly into the game update, otherwise the rollback won't be able to read old inputs. That's why I've created a separate input system for my game, which will read the inputs and pass them on to the RollbackManager, which will give the right inputs for the frame being simulated/resimulated.
+
+Also, as mentioned above, inputs must not be read directly into the game update, otherwise the rollback won't be able to read old inputs. That's why I've created a separate input system for my game, which will read the inputs and pass them on to the RollbackManager, which will give the right inputs for the frame being simulated/resimulated.
 
 I decided to store the inputs in a std::uint8_t, assigning each input to a different bit, for two reasons. The first is that storing the value of all inputs in different bits of a single number makes it easy to read the inputs using the bitwise "&" operator while giving my game only one number to read. <br>
 The second is that a std::uint8_t only takes up a single byte of memory, which is important given that the inputs will be sent to the network every frame.
@@ -276,8 +289,7 @@ void PlayerManager::Move(const Player& player) const noexcept {
 
   if (move_direction.Length() >= Math::Epsilon) {
     
-    const auto& body_ref =
-        world_->GetCollider(player.main_col_ref).GetBodyRef();
+    const auto& body_ref = world_->GetCollider(player.main_col_ref).GetBodyRef();
     auto& body = world_->GetBody(body_ref);
  
     // Clamp the velocity
@@ -454,9 +466,8 @@ It was therefore indeed useful to make a clear distinction between the different
 Now that the code is done let's open Tracy Profiler to take a closer look at how rollback is handled in the program:
 <div style="text-align:center">
   <img src="/rollback_game/images/no_confirm_frame.png" alt="One frame with rollback but..." />
-  <p style="margin-top: -30px">One frame with rollback but...</p>
+  <p style="margin-top: -30px"><em>One frame with rollback but...</em></p>
 </div>
-
 
 Ah yes it's true, I don't confirm any frame, which means that I constantly rollback from frame 0...
 Here my program crashed because too many inputs were sent over the network, otherwise the 700 updates that you see on the screen would have been carried out without problem in 3.57ms which means that I am far from having performance problems with my game despite huge rollback. It's better than nothing...
@@ -513,7 +524,10 @@ if (rollback_manager_.last_remote_input_frame() < frame_inputs.back().frame_nbr(
 Once up to date, it will confirm its frame and compare its checksum with that of the master client. If the checksum does not match, the client will crash which will end the game because the integrity of the simulation is not respected. Otherwise it will simply continue its simulation.
 
 Now that the confirm frame code is there, let's look again at a screen of a frame where the rollback is executed:
-![A frame where rollback was applied (correctly this time)](/rollback_game/images/rollback_frame.png)
+<div style="text-align:center">
+  <img src="/rollback_game/images/rollback_frame.png" alt="A frame where rollback was applied (correctly this time)" />
+  <p style="margin-top: -30px"><em>A frame where rollback was applied (correctly this time).</em></p>
+</div>
 
 Ah there you go, it's clearly better like that. <br>
 The rollback is indeed executed in the OnInputReceived function which is the function called when a remote input is received. The state returns to the last state confirmed via the Rollback method then we can see that the program resimulates four frames on this screenshot. <br>
@@ -521,7 +535,10 @@ After correcting the simulation, we confirm the frames to be confirmed (two in t
 Finally the update of the current frame is executed at the very end.
 
 Let's take a closer look at the statistics of the SimulateUntilCurrentFrame() method.
-![stats](/rollback_game/images/rollback_stats.png)
+<div style="text-align:center">
+  <img src="/rollback_game/images/rollback_stats.png" alt="Statistics of the SimulateUntilCurrentFrame method." />
+  <p style="margin-top: -30px"><em>Statistics of the SimulateUntilCurrentFrame method.</em></p>
+</div>
 
 The function takes on average 64.22 microseconds to execute which is not bad given that my implementation is quite naive and does not seek to be as optimized as possible. It's not nothing either especially since my game is not very demanding in terms of logic but it is also part of the rollback overhead. Regardless, I still have some room to run before I have performance issues.
 
