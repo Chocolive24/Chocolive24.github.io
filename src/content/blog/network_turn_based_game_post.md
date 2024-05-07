@@ -84,7 +84,7 @@ Once the connection has been made, the client application is in the user identif
 In other words, the application asks the user to identify himself by giving a username. 
 
 <div style="text-align:center">
-  <img src="/network_turn_based_game/gifs/client_identification.gif" alt="Demo of client identification in my app." height="450px" />
+  <img src="/network_turn_based_game/gifs/client_identification.gif" alt="Demo of client identification in my app." height="250px" />
   <p style="margin-top: -30px"><em>Demo of client identification in my app.</em></p>
 </div>
 
@@ -109,7 +109,7 @@ Once the sucessfuly player has been added to the lobby, the server sends back a 
 so that the client is aware that it is indeed in a lobby, and the application switches to lobby GUI and state.
 
 <div style="text-align:center">
-  <img src="/network_turn_based_game/gifs/lobby.gif" alt="Demo of two clients joining a lobby." height="450px" />
+  <img src="/network_turn_based_game/gifs/lobby.gif" alt="Demo of two clients joining a lobby." />
   <p style="margin-top: -30px"><em>Demo of two clients joining a lobby.</em></p>
 </div>
 
