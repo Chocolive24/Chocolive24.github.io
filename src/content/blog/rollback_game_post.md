@@ -6,7 +6,7 @@ heroImage: "/rollback_game/images/rollback_project_architecture.png"
 tags: ["Rollback", "Network", "C++", "Game", "2D", "SAE"]
 ---
 
-Hello, for the past month, as part of a graded assignment for the SAE Institute university, I've been developing an online multiplayer game in C++ using rollback. The project lasted a month and we were asked, using our network knowledge and our own 2D physics engine developed earlier in the year, to create an online game with a real gaming atmosphere using rollback. 
+Hello, for the past month, as part of a graded assignment for the SAE Institute university, I've been developing an online multiplayer game in C++ using rollback. The project lasted a month and we were asked, using our network knowledge and our own 2D physics engine developed earlier in the year, to create an online game with true game feel using rollback. 
 
 Here's a quick gameplay of my game in real conditions:
 
@@ -45,13 +45,14 @@ So here's what my project's code architecture looks like:
 
 <div style="text-align:center">
   <img src="/rollback_game/images/rollback_project_architecture.png" alt="My project architecture" />
-  <p style="margin-top: -30px"><em>My project architecture<em></p>
+  <p style="margin-top: -30px"><em>My project architecture</em></p>
 </div>
 
 From a global point of view, 4 main modules stand out. The game module (red/green/yellow) follows a Model-View-Controller design pattern. The network module (blue) is isolated in its own corner, and it's up to the other modules of the program to communicate with it. The client module (khaki), which brings together the logic of the game, the network and the graphics. Finally, there's the application module (gray), which is at the top of the hierarchy and will execute one of the available applications.<br>
 I'll go through each of these modules in a little more detail.
 
-## Game module.
+## Game module.¨
+
 <div style="text-align:center">
   <img src="/rollback_game/images/game_module.png" alt="The game module." />
   <p style="margin-top: -30px"><em>The game module.</em></p>
@@ -69,7 +70,10 @@ Finally, the View section consists of a GameRender with a pointer to a LocalGame
 
 ## Network module.
 
-![The network module.](/rollback_game/images/network_module.png)
+<div style="text-align:center">
+  <img src="/rollback_game/images/network_module.png" alt="The network module." />
+  <p style="margin-top: -30px"><em>The network module.</em></p>
+</div>
 
 The network module is quite small, not least because photon encapsulates all the code that sets up the network connections. What's important in this module is the NetworkInterface. Indeed, if a class or module in my program needs to communicate via the network, it will pass through a pointer to an interface rather than directly to an implementation. This allows me to have several possible network implementations without having to change the rest of my program. 
 
@@ -79,13 +83,19 @@ The second implementation is called NetworkManager and is simply the network cod
 
 ## Client module.
 
-![The client module.](/rollback_game/images/client_module.png)
+<div style="text-align:center">
+  <img src="/rollback_game/images/client_module.png" alt="The client module." />
+  <p style="margin-top: -30px"><em>The client module.</em></p>
+</div>
 
 The client module simply consists of a single class linking the various systems seen so far. Its main attributes are the OnlineGameManager, the GameRenderer and a pointer to the network interface. Here too, the network interface pointer enables the client to act in exactly the same way, regardless of the behavior of the network implementation it is given. The client class acts globally as a kind of application. The advantage of this design choice is that I can instantiate two clients in a single executable without having to run two separate ones.
 
 ## Application module and its different executables.
 
-![The application module.](/rollback_game/images/app_module.png)
+<div style="text-align:center">
+  <img src="/rollback_game/images/app_module.png" alt="The application module." />
+  <p style="margin-top: -30px"><em>The application module.</em></p>
+</div>
 
 The last module in my program is the application module. This consists of an interface called Application and an Engine class which owns the program window and a pointer to an application. The Engine is therefore the program's main class, which can execute any application given to it. So, in a simple, modular way, I can code several application uses for my game. I'm going to describe the three applications I used to develop my game.
 
@@ -93,11 +103,13 @@ The last module in my program is the application module. This consists of an int
 
 The SimulationApplication is an application that runs two client instances using the SimulationNetwork implementation. The application has two render textures to give one to each client, which in turn gives it to its GameRenderer, so that each client's game is drawn separately but from the same window. This application is essential for debugging and testing the game, as it requires no Internet connection and can simulate extreme network scenarios.
 
-<video controls>
-  <source src="/rollback_game/videos/simul_app.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<p>The simulationApplication running two clients in the same window using the mock network.</p>
+<div style="text-align:center">
+  <video controls>
+    <source src="/rollback_game/videos/simul_app.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top: -30px"><em>The simulationApplication running two clients in the same window using the mock network.</em></p>
+</div>
 
 By the way, this application was extremely useful when I was making my rollback prototypes, so I could access the debugger on both clients at the same time.
 
