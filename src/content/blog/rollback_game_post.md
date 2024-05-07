@@ -506,3 +506,14 @@ Let's take a closer look at the statistics of the SimulateUntilCurrentFrame() me
 The function takes on average 64.22 microseconds to execute which is not bad given that my implementation is quite naive and does not seek to be as optimized as possible. It's not nothing either especially since my game is not very demanding in terms of logic but it is also part of the rollback overhead. Regardless, I still have some room to run before I have performance issues.
 
 # Conclusion
+
+Here's a gameplay of my game using the network with the final rollback implementation:
+
+VIDEO:
+
+There's absolutely no latency, and the game feels like it's playing in real time. This is the proof in the pudding that rollback is a powerful technique for simulating online games with a true game feel. However, as we've seen, it's also a fairly costly technique in terms of computation and effort to implement. The different game systems need to be clearly separated, the input protocol needs to be very robust to anticipate worst-case scenarios, and the overall code architecture needs to be impeccable to ensure that the rollback works properly. To successfully implement rollback in your game, you need to have built your code architecture with rollback in mind. It's far too complicated to add rollback after months of development on a game with no prerequisites. That's why you need to think long and hard about which technique to use to ensure the integrity of your game's simulation before you start developing your online game. Rollback is not the best technique to use in every game. Games that don't have a true game feel have no interest in using rollback; it's better to use input delay or other techniques.
+
+The implementation I've shown you is very naive and could obviously be optimized and improved. Unfortunately, I haven't had the time to go into it in depth yet.
+
+Thank you for taking the time to read this post, I hope I've made myself clear and that it has widened your field of vision on the subject of rollback implementation in a game.
+Here's the link to the github repo if you're interested: https://github.com/Chocolive24/rollback_game
