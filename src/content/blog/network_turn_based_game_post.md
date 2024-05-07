@@ -15,7 +15,13 @@ I chose to make a 8-ball pool game using my own 2D physics engine.
 I've set up a lobby system that allows several games to be played simultaneously by several clients on the server. 
 I also have a database that stores the username and elo of each player connecting to the game.
 
-![Demo of my 8-ball pool <br> It shows two players (blue and red windows) playing a game in network](/network_turn_based_game/videos/demo.mp4)
+<div style="text-align:center">
+  <video controls>
+    <source src="/network_turn_based_game/videos/demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p style="margin-top: -30px"><em>Demo of my 8-ball pool. It shows two players (blue and red windows) playing a network game</em></p>
+</div>
 
 I'm only going to present the protocol I've created for my game, based on Tcp sockets supplied by SFML. 
 I'm only going to talk about the application layer, since my protocol is located there.
@@ -77,7 +83,10 @@ When a user launches the client application, it connects its socket to the serve
 Once the connection has been made, the client application is in the user identification state. 
 In other words, the application asks the user to identify himself by giving a username. 
 
-![Demo of client identification in my app.](/network_turn_based_game/gifs/client_identification.gif width=300 height=450)
+<div style="text-align:center">
+  <img src="/network_turn_based_game/gifs/client_identification.gif" alt="Demo of client identification in my app." />
+  <p style="margin-top: -30px"><em>Demo of client identification in my app.</em></p>
+</div>
 
 When the user has typed a name, a packet of type kClientIdentification containing the name string is sent to the server. The server then makes an HTTP request to the database to retrieve the player's elo. There are two scenarios.
 
