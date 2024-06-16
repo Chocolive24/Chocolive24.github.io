@@ -20,6 +20,7 @@ need to install CUDA toolkit
 - [World creation](#world-creation)
 - [Camera class](#camera-class)
 - [Random numbers with CUDA for the Anti-Aliasing](#random-number-swith-cuda-for-the-anti-aliasing)
+- [Avoid recursion when rays bounce](#avoid-recursion_when-rays-bounce)
 - [Conclusion](#conclusion)
 
 # CMake setup
@@ -473,3 +474,75 @@ __global__ void Render(Vec3F* fb, Camera** camera, Hittable** world,
 This give us this result which is the same image but using anti-aliasing:
 TODO MONTER IMAGE.
 
+# Avoid recursion when rays bounce.
+
+The next chapter introcudes the first material type we apply to our sphere which is the diffuse material also called matte.
+Light that reflects off a diffuse surface has its direction randomized but it might also be absorbed rather than reflected. The darker the surfacer the more the light is absorbded. The first implementation of reflected rays on diffuse surfaces is quite naive and reflectes the rays in a totally random direction using a rejection method to generate a correct random vector. It also ommit the fact that the function is recursive and can call itself a sufficient number of times to cause a stackoverflow in our CUDA code context. That's why I followed the adivce from the CUDA post and decided to already put a max ray bounce limit in the CalculatePixelColor() device function:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+  __device__  [[nodiscard]] static Color CalculatePixelColor(
+      const RayF& r, Hittable** world, curandState* local_rand_state) noexcept {
+    RayF cur_ray = r;
+    float cur_attenuation = 1.f;
+
+    for (int i = 0; i < kMaxBounceCount; i++) {
+      const HitResult hit_result =
+          (*world)->DetectHit(cur_ray, IntervalF(0.f, math_utility::kInfinity));
+
+      if (hit_result.has_hit) {
+        const auto direction =
+            GetRandVecOnHemisphere(local_rand_state, hit_result.normal);
+
+        cur_attenuation *= 0.5f;
+        cur_ray = RayF{hit_result.point, direction};
+      }
+      else
+      {
+        const Vec3F unit_direction = cur_ray.direction().Normalized();
+        const float a = 0.5f * (unit_direction.y + 1.f);
+        const auto color =
+            (1.f - a) * Color(1.f, 1.f, 1.f) + a * Color(0.5f, 0.7f, 1.f);
+
+        return cur_attenuation * color;
+      }
+    }
+
+    return Vec3F{0.f, 0.f, 0.f}; // exceeded recursion.
+  }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+We also need to be careful about how we write the new random vector generation functions. In addition to having to pass our local_rand_state object from the Render() kernel as a parameter, we also have to take into account the fact that the curand_uniform() function returns a value between 0 and 1. But when we want to generate a random vector in the unit sphere, we want it to be between -1 and 1. This is why we use a little mathematical trick by multiplying the result of curand_uniform() by 2 and then subtracting 1 to go from [0; 1] to [-1; 1].
+
+Here is my device_random.h file to generate correct random vectors on the GPU:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#pragma once
+
+#include "vec3.h"
+
+#include <curand_kernel.h>
+
+__device__ [[nodiscard]] inline Vec3F GetRandomVector(
+    curandState* local_rand_state) noexcept {
+  return Vec3F{curand_uniform(local_rand_state),
+               curand_uniform(local_rand_state),
+               curand_uniform(local_rand_state)};
+}
+
+__device__ [[nodiscard]] inline Vec3F GetRandVecInUnitSphere(
+    curandState* local_rand_state) noexcept {
+  Vec3F p{};
+  do {
+    // Transform random value in range [0 ; 1] to range [-1 ; 1].
+    p = 2.0f * GetRandomVector(local_rand_state) - Vec3F(1, 1, 1);
+  } while (p.LengthSquared() >= 1.0f);
+  return p;
+}
+
+__device__ [[nodiscard]] inline Vec3F GetRandVecOnHemisphere(
+    curandState* local_rand_state, const Vec3F& hit_normal) noexcept {
+  const Vec3F on_unit_sphere = GetRandVecInUnitSphere(local_rand_state).Normalized();
+  if (on_unit_sphere.DotProduct(hit_normal) > 0.f) // In the same hemisphere as the normal
+    return on_unit_sphere;
+
+  return -on_unit_sphere;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
