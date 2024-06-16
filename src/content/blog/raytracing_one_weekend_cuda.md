@@ -19,8 +19,9 @@ need to install CUDA toolkit
 - [Hit sphere](#hit-sphere)
 - [World creation](#world-creation)
 - [Camera class](#camera-class)
-- [Random numbers with CUDA for the Anti-Aliasing](#random-number-swith-cuda-for-the-anti-aliasing)
-- [Avoid recursion when rays bounce](#avoid-recursion_when-rays-bounce)
+- [Random numbers with CUDA for the Anti-Aliasing](#random-numbers-with-cuda-for-the-anti-aliasing)
+- [Avoid recursion when rays bounce](#avoid-recursion-when-rays-bounce)
+- [The material abstraction](#the-material-abstraction)
 - [Conclusion](#conclusion)
 
 # CMake setup
@@ -546,3 +547,76 @@ __device__ [[nodiscard]] inline Vec3F GetRandVecOnHemisphere(
   return -on_unit_sphere;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+# The material abstraction.
+
+The next chapter introduces an abstract class to represent materials. This class would be used by the device code so you already know which keyword we should use on the methods. Also note that the materials need to generate random vectors in the Scatter method, that's why we need to add the local_rand_state object as parameter in the method:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+class Material {
+ public:
+  __device__ constexpr Material() noexcept = default;
+  __device__ Material(Material&& other) noexcept = default;
+  __device__ Material& operator=(Material&& other) noexcept = default;
+  __device__ Material(const Material& other) noexcept = default;
+  __device__ Material& operator=(const Material& other) noexcept = default;
+  __device__ virtual ~Material() noexcept = default;
+
+  __device__ virtual bool Scatter(const RayF& r_in, const HitResult& hit,
+                                  Color& attenuation, RayF& scattered,
+                                  curandState* local_rand_state) const = 0;
+};
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+The next change from the book is that we cannot store shared pointer Material in the HitResult struct because the base CUDA C++ language does not provide standard library support. Their are some 3rd parties that have created their own implementations but I'd like to stick to the book's vision of having no dependencies in the code (expect CUDA for this project). So we will just store the material as a raw pointer.
+
+Then after creating the Lambertian and the Metal materials, we can add these to some sphere and see the result. We just need to change our way to create our spheres and to destroy them. Becuase we store the sphere in a hittable* list, we should normally dynamic_cast each hittable to sphere in order to delete their material. But dynmaic_cast is not allowed in device code, that's why I simply use a static_cast even if it is a huge code smell. The goal is to write the code in one weekend so I don't have time to create a better architecture for my code sorry.
+
+Here is the two horrible functions:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+__global__ void CreateWorld(Camera** d_camera, Hittable** d_list, Hittable** d_world) {
+  if (threadIdx.x == 0 && blockIdx.x == 0) {
+    d_list[0] = new Sphere(Vec3F(0.f, -100.5f, -1.f), 100.f,
+                           new Lambertian(Color(0.8f, 0.8f, 0.0f)));
+
+    d_list[1] = new Sphere(Vec3F(0.f, 0.f, -1.2f), 0.5f,
+                           new Lambertian(Color(0.1f, 0.2f, 0.5f)));
+
+    d_list[2] = new Sphere(Vec3F(-1.f, 0.f, -1.f), 0.5f,
+                           new Metal(Color(0.8f, 0.8f, 0.8f)));
+
+    d_list[3] = new Sphere(Vec3F(1.f, 0.f, -1.f), 0.5f,
+                           new Metal(Color(0.8f, 0.6f, 0.2f)));
+
+    *d_world = new HittableList(d_list, 4);
+    *d_camera = new Camera();
+    (*d_camera)->Initialize();
+  }
+}
+
+__global__ void FreeWorld(Camera** d_camera, Hittable** d_list, Hittable** d_world) {
+  if (threadIdx.x == 0 && blockIdx.x == 0) {
+    if (*d_camera)
+    {
+      delete *d_camera;
+      d_camera = nullptr;
+    }
+    if (*d_world) {
+      delete *d_world;
+      *d_world = nullptr;  // Set the pointer to nullptr after deletion
+    }
+    for (int i = 0; i < 4; i++) {
+      // Dynamic_cast is not allowed in device code so we use static_cast and yes I
+      // know that is a real code smell here but the objective is to write the code
+      // in a weekend so I don't want to search for a better architecture now sorry.
+      delete static_cast<Sphere*>(d_list[i])->material;
+      delete d_list[i];
+    }
+  }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+And here is the result:
+
+TODO: montrer image.
+
+Then it's time to implement the Dielectric material. There is no special code here so let's jump to the image result:
