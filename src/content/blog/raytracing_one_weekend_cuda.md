@@ -2,7 +2,7 @@
 title: "My implemenation of the raytracing in one weekend using CUDA."
 description: "A technial post about how I implemented a raytracer using the CUDA API."
 pubDate: "June 16 2024"
-heroImage: "/rollback_game/gifs/gameplay.gif"
+heroImage: "/raytracing_one_weekend_cuda/images/final_16min.png"
 tags: ["Computer Graphics", "Raytracing", "C++", "CUDA"]
 ---
 
@@ -619,4 +619,10 @@ And here is the result:
 
 TODO: montrer image.
 
-Then it's time to implement the Dielectric material. There is no special code here so let's jump to the image result:
+Then it's time to implement the Dielectric material. There is no special CUDA code here so let's jump to the image result:
+
+# Final result
+
+21.245
+1177.92s -> 20min35s
+975.123s -> 16m15s
