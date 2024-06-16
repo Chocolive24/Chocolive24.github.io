@@ -12,7 +12,6 @@ need to install CUDA toolkit
 
 # Content
 
-- [First step into CUDA](#first-step-into-cuda)
 - [CMake setup](#cmake-setup)
 - [Render the first image](#render-the-first-image)
 - [Create classes that can be used on both the CPU and GPU](#create-classes-that-can-be-used-on-both-the-cpu-and-gpu)
@@ -22,8 +21,6 @@ need to install CUDA toolkit
 - [Camera class](#camera-class)
 - [Random numbers with CUDA for the Anti-Aliasing](#random-number-swith-cuda-for-the-anti-aliasing)
 - [Conclusion](#conclusion)
-
-# First step into CUDA
 
 # CMake setup
 
@@ -409,47 +406,70 @@ TODO SHOW IMAGE.
 
 # Random numbers with CUDA for the Anti-Aliasing
 
-Montrer le profiling de ma fonction add test CUDA.
+The chapter 8 is about anti-aliasing which consist of sampling the square region centered at a pixel that extends halfway to each of the four neighboring pixels. To sample the square pixel we will take some random point inside it. So we need to generate random numbers via the CUDA API to acces them on the GPU. To do so we need to use the cuRAND library. Also ince random numbers on a computer actually consist of pseudorandom sequences, we need to setup and remember state for every thread on the GPU. That's why we will create a "curandState" per pixel:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <curand_kernel.h>
 
-How to setup Cmake and perhaps vcpkg to work with CUDA
+...
 
-Render the First image
-	CHECK_CUDA_ERRORS
-	création du framebuffer avec CUDA sur la mémoire partagée entre CPU et GPU
-	fonction __global__ Render()
+int main() {
+    ... 
 
-Create classes that can be used on both the CPU and GPU
-	J'ai fais des template classes en plus
+    curandState* d_rand_state;
+    CHECK_CUDA_ERRORS(cudaMalloc(reinterpret_cast<void**>(&d_rand_state),
+                        kNumPixels * sizeof(curandState)));
 
-First rays 
-	parler de la boucle de cout inversée en y
-	montrer comment j'ai utiliser le fb du CUDA blog avec les calculs pixels du livre de base:
-		__global__ void render(vec3 *fb, int max_x, int max_y,
-                       vec3 lower_left_corner, vec3 horizontal, vec3 vertical, vec3 origin,
-                       hitable **world) {
+    ...
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Then we need to initialize the curandState object per pixel for every thread. The CUDA post has an approach which consits in creating a second kernel to be able to separate the time for random initialization from the time it takes to do the rendering, in order to measure the only the rendering. I followed the same principle but you can do it in the Render() kernel if you want to.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+__global__ void RenderInit(curandState* rand_state) {
   const int i = threadIdx.x + blockIdx.x * blockDim.x;
   const int j = threadIdx.y + blockIdx.y * blockDim.y;
-  if ((i >= max_x) || (j >= max_y)) return;
-  const int pixel_index = j * max_x + i;
-  const auto pixel_center = pixel_00_loc + (i * pixel_delta_u) +
-                            (j * pixel_delta_v);
-  const auto ray_direction = pixel_center - origin;
-  const RayF r(origin, ray_direction);
 
-  fb[pixel_index] = GetRayColor(r, world);
+  if ((i >= Camera::kImageWidth) || (j >= Camera::kImageHeight)) 
+    return;
+
+  const int pixel_index = j * Camera::kImageWidth + i;
+  // Each thread gets same seed, a different sequence number, no offset
+  curand_init(1984, pixel_index, 0, &rand_state[pixel_index]);
 }
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Hit Sphere
-	montrer que le cercle était tout raplati
+We can finally use it in the Render() kernel by making a local copy of the current "curandState" object to which we call curand_uniform():
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+__global__ void Render(Vec3F* fb, Camera** camera, Hittable** world,
+                       const curandState* rand_state) {
+  const int i = threadIdx.x + blockIdx.x * blockDim.x;
+  const int j = threadIdx.y + blockIdx.y * blockDim.y;
 
-Création du World
-	Mémoire allouée sur le GPU pour les Hittable**
-	Les malloc, free, checkdevice etc...
+  if ((i >= Camera::kImageWidth) || (j >= Camera::kImageHeight)) 
+    return;
 
-Camera class
-	montrer comment j'ai fais la classe caméra
-		j'ai laissé l'opportunité d'être host et device
-		j'ai créé la camera localement dans le code device pour me simplifier la vie car j'en ai pas besoin de le code host.
+  const int pixel_index = j * Camera::kImageWidth + i;
 
-Random and AA
-	montrer le curand et ma manière de gérer l'anti aliasing (la méthode du livre fusionnée au curand)
+  curandState local_rand_state = rand_state[pixel_index];
+  Vec3F col(0, 0, 0);
+
+  for (int s = 0; s < Camera::kSamplesPerPixel; s++) {
+    const auto offset = Vec3F(curand_uniform(&local_rand_state) - 0.5f,
+                              curand_uniform(&local_rand_state) - 0.5f, 0.f);
+    const auto pixel_sample = (*camera)->pixel_00_loc +
+                              ((i + offset.x) * (*camera)->pixel_delta_u) +
+                              ((j + offset.y) * (*camera)->pixel_delta_v);
+    const auto ray_direction = pixel_sample - (*camera)->kLookFrom;
+
+    const RayF r((*camera)->kLookFrom, ray_direction);
+
+    col += Camera::CalculatePixelColor(r, world);
+  }
+
+  fb[pixel_index] = col / Camera::kSamplesPerPixel;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+This give us this result which is the same image but using anti-aliasing:
+TODO MONTER IMAGE.
+
