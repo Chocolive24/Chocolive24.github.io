@@ -30,6 +30,7 @@ In this technical post I'm going to talk about the particularities I had to take
 - [Random numbers with CUDA for the Anti-Aliasing](#random-numbers-with-cuda-for-the-anti-aliasing)
 - [Avoid recursion when rays bounce](#avoid-recursion-when-rays-bounce)
 - [The material abstraction](#the-material-abstraction)
+- [Final result](#final-result)
 - [Conclusion](#conclusion)
 
 # Render the first image
