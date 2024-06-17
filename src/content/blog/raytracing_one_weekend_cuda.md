@@ -505,7 +505,7 @@ __global__ void Render(Vec3F* fb, Camera** camera, Hittable** world,
 This give us this result which is the same image but using anti-aliasing:
 
 <div style="text-align:center">
-  <img src="/raytracing_one_weekend_cuda/images/aa.jpg" alt="Same render but with anti-alisaing."/>
+  <img src="/raytracing_one_weekend_cuda/images/aa.jpg" width="400" height="225" alt="Same render but with anti-alisaing."/>
   <p style="margin-top: -30px"><em>Same render but with anti-alisaing.</em></p>
 </div>
 
@@ -586,7 +586,7 @@ __device__ [[nodiscard]] inline Vec3F GetRandVecOnHemisphere(
 
 Now we can create our first diffuse surface render:
 <div style="text-align:center">
-  <img src="/raytracing_one_weekend_cuda/images/simple_diffuse.jpg" alt="First diffuse surface render."/>
+  <img src="/raytracing_one_weekend_cuda/images/simple_diffuse.jpg" width="400" height="225" alt="First diffuse surface render."/>
   <p style="margin-top: -30px"><em>First diffuse surface render.</em></p>
 </div>
 
