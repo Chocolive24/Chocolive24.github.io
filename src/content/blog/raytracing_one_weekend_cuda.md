@@ -6,13 +6,16 @@ heroImage: "/raytracing_one_weekend_cuda/images/final_16min.png"
 tags: ["Computer Graphics", "Raytracing", "C++", "CUDA"]
 ---
 
-Intro - contexte
+Hello, I recently took one of my weekends to implement a raytracer following the ebook ["Ray Tracing in One Weekend"](https://raytracing.github.io/books/RayTracingInOneWeekend.html) by Peter Shirley. I'd heard a lot about this book and as a computer graphics enthusiast, I had to read it. I ended up with a result similar to the book, which took 1h50 to render, given that the image is 1200x675 pixels, the number of sample pixels is 500 and the maximum number of ray bounces is 50, giving us a maximum number of possible iterations of: 1200x675x500x50 = 20'250'000'000.
 
-need to install CUDA toolkit
+The book's raytracer is designed to be simple and accessible to as many people as possible, so rendering is done naively on the CPU. I had a strong desire to read the other books in this series, but I thought it was a pity not to use the GPU to work more closely with modern raytracers on the market. So I remembered hearing about NVIDIA's CUDA API, which is an API for writing parallel computing code on the GPU in C++. I'd never used CUDA before and thought this project would be perfect for that.
+
+The first thing I did was to read Mark Harris' technial post: ["An Even Easier Introduction to CUDA"](https://developer.nvidia.com/blog/even-easier-introduction-cuda/) to get the basics down. After reading this post I saw another post by Roger Allen talking about accelerating the raytracing in one weekend rendering time using CUDA: ["Accelerated Ray Tracing in One Weekend in CUDA"](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/). So I used my code from my reading of the raytracing book and the CUDA post to implement my version of raytracing in one weekend in CUDA. 
+
+In this technical post I'm going to talk about the particularities I had to take into account when using CUDA in my project and my journey to get to the final result of the raytracing book. I'm not going to explain how raytracing works, as Peter Shirley's ebook will inevitably do that better than I can. Nor do I claim to have found all the solutions to my CUDA-related problems on my own, since I've drawn heavily on the CUDA post. 
 
 # Content
 
-- [CMake setup](#cmake-setup)
 - [Render the first image](#render-the-first-image)
 - [Create classes that can be used on both the CPU and GPU](#create-classes-that-can-be-used-on-both-the-cpu-and-gpu)
 - [First rays](#first-rays)
@@ -23,8 +26,6 @@ need to install CUDA toolkit
 - [Avoid recursion when rays bounce](#avoid-recursion-when-rays-bounce)
 - [The material abstraction](#the-material-abstraction)
 - [Conclusion](#conclusion)
-
-# CMake setup
 
 # Render the first image
 
@@ -183,7 +184,7 @@ public:
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-This class is a template one to be able to easily switch between float and double if I want to but you need to be aware that the current GPUs run fastest when they do calculations in single precision. Double precision calculations can be several times slower on some GPUs. That's why in all my program I will only use Vec3<float>:
+This class is a template one to be able to easily switch between float and double if I want to but you need to be aware that the current GPUs run fastest when they do calculations in single precision. Double precision calculations can be several times slower on some GPUs. That's why in all my program I will only use Vec3F:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 using Vec3F = Vec3<float>;
