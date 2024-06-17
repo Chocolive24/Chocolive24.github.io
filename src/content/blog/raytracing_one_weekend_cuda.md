@@ -6,13 +6,18 @@ heroImage: "/raytracing_one_weekend_cuda/images/final_16min.png"
 tags: ["Computer Graphics", "Raytracing", "C++", "CUDA"]
 ---
 
-Hello, I recently took one of my weekends to implement a raytracer following the ebook ["Ray Tracing in One Weekend"](https://raytracing.github.io/books/RayTracingInOneWeekend.html) by Peter Shirley. I'd heard a lot about this book and as a computer graphics enthusiast, I had to read it. I ended up with a result similar to the book, which took 1h50 to render, given that the image is 1200x675 pixels, the number of sample pixels is 500 and the maximum number of ray bounces is 50, giving us a maximum number of possible iterations of: 1200x675x500x50 = 20'250'000'000.
+Hello, I recently took one of my weekends to implement a raytracer following the ebook [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) by Peter Shirley. I'd heard a lot about this book and as a computer graphics enthusiast, I had to read it. I ended up with a result similar to the book, which took 1h50 to render, given that the image is 1200x675 pixels, the number of sample pixels is 500 and the maximum number of ray bounces is 50, giving us a maximum number of possible iterations of: 1200x675x500x50 = 20'250'000'000.
+
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/cpu_result.png" alt="My final render."/>
+  <p style="margin-top: -30px"><em>My final render.</em></p>
+</div>
 
 The book's raytracer is designed to be simple and accessible to as many people as possible, so rendering is done naively on the CPU. I had a strong desire to read the other books in this series, but I thought it was a pity not to use the GPU to work more closely with modern raytracers on the market. So I remembered hearing about NVIDIA's CUDA API, which is an API for writing parallel computing code on the GPU in C++. I'd never used CUDA before and thought this project would be perfect for that.
 
-The first thing I did was to read Mark Harris' technial post: ["An Even Easier Introduction to CUDA"](https://developer.nvidia.com/blog/even-easier-introduction-cuda/) to get the basics down. After reading this post I saw another post by Roger Allen talking about accelerating the raytracing in one weekend rendering time using CUDA: ["Accelerated Ray Tracing in One Weekend in CUDA"](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/). So I used my code from my reading of the raytracing book and the CUDA post to implement my version of raytracing in one weekend in CUDA. 
+The first thing I did was to read Mark Harris' technial post: [An Even Easier Introduction to CUDA](https://developer.nvidia.com/blog/even-easier-introduction-cuda/) to get the basics down. After reading this post I saw another post by Roger Allen talking about accelerating the raytracing in one weekend rendering time using CUDA: [Accelerated Ray Tracing in One Weekend in CUDA](https://developer.nvidia.com/blog/accelerated-ray-tracing-cuda/). So I used my code from my reading of the raytracing book and the CUDA post to implement my version of raytracing in one weekend in CUDA. 
 
-In this technical post I'm going to talk about the particularities I had to take into account when using CUDA in my project and my journey to get to the final result of the raytracing book. I'm not going to explain how raytracing works, as Peter Shirley's ebook will inevitably do that better than I can. Nor do I claim to have found all the solutions to my CUDA-related problems on my own, since I've drawn heavily on the CUDA post. 
+In this technical post I'm going to talk about the particularities I had to take into account when using CUDA in my project and my journey to get to the final result of the raytracing book. I'm not going to explain how raytracing works, as Peter Shirley's ebook will inevitably do that better than I can.  Nor do I claim to have found all the solutions to my CUDA-related problems on my own, since I've drawn heavily on the CUDA post. I will often reference chapters from the book so it may be beneficial to have read it.
 
 # Content
 
@@ -29,9 +34,8 @@ In this technical post I'm going to talk about the particularities I had to take
 
 # Render the first image
 
-La première chpse à faire et de séparer les calculs de valeur des pixels et l'écriture de ces dernières dans l'image. Nous voulons faire tous les calculs en parrellèle sur le GPU car il est fait pour ca. Nous voulons ensuite utiliser notre CPU pour tout retranscrire dans l'image.ppm. Tout d'abord il est important de definir une macro qui que nous utiliseront à chaque appel de fonction de l'API CUDA pour checker les codes erreurs des fonctions pour nous aider dans notre développement.
-
-First create the macro to check cuda errors: Each CUDA API call we make returns an error code that we should check. We check the cudaError_t result with a checkCudaErrors macro to output the error to stdout before we reset the CUDA device and exit.
+So we want to separate the calculation of pixel values from the writing of these values to the image. We want to do all the calculations in parallel on the GPU, because that's what it's designed for. We then want to use our CPU to transcribe everything into the PPM image. <br>
+But first of all, it's important to define a macro that we'll use for each CUDA API function call to check the error codes of the functions to help us in our development.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #define CHECK_CUDA_ERRORS(val) check_cuda((val), #val, __FILE__, __LINE__)
@@ -49,9 +53,9 @@ void check_cuda(cudaError_t result, char const* const func,
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Then the first tricky things to do is to create a buffer that has a memory shared on both the CPU and GPU.
-To do so we allocate a framebuffer of size image_width * image_height on the unified memory by calling cudaMallocManaged().
-The unifided memory is shared by both the GPU to write pixel values into it and the CPU to read from it and output it in the image.ppm file.
+The first thing to do is to create a buffer whose memory is shared between the CPU and GPU.
+To do this, we allocate a framebuffer of size image_width * image_height on the unified memory by calling cudaMallocManaged().
+Unified memory is shared both by the GPU, which writes pixel values to it, and by the CPU, which reads and renders them in the PPM image.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 // FrameBuffer
@@ -65,11 +69,11 @@ float* fb = nullptr;
 CHECK_CUDA_ERRORS(cudaMallocManaged(reinterpret_cast<void**>(&fb), kFbSize));
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Then we need to define how many thread and blocks from our GPU we will use. Personally I simply followed the post from Roger Allen which define 8x8 thread for 2 reasons: (1) is a small, square region so the work would be similar.  This should help each pixel do a similar amount of work. If some pixels work much longer than other pixels in a block, the efficiency of that block is impacted.
-(2) has a pixel count that is a multiple of 32 in order to fit into warps evenly.
+Then we need to define how many thread and blocks from our GPU we will use. Personally I simply followed the post from Roger Allen which define 8x8 thread for 2 reasons: <br>
+1. A small block size should help each pixel do a similar amount of work. If some pixels work much longer than other pixels in a block, the efficiency of that block is impacted.
+2. A block size which has a pixel count that is a multiple of 32 enables to fit into warps evenly.
 
-I also added a timer like in the cuda post to measure the time it takes in seconds.
-
+I also added a timer like in the cuda post to measure the GPU initialization + calculation time.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 constexpr int kTx = 8;
 constexpr int kTy = 8;
@@ -89,8 +93,7 @@ const double timer_seconds = static_cast<double>(stop - start) / CLOCKS_PER_SEC;
 std::cerr << "took " << timer_seconds << " seconds.\n";
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Now we need a Render() function that runs on the GPU to calculates the value of each pixel and write it into the framebuffer but is called by the CPU. Such a function is called a kernel in CUDA. To tell the cuda compiler that a function is a kernel we need to add the "__global__" keyword to it:
-
+Now we need a Render() function that runs on the GPU to calculates the value of each pixel and write it into the framebuffer but is called by the CPU. Such a function is called a kernel in CUDA. To tell the cuda compiler that a function is a kernel we need to add the __global__ keyword to it:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 __global__ void Render(float *fb, const int image_width, const int image_height) {
     const int i = threadIdx.x + blockIdx.x * blockDim.x;
@@ -104,10 +107,9 @@ __global__ void Render(float *fb, const int image_width, const int image_height)
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Note that we use the threadIdx and blockIdx CUDA built-in variables to identify the coordinates of each thread in the image (i,j) so it knows how to calculate the final color. It is possible with images of sizes that are not multiples of the block size to have extra threads running that are outside the image. We must make sure these threads do not try to write to the frame buffer and return early.
+Note that we use the CUDA built-in variables threadIdx and blockIdx to identify the coordinates of each thread in the image (i,j) so that we know how to calculate the final color. It's possible that images whose size is not a multiple of the block size contain additional threads running outside the image. We need to ensure that these threads don't try to write to the image buffer and return prematurely.
 
-After the execution of the kernel function, we can read the pixel values on the CPU and write them in the image file like in the book and simply free the frame buffer memory after we finished with it. (I put all the code from the thread creations to be explicit):
-
+After executing the kernel function, we can read the pixel values from the processor and write them to the image file as in the book, and simply release the frame buffer memory once we're done. (I've put all the thread creation code in here to be self-explanatory) :
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 constexpr int kTx = 8;
 constexpr int kTy = 8;
@@ -143,8 +145,7 @@ for (int j = kImageHeight-1; j >= 0; j--) {
 }
 checkCudaErrors(cudaFree(fb));
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-
-If we open the ppm file (I use ppm viewer online personaly) we should have the first image of the raytracing book:
+If we open the ppm file (I use [ppm viewer site](https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html) personally) we should have the first image of the raytracing book:
 
 <div style="text-align:center">
   <img src="/raytracing_one_weekend_cuda/images/first_image.png" alt="The first PPM image of the book." />
@@ -153,7 +154,7 @@ If we open the ppm file (I use ppm viewer online personaly) we should have the f
 
 # Create classes that can be used on both the CPU and GPU
 
-The second tricky thing to do after writing to a framebuffer was to be able to use the common classes like the Vec3 one or the Ray one on both the CPU and the GPU. To do so we simply need to tell the compiler that each method of these classes are callable from the host (the CPU code) and from the device (the GPU code) using the "__host__" and "__device__" keywords on all methods (it includes the constructors and the operators).
+The second tricky thing to do after writing to a framebuffer was to be able to use common classes such as the Vec3 class or the Ray class on both the CPU and GPU. To do this, we simply need to tell the compiler that every method in these classes can be called from the host (CPU code) and from the device (GPU code) using the __host__ and __device__ keywords on all methods (this includes constructors and operators).
 
 Here is some small examples with some methods of my Vec3 class:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -185,7 +186,6 @@ public:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 This class is a template one to be able to easily switch between float and double if I want to but you need to be aware that the current GPUs run fastest when they do calculations in single precision. Double precision calculations can be several times slower on some GPUs. That's why in all my program I will only use Vec3F:
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 using Vec3F = Vec3<float>;
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
@@ -194,8 +194,7 @@ The advantage of my template class is that I can easily use the same class in a 
 
 # First rays
 
-Les fonctions de calculs de rayons, d'intersections etc seront 100% utilisées par notre GPU. Tout l'intéret d'utiliser CUDA réside à éxecuter toutes ces fonctions de calculs sur les threads du GPU c'est pourquoi il faut annoter toutes ces fonctions avec le keyword "__device__" comme la fonction CalculatePixelColor (the color() function from the book) for example:
-
+Functions  for calculating rays, intersections etc will be 100% used by our GPU. The whole point of using CUDA is to run all these calculation functions on GPU threads, which is why we need to annotate all these functions with the __device__ keyword, like the CalculatePixelColor function (the color() function from the book) for example:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 __device__ Vec3F CalculatePixelColor(const RayF& r) {
    Vec3F unit_direction = r.direction().Normalized();
@@ -204,7 +203,7 @@ __device__ Vec3F CalculatePixelColor(const RayF& r) {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Grace au keyword "__device__" cette fonction peut être exécuter par le kernel:
+Thanks to the __device__ keyword this function can be executed by the kernel:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 __global__ void Render(Vec3F *fb, int image_width, int image_height,
                        Vec3F pixel_00_loc, Vec3F pixel_delta_u, Vec3F pixel_delta_v, 
@@ -223,11 +222,28 @@ __global__ void Render(Vec3F *fb, int image_width, int image_height,
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Il y a quelques changement dans les calculs de viewport entre le livre et le post cuda. J'ai personnelement gardé les calculs de livre et je me suis retrouvé avec mon background inversé en y:
+There are some changes in the viewport calculations between the book and the post cuda. I personally kept the book calculations and ended up with my background reversed in y:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Image</title>
+    <style>
+        .reverse-y {
+            transform: scaleY(-1);
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align:center">
+        <img src="/raytracing_one_weekend_cuda/images/image2.png" alt="The blue gradient image reversed." class="reverse-y"/>
+        <p style="margin-top: -30px"><em>The blue gradient image reversed.</em></p>
+    </div>
+</body>
+</html>
 
-TODO: image inversée
-
-Pour régler ce léger problème j'ai simplement inversé ma boucle j quand j'écris dans l'image:
+To resolve this slight problem I simply inverted my loop j when I write in the image:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 // The j loop is inverted compared to the raytracing in a weekend book because
 // the Render function executed on the GPU has an inverted Y.
@@ -240,8 +256,10 @@ for (int j = 0; j < kImageHeight; j++) {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 Now the image is correct:
-
-TODO image non inversée
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/image2.png" alt="The blue gradient image."/>
+  <p style="margin-top: -30px"><em>The blue gradient image.</em></p>
+</div>
 
 # Hit sphere
 
