@@ -154,7 +154,8 @@ If we open the ppm file (I use [ppm viewer site](https://www.cs.rhodes.edu/welsh
 
 # Create classes that can be used on both the CPU and GPU
 
-The second tricky thing to do after writing to a framebuffer was to be able to use common classes such as the Vec3 class or the Ray class on both the CPU and GPU. To do this, we simply need to tell the compiler that every method in these classes can be called from the host (CPU code) and from the device (GPU code) using the __host__ and __device__ keywords on all methods (this includes constructors and operators).
+The second tricky thing to do after writing to a framebuffer was to be able to use common classes such as the Vec3 class or the Ray class on both the CPU and GPU. <br>
+To do this, we simply need to tell the compiler that every method in these classes can be called from the host (CPU code) and from the device (GPU code) using the __host__ and __device__ keywords on all methods (this includes constructors and operators).
 
 Here is some small examples with some methods of my Vec3 class:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -272,8 +273,8 @@ Displaying a sphere is quite simple to do, especially since no GPU allocation is
 
 # World creation
 
-Le dernier chapitre était très simple à adapter à du code CUDA, par contre celui-ci sera bien plus complexe. Nous entrons dans les chapitres d'abscatrion des différents objects "Hittable" et de la création du world. Tout nos objets et notre world doivent être alloué sur le GPU, le CPU n'a pas besoin d'y accéder. Ils doivent donc être "__device__" usable et doivent être alloué via la fonction CUDA cudaMalloc(). Nous stocker les hittables dans des pointeurs de pointeurs qui font office de vector<shared_ptr> comme dans le livre:
-
+The previous chapter was very simple to adapt to CUDA code, however this one will be much more complex. We enter the chapters of abstraction of the different "Hittable" objects and the creation of the world. <br>
+All our objects and our world must be allocated on the GPU, the CPU does not need to access them. They must therefore be  __device__ usable and must be allocated via the cudaMalloc() function. We store hittables in pointers that act as vector<shared_ptr> like in the book:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 ...
 
@@ -321,7 +322,7 @@ int main() {
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-Note that CreateWorld and FreeWorld are "__global__" to be able to call them from the host code.
+Note that CreateWorld and FreeWorld are __global__ to be able to call them from the host code even if the device will execute them.
 
 Then we can free all the memory of the program and reset the CUDA device before exiting the main process:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -340,16 +341,19 @@ CHECK_CUDA_ERRORS(cudaDeviceReset());
 return EXIT_SUCCESS;
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now we a sphere a ground both allocated on the GPU and the image looks like that:
+Now we have a sphere and a ground both allocated on the GPU and the image looks like that:
 
-TODO: show image
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/first_world.png" alt="Resulting render using the world architecture."/>
+  <p style="margin-top: -30px"><em>Resulting render using the world architecture.</em></p>
+</div>
 
 # Camera class
 
-Le chapitre sur la camera est aussi un important passage de factorisation du code.
-J'ai fait en sorte que ma caméra soit host and device usable car je pense qu'on peut vouloir instantié la caméra dans le host code tout en l'utilisant dans le device code bien que personnellement je l'instantie dans le device code mais j'en parlerai plus tard. 
+The chapter on the camera is also an important passage of code factorization.
+I made sure that my camera is host and device usable because I think that we can want to instantiate the camera in the host code while using it in the device code although personally I instantiate it in the device code but I will talk about it later. 
 
-Je me suis aussi permis de profiter du comportement 100% static du program et des avantages du C++ pour stocker la majeure partie des attributs de la caméra en tant que constante évalué au compile time via le keyword "constexpr". 
+I also took advantage of the 100% static behavior of the program and the advantages of C++ to store most of the camera attributes as a constant evaluated at compile time via the keyword "constexpr".
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 class Camera {
     ...
@@ -367,10 +371,9 @@ class Camera {
     Vec3F pixel_00_loc{};
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Si vous avez lu les commentaires vous avez compris que j'ai eu un problème avec l'attribut Vec3F kLookFrom. En effet dans le code de ma fonction Render je peux accéder à toutes mes constantes excépté kLookFrom. J'en ai conclu que ma classe Vec3F (qui pourtant à un constructeur constexpr) n'était pas compatible avec CUDA en compile time soit car c'est un user-type soit à cause de l'aspect template. Je n'ai pas trouvé d'info qui confirmerait la théorie que CUDA ne comprend que les types de base du C++ en compile time donc je vais classer cette théorie en tant que spéculation.
+If you read the comments you understood that I had a problem with the Vec3F kLookFrom attribute. Indeed in the code of my Render function I can access all my constants except kLookFrom. I concluded that my Vec3F class (which nevertheless has a constexpr constructor) was not compatible with CUDA in compile time either because it is a user-type or because of the template aspect. I haven't found any info that would support the theory that CUDA only understands basic C++ types in compile time so I'll classify this theory as speculation.
 
-Les attributs pixel_delta_u, pixel_delta_v et pixel_00_loc peuvent eux aussi être connu en compile time mais j'ai trouvé qu'il y avait trop de valeurs intermédiaire à stocker pour calculer leur résultat récpectifs. Je considère préférable de calculer leurs valeurs dans la fonction Initialize() via les valeurs intérmédiraires en "constexpr" que de tout stocker dans ma classe caméra:
-
+The pixel_delta_u, pixel_delta_v and pixel_00_loc attributes can also be known in compile time but I found that there were too many intermediate values ​​to store to calculate their final result. I consider it better to calculate their values ​​in the Initialize() function via intermediate values ​​in "constexpr" than to store everything in my camera class:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 __host__ __device__ void Initialize() noexcept {
   // Determine viewport dimensions.
@@ -396,7 +399,7 @@ __host__ __device__ void Initialize() noexcept {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Maintenant il ne reste qu'à créer la caméra en l'allouant sur la mémoire du GPU car c'est le device code qui va l'utiliser sans oublier de tout désalloué à la fin du programme (je ne montre que l'allocation car la désallocation suit un pattern similaire)
+Now all that remains is to create the camera by allocating it on the GPU memory because it is the device code that will use it without forgetting to deallocate everything at the end of the program (I only show the allocation because deallocation follows a similar pattern)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 ...
 
@@ -428,7 +431,10 @@ int main() {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 Now we have the exact same image but the code is cleaner:
-TODO SHOW IMAGE.
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/first_world.png" alt="Same result using the camera class."/>
+  <p style="margin-top: -30px"><em>Same result using the camera class.</em></p>
+</div>
 
 # Random numbers with CUDA for the Anti-Aliasing
 
