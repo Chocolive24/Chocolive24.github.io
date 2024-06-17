@@ -511,8 +511,10 @@ This give us this result which is the same image but using anti-aliasing:
 
 # Avoid recursion when rays bounce.
 
-The next chapter introcudes the first material type we apply to our sphere which is the diffuse material also called matte.
-Light that reflects off a diffuse surface has its direction randomized but it might also be absorbed rather than reflected. The darker the surfacer the more the light is absorbded. The first implementation of reflected rays on diffuse surfaces is quite naive and reflectes the rays in a totally random direction using a rejection method to generate a correct random vector. It also ommit the fact that the function is recursive and can call itself a sufficient number of times to cause a stackoverflow in our CUDA code context. That's why I followed the adivce from the CUDA post and decided to already put a max ray bounce limit in the CalculatePixelColor() device function:
+The next chapter introduces the first material type we apply to our sphere which is the diffuse material also called matte.
+Light that reflects off a diffuse surface has its direction randomized but it might also be absorbed rather than reflected. The darker the surface the more the light is absorbed.
+
+The first implementation of reflected rays on diffuse surfaces is quite naive and reflects the rays in a totally random direction using a rejection method to generate a correct random vector. It also ommits the fact that the function is recursive and can call itself a sufficient number of times to cause a stackoverflow in our CUDA code context. That's why I followed the adivce from the CUDA post and decided to already put a max ray bounce limit in the CalculatePixelColor() device function:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
   __device__  [[nodiscard]] static Color CalculatePixelColor(
       const RayF& r, Hittable** world, curandState* local_rand_state) noexcept {
@@ -582,6 +584,12 @@ __device__ [[nodiscard]] inline Vec3F GetRandVecOnHemisphere(
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
+Now we can create our first diffuse surface render:
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/simple_diffuse.jpg" alt="First diffuse surface render."/>
+  <p style="margin-top: -30px"><em>First diffuse surface render.</em></p>
+</div>
+
 # The material abstraction.
 
 The next chapter introduces an abstract class to represent materials. This class would be used by the device code so you already know which keyword we should use on the methods. Also note that the materials need to generate random vectors in the Scatter method, that's why we need to add the local_rand_state object as parameter in the method:
@@ -650,10 +658,16 @@ __global__ void FreeWorld(Camera** d_camera, Hittable** d_list, Hittable** d_wor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 And here is the result:
-
-TODO: montrer image.
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/first_metal.png" alt="Spheres with different materials."/>
+  <p style="margin-top: -30px"><em>Spheres with different materials.</em></p>
+</div>
 
 Then it's time to implement the Dielectric material. There is no special CUDA code here so let's jump to the image result:
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/refract.png" alt="Render with two dielectric material on the left."/>
+  <p style="margin-top: -30px"><em>Render with two dielectric material on the left.</em></p>
+</div>
 
 # Final result
 
