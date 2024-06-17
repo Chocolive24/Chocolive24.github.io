@@ -28,7 +28,7 @@ need to install CUDA toolkit
 
 # Render the first image
 
-La première chpse à faire et de séparer les calculs de valeur des pixels et l'écriture de ces dernières dans l'image. Nous voulons faire tous les calculs en parrellèle sur le GPU car il est fait pour ca puis ensuite utiliser notre CPU pour tout retranscrire dans l'image.ppm. Tout d'abord il est important de definir une macro qui que nous utiliseront à chaque appel de fonction de l'API CUDA pour checker les codes erreurs des fonctions pour nous aider dans notre développement.
+La première chpse à faire et de séparer les calculs de valeur des pixels et l'écriture de ces dernières dans l'image. Nous voulons faire tous les calculs en parrellèle sur le GPU car il est fait pour ca. Nous voulons ensuite utiliser notre CPU pour tout retranscrire dans l'image.ppm. Tout d'abord il est important de definir une macro qui que nous utiliseront à chaque appel de fonction de l'API CUDA pour checker les codes erreurs des fonctions pour nous aider dans notre développement.
 
 First create the macro to check cuda errors: Each CUDA API call we make returns an error code that we should check. We check the cudaError_t result with a checkCudaErrors macro to output the error to stdout before we reset the CUDA device and exit.
 
@@ -48,7 +48,7 @@ void check_cuda(cudaError_t result, char const* const func,
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Then the first tricky to do what to create a buffer that has a memory shared on both the CPU and GPU.
+Then the first tricky things to do is to create a buffer that has a memory shared on both the CPU and GPU.
 To do so we allocate a framebuffer of size image_width * image_height on the unified memory by calling cudaMallocManaged().
 The unifided memory is shared by both the GPU to write pixel values into it and the CPU to read from it and output it in the image.ppm file.
 
@@ -64,7 +64,7 @@ float* fb = nullptr;
 CHECK_CUDA_ERRORS(cudaMallocManaged(reinterpret_cast<void**>(&fb), kFbSize));
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-Then we need to define how many thread and blocks we will use. Personally I simply followed the post from Roger Allen which define 8x8 thread for 2 reasons: (1) is a small, square region so the work would be similar.  This should help each pixel do a similar amount of work. If some pixels work much longer than other pixels in a block, the efficiency of that block is impacted.
+Then we need to define how many thread and blocks from our GPU we will use. Personally I simply followed the post from Roger Allen which define 8x8 thread for 2 reasons: (1) is a small, square region so the work would be similar.  This should help each pixel do a similar amount of work. If some pixels work much longer than other pixels in a block, the efficiency of that block is impacted.
 (2) has a pixel count that is a multiple of 32 in order to fit into warps evenly.
 
 I also added a timer like in the cuda post to measure the time it takes in seconds.
@@ -145,7 +145,10 @@ checkCudaErrors(cudaFree(fb));
 
 If we open the ppm file (I use ppm viewer online personaly) we should have the first image of the raytracing book:
 
-TODO: Show the right green image.
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/first_image.png" alt="The first PPM image of the book." />
+  <p style="margin-top: -30px"><em>The first PPM image of the book.</em></p>
+</div>
 
 # Create classes that can be used on both the CPU and GPU
 
@@ -607,7 +610,7 @@ __global__ void FreeWorld(Camera** d_camera, Hittable** d_list, Hittable** d_wor
     for (int i = 0; i < 4; i++) {
       // Dynamic_cast is not allowed in device code so we use static_cast and yes I
       // know that is a real code smell here but the objective is to write the code
-      // in a weekend so I don't want to search for a better architecture now sorry.
+      // in a weekend so I don't want to search for a better architecture now.
       delete static_cast<Sphere*>(d_list[i])->material;
       delete d_list[i];
     }
@@ -622,6 +625,8 @@ TODO: montrer image.
 Then it's time to implement the Dielectric material. There is no special CUDA code here so let's jump to the image result:
 
 # Final result
+
+We jump to final result because the last two chapters were about customize the camera and adding blur effect but it doesn't really change from the original code.
 
 21.245
 1177.92s -> 20min35s
