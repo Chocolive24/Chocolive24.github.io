@@ -438,7 +438,7 @@ Now we have the exact same image but the code is cleaner:
 
 # Random numbers with CUDA for the Anti-Aliasing
 
-The chapter 8 is about anti-aliasing which consist of sampling the square region centered at a pixel that extends halfway to each of the four neighboring pixels. To sample the square pixel we will take some random point inside it. So we need to generate random numbers via the CUDA API to acces them on the GPU. To do so we need to use the cuRAND library. Also ince random numbers on a computer actually consist of pseudorandom sequences, we need to setup and remember state for every thread on the GPU. That's why we will create a "curandState" per pixel:
+The chapter 8 is about anti-aliasing which consist of sampling the square region centered at a pixel that extends halfway to each of the four neighboring pixels. To sample the square pixel we will take some random point inside it. So we need to generate random numbers via the CUDA API to acces them on the GPU. To do so we need to use the cuRAND library. Also since random numbers on a computer actually consist of pseudorandom sequences, we need to setup and remember state for every thread on the GPU. That's why we will create a "curandState" per pixel:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #include <curand_kernel.h>
 
@@ -503,7 +503,11 @@ __global__ void Render(Vec3F* fb, Camera** camera, Hittable** world,
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 This give us this result which is the same image but using anti-aliasing:
-TODO MONTER IMAGE.
+
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/aa.jpg" alt="Same render but with anti-alisaing."/>
+  <p style="margin-top: -30px"><em>Same render but with anti-alisaing.</em></p>
+</div>
 
 # Avoid recursion when rays bounce.
 
