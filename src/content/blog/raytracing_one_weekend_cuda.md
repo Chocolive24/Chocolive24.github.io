@@ -194,7 +194,7 @@ The advantage of my template class is that I can easily use the same class in a 
 
 # First rays
 
-Functions  for calculating rays, intersections etc will be 100% used by our GPU. The whole point of using CUDA is to run all these calculation functions on GPU threads, which is why we need to annotate all these functions with the __device__ keyword, like the CalculatePixelColor function (the color() function from the book) for example:
+Functions for calculating rays, intersections etc will be 100% used by our GPU. The whole point of using CUDA is to run all these calculation functions on GPU threads, which is why we need to annotate all these functions with the __device__ keyword, like the CalculatePixelColor function (the color() function from the book) for example:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 __device__ Vec3F CalculatePixelColor(const RayF& r) {
    Vec3F unit_direction = r.direction().Normalized();
@@ -263,10 +263,12 @@ Now the image is correct:
 
 # Hit sphere
 
-L'affichage d'une sphere est assez simple à faire d'autant plus qu'aucune allocation n'est nécessaire dans ce chapitre du livre.
-Il faut seulement faire attention de bien mettre le mot clé "__device__" sur toutes les nouvelles fonction qui seront exécuté via le kernel. Une fois CUDA setup correctement et les allocations faites, ce genre de code ne pose aucune difficulté lors du développement, c'est l'un des point fort du CUDA.
+Displaying a sphere is quite simple to do, especially since no GPU allocation is necessary in this chapter of the book. You just have to be careful to put the __device__ keyword on all new functions that will be executed via the kernel. Once CUDA is setup correctly and the allocations are made, this type of code poses no difficulty during development, it is one of the strong points of CUDA.
 
-TODO: montrer image du hit sphere.
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/hit_sphere.png" alt="First sphere drawn."/>
+  <p style="margin-top: -30px"><em>First sphere drawn.</em></p>
+</div>
 
 # World creation
 
