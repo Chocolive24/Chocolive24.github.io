@@ -671,8 +671,20 @@ Then it's time to implement the Dielectric material. There is no special CUDA co
 
 # Final result
 
-We jump to final result because the last two chapters were about customize the camera and adding blur effect but it doesn't really change from the original code.
+Let me jump to the final result because the last two chapters concerned the customization of the camera and the addition of a defocus blur, but the code does not really change compared to the code in the book.
 
-21.245
-1177.92s -> 20min35s
-975.123s -> 16m15s
+To get the final result, simply create a large number of spheres randomly, change the size of the image to 1200x675, set the number of sample pixels to 500 and the maximum bounce per radius to 50. This give us this result:
+
+<div style="text-align:center">
+  <img src="/raytracing_one_weekend_cuda/images/final_16min.png" alt="Final result."/>
+  <p style="margin-top: -30px"><em>Final result.</em></p>
+</div>
+
+The book's implementation using only the CPU took 1h50 to render the image using my Intel Core i7 CPU while my implementation with CUDA using 8x8 threads took 20min35s using my NVIDIA GeForce RTX 3050Ti GPU. I also took the liberty of testing some thread values ​​to try to get a better result and I got the best performance using 16x16 thread for a calculation time of 16min15s. This makes the implementation with CUDA almost 7x faster
+
+# Conclusion
+
+Going from 1h50 with my CPU to 16min15s with my GPU is a huge change. It wasn't easy to use the CUDA API at first but once you wrote a few pieces of code, you got used to it quite well. <br>
+Overall, I find using CUDA quite simple for a small project like this. I also find the ratio of effort provided - efficiency obtained very good. I definitely want to continue reading the series of books on raytracing using CUDA but also to use CUDA in other contexts like AI for example.
+
+Thank you for reading this technical post. Don’t hesitate to check out the project code on my [github](https://github.com/Chocolive24/raytracing_in_one_weekend_with_cuda)
