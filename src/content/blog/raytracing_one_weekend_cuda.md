@@ -684,7 +684,7 @@ The book's implementation using only the CPU took 1h50 to render the image using
 
 # Conclusion
 
-Going from 1h50 with my CPU to 16min15s with my GPU is a huge change. It wasn't easy to use the CUDA API at first but once you wrote a few pieces of code, you got used to it quite well. <br>
+Going from 1h50 with my Intel Core i7 CPU to 16min15s with my NVIDIA GeForce RTX 3050Ti GPU is a huge change. It wasn't easy to use the CUDA API at first but once you wrote a few pieces of code, you got used to it quite well. <br>
 Overall, I find using CUDA quite simple for a small project like this. I also find the ratio of effort provided - efficiency obtained very good. I definitely want to continue reading the series of books on raytracing using CUDA but also to use CUDA in other contexts like AI for example.
 
 Thank you for reading this technical post. Don’t hesitate to check out the project code on my [github](https://github.com/Chocolive24/raytracing_in_one_weekend_with_cuda)
