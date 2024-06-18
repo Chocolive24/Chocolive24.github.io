@@ -1,5 +1,5 @@
 ---
-title: "My implemenation of the raytracing in one weekend using CUDA."
+title: "My implementation of the raytracing in one weekend using CUDA."
 description: "A technial post about how I implemented a raytracer using the CUDA API."
 pubDate: "June 16 2024"
 heroImage: "/raytracing_one_weekend_cuda/images/final_16min.png"
