@@ -59,43 +59,8 @@ const projects = (await getCollection("project")).sort((a, b) => {
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
     <div class="text-5xl font-bold">Pachoud Olivier </div>
-    <div class="text-3xl py-3 font-bold">Hello, I'm a graphics programmer currently doing a bachelor's degree at the SAE institute in Geneva. I'm also interested in game engine programming.</div>
+    <div class="text-3xl py-3">Hello, I'm a graphics programmer currently doing a bachelor's degree at the SAE institute in Geneva. I'm also interested in game engine programming.</div>
   </div>
-
-  <!-- <div>
-    <div class="text-3xl w-full font-bold mb-2"> Featured Projects
-      These are my favorite projects, showcasing my expertise and passion for computer graphics programming.</div>
-  </div> -->
-
-  <!-- <div>
-    <div class="text-3xl w-full font-bold mb-2">
-      Featured Projects
-    </div>
-    <div class="text-base w-full mb-4">
-      These are my favorite projects, showcasing my expertise and passion for computer graphics programming.
-    </div>
-  
-    <div class="text-3xl w-full font-bold mb-2">
-      Academic Projects
-    </div>
-    <div class="text-base w-full mb-4">
-      Projects completed during my Bachelor's degree, demonstrating my educational background and foundational skills.
-    </div>
-  
-    <div class="text-3xl w-full font-bold mb-2">
-      Personal Projects
-    </div>
-    <div class="text-base w-full mb-4">
-      Projects developed in my free time, driven by curiosity and a desire to explore new technologies and techniques.
-    </div>
-  
-    <div class="text-3xl w-full font-bold mb-2">
-      Game Jam Projects
-    </div>
-    <div class="text-base w-full mb-4">
-      Fast-paced, collaborative projects created during game jams, highlighting my ability to work under tight deadlines and contribute to team efforts.
-    </div>
-  </div> -->
 
   <div>
     <div class="text-3xl w-full font-bold mb-2">
@@ -149,6 +114,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
   
     <div class="text-xl w-full font-bold mb-2">
       Personal Projects
+
     </div>
       {
         projects.map((project) => (
