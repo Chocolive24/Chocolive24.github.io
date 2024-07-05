@@ -69,6 +69,7 @@ const { page } = Astro.props;
       {/* Render Featured Projects */}
       <div class="mb-5">
         <div class="text-xl font-bold mb-2">Featured Projects</div>
+        <div class="text-xl mb-2">These are my favorite projects, showcasing my expertise and passion for computer graphics programming.</div>
         <ul>
           {page.data
             .filter(post => post.data.type === 'featured')
@@ -90,6 +91,7 @@ const { page } = Astro.props;
       {/* Render Academic Projects */}
       <div class="mb-5">
         <div class="text-xl font-bold mb-2">Academic Projects</div>
+        <div class="text-xl mb-2"> Projects completed during my Bachelor's degree, demonstrating my educational background and foundational skills.</div>
         <ul>
           {page.data
             .filter(post => post.data.type === 'academic')
@@ -111,6 +113,7 @@ const { page } = Astro.props;
       {/* Render Personal Projects */}
       <div class="mb-5">
         <div class="text-xl font-bold mb-2">Personal Projects</div>
+        <div class="text-xl mb-2">Projects developed in my free time, driven by curiosity and a desire to explore new technologies and techniques.</div>
         <ul>
           {page.data
             .filter(post => post.data.type === 'personal')
@@ -132,6 +135,7 @@ const { page } = Astro.props;
       {/* Render Game Jam Projects */}
       <div class="mb-5">
         <div class="text-xl font-bold mb-2">Game Jam Projects</div>
+        <div class="text-xl mb-2">Fast-paced, collaborative projects created during game jams, highlighting my ability to work under tight deadlines and contribute to team efforts.</div>
         <ul>
           {page.data
             .filter(post => post.data.type === 'gamejam')
