@@ -120,19 +120,22 @@ const projects = (await getCollection("project")).sort((a, b) => {
   </div>
   
   {
-      projects.map((project) => (
-      <>
+    projects.map((project) => (
+      // Add a condition to render only projects that meet specific criteria
+      project.data.type === 'featured' && (
+        <>
           <HorizontalCard
             title={project.data.title}
             img={project.data.heroImage}
             desc={project.data.description}
-            url={"/project/" + createSlug(project.data.title, project.slug)}
+            url={`/project/${createSlug(project.data.title, project.slug)}`}
             target="_self"
             badge={project.data.state}
           />
           <div class="divider my-0" />
-      </>
-      ))
+        </>
+      )
+    ))
   }
 
   <div>
