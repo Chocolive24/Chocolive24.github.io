@@ -53,7 +53,7 @@ export async function getStaticPaths({ paginate }) {
 const { page } = Astro.props;
 ---
 
-<BaseLayout title="Projects" sideBarActiveItemID="projects">
+<BaseLayout title="Projects" sideBarActiveItemID="project">
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Projects</div>
   </div>
@@ -68,7 +68,7 @@ const { page } = Astro.props;
       <>
       {/* Render Featured Projects */}
       <div class="mb-5">
-        <div class="text-xl font-bold mb-2">Featured Projects</div>
+        <div class="text-xl font-bold mb-2">Favorite Projects</div>
         <div class="text-xl mb-2">These are my favorite projects, showcasing my expertise and passion for computer graphics programming.</div>
         <ul>
           {page.data
