@@ -38,7 +38,11 @@ const projects = (await getCollection("project")).sort((a, b) => {
   }
 });
 
-
+// Take only the first two projects
+const featured_projects = (await getCollection("project")).filter(project => project.data.type === 'featured').slice(0, 2); 
+const academic_projects = (await getCollection("project")).filter(project => project.data.type === 'academic').slice(0, 2); 
+const personal_projects = (await getCollection("project")).filter(project => project.data.type === 'personal').slice(0, 2); 
+const gamejam_projects = (await getCollection("project")).filter(project => project.data.type === 'gamejam').slice(0, 2); 
 
 // const projects = (await getCollection("project")).sort((a, b) => {
 //   if (a.data.top )
@@ -71,7 +75,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
       Featured Projects
     </div>
       {
-        projects.map((project) => (
+        featured_projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
           project.data.type === 'featured' && (
             <>
@@ -94,7 +98,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
     </div>
 
       {
-        projects.map((project) => (
+        academic_projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
           project.data.type === 'academic' && (
             <>
@@ -117,7 +121,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
 
     </div>
       {
-        projects.map((project) => (
+        personal_projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
           project.data.type === 'personal' && (
             <>
@@ -139,7 +143,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
       Game Jam Projects
     </div>
       {
-        projects.map((project) => (
+        gamejam_projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
           project.data.type === 'gamejam' && (
             <>
