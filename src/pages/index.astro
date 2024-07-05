@@ -128,14 +128,74 @@ const projects = (await getCollection("project")).sort((a, b) => {
   
     <div class="text-xl w-full font-bold mb-2">
       Academic Projects
+
+      {
+        projects.map((project) => (
+          // Add a condition to render only projects that meet specific criteria
+          project.data.type === 'academic' && (
+            <>
+              <HorizontalCard
+                title={project.data.title}
+                img={project.data.heroImage}
+                desc={project.data.description}
+                url={`/project/${createSlug(project.data.title, project.slug)}`}
+                target="_self"
+                badge={project.data.state}
+              />
+              <div class="divider my-0" />
+            </>
+          )
+        ))
+      }
+
     </div>
   
     <div class="text-xl w-full font-bold mb-2">
       Personal Projects
+
+      {
+        projects.map((project) => (
+          // Add a condition to render only projects that meet specific criteria
+          project.data.type === 'academic' && (
+            <>
+              <HorizontalCard
+                title={project.data.title}
+                img={project.data.heroImage}
+                desc={project.data.description}
+                url={`/project/${createSlug(project.data.title, project.slug)}`}
+                target="_self"
+                badge={project.data.state}
+              />
+              <div class="divider my-0" />
+            </>
+          )
+        ))
+      }
+
     </div>
   
     <div class="text-xl w-full font-bold mb-2">
       Game Jam Projects
+
+      {
+        projects.map((project) => (
+          // Add a condition to render only projects that meet specific criteria
+          project.data.type === 'academic' && (
+            <>
+              <HorizontalCard
+                title={project.data.title}
+                img={project.data.heroImage}
+                desc={project.data.description}
+                url={`/project/${createSlug(project.data.title, project.slug)}`}
+                target="_self"
+                badge={project.data.state}
+              />
+              <div class="divider my-0" />
+            </>
+          )
+        ))
+      }
+
     </div>
   </div>
   
