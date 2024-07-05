@@ -4,7 +4,7 @@ description: "A 2D physics engine made in C++ designed for performance and realt
 startDate: "13 Nov 2023"
 top: "3"
 state: "completed"
-heroImage: "/physics_engine_opti/gifs/bouncing_shapes.gif"
+heroImage: "/physics_engine_opti/gifs/bouncing_shapes_16_9.gif"
 tags: ["Physics", "Optimization", "C++", "Engine", "2D", "SAE"]
 ---
 

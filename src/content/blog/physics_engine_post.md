@@ -2,7 +2,7 @@
 title: "The optimizations I made to my 2D C++ physics engine"
 description: "A Post about the different optimization technics I applied to my 2D physics engine made in C++."
 pubDate: "Nov 13 2023"
-heroImage: "/physics_engine_opti/gifs/bouncing_shapes.gif"
+heroImage: "/physics_engine_opti/gifs/bouncing_shapes_16_9.gif"
 tags: ["Physics", "Optimization", "C++", "Engine", "2D", "SAE"]
 ---
 
