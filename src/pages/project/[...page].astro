@@ -5,17 +5,48 @@ import { getCollection } from "astro:content";
 import createSlug from "../../lib/createSlug"
 
 export async function getStaticPaths({ paginate }) {
-  const posts = await getCollection("project");
-  posts.sort((a, b) => {
-    // First sort by if state == "active" and then by date
-    if (a.data.state === "active" && b.data.state !== "active") {
+  const posts = (await getCollection("project")).sort((a, b) => {
+    // Sort by type first
+    const typeOrder = {
+      'featured': 1,
+      'academic': 2,
+      'personal': 3,
+      'gamejam': 4
+    };
+
+    const typeA = a.data.type;
+    const typeB = b.data.type;
+
+    // Compare types using predefined order
+    if (typeOrder[typeA] < typeOrder[typeB]) {
       return -1;
-    } else if (a.data.state !== "active" && b.data.state === "active") {
+    } else if (typeOrder[typeA] > typeOrder[typeB]) {
       return 1;
     }
 
-    return b.data.startDate.valueOf() - a.data.startDate.valueOf();
+    // If types are the same, sort by 'top'
+    if (a.data.top && b.data.top) {
+      return parseInt(a.data.top) - parseInt(b.data.top);
+    } else if (a.data.top) {
+      return -1;
+    } else if (b.data.top) {
+      return 1;
+    } else {
+      return 0; // If neither have 'top', consider them equal
+    }
   });
+
+  // const posts = await getCollection("project");
+  // posts.sort((a, b) => {
+  //   // First sort by if state == "active" and then by date
+  //   if (a.data.state === "active" && b.data.state !== "active") {
+  //     return -1;
+  //   } else if (a.data.state !== "active" && b.data.state === "active") {
+  //     return 1;
+  //   }
+
+  //   return b.data.startDate.valueOf() - a.data.startDate.valueOf();
+  // });
   return paginate(posts, { pageSize: 10 });
 }
 
@@ -24,7 +55,7 @@ const { page } = Astro.props;
 
 <BaseLayout title="Projects" sideBarActiveItemID="projects">
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Project</div>
+    <div class="text-3xl w-full font-bold">Projects</div>
   </div>
 
   {
@@ -34,22 +65,91 @@ const { page } = Astro.props;
         <p>There are no projects to show at the moment. Check back later!</p>
       </div>
     ) : (
-      <ul>
-        {page.data.map((post) => (
-          <>
-            <HorizontalCard
-              title={post.data.title}
-              img={post.data.heroImage}
-              desc={post.data.description}
-              url={"/project/" + createSlug(post.data.title, post.slug)}
-              target="_self"
-              badge={post.data.state}
-              tags={post.data.tags}
-            />
-            <div class="divider my-0" />
-          </>
-        ))}
-      </ul>
+      <>
+      {/* Render Featured Projects */}
+      <div class="mb-5">
+        <div class="text-xl font-bold mb-2">Featured Projects</div>
+        <ul>
+          {page.data
+            .filter(post => post.data.type === 'featured')
+            .map(post => (
+                <HorizontalCard
+                  title={post.data.title}
+                  img={post.data.heroImage}
+                  desc={post.data.description}
+                  url={`/project/${createSlug(post.data.title, post.slug)}`}
+                  target="_self"
+                  badge={post.data.state}
+                  tags={post.data.tags}
+                />
+                <div class="divider my-0" />
+            ))}
+        </ul>
+      </div>
+
+      {/* Render Academic Projects */}
+      <div class="mb-5">
+        <div class="text-xl font-bold mb-2">Academic Projects</div>
+        <ul>
+          {page.data
+            .filter(post => post.data.type === 'academic')
+            .map(post => (
+                <HorizontalCard
+                  title={post.data.title}
+                  img={post.data.heroImage}
+                  desc={post.data.description}
+                  url={`/project/${createSlug(post.data.title, post.slug)}`}
+                  target="_self"
+                  badge={post.data.state}
+                  tags={post.data.tags}
+                />
+                <div class="divider my-0" />
+            ))}
+        </ul>
+      </div>
+
+      {/* Render Personal Projects */}
+      <div class="mb-5">
+        <div class="text-xl font-bold mb-2">Personal Projects</div>
+        <ul>
+          {page.data
+            .filter(post => post.data.type === 'personal')
+            .map(post => (
+                <HorizontalCard
+                  title={post.data.title}
+                  img={post.data.heroImage}
+                  desc={post.data.description}
+                  url={`/project/${createSlug(post.data.title, post.slug)}`}
+                  target="_self"
+                  badge={post.data.state}
+                  tags={post.data.tags}
+                />
+                <div class="divider my-0" />
+            ))}
+        </ul>
+      </div>
+
+      {/* Render Game Jam Projects */}
+      <div class="mb-5">
+        <div class="text-xl font-bold mb-2">Game Jam Projects</div>
+        <ul>
+          {page.data
+            .filter(post => post.data.type === 'gamejam')
+            .map(post => (
+                <HorizontalCard
+                  title={post.data.title}
+                  img={post.data.heroImage}
+                  desc={post.data.description}
+                  url={`/project/${createSlug(post.data.title, post.slug)}`}
+                  target="_self"
+                  badge={post.data.state}
+                  tags={post.data.tags}
+                />
+                <div class="divider my-0" />
+            ))}
+        </ul>
+      </div>
+    </>
     )
   }
 
