@@ -14,6 +14,7 @@ const projectSchema = z.object({
     description: z.string(),
     startDate: z.coerce.date(),
     endDate: z.coerce.date().optional(),
+    top: z.enum(['1', '2', '3', '4']).optional(),
     heroImage: z.string().optional(),
     state: z.enum(['active', 'inactive', 'completed']),
     tags: z.array(z.string()).refine(items => new Set(items).size === items.length, {

@@ -8,15 +8,35 @@ const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueO
 const last_posts = posts.slice(0, 3);
 
 const projects = (await getCollection("project")).sort((a, b) => {
-  // First sort by if state == "active" and then by date
-  if (a.data.state === "active" && b.data.state !== "active") {
+  // If both have 'top', compare them numerically
+  if (a.data.top && b.data.top) {
+    return parseInt(a.data.top) - parseInt(b.data.top);
+  }
+  // If only a has 'top', it should come first
+  if (a.data.top) {
     return -1;
-  } else if (a.data.state !== "active" && b.data.state === "active") {
+  }
+  // If only b has 'top', it should come first
+  if (b.data.top) {
     return 1;
   }
-
-  return b.data.startDate.valueOf() - a.data.startDate.valueOf();
+  // If neither have 'top', consider them equal
+  return 0;
 });
+
+
+// const projects = (await getCollection("project")).sort((a, b) => {
+//   if (a.data.top )
+
+//   // First sort by if state == "active" and then by date
+//   if (a.data.state === "active" && b.data.state !== "active") {
+//     return -1;
+//   } else if (a.data.state !== "active" && b.data.state === "active") {
+//     return 1;
+//   }
+
+//   return b.data.startDate.valueOf() - a.data.startDate.valueOf();
+// });
 const last_projects = projects.slice(0, 3);
 ---
 

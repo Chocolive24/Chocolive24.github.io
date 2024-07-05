@@ -85,7 +85,7 @@ const std::clock_t start = clock();
 dim3 blocks(kImageWidth / kTx + 1, kImageHeight / kTy + 1);
 dim3 threads(kTx, kTy);
 
-Render<<<blocks, threads>>>(fb, kImageWidth, kImageHeight); // I'll the function right after
+Render<<<blocks, threads>>>(fb, kImageWidth, kImageHeight); // I'll show the function right after.
 CHECK_CUDA_ERRORS(cudaGetLastError());
 CHECK_CUDA_ERRORS(cudaDeviceSynchronize());
 
