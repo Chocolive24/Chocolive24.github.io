@@ -156,7 +156,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
       {
         projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
-          project.data.type === 'academic' && (
+          project.data.type === 'personal' && (
             <>
               <HorizontalCard
                 title={project.data.title}
@@ -180,7 +180,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
       {
         projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
-          project.data.type === 'academic' && (
+          project.data.type === 'gamejam' && (
             <>
               <HorizontalCard
                 title={project.data.title}
@@ -202,7 +202,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
 
 
   <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">My last blogs</div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">My latest blog posts</div>
   </div>
 
   {
