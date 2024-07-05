@@ -104,6 +104,26 @@ const projects = (await getCollection("project")).sort((a, b) => {
   
     <div class="text-xl w-full font-bold mb-2">
       Featured Projects
+
+      {
+        projects.map((project) => (
+          // Add a condition to render only projects that meet specific criteria
+          project.data.type === 'featured' && (
+            <>
+              <HorizontalCard
+                title={project.data.title}
+                img={project.data.heroImage}
+                desc={project.data.description}
+                url={`/project/${createSlug(project.data.title, project.slug)}`}
+                target="_self"
+                badge={project.data.state}
+              />
+              <div class="divider my-0" />
+            </>
+          )
+        ))
+      }
+
     </div>
   
     <div class="text-xl w-full font-bold mb-2">
@@ -119,24 +139,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
     </div>
   </div>
   
-  {
-    projects.map((project) => (
-      // Add a condition to render only projects that meet specific criteria
-      project.data.type === 'featured' && (
-        <>
-          <HorizontalCard
-            title={project.data.title}
-            img={project.data.heroImage}
-            desc={project.data.description}
-            url={`/project/${createSlug(project.data.title, project.slug)}`}
-            target="_self"
-            badge={project.data.state}
-          />
-          <div class="divider my-0" />
-        </>
-      )
-    ))
-  }
+
 
   <div>
     <div class="text-3xl w-full font-bold mb-5 mt-10">My last blogs</div>
