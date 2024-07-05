@@ -104,7 +104,7 @@ const projects = (await getCollection("project")).sort((a, b) => {
   
     <div class="text-xl w-full font-bold mb-2">
       Featured Projects
-
+    </div>
       {
         projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
@@ -123,11 +123,10 @@ const projects = (await getCollection("project")).sort((a, b) => {
           )
         ))
       }
-
-    </div>
   
     <div class="text-xl w-full font-bold mb-2">
       Academic Projects
+    </div>
 
       {
         projects.map((project) => (
@@ -147,12 +146,10 @@ const projects = (await getCollection("project")).sort((a, b) => {
           )
         ))
       }
-
-    </div>
   
     <div class="text-xl w-full font-bold mb-2">
       Personal Projects
-
+    </div>
       {
         projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
@@ -172,11 +169,9 @@ const projects = (await getCollection("project")).sort((a, b) => {
         ))
       }
 
-    </div>
-  
     <div class="text-xl w-full font-bold mb-2">
       Game Jam Projects
-
+    </div>
       {
         projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
@@ -195,8 +190,6 @@ const projects = (await getCollection("project")).sort((a, b) => {
           )
         ))
       }
-
-    </div>
   </div>
   
 
