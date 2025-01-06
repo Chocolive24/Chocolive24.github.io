@@ -4,30 +4,30 @@ import HorizontalCard from "@components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../../../../lib/createSlug";
 
-// Updated getStaticPaths to encode tags properly
 export async function getStaticPaths({ paginate }) {
   const all_posts = await getCollection("blog");
-  const all_tags = all_posts.flatMap((post) => post.data.tags || []);
+  const all_tags = all_posts.flatMap((post) => {
+    return post.data.tags || [];
+  });
 
   return all_tags.flatMap((tag) => {
-    const filtered_posts = all_posts.filter((post) => post.data.tags?.includes(tag));
-
-    return paginate(filtered_posts, {
-      params: { tag: encodeURIComponent(tag) }, // Encode the tag
+    const filtred_posts = all_posts.filter((post) => {
+      return post.data.tags?.includes(tag);
+    });
+    return paginate(filtred_posts, {
+      params: { tag },
       pageSize: 10,
     });
   });
 }
 
-// Decode the tag from the URL params
 const { page } = Astro.props;
 const params = Astro.params;
-const decodedTag = decodeURIComponent(params.tag);
 ---
 
-<BaseLayout title={"Blog - " + decodedTag} sideBarActiveItemID="blog">
+<BaseLayout title={"Blog - " + params.tag} sideBarActiveItemID="blog">
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Blog - {decodedTag}</div>
+    <div class="text-3xl w-full font-bold">Blog - {params.tag}</div>
   </div>
   {
     page.data.length === 0 ? (
@@ -38,7 +38,7 @@ const decodedTag = decodeURIComponent(params.tag);
     ) : (
       <ul>
         {page.data.map((post) => (
-          <li>
+          <>
             <HorizontalCard
               title={post.data.title}
               img={post.data.heroImage}
@@ -49,7 +49,7 @@ const decodedTag = decodeURIComponent(params.tag);
               tags={post.data.tags}
             />
             <div class="divider my-0" />
-          </li>
+          </>
         ))}
       </ul>
     )
@@ -59,6 +59,7 @@ const decodedTag = decodeURIComponent(params.tag);
     {
       page.url.prev ? (
         <a href={page.url.prev} class="btn btn-ghost my-10 mx-5">
+          {" "}
           <svg
             class="h-6 w-6 fill-current md:h-8 md:w-8"
             xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +68,7 @@ const decodedTag = decodeURIComponent(params.tag);
             viewBox="0 0 24 24"
           >
             <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
-          </svg>
+          </svg>{" "}
           Recent posts
         </a>
       ) : (
@@ -77,7 +78,7 @@ const decodedTag = decodeURIComponent(params.tag);
     {
       page.url.next ? (
         <a href={page.url.next} class="btn btn-ghost my-10 mx-5">
-          Older Posts
+          Older Posts{" "}
           <svg
             class="h-6 w-6 fill-current md:h-8 md:w-8"
             xmlns="http://www.w3.org/2000/svg"
@@ -85,6 +86,7 @@ const decodedTag = decodeURIComponent(params.tag);
             height="24"
             viewBox="0 0 24 24"
           >
+            {" "}
             <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
           </svg>
         </a>
@@ -94,4 +96,3 @@ const decodedTag = decodeURIComponent(params.tag);
     }
   </div>
 </BaseLayout>
-

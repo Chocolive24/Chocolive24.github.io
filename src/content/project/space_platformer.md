@@ -6,7 +6,7 @@ top: "5"
 type: "academic"
 state: "completed"
 heroImage: "/space_platformer/space_platformer_hero_image.gif"
-tags: ["Game", "2D", "C#", "Unity", "SAE"]
+tags: ["Game", "2D", "Unity", "SAE", "C-Sharp"]
 ---
 
 TODO
