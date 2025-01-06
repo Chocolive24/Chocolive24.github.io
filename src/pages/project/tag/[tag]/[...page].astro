@@ -10,12 +10,13 @@ export async function getStaticPaths({ paginate }) {
     return post.data.tags || [];
   });
 
+  // Encode tags to handle special characters
   return all_tags.flatMap((tag) => {
-    const filtred_posts = all_posts.filter((post) => {
+    const filtered_posts = all_posts.filter((post) => {
       return post.data.tags?.includes(tag);
     });
-    return paginate(filtred_posts, {
-      params: { tag: encodeURIComponent(tag) },
+    return paginate(filtered_posts, {
+      params: { tag: encodeURIComponent(tag) }, // Encode tags here
       pageSize: 10,
     });
   });
@@ -23,11 +24,12 @@ export async function getStaticPaths({ paginate }) {
 
 const { page } = Astro.props;
 const params = Astro.params;
+const decodedTag = decodeURIComponent(params.tag); // Decode the tag for display
 ---
 
-<BaseLayout title={"Project - " + params.tag} sideBarActiveItemID="project">
+<BaseLayout title={"Project - " + decodedTag} sideBarActiveItemID="project">
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Project - {params.tag}</div>
+    <div class="text-3xl w-full font-bold">Project - {decodedTag}</div>
   </div>
   {
     page.data.length === 0 ? (
@@ -96,3 +98,4 @@ const params = Astro.params;
     }
   </div>
 </BaseLayout>
+
