@@ -27,9 +27,12 @@ I've managed to create a 3D scene using several techniques and functionalities, 
 - High Dynamic Range (HDR) + Tone Mapping + Gamma Correction
 
 Here are different renderings of my scene:
-![](/3d_scene/images/scene_cover.png)
-![](/3d_scene/images/gold_sphere_cover.png)
-![](/3d_scene/images/chest_cover.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/scene_cover.png" alt="" />
+  <img src="/3d_scene/images/gold_sphere_cover.png" alt="" />
+  <img src="/3d_scene/images/chest_cover.png" alt="" />
+  <p style="margin-top: -30px"><em></em></p>
+</div>
 
 The character model was created by Jeremy Leung, an excellent artist from Sae Institute.
 
@@ -77,12 +80,26 @@ The third contains the albedo in RGB and the ao in alpha, and the last just cont
 
 One last important note: I'm storing the positions and normals in view-space so that I can calculate the SSAO correctly in the future, as this is done in view-space.
 This is why we don't see a blue color in the position texture, because all Z positions are zero.
-![position in view space (RGB) + metallic (A)](/3d_scene/images/pos_metallic_map.png width=450) ![normal in view space (RGB) + roughness (A)](/3d_scene/images/normal_roughness_map.png width=450) 
-![albedo (RGB) + ambient occlusion (A)](/3d_scene/images/albedo_ao_map.png width=450) ![emissive (RGB)](/3d_scene/images/emissive_map.png width=450)
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td> <img src="/3d_scene/images/pos_metallic_map.png" width=550/>
+        <p style="margin-top: -30px"><em>position in view space (RGB) + metallic (A)</em></p></td>
+        <td>  <img src="/3d_scene/images/normal_roughness_map.png" width=550/>
+        <p style="margin-top: -30px"><em>normal in view space (RGB) + roughness (A)</em></p></td>
+    </tr>
+    <tr>
+        <td> <img src="/3d_scene/images/albedo_ao_map.png" width=550/>
+        <p style="margin-top: -30px"><em>albedo (RGB) + ambient occlusion (A)</em></p></td>
+        <td>  <img src="/3d_scene/images/emissive_map.png" width=550/>
+        <p style="margin-top: -30px"><em>emissive (RGB)</em></p></td>
+    </tr>
+    </table>
+</div>
 
 ### Instancing.
 
-There's nothing special about the pipeline I use to draw the meshes, which appear only once in the scene. However, for the many gold spheres, my pipeline is a little different. These spheres are instantiated, which means that only one drawcall is needed to draw all the spheres. To further optimize this aspect, I pass the model matrices of my spheres directly to vertex input instead of passing them through a uniform. 
+There's nothing special about the pipeline I use to draw the meshes which appear only once in the scene. However, for the many gold spheres, my pipeline is a little different. These spheres are instantiated, which means that only one drawcall is needed to draw all the spheres. To further optimize this aspect, I pass the model matrices of my spheres directly to vertex input instead of passing them through a uniform. 
 This avoids making too many uniform calls or exceeding the limit on the number of uniform variables.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ glsl
 layout(location = 5) in mat4 aModelMatrix;
@@ -186,15 +203,24 @@ The size and distribution of these samples affect the quality and accuracy of th
 The algorithm also take into account a 4x4 array of random rotation vectors oriented around the tangent-space surface normal called
 a noise texture to reduce the number of samples necessary to get good results.
 
-![Noise Texture](/3d_scene/images/noise_map.png width=200 height=200) 
+<div style="text-align:center">
+  <img src="/3d_scene/images/noise_map.png" width=200 height=200/>
+  <p style="margin-top: -30px"><em>Noise Texture</em></p>
+</div>
 
 The result of the SSAO is stored in the red channel of a framebuffer's texture and looks like that:
 
-![SSAO Map](/3d_scene/images/base_ssao_map.png) 
+<div style="text-align:center">
+  <img src="/3d_scene/images/base_ssao_map.png"/>
+  <p style="margin-top: -30px"><em>SSAO Map</em></p>
+</div>
 
 To soften shadows and avoid noisy results, a blurring algorithm is then applied to the ssao texture.
 
-![Blurred SSAO Map](/3d_scene/images/blur_ssao_map.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/blur_ssao_map.png"/>
+  <p style="margin-top: -30px"><em>Blurred SSAO Map</em></p>
+</div>
 
 ## Shadow Mapping Pass
 
@@ -225,7 +251,10 @@ light_space_matrix_ = light_projection * light_view;
 Also note that to avoid the Peter Panning problem, the front faces of the meshes are culled.<br>
 The result of the directional light shadow map looks like this:
 
-![Directional Light Shadow Map](/3d_scene/images/dir_light_shadow_map.png height=350 border="1")
+<div style="text-align:center">
+  <img src="/3d_scene/images/dir_light_shadow_map.png" width=450 style="border: 1px solid black;"/>
+  <p style="margin-top: -30px"><em>Directional Light Shadow Map</em></p>
+</div>
 
 
 ### Point Light Shadow Cubemap
@@ -251,19 +280,26 @@ for (int i = 0; i < 6; i++) {
 
 As before the front faces are culled to avoid Peter Panning and there is the result of the shadow cubemap:
 
-<table>
-  <tr>
-    <td><img src="/3d_scene/images/point_right_shadow_map.png" alt="X+" width="200" height="200" border="1"></td>
-    <td><img src="/3d_scene/images/point_left_shadow_map.png" alt="X-" width="200" height="200" border="1"></td>
-    <td><img src="/3d_scene/images/point_up_shadow_map.png" alt="Y+" width="200" height="200" border="1"></td>
-  </tr>
-  <tr>
-    <td><img src="/3d_scene/images/point_down_shadow_map.png" alt="Y-" width="200" height="200" border="1"></td>
-    <td><img src="/3d_scene/images/point_front_shadow_map.png" alt="Z+" width="200" height="200" border="1"></td>
-    <td><img src="/3d_scene/images/point_back_shadow_map.png" alt="Z-" width="200" height="200" border="1"></td>
-  </tr>
-</table>
-
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/3d_scene/images/point_right_shadow_map.png" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>X+</em></p></td>
+        <td><img src="/3d_scene/images/point_left_shadow_map.png" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>X-</em></p></td>
+        <td><img src="/3d_scene/images/point_up_shadow_map.png" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>Y+</em></p></td>
+    </tr>
+    <tr>
+        <td><img src="/3d_scene/images/point_down_shadow_map.png" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>Y-</em></p></td>
+        <td><img src="/3d_scene/images/point_front_shadow_map.png" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>Z+</em></p></td>
+        <td><img src="/3d_scene/images/point_back_shadow_map.png" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>Z-</em></p></td>
+    </tr>
+    </table>
+</div>
 
 The depth maps are upside down because of the way OpenGL cube maps work. 
 They assume that the origin of the images is at the top left. This is why things are reversed in the Y direction.
@@ -351,7 +387,10 @@ The mathematical equation used to simulate the visuals of light is the Cook-Torr
 What it does is it sums up the reflected irradiance of the light on a fragment. My goal is not to explain this equation in detail but rather 
 to explain the purpose behind it to understand how light is calculated in my scene.
 
-![Cook-Torrance Reflectance Equation (this way we know what it looks like).](/3d_scene/images/reflect_equ.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/reflect_equ.png" />
+  <p style="margin-top: -30px"><em>Cook-Torrance Reflectance Equation (this way we know what it looks like).</em></p>
+</div>
 
 Finally, shadows are calculated by comparing the depth values of the various shadow maps with those of the fragments, and doing a little mathematics. 
 The resulting shadow value lies between 0 and 1, and is used to define the percentage by which a fragment is in shadow, in order to reduce the intensity of light it receives. 
@@ -372,11 +411,17 @@ Here's the result after calculating the directional light:<br>
 (Note that my implementation of emissive material is extremly basic and naive. I simply force the emissive color to be displayed over the other colors after 
 light calculation. Basically, I treat emissive textures as a material that emits light of its own accord. It is virtually unaffected by surrounding lights.)
 
-![Directional Light](/3d_scene/images/dir_light.png) 
+<div style="text-align:center">
+  <img src="/3d_scene/images/dir_light.png" />
+  <p style="margin-top: -30px"><em>Directional Light</em></p>
+</div>
 
 And here's the result after calculating the point light:
 
-![Point Light](/3d_scene/images/point_light.png) 
+<div style="text-align:center">
+  <img src="/3d_scene/images/point_light.png" />
+  <p style="margin-top: -30px"><em>Point Light</em></p>
+</div>
 
 For the moment, everything looks rather dark because the textures are load in SRGB space to avoid problems with the monitor output, a gamma correction will be applied
 to pixel color and the shadows and colors of the scene will be much more visible, but I'll talk about this later in the HDR pass.
@@ -393,24 +438,47 @@ such that we can directly use it in our lighting equations, treating each cubema
 The type of image file used to create the cube map is is the ".hdr". This format allows us to specify color values outside the 0.0 to 1.0 range of the monitor,
 to give lights their correct color intensities. However, this type of image is a large rectangle called an equirectangle.
 
-![Equirectangular Map](/3d_scene/images/equi_rect.png) 
+<div style="text-align:center">
+  <img src="/3d_scene/images/equi_rect.png" />
+  <p style="margin-top: -30px"><em>Equirectangular Map</em></p>
+</div>
 
 (As before, the images I will show are a bit dark because of the fact that they are loaded in SRGB space so their color are not
 the correct one for now.)
 
 So the first step is to convert this equirectangular map to a cubemap with an algorithm performed on a fragment shader:
-
-![X+](/3d_scene/images/hill_right.png width=300 height=230) ![X-](/3d_scene/images/hill_left.png width=300 height=230) ![Y+](/3d_scene/images/hill_top.png width=300 height=230) 
-![Y-](/3d_scene/images/hill_bottom.png width=300 height=230) ![Z+](/3d_scene/images/hill_front.png width=300 height=230) ![Z-](/3d_scene/images/hill_back.png width=300 height=230) 
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/3d_scene/images/hill_right.png" width="300">
+        <p style="margin-top: -30px"><em>X+</em></p></td>
+        <td><img src="/3d_scene/images/hill_left.png" width="300">
+        <p style="margin-top: -30px"><em>X-</em></p></td>
+        <td><img src="/3d_scene/images/hill_top.png" width="300">
+        <p style="margin-top: -30px"><em>Y+</em></p></td>
+    </tr>
+    <tr>
+        <td><img src="/3d_scene/images/hill_bottom.png" width="300">
+        <p style="margin-top: -30px"><em>Y-</em></p></td>
+        <td><img src="/3d_scene/images/hill_front.png" width="300">
+        <p style="margin-top: -30px"><em>Z+</em></p></td>
+        <td><img src="/3d_scene/images/hill_back.png" width="300">
+        <p style="margin-top: -30px"><em>Z-</em></p></td>
+    </tr>
+    </table>
+</div>
 
 Now we need to approximate the value of the integral of the reflectance equation for an arbitrary number of sample directions 
 (because we cannot calculate the value for all directions of light because they are infinite). 
 But to make the work easier, we can split the intergal in two, with one part for the diffuse term and the 
 other for the specular term like so:
 
-![Cook-Torrance Reflectance Equation split in two part:<br>
-in red: the diffuse term part <br>
-in green: the specular term part](/3d_scene/images/split_equ.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/split_equ.png" />
+  <p style="margin-top: -30px"><em>Cook-Torrance Reflectance Equation split in two part:<br>
+In red: the diffuse term part <br>
+In green: the specular term part</em></p>
+</div>
 
 Here too the goal is not to understand the math behind this equation but rather the principle of separating it into two distinct parts to focus on each in due time.
 
@@ -418,10 +486,27 @@ Now we can calculate the result for all sampled directions specificly for the di
 These results are pre-calculated and stored at the start of the program in a cubemap called the irradiance map. 
 This allows us to directly find the value of the desired integral in the cubemap for our light calculations.
 This cubemap represents somewhat the average color of the ambient lighting of the environment.
-Here is how to irradiance map looks like:
-
-![X+](/3d_scene/images/irr_right.png width=300 height=230) ![X-](/3d_scene/images/irr_left.png width=300 height=230) ![Y+](/3d_scene/images/irr_top.png width=300 height=230) 
-![Y-](/3d_scene/images/irr_bottom.png width=300 height=230) ![Z+](/3d_scene/images/irr_front.png width=300 height=230) ![Z-](/3d_scene/images/irr_back.png width=300 height=230) 
+Here is how the irradiance map looks like:
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/3d_scene/images/irr_right.png" width="300">
+        <p style="margin-top: -30px"><em>X+</em></p></td>
+        <td><img src="/3d_scene/images/irr_left.png" width="300">
+        <p style="margin-top: -30px"><em>X-</em></p></td>
+        <td><img src="/3d_scene/images/irr_top.png" width="300">
+        <p style="margin-top: -30px"><em>Y+</em></p></td>
+    </tr>
+    <tr>
+        <td><img src="/3d_scene/images/irr_bottom.png" width="300">
+        <p style="margin-top: -30px"><em>Y-</em></p></td>
+        <td><img src="/3d_scene/images/irr_front.png" width="300">
+        <p style="margin-top: -30px"><em>Z+</em></p></td>
+        <td><img src="/3d_scene/images/irr_back.png" width="300">
+        <p style="margin-top: -30px"><em>Z-</em></p></td>
+    </tr>
+    </table>
+</div>
 
 The next step is to calculate the specular term of the equation.
 To do this, the work is separated into two parts. 
@@ -433,14 +518,35 @@ For each roughness level, a mipmap level of the cubemap is created, in the case 
 Which means that each level of mipmap is more and more blurry and pixelated.
 
 Here is the first mipmap level of my pre-filtered environment map:
-![X+](/3d_scene/images/pre_right.png width=300 height=230) ![X-](/3d_scene/images/pre_left.png width=300 height=230) ![Y+](/3d_scene/images/pre_top.png width=300 height=230) 
-![Y-](/3d_scene/images/pre_bottom.png width=300 height=230) ![Z+](/3d_scene/images/pre_front.png width=300 height=230) ![Z-](/3d_scene/images/pre_back.png width=300 height=230) 
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/3d_scene/images/pre_right.png" width="300">
+        <p style="margin-top: -30px"><em>X+</em></p></td>
+        <td><img src="/3d_scene/images/pre_left.png" width="300">
+        <p style="margin-top: -30px"><em>X-</em></p></td>
+        <td><img src="/3d_scene/images/pre_top.png" width="300">
+        <p style="margin-top: -30px"><em>Y+</em></p></td>
+    </tr>
+    <tr>
+        <td><img src="/3d_scene/images/pre_bottom.png" width="300">
+        <p style="margin-top: -30px"><em>Y-</em></p></td>
+        <td><img src="/3d_scene/images/pre_front.png" width="300">
+        <p style="margin-top: -30px"><em>Z+</em></p></td>
+        <td><img src="/3d_scene/images/pre_back.png" width="300">
+        <p style="margin-top: -30px"><em>Z-</em></p></td>
+    </tr>
+    </table>
+</div>
 
 The second part of the specular term calculates the BRDF part of the equation.
 The objective is to pre-calculate the BRDF values ​​for a good number of roughness values.
 Epic Games stores the pre-computed BRDF's response to each normal and light direction combination on varying roughness values ​in a 2D lookup texture (LUT) known as the BRDF integration map.
 
-![BRDF Lookup texture](/3d_scene/images/brdf_lut.png width=250 height=250)
+<div style="text-align:center">
+  <img src="/3d_scene/images/brdf_lut.png" width=250/>
+  <p style="margin-top: -30px"><em>BRDF Lookup texture</em></p>
+</div>
 
 The red channel represents the x-axis and is treated as as the BRDF's input which is the angle between view direction and normal.<br>
 The green channel represents the y-axis and is treated as the input roughness value.
@@ -448,7 +554,10 @@ The green channel represents the y-axis and is treated as the input roughness va
 Now we can finally calculate the ambient lighting based on the environment by sending all these textures to the 
 PBR fragment shader and read their data to obtain the inputs for the light calculation. The final output looks like this:
 
-![The scene using IBL](/3d_scene/images/pbr_map.png) 
+<div style="text-align:center">
+  <img src="/3d_scene/images/pbr_map.png">
+  <p style="margin-top: -30px"><em>The scene using IBL</em></p>
+</div>
 
 We can clearly see the impact of the IBL method on the golden spheres as they reflect the environment due to their metallic proprety.
 
@@ -474,7 +583,10 @@ and then correct all the pixels at once at the last render pass that we will see
 
 So now the point light is drawn on the scene:
 
-![Scene Map with Point Light](/3d_scene/images/front_light.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/front_light.png">
+  <p style="margin-top: -30px"><em>Scene Map with Point Light</em></p>
+</div>
 
 Then it is time to draw the skybox but there is a little trick.
 In fact, drawing the skybox last is a good optimization, because with the depth values of objects already present in the scene, 
@@ -489,7 +601,10 @@ gl_Position = clipPos.xyww;
 
 Now the skybox can be rendered in a proper way:
 
-![Scene Map with Skybox](/3d_scene/images/front_pbr_map.png) 
+<div style="text-align:center">
+  <img src="/3d_scene/images/front_pbr_map.png">
+  <p style="margin-top: -30px"><em>Scene Map with Skybox</em></p>
+</div>
 
 Now we are done with rendering the scene. The last steps are just post-processing.
 
@@ -521,19 +636,51 @@ else
 fragColor = vec4(color, 1.0);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-![First color attachment of the HDR FBO containing the pixels of the scene](/3d_scene/images/front_pbr_map.png) 
-![Second color attachment of the HDR FBO containing the bright pixels of the scene](/3d_scene/images/front_bright_pbr_map.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/front_pbr_map.png">
+  <p style="margin-top: -30px"><em>First color attachment of the HDR FBO containing the pixels of the scene</em></p>
+</div>
+
+<div style="text-align:center">
+  <img src="/3d_scene/images/front_bright_pbr_map.png">
+  <p style="margin-top: -30px"><em>Second color attachment of the HDR FBO containing the bright pixels of the scene</em></p>
+</div>
 
 I didn't say it earlier because I didn't want to give too much information at once.
 
 The way bloom is applied in the article from "Alexander Christensen" is by applying a down-sampling algorithm which runs a shader which downsamples (downscales) the HDR buffer 
 containing per-pixel color. This shader is run a fixed number of times to continually produce a smaller image, each time with half resolution in both X and Y axes.
 
-![Down Mip 1: 640x360](/3d_scene/images/mip_640x360.png width=300 height=150) ![Down Mip 3: 160x90](/3d_scene/images/mip_160x90.png width=300 height=150) ![Down Mip 5: 40x22](/3d_scene/images/mip_40x22.png width=300 height=150) 
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/3d_scene/images/mip_640x360.png" style="width: 250px; height: 150px;">
+        <p style="margin-top: -30px"><em>Down Mip 1: 640x360</em></p></td>
+        <td><img src="/3d_scene/images/mip_160x90.png" style="width: 250px; height: 150px;">
+        <p style="margin-top: -30px"><em>Down Mip 3: 160x90</em></p></td>
+        <td><img src="/3d_scene/images/mip_40x22.png" style="width: 250px; height: 150px;">
+        <p style="margin-top: -30px"><em>Down Mip 5: 40x22</em></p></td>
+    </tr>
+    </table>
+</div>
 
 Then it runs a small 3x3 filter kernel on each downsampled image, and progressively blur and upsample them until we reach the first image. 
 
-![Up Mip 2: 160x90](/3d_scene/images/up_mip_160x90.png width=250 height=150) ![Up Mip 4: 640x360 (final bloom image)](/3d_scene/images/up_mip_640x360.png width=250 height=150)
+<div style="text-align:center">
+    <table style="margin: auto; table-layout: fixed;">
+        <tr>
+            <td style="text-align: center; vertical-align: top; padding: 10px;">
+                <img src="/3d_scene/images/up_mip_160x90.png" style="width: 250px; height: 150px;">
+                <p style="margin-top: -30px"><em>Up Mip 2: 160x90</em></p>
+            </td>
+            <td style="text-align: center; vertical-align: top; padding: 10px;">
+                <img src="/3d_scene/images/up_mip_640x360.png" style="width: 250px; height: 150px;">
+                <p style="margin-top: -30px"><em>Up Mip 4: 640x360 (final bloom image)</em></p>
+            </td>
+        </tr>
+    </table>
+</div>
+
 
 That's all for creating the bloom texture. All that remains is to send it to the last render pass which will be responsible for mixing this texture with the texture of the scene.
 
@@ -552,8 +699,15 @@ This render pass is therefore responsible for mixing the scene texture with the 
 This is the final process of my scene.
 
 Here is the two textures which will be mixed together:
-![First color attachment of the HDR FBO containing the pixels of the scene](/3d_scene/images/front_pbr_map.png) 
-![Bloom texture](/3d_scene/images/up_mip_640x360.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/front_pbr_map.png">
+  <p style="margin-top: -30px"><em>First color attachment of the HDR FBO containing the pixels of the scene</em></p>
+</div>
+
+<div style="text-align:center">
+  <img src="/3d_scene/images/up_mip_640x360.png">
+  <p style="margin-top: -30px"><em>Bloom texture</em></p>
+</div>
 
 So here's the latest post-process applied to the rendering of my scene. 
 First, the texture of the bloom is mixed with that of the scene. 
@@ -578,8 +732,10 @@ fragColor = vec4(mapped, 1.0);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 Now the rendering process is finally complete. Here is the final result of the scene:
-
-![Final Result mixing the scene map and the bloom map with tone mapping and gamma correction.](/3d_scene/images/final_scene.png)
+<div style="text-align:center">
+  <img src="/3d_scene/images/final_scene.png">
+  <p style="margin-top: -30px"><em>Final Result mixing the scene map and the bloom map with tone mapping and gamma correction.</em></p>
+</div>
 
 ## Conclusion
 
