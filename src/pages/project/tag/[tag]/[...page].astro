@@ -15,7 +15,8 @@ export async function getStaticPaths({ paginate }) {
       return post.data.tags?.includes(tag);
     });
     return paginate(filtred_posts, {
-      params: { tag },
+      params: { tag: encodeURIComponent(tag) },
+      props: { tag }, // Pass the tag for use in your page
       pageSize: 10,
     });
   });
