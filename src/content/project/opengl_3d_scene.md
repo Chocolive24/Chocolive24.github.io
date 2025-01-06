@@ -6,7 +6,7 @@ top: "1"
 type: "featured"
 state: "completed"
 heroImage: "/3d_scene/images/scene_cover.png"
-tags: ["Computer Graphcis", "OpenGL", "C++", "Engine", "3D", "SAE"]
+tags: ["Computer Graphics", "OpenGL", "C++", "Engine", "3D", "SAE"]
 ---
 
 This project is a deferred rendering 3D scene including Physically Based Rendering (PBR) and Image Based Lighting (IBL) made with a from scratch graphics engine using OpenGL.
