@@ -30,7 +30,7 @@ import { Image } from "astro:assets";
               {Object.entries(infos).map(([icon, text]) => {
                 return (
                   <div class="flex items-center gap-2">
-                    <img src={icon} alt={text} class="w-5 h-5" />
+                    <img src={icon} alt={text} class="w-5 h-5 dark:invert dark:brightness-125" />
                     <span>{text}</span>
                   </div>
                 );
