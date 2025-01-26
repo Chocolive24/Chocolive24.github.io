@@ -18,6 +18,7 @@ const projectSchema = z.object({
     type: z.enum(['featured', 'academic', 'personal', 'gamejam']),
     heroImage: z.string().optional(),
     state: z.enum(['active', 'inactive', 'completed']),
+    infos: z.record(z.string(), z.string()).optional(),
     tags: z.array(z.string()).refine(items => new Set(items).size === items.length, {
         message: 'tags must be unique',
     }).optional(),

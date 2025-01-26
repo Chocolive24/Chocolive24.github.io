@@ -73,6 +73,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
                 url={`/project/${createSlug(project.data.title, project.slug)}`}
                 target="_self"
                 badge={project.data.state}
+                infos={project.data.infos}
               />
               <div class="divider my-0" />
             </>

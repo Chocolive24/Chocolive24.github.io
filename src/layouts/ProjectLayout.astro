@@ -6,7 +6,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 export interface Props extends ProjectSchema {}
 
-const { title, description, startDate, endDate, heroImage, state, tags = [] } = Astro.props;
+const { title, description, startDate, endDate, heroImage, state, infos = [], tags = [] } = Astro.props;
 dayjs.extend(localizedFormat);
 const displayStartDate = dayjs(startDate).format("ll")
 const displayEndDate = endDate ? dayjs(endDate).format("ll") : "Present";
@@ -17,20 +17,39 @@ import { Image } from "astro:assets";
   <main class="md:flex md:justify-center">
     <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
       {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6" />}
+      
       <h1 class="title my-2 text-4xl font-bold">{title}</h1>
       <time>{displayStartDate}</time> - <time>{displayEndDate}</time>
       <br />
+
       {state && <div class="badge badge-secondary my-1">{state}</div>}
-      {
-        tags &&
-          tags.map((tag) => (
-            <a href={`/project/tag/${tag}`} class="badge badge-outline ml-2 no-underline">
-              {tag}
-            </a>
-          ))
+
+        {/* Infos Section */}
+           {infos && (
+            <div class="flex items-center gap-4"> {/* Added gap for spacing between elements */}
+              {Object.entries(infos).map(([icon, text]) => {
+                return (
+                  <div class="flex items-center gap-2">
+                    <img src={icon} alt={text} class="w-5 h-5" />
+                    <span>{text}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+      {/* Tags Section */}
+      {tags &&
+        tags.map((tag) => (
+          <a href={`/project/tag/${tag}`} class="badge badge-outline ml-2 no-underline">
+            {tag}
+          </a>
+        ))
       }
+
       <div class="divider my-2"></div>
       <slot />
     </article>
   </main>
 </BaseLayout>
+

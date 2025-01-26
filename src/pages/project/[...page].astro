@@ -13,7 +13,7 @@ export async function getStaticPaths({ paginate }) {
       'personal': 3,
       'gamejam': 4
     };
-
+    
     const typeA = a.data.type;
     const typeB = b.data.type;
 
@@ -35,6 +35,7 @@ export async function getStaticPaths({ paginate }) {
       return 0; // If neither have 'top', consider them equal
     }
   });
+
 
   // const posts = await getCollection("project");
   // posts.sort((a, b) => {
@@ -81,6 +82,7 @@ const { page } = Astro.props;
                   url={`/project/${createSlug(post.data.title, post.slug)}`}
                   target="_self"
                   badge={post.data.state}
+                  infos={post.data.infos}
                   tags={post.data.tags}
                 />
                 <div class="divider my-0" />
@@ -103,6 +105,7 @@ const { page } = Astro.props;
                   url={`/project/${createSlug(post.data.title, post.slug)}`}
                   target="_self"
                   badge={post.data.state}
+                  infos={post.data.infos}
                   tags={post.data.tags}
                 />
                 <div class="divider my-0" />
@@ -125,6 +128,7 @@ const { page } = Astro.props;
                   url={`/project/${createSlug(post.data.title, post.slug)}`}
                   target="_self"
                   badge={post.data.state}
+                  infos={post.data.infos}
                   tags={post.data.tags}
                 />
                 <div class="divider my-0" />
@@ -147,6 +151,7 @@ const { page } = Astro.props;
                   url={`/project/${createSlug(post.data.title, post.slug)}`}
                   target="_self"
                   badge={post.data.state}
+                  infos={post.data.infos}
                   tags={post.data.tags}
                 />
                 <div class="divider my-0" />
