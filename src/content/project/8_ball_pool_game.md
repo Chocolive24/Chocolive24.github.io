@@ -2,7 +2,7 @@
 title: "Multiplayer online 8-ball pool game in C++."
 description: "A 8-ball pool game playable online made in C++ with SFML."
 startDate: "15 March 2024"
-endDate: "07 April 2024"
+endDate: "05 April 2024"
 top: "3"
 type: "academic"
 state: "completed"

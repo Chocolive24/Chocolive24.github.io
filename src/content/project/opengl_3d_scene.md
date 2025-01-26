@@ -1,8 +1,8 @@
 ---
 title: "OpenGL 3D scene in PBR"
 description: "A 3D scene made in C++ with OpenGL with many computer graphics techniques including PBR"
-startDate: "02 February 2024"
-endDate: 
+startDate: "22 November 2023"
+endDate: "14 February 2024"
 top: "1"
 type: "featured"
 state: "completed"
@@ -16,9 +16,12 @@ infos: {
 tags: ["Computer Graphics", "OpenGL", "C++", "Engine", "3D", "SAE"]
 ---
 
-This project is a deferred rendering 3D scene including Physically Based Rendering (PBR) and Image Based Lighting (IBL) made with a from scratch graphics engine using OpenGL.
-I carried out this project during a computer graphics module in the 2nd year of my bachelor's degree at SAE-Institute-Geneva. The aim of the project was to learn the different techniques for rendering graphics based on rasterisation.
+## Context
+This project is a deferred rendering 3D scene featuring Physically Based Rendering (PBR) and Image-Based Lighting (IBL), developed using a custom graphics engine built from scratch with OpenGL. I completed this project during a Computer Graphics module in the second year of my bachelor's degree at SAE Institute Geneva.
 
+The primary goal of the project was to explore and implement various rasterization-based rendering techniques. We began with fundamental tasks, such as rendering a simple triangle and learning matrix operations for 3D transformations. Gradually, we progressed to advanced shading techniques, including shadow mapping, deferred shading, PBR, and IBL. By the end of the module, we applied all these techniques to create a full 3D scene, demonstrating our understanding of graphics rendering workflows.
+
+## Showcase
 Here is a short showcase video:
 <iframe width="750" height="420" src="https://www.youtube.com/embed/0zDGHmd1_Dg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -48,4 +51,11 @@ Here are different renderings of my scene:
 - Physically Based Bloom
 - High Dynamic Range (HDR) + Tone Mapping + Gamma Correction
 
-POUR PENGUIN CARD MASTER VIDO 30MIN30 OP car full AOE -> à mettre dans "trailer"
+## What did I learn ?
+- The basics of graphics programming
+- The OpenGL API
+- Rasterisation-based 3D rendering
+- Deferred Rendering 
+- Physically Based Rendering (PBR) and Image Based Lighting (IBL)
+- The rendering equation and a way to solve it using PBR
+- A better understanding and use of abstractions

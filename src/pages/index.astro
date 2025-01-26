@@ -50,7 +50,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
   <div class="pb-12 mt-5">
     <div class="text-5xl font-bold">Pachoud Olivier </div>
     <div class="text-4xl font-bold">Junior Graphics Programmer </div>
-    <div class="text-3xl py-3">Hello, I'm a graphics programmer currently doing a bachelor's degree at the SAE institute in Geneva. <br>I'm also interested in game engine programming and game creation.</div>
+    <div class="text-3xl py-3">Hello, I'm a graphics programmer currently doing a bachelor's degree in Games Programming at the SAE institute in Geneva. <br>I'm also interested in game engine programming and game creation.</div>
   </div>
 
   <div>
@@ -97,6 +97,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
                 url={`/project/${createSlug(project.data.title, project.slug)}`}
                 target="_self"
                 badge={project.data.state}
+                infos={project.data.infos}
               />
               <div class="divider my-0" />
             </>
@@ -120,6 +121,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
                 url={`/project/${createSlug(project.data.title, project.slug)}`}
                 target="_self"
                 badge={project.data.state}
+                infos={project.data.infos}
               />
               <div class="divider my-0" />
             </>
@@ -142,6 +144,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
                 url={`/project/${createSlug(project.data.title, project.slug)}`}
                 target="_self"
                 badge={project.data.state}
+                infos={project.data.infos}
               />
               <div class="divider my-0" />
             </>

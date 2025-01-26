@@ -20,23 +20,34 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
       <div class="grow w-full">
         <h1 class="text-xl font-bold">
           {title}
-          {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-        </h1>
-        <p class="py-1 text-1xl">{desc}</p>
+          {badge && (
+                <div
+                  class={`badge mx-2 ${
+                    badge === "completed" ? "badge-success" : "badge-info"
+                  }`}
+                >
+                  {badge}
+                </div>
+              )}
+            </h1>
+            <p class="py-1 text-1xl">{desc}</p>
         {/* Infos Section */}
         {infos && (
-          <div class="flex items-center gap-4"> {/* Added gap for spacing between elements */}
-            {Object.entries(infos).map(([icon, text]) => {
-              return (
-                <div class="flex items-center gap-2">
-                  <img src={icon} alt={text} class="w-5 h-5" />
-                  <span>{text}</span>
-                </div>
-              );
-            })}
-          </div>
+            <div class="flex items-center gap-4">
+              {Object.entries(infos).map(([icon, text]) => {
+                return (
+                  <div class="flex items-center gap-2">
+                    <img
+                      src={icon}
+                      alt={text}
+                      class="w-5 h-5 dark:invert dark:brightness-125"
+                    />
+                    <span>{text}</span>
+                  </div>
+                );
+              })}
+            </div>
         )}
-
         {/* Tags Section */}
         <div class="card-actions justify-end mt-4"> {/* Added margin-top for spacing */}
           {tags &&
