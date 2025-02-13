@@ -16,4 +16,10 @@ infos: {
 tags: ["Physics", "Optimization", "C++", "Engine", "2D", "SAE"]
 ---
 
-TODO
+## Context
+
+## Showcase
+Here is a short showcase video:
+<iframe width="750" height="420" src="https://youtu.be/rNb0OLZd4wg?si=gO30elQLfbVGYJ2M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+## What did I learn ?

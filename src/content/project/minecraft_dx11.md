@@ -1,6 +1,6 @@
 ---
 title: "Minecraft clone in DirectX11"
-description: "A minecraft clone that I made by myself in C++ and DirectX11 in one week."
+description: "A minecraft clone that I made by myself in C++ and DirectX11 in two weeks."
 startDate: "15 December 2023"
 endDate: "29 December 2023"
 top: "1"
