@@ -7,20 +7,29 @@ top: "1"
 type: "academic"
 state: "completed"
 heroImage: "/physics_engine_opti/gifs/bouncing_shapes.gif"
-infos: {
-  "/icones/people.svg": "1",
-  "/icones/clock.svg": "1.5 months",
-  "/icones/tools.svg": "C++/SDL2/Tracy",
-  "/icones/calendar.svg": "November 2024",
-}
-tags: ["Physics", "Optimization", "C++", "Engine", "2D", "SAE"]
+infos:
+  "/icones/people.svg": "1"
+  "/icones/clock.svg": "1.5 months"
+  "/icones/tools.svg": "C++/SDL2/Tracy"
+  "/icones/calendar.svg": "November 2024"
+tags:
+  - "Physics"
+  - "Optimization"
+  - "C++"
+  - "Engine"
+  - "2D"
+  - "SAE"
 ---
+
+import YoutubePlayer from '/src/components/YoutubePlayer.astro';
 
 ## Context
 
 ## Showcase
 Here is a short showcase video:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/rNb0OLZd4wg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="750" height="420" src="https://www.youtube.com/embed/rNb0OLZd4wg?si=K-_6U8cB3IAWXdEx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<YoutubePlayer id="rNb0OLZd4wg" />
 
 <button id="playButton">Play Physics Engine 2D</button>
 
@@ -65,6 +74,7 @@ Here is a short showcase video:
     playButton.style.display = 'none';    // Hide the button
   });
 </script>
+
 
 <iframe frameborder="0" src="https://itch.io/embed/2219858" width="552" height="167"><a href="https://chocolive.itch.io/card-master-penguin">Card Master Penguin by Chocolive</a></iframe>
 
