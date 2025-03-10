@@ -16,12 +16,13 @@ tags:
   - "Physics"
   - "Optimization"
   - "C++"
+  - "Low Level"
   - "Engine"
   - "2D"
   - "SAE"
 ---
 
-import YoutubePlayer from '/src/components/YoutubePlayer.astro';
+<!-- import YoutubePlayer from '/src/components/YoutubePlayer.astro'; -->
 
 ## Context
 
@@ -29,7 +30,32 @@ import YoutubePlayer from '/src/components/YoutubePlayer.astro';
 Here is a short showcase video:
 <iframe width="750" height="420" src="https://www.youtube.com/embed/rNb0OLZd4wg?si=K-_6U8cB3IAWXdEx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<YoutubePlayer id="rNb0OLZd4wg" />
+Features
+- Creation of bodies.
+  - Attributes:
+    - Position
+    - Velocity
+    - Mass
+  - Dynamic bodies:
+    - Forces can be applied to them.
+    - Physical collision calculations.
+  - Kinematic bodies
+    - Not impacted by forces.
+    - No physical collisions.
+  - Static bodies
+    - Don't move.
+    - Physical collision calculations.
+- Creation of collider:
+  - Attributes
+    - Shape
+      - Circle
+      - Rectangle
+      - Convex Polygon (only work for trigger for now)
+  - Restitution
+  - Trigger mode
+- Broad Phase with Quadtree
+
+<!-- <YoutubePlayer id="rNb0OLZd4wg" />
 
 <button id="playButton">Play Physics Engine 2D</button>
 
@@ -76,6 +102,6 @@ Here is a short showcase video:
 </script>
 
 
-<iframe frameborder="0" src="https://itch.io/embed/2219858" width="552" height="167"><a href="https://chocolive.itch.io/card-master-penguin">Card Master Penguin by Chocolive</a></iframe>
+<iframe frameborder="0" src="https://itch.io/embed/2219858" width="552" height="167"><a href="https://chocolive.itch.io/card-master-penguin">Card Master Penguin by Chocolive</a></iframe> -->
 
 ## What did I learn ?

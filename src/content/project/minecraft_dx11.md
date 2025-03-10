@@ -13,7 +13,7 @@ infos: {
   "/icones/tools.svg": "C++/DX11",
   "/icones/calendar.svg": "December 2023",
 }
-tags: ["Computer Graphics", "Game", "C++", "DirectX11", "3D"]
+tags: ["Computer Graphics", "Game", "C++", "DirectX11", "3D", "Personal project"]
 ---
 
 TODO

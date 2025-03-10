@@ -1,9 +1,9 @@
 ---
-title: "OpenGL 3D scene in PBR"
+title: "OpenGL 3D Scene in PBR"
 description: "A 3D scene made in C++ with OpenGL with many computer graphics techniques including PBR"
 startDate: "22 November 2023"
 endDate: "14 February 2024"
-top: "1"
+top: "2"
 type: "featured"
 state: "completed"
 heroImage: "/3d_scene/images/scene_cover.png"
@@ -17,13 +17,16 @@ tags: ["Computer Graphics", "OpenGL", "C++", "Engine", "3D", "SAE"]
 ---
 
 ## Context
-This project is a deferred rendering 3D scene featuring Physically Based Rendering (PBR) and Image-Based Lighting (IBL), developed using a custom graphics engine built from scratch with OpenGL. I completed this project during a Computer Graphics module in the second year of my bachelor's degree at SAE Institute Geneva.
+This project is a **deferred rendering 3D scene** with **Physically Based Rendering** (PBR) and **Image-Based Lighting** (IBL), built with a **custom engine from scratch** using **OpenGL**. I developed it during my **second-year** Computer Graphics module at **SAE Institute Geneva**.
 
-The primary goal of the project was to explore and implement various rasterization-based rendering techniques. We began with fundamental tasks, such as rendering a simple triangle and learning matrix operations for 3D transformations. Gradually, we progressed to advanced shading techniques, including shadow mapping, deferred shading, PBR, and IBL. By the end of the module, we applied all these techniques to create a full 3D scene, demonstrating our understanding of graphics rendering workflows.
+The **goal** was to explore **rasterization-based rendering**. We **started with basics** like rendering a **triangle** and  **matrix operations**, **then** advanced to techniques such as **shadow mapping**, **deferred shading**, **PBR**, and **IBL**. **By the end**, we combined these to **create a complete 3D scene**, showcasing our understanding of graphics rendering.
 
 ## Showcase
-Here is a short showcase video:
+Here is a short showcase video of my scene:
 <iframe width="750" height="420" src="https://www.youtube.com/embed/0zDGHmd1_Dg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Here's a video showing the different samples I created while learning OpenGL during the course module:
+<iframe width="750" height="420" src="https://www.youtube.com/embed/a2DS3KvjSz0?si=bJU4o-kN1ZQF0ibe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Here are different renderings of my scene:
 <div style="text-align:center">
@@ -59,3 +62,8 @@ Here are different renderings of my scene:
 - Physically Based Rendering (PBR) and Image Based Lighting (IBL)
 - The rendering equation and a way to solve it using PBR
 - A better understanding and use of abstractions
+- Use of RAII in C++ to throw error logs and ensure proper resource cleanup by allowing the programmer to control destruction order
+
+## Blog Post  
+I've written a blog post about implementing the different rendering passes for my scene:  
+[Read it here](https://chocolive24.github.io/blog/how-i-created-an-opengl-3d-scene/)

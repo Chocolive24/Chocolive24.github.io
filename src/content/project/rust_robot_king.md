@@ -13,7 +13,7 @@ infos: {
   "/icones/tools.svg": "Unreal",
   "/icones/calendar.svg": "April 2023",
 }
-tags: ["Game Jam", "Game", "Unreal", "Dungeon Crawler", "Combo", "Tactical", "3D"]
+tags: ["Game Jam", "Game", "Unreal", "Dungeon Crawler", "Combo", "Tactical", "3D", "Group"]
 ---
 
 TODO
