@@ -1,5 +1,5 @@
 ---
-title: "Ruby and the Lost Crystals: My Stylization Process for Ruby and the Lost Crystals Using a Physically Based Cel Shader."
+title: "My Stylization Process for Ruby and the Lost Crystals Using a Physically Based Cel Shader."
 description: "A post about the different techniques I used to stylise the rendering of our game group project."
 pubDate: "Feb 13 2025"
 heroImage: "/ruby/images/cel_shader.png"
