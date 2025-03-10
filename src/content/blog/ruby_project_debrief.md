@@ -2,7 +2,7 @@
 title: "Ruby and the Lost Crystals: Project Debrief"
 description: "A post debriefing our management on our Group Game Project."
 pubDate: "Feb 13 2025"
-heroImage: "/ruby/gifs/showcase.gif"
+heroImage: "/ruby/gifs/debrief.gif"
 tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]
 ---
 
@@ -74,7 +74,6 @@ Ruby and the lost crystals is a game that combines exploration, reflection and s
     </table>
 </div>
           
-
 ## 1.2 Game Pillars
 Our vision was a Relaxing and Feel Good experience. Inspired by the wholesome genre, the game aims to set a positive and restful context. This ambition is reflected not only in the design of the characters and their dynamic duo, but also in the design of the environment, music and user interface.
 
@@ -247,7 +246,7 @@ Video of our second Production Prototype which was focused on Game Experience an
 <iframe width="750" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=IwW1h0k3m7cqI_hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 3.5 January to 14 February
-We did the vertical slice for the school's submission deadline. Unfortunately, not all the content you would have liked to see was available, due to the fact that the scope of the project was changed at the end of October on the advice of Nicolas Brière.
+We did the vertical slice for the school's submission deadline. Unfortunately, not all the content we would have liked to see was available, due to the fact that the scope of the project was changed at the end of October on the advice of Nicolas Brière.
 
 Video of our Preliminary Vertical Slice for the school's submission deadline.
 <iframe width="750" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=IwW1h0k3m7cqI_hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

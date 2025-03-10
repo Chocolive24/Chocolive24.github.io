@@ -1,15 +1,15 @@
 ---
-title: "Ruby and the Lost Crystals"
+title: "Ruby and The Lost Crystals"
 description: "In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire must work together to progress, with the sole mission of restoring the scattered crystals. To do this, Ruby is able to perform physical interactions, while Sapphire can fire projectiles with a variety of behaviours"
-startDate: "04 September 2024"
+startDate: "03 July 2024"
 endDate: "10 March 2025"
 top: "1"
 type: "featured"
 state: "active"
 heroImage: "/ruby/gifs/showcase.gif"
 infos: {
-  "/icones/people.svg": "8 (+ 6)",
-  "/icones/clock.svg": "7 month",
+  "/icones/people.svg": "10 (+ 4)",
+  "/icones/clock.svg": "8 month",
   "/icones/tools.svg": "Unreal/Perforce/Wwise",
   "/icones/calendar.svg": "10 March 2025",
 }
@@ -23,16 +23,36 @@ The aim was to produce a vertical slice in six months (from September to Februar
 The aim of the project is to have a semi-professional experience where each discipline plays an essential role in production and where students can specialise in one aspect of game development.
 
 ## Showcase
-Here is a short showcase video of my scene:
-<iframe width="750" height="420" src="https://youtu.be/YNXXZ5jRn7E?si=AVGq7VfW8YAOOOAi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+Here is a gameplay video of the game:
+<iframe width="750" height="420" src="https://www.youtube.com/embed/YNXXZ5jRn7E?si=2fGeLgE3zW_Po6mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Here's a video showing the different developpement milestone of the project:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/a2DS3KvjSz0?si=bJU4o-kN1ZQF0ibe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## Project status
+July 2024: very first game mechanics prototype:
+<iframe width="750" height="420" src="https://www.youtube.com/embed/dJzH4OkNIiw?si=EZulL54fo9JTGmWB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+August 2024: proof of concept:
+<iframe width="750" height="420" src="https://www.youtube.com/embed/X0bnC_ms4Og?si=UUUXx-IuADwCqKzb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+31 October: 1st production prototype focused on game mechanics and feedbacks:
+<iframe width="750" height="420" src="https://www.youtube.com/embed/zMjtl-OyK8k?si=uw2Kehp4z7V53wnD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+19 December 2024: 2nd production prototype focused on game experience, narration and level design:
+<iframe width="750" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=v76iF2ODPO_Gar9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+14 February 2025: vertical slice for the school's submission deadline.:
+<iframe width="750" height="420" src="https://www.youtube.com/embed/WXXpQHP8ShE?si=jYwIqfMaJSdFrCRD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
-- Developp a Game with Unreal
-- 
+- Developing a game on Unreal
+- Versioning with Perforce
+- Integrating and using Wwise with Unreal
+- Distributing tasks between programmers
+- Working with game artists
+- Working with audio engineers
+- Lots of stylised graphics rendering techniques
+- Using AI to create concepts and creative ideas
+- Polishing a game
+- Pitching a game
 
 ## Blog Post  
-I've written a blog post about implementing the different rendering passes for my scene:  
-[Read it here](https://chocolive24.github.io/blog/how-i-created-an-opengl-3d-scene/)
+The games programming team has written a blog post to give an update on the development of the project:  [Read it here](https://chocolive24.github.io/blog/ruby-and-the-lost-crystals-project-debrief)
