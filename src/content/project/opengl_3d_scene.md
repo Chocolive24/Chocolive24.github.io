@@ -36,7 +36,7 @@ Here are different renderings of my scene:
   <p style="margin-top: -30px"><em></em></p>
 </div>
 
-<br>Here are all the techniques and functionalities contained in my scene:
+## Features
 - OBJ Model Loading
 - Instancing
 - Face and Frustum Culling
@@ -66,4 +66,4 @@ Here are different renderings of my scene:
 
 ## Blog Post  
 I've written a blog post about implementing the different rendering passes for my scene:  
-[Read it here](https://chocolive24.github.io/blog/how-i-created-an-opengl-3d-scene/)
+[Read it here](/blog/how-i-created-an-opengl-3d-scene/)
