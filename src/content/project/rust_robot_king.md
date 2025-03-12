@@ -19,10 +19,10 @@ tags: ["Game Jam", "Game", "Unreal", "Dungeon Crawler", "Combo", "Tactical", "3D
 ## Context
 This game was created during the **Dungeon Crawler Jam 2023**. We had **one week** to make a **first person grid based dungeon crawler game**. The **theme** of the Jam was **"Duality"**. We used **Unreal 4** to develop the game. Personally, it was the **first time** I had **developed a game on Unreal**
 
-We decided to make a **Dungeon Crawler** in which there are rooms with enemies that we **fight in turn-based battle** using **attacks based on key combos**.
+We decided to make a **Dungeon Crawler** in which there are rooms with enemies that we **fight in turn-based battle** using **attacks based on key combos**. For the **artistic direction**, we opted for a **pixelated 3D rendering** similar to **old PS1** games.
 
 ## Organisation Chart
-- Joey Gugler Art and Code
+- Joey Gugler: Art and Code
 - Me: Code
 - Leonar Sadriu SFX and Music
 

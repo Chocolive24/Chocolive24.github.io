@@ -27,7 +27,7 @@ We decided to make a **Tower Defence game** where, **instead of playing the stra
 - Leonar Sadriu SFX and Music
 
 ## Showcase
-Here is a short showcase video (Unfortunately, the game has a bug that causes combat to crash and freezes the player):
+Here is a short showcase video:
 <iframe width="750" height="420" src="https://www.youtube.com/embed/W2wsck70J7U?si=BVcmhjlSSfAYBel5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?

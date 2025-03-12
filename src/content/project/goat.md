@@ -30,7 +30,7 @@ We decided to make a **Bullet Hell game** where you control a goat attached by a
 - Alexis Haldy: Code
 
 ## Showcase
-Here is a short showcase video (Unfortunately, the game has a bug that causes combat to crash and freezes the player):
+Here is a short showcase video:
 <iframe width="750" height="420" src="https://www.youtube.com/embed/isPShvAzVTQ?si=PyDxEOg5UwCubLFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
