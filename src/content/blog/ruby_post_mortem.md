@@ -1,6 +1,6 @@
 ---
 title: "Ruby and The Lost Crystals: Post-Mortem."
-description: "Reflective analysis of our group game project management"
+description: "Reflective analysis of our group game project management."
 pubDate: "Feb 13 2025"
 heroImage: "/ruby/gifs/showcase.gif"
 tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]

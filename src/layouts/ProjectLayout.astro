@@ -22,7 +22,15 @@ import { Image } from "astro:assets";
       <time>{displayStartDate}</time> - <time>{displayEndDate}</time>
       <br />
 
-      {state && <div class="badge badge-secondary my-1">{state}</div>}
+      
+      {/* Dynamic Badge Color Based on State */}
+      {state && (
+        <div 
+          class={`badge my-1 ${state === "completed" ? "badge-success" : "badge-info"}`}
+        >
+          {state}
+        </div>
+      )}
 
         {/* Infos Section */}
            {infos && (

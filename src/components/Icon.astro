@@ -1,0 +1,32 @@
+---
+import { useEffect, useState } from "react";
+
+const InfosSection = ({ infos }) => {
+  const [iconContent, setIconContent] = useState({});
+
+  // Function to fetch SVG files and convert them to text
+  const fetchSVG = async (iconPath) => {
+    try {
+      const response = await fetch(iconPath);
+      const text = await response.text();
+      return text;
+    } catch (error) {
+      console.error("Error fetching SVG:", error);
+      return "";
+    }
+  };
+
+  useEffect(() => {
+    // Example of loading icons dynamically based on your icons paths in 'infos'
+    const loadIcons = async () => {
+      const icons = {};
+      for (const [iconPath, text] of Object.entries(infos)) {
+        const svgContent = await fetchSVG(iconPath);
+        icons[iconPath] = svgContent;
+      }
+      setIconContent(icons);
+    };
+
+    loadIcons();
+  }, [infos]);
+---

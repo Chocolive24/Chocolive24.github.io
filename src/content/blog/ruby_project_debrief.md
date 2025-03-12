@@ -1,6 +1,6 @@
 ---
 title: "Ruby and the Lost Crystals: Project Debrief"
-description: "A post debriefing our management on our Group Game Project."
+description: "A post summarising the 8 months we spent working on the game project together with SAE Institut's Game Artists and Game Audio."
 pubDate: "Feb 13 2025"
 heroImage: "/ruby/gifs/debrief.gif"
 tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]
