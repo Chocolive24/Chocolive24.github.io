@@ -95,5 +95,5 @@ Finally the ClientApplication is the target build application which consists of 
 - Use raylib
 
 ## Blog Post
-I've written a blog post on the various optimisations I've made to my programme.
+I've written a blog post on my rollback implementation and my code architecture.
 [Read it here](/blog/how-did-i-implement-rollback-for-my-online-c-game)

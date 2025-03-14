@@ -164,7 +164,6 @@ With all the changes made to my engine I saved between 760ms and 856ms.
 - Writing custom allocators
 - Profiling code and memory management
 - Optimisation tricks
-  - Padding
   - Memory layout
   - Cache hit
   - Quadtree
