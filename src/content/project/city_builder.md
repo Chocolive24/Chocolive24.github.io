@@ -4,7 +4,7 @@ description: "A City Builder developed in low-level C++ with minimal dependencie
 The custom game engine features hot reload, game data serialization, image, UI, and text rendering, audio decoding and playback, and a built-in tile editor."
 startDate: "06 July 2023"
 endDate: "26 July 2023"
-top: "5"
+top: "3"
 type: "academic"
 state: "completed"
 heroImage: "/city_builder/gifs/showcase.gif"
