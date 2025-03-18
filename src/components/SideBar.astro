@@ -5,6 +5,14 @@ import SideBarMenu from "./SideBarMenu.astro";
 const { sideBarActiveItemID } = Astro.props;
 ---
 
+<ul class="menu bg-base-200 rounded-box p-4 shadow-lg">
+  <li><a class="hover:bg-primary hover:text-white">Home</a></li>
+  <li><a class="hover:bg-primary hover:text-white">Projects</a></li>
+  <li><a class="hover:bg-primary hover:text-white">Blog</a></li>
+  <li><a class="hover:bg-primary hover:text-white">CV</a></li>
+  <li><a class="hover:bg-primary hover:text-white">Contact</a></li>
+</ul>
+
 <div class="drawer-side z-40">
   <label for="my-drawer" class="drawer-overlay"></label>
   <aside class="px-2 pt-2 h-auto min-h-full w-[19rem] bg-base-200 text-base-content flex flex-col">

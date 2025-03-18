@@ -1,15 +1,15 @@
 ---
 title: "Ruby and The Lost Crystals"
-description: "In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire must work together to progress, with the sole mission of restoring the scattered crystals. To do this, Ruby is able to perform physical interactions, while Sapphire can fire projectiles with a variety of behaviours"
-startDate: "03 July 2024"
+description: "A 3D stylized puzzle shooter set in the ancient ruins of the Crystalins, a lost race of living stones. Solve puzzles and use magic projectiles to restore their scattered crystals."
+startDate: "04 September 2024"
 endDate: "10 March 2025"
 top: "1"
 type: "featured"
 state: "active"
 heroImage: "/ruby/gifs/showcase.gif"
 infos: {
-  "/icones/people.svg": "12 (+4)",
-  "/icones/clock.svg": "8 month",
+  "/icones/people.svg": "5",
+  "/icones/clock.svg": "6 month",
   "/icones/tools.svg": "Unreal/Perforce/Wwise",
   "/icones/calendar.svg": "10 March 2025",
 }
@@ -21,6 +21,9 @@ Ruby and the Lost Crystals is a **game project** produced as part of the **third
 
 The aim was to produce a **vertical slice in six months** (from September to February), enabling us to demonstrate gameplay that is representative of the game's final concept.
 The aim of the project is to have a **semi-professional experience** where each discipline plays an essential role in production and where **students can specialise in one aspect of game development**.
+
+# Pitch
+In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire must work together to progress, with the sole mission of restoring the scattered crystals. To do this, Ruby is able to perform physical interactions, while Sapphire can fire projectiles with a variety of behaviours
 
 ## Organisation Chart
 

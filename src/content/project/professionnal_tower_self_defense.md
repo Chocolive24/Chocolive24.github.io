@@ -1,5 +1,5 @@
 ---
-title: "Professional Tower Self Defence"
+title: "Tower Self Defence"
 description: "A FPS where you play as a tower in a Tower Defence game made during GMTK Game Jam 2023."
 startDate: "07 July 2023"
 endDate: "09 July 2023"

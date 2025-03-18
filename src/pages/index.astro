@@ -48,9 +48,9 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
 
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
-    <div class="text-5xl font-bold">Pachoud Olivier </div>
+    <div class="text-5xl font-bold">Olivier Pachoud</div>
     <div class="text-4xl font-bold">Junior Graphics Programmer </div>
-    <div class="text-3xl py-3">Hello, I'm a graphics programmer currently doing a bachelor's degree in Games Programming at the SAE institute in Geneva. <br>I'm also interested in game engine programming and game creation.</div>
+    <div class="text-3xl py-3">Hello, I'm a graphics programmer finishing my bachelor's degree in Games Programming at the SAE Institute in Geneva, <br> I'll be graduating in July 2025. <br>I'm also interested in game engine programming and game creation.</div>
   </div>
 
   <div>
@@ -153,6 +153,11 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
       }
   </div>
   
+  <div class="flex justify-center mt-4">
+  <a href="/project" class="btn btn-outline px-6 py-3 text-lg w-full max-w-xs">
+    View All Projects
+  </a>
+</div>
 
 
   <div>
@@ -174,4 +179,10 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
       </>
     ))
   }
+
+<div class="flex justify-center mt-4">
+  <a href="/blog" class="btn btn-outline px-6 py-3 text-lg w-full max-w-xs">
+    View All Blog Posts
+  </a>
+</div>
 </BaseLayout>
