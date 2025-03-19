@@ -14,6 +14,7 @@ infos: {
   "/icones/calendar.svg": "February 2024",
 }
 tags: ["Computer Graphics", "OpenGL", "C++", "Engine", "3D", "SAE"]
+relatedBlogs: ["How I created an OpenGL 3D scene."]
 ---
 
 ## Context

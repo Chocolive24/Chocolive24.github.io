@@ -14,6 +14,7 @@ infos: {
   "/icones/calendar.svg": "March 2024",
 }
 tags: ["Network", "Game", "2D", "C++", "Python", "FastAPI", "Docker", "SFML", "SAE"]
+relatedBlogs: ["The network protocol of my C++ turn-based game."]
 ---
 
 TODO

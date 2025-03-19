@@ -20,6 +20,7 @@ tags:
   - "Engine"
   - "2D"
   - "SAE"
+relatedBlogs: ["The optimisations I made to my 2D C++ physics engine"]
 ---
 
 <!-- import YoutubePlayer from '/src/components/YoutubePlayer.astro'; -->

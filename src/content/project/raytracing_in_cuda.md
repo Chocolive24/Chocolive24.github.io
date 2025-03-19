@@ -13,6 +13,7 @@ infos: {
   "/icones/calendar.svg": "January 2025",
 }
 tags: ["Computer Graphics", "Raytracing", "CUDA", "C++", "3D", "Low-Level Programming", "Personal project"]
+relatedBlogs: ["My implementation of the raytracing in one weekend using CUDA."]
 ---
 
 ## Context

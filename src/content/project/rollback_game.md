@@ -14,6 +14,7 @@ infos: {
   "/icones/calendar.svg": "April 2024",
 }
 tags: ["Network", "Rollback", "Game", "2D", "C++", "Photon Realtime", "SAE"]
+relatedBlogs: ["How did I implement rollback for my online C++ game."]
 ---
 
 ## Context

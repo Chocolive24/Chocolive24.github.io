@@ -14,6 +14,9 @@ infos: {
   "/icones/calendar.svg": "10 March 2025",
 }
 tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]
+relatedBlogs: ["Ruby and the Lost Crystals: Project Debrief",
+  "My Stylization Process for Ruby and the Lost Crystals Using a Physically Based Cel Shader.",
+  "Ruby and The Lost Crystals: Post-Mortem."]
 ---
 
 ## Context
@@ -85,9 +88,10 @@ Here is a **gameplay** video of the game:
 - Polishing a game
 - Pitching a game
 
-## Blog Post  
+
+<!-- ## Blog Post  
 The games programming team has written a blog post to give an update on the development of the project:  [Read it here](/blog/ruby-and-the-lost-crystals-project-debrief)
 
 I wrote another blog post about my graphics stylisation process on the game:  [Read it here](/blog/my-stylization-process-for-ruby-and-the-lost-crystals-using-a-physically-based-cel-shader)
 
-Finally I wrote a post-mortem:  [Read it here](/blog/ruby-and-the-lost-crystals-post-mortem)
+Finally I wrote a post-mortem:  [Read it here](/blog/ruby-and-the-lost-crystals-post-mortem) -->
