@@ -44,6 +44,6 @@ Here are some renders I was able to create using CUDA
 - Creating a Bouding Volume Hierarchy
 - Performing lighting calculations based on material properties
 
-## Blog Post
+<!-- ## Blog Post
 I've written a blog post about implementing the book pathtracer using CUDA:  
-[Read it here](/blog/my-implementation-of-the-raytracing-in-one-weekend-using-cuda/)
+[Read it here](/blog/my-implementation-of-the-raytracing-in-one-weekend-using-cuda/) -->

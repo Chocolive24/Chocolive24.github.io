@@ -95,6 +95,6 @@ Finally the ClientApplication is the target build application which consists of 
 - Use photon real time
 - Use raylib
 
-## Blog Post
+<!-- ## Blog Post
 I've written a blog post on my rollback implementation and my code architecture.
-[Read it here](/blog/how-did-i-implement-rollback-for-my-online-c-game)
+[Read it here](/blog/how-did-i-implement-rollback-for-my-online-c-game) -->

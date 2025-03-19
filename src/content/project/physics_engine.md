@@ -171,6 +171,6 @@ With all the changes made to my engine I saved between 760ms and 856ms.
 - How a modern CPU works
 - Performing statistical tests
 
-## Blog Post
+<!-- ## Blog Post
 I've written a blog post on the various optimisations I've made to my programme.
-[Read it here](/blog/the-optimisations-i-made-to-my-2d-c-physics-engine/)
+[Read it here](/blog/the-optimisations-i-made-to-my-2d-c-physics-engine/) -->

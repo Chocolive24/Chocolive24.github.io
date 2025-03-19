@@ -6,7 +6,7 @@ endDate: "14 February 2024"
 top: "2"
 type: "featured"
 state: "completed"
-heroImage: "/3d_scene/images/scene_cover.png"
+heroImage: "/3d_scene/gifs/showcase.gif"
 infos: {
   "/icones/people.svg": "1",
   "/icones/clock.svg": "2.5 months",
@@ -65,6 +65,6 @@ Here are different renderings of my scene:
 - A better understanding and use of abstractions
 - Use of RAII in C++ to throw error logs and ensure proper resource cleanup by allowing the programmer to control destruction order
 
-## Blog Post  
+<!-- ## Blog Post  
 I've written a blog post about implementing the different rendering passes for my scene:  
-[Read it here](/blog/how-i-created-an-opengl-3d-scene/)
+[Read it here](/blog/how-i-created-an-opengl-3d-scene/) -->

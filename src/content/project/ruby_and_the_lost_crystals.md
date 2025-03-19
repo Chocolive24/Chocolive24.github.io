@@ -30,22 +30,26 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 
 ## Organisation Chart
 
-**Game Programming Team:**
-- **Remy Lambert : Product Owner, Game & Level Designer**
-- **Olivier Pachoud  : Lead Game Programmer, Graphics Programmer & Tech Artist**
-- Contributors:
-  - Constantin Vérine: Helped with implementing audio in code.
-  - Alexis Haldy: Helped with refactoring.
+**Main Game Programming Team:**
+- **Remy Lambert : Project Co-leader, Product Owner, Game & Level Designer**
+- **Me (Olivier Pachoud)  : Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist**
 
-**Game Art Team:**
+Game Programming Team:
+  - Constantin Vérine: Audio Programmer
+  - Alexis Haldy: Refactoring, Debugging
+
+**Main Game Art Team:**
 - **Isabelle Borcard: Lead Game Art**
 - **Eliot Depres: Main Level Artist**
-- Contributors:
+
+Game Art Team
   - Mélissa Houriet: Made Sapphire's model.
   - Samuel Blanc: Made some gameplay models.
 
-**Audio Team:**
+**Main Audio Team:**
 - **Samuel Rochat: Lead Audio & Wwise Implementation Expert**
+
+Audio Team:
 - Johan Walder
 - Yannis von Will
 - Killian Rossier
