@@ -26,7 +26,7 @@ relatedBlogs: ["The optimisations I made to my 2D C++ physics engine"]
 <!-- import YoutubePlayer from '/src/components/YoutubePlayer.astro'; -->
 
 ## Context
-This physics engine was programmed during a **course module** on **physics**, **maths**, **optimisation**, **CPU architecture** and **profiling** at **SAE Institut Geneva** in the **2nd year of a bachelor's degree in Games Programming**.
+This physics engine was programmed during a **course module** on **physics**, **maths**, **optimisation**, **CPU architecture**, **Assembly** and **profiling** at **SAE Institut Geneva** in the **2nd year of a bachelor's degree in Games Programming**.
 
 The **aim** was to **write** the engine as an **API** that anyone could use, and to **optimise it** accordingly. The engine had to be capable of **running** a sample with **1000 colliders in trigger** mode at a minimum of **60fps**.
 
@@ -159,6 +159,7 @@ With all the changes made to my engine I saved between 760ms and 856ms.
 - Basics of Calculus
 - Basics of Linear Algebra
 - Basics of Physics
+- Basics of Assembly language
 - Choose and use the right C++ data structures in a given context
 - Low level C++ API programming
 - Template programming
