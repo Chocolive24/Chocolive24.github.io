@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import BackgroundLayout from "@layouts/BackgroundLayout.astro";
 import HorizontalCard from "@components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../../../../lib/createSlug";
@@ -25,9 +26,9 @@ const { page } = Astro.props;
 const params = Astro.params;
 ---
 
-<BaseLayout title={"Blog - " + params.tag} sideBarActiveItemID="blog">
+<BackgroundLayout title={"Blog - " + params.tag} sideBarActiveItemID="blog" style="position: relative">
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Blog - {params.tag}</div>
+    <div class="text-3xl w-full font-bold" style="position: relative">Blog - {params.tag}</div>
   </div>
   {
     page.data.length === 0 ? (
@@ -95,4 +96,4 @@ const params = Astro.params;
       )
     }
   </div>
-</BaseLayout>
+</BackgroundLayout>
