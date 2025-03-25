@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BackgroundLayout from "../layouts/BackgroundLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
@@ -46,35 +47,52 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
 
 ---
 
-<BaseLayout sideBarActiveItemID="home">
-  <div style="text-align:center">
-    <img src="/public/index/Ruby.PNG" alt="" width="300px" />
-    <!-- <p style="margin-top: -30px"><em></em></p> -->
-  </div>
+<BackgroundLayout sideBarActiveItemID="home">
+  <div style="display: flex; justify-content: center; align-items: center; margin-top: -100px;">
+    <!-- Girl image with beige tint -->
+    <div style="position: relative;">
+      <img src="/index/Ruby.png" width="250">
+   </div>
+    <!-- Speech bubble container -->
+    <div style="position: relative; display: inline-block; margin-top: 200px;">
+        <img src="/index/bulle_dialog.png" width="1000" style="display: block; ">
+        
+        <!-- Text inside the speech bubble -->
+        <div style="
+            position: absolute; 
+            top: 22.5%; 
+            left: 5%; 
+            width: 92%;
+            text-align: left;
+            color: #000000;
+        ">
+            <p style="font-size: 30px; font-weight: bold; margin: 0;">
+                Olivier Pachoud - Junior Graphics Programmer
+            </p>
+            <p style="font-size: 22px; margin: 0;">
+                Hello, I'm a graphics programmer finishing my bachelor's degree in Games Programming at the SAE Institute in Geneva. <br> 
+                I'll be graduating in July 2025. <br> 
+                I'm also interested in game engine programming and game creation.
+            </p>
 
-  <div style="text-align:center;">
-    <table>
-    <tr>
-        <td> <img src="/ruby/images/Ruby.png" width=575/>
-        <p style="margin-top: -30px"><em>A fresco visible in the game.</em></p></td>
-        <td>  <img src="/ruby/images/concept_ruin.webp" width=550/>
-        <p style="margin-top: -30px"><em>Game concept art generated via ChatGPT.</em></p></td>
-    </tr>
-    </table>
+        </div>
+    </div>
 </div>
 
-  <div class="pb-12 mt-5">
+
+
+  <!-- <div class="pb-12 mt-5">
     <div class="text-5xl font-bold">Olivier Pachoud</div>
     <div class="text-4xl font-bold">Junior Graphics Programmer </div>
     <div class="text-3xl py-3">Hello, I'm a graphics programmer finishing my bachelor's degree in Games Programming at the SAE Institute in Geneva, <br> I'll be graduating in July 2025. <br>I'm also interested in game engine programming and game creation.</div>
-  </div>
+  </div> -->
 
-  <div>
+  <div class="mt-10" style="position: relative;">
     <div class="text-3xl w-full font-bold mb-2">
       Explore a showcase of my projects
     </div>
   
-    <div class="text-xl w-full font-bold mb-2">
+    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
       Favorite Projects
     </div>
       {
@@ -97,7 +115,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
         ))
       }
   
-    <div class="text-xl w-full font-bold mb-2">
+    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
       Academic Projects
     </div>
 
@@ -121,7 +139,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
         ))
       }
   
-    <div class="text-xl w-full font-bold mb-2">
+    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
       Personal Projects
 
     </div>
@@ -145,7 +163,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
         ))
       }
 
-    <div class="text-xl w-full font-bold mb-2">
+    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
       Game Jam Projects
     </div>
       {
@@ -169,7 +187,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
       }
   </div>
   
-  <div class="flex justify-center mt-4">
+  <div class="flex justify-center mt-4" style="position: relative;">
     <a href="/project" class="btn btn-outline text-lg w-full max-w-xs">
       View All Projects
     </a>
@@ -178,7 +196,7 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
 
 
   <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">My latest blog posts</div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10" style="position: relative;">My latest blog posts</div>
   </div>
 
   {
@@ -197,9 +215,9 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
     ))
   }
 
-<div class="flex justify-center mt-4">
+<div class="flex justify-center mt-4" style="position: relative;">
   <a href="/blog" class="btn btn-outline text-lg w-full max-w-xs">
     View All Blog Posts
   </a>
 </div>
-</BaseLayout>
+</BackgroundLayout>

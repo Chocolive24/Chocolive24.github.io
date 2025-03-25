@@ -22,11 +22,30 @@ const {
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
     {TRANSITION_API && <ViewTransitions />}
+    <style>
+      .background-image {
+        position: relative;
+        background-image: url('ruby/gifs/showcase.gif?v=1'); /* Add a version query string */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .background-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(20, 10, 55, 0.7)/* Color with transparency */
+      }
+    </style>
   </head>
   <body>
     <div class="bg-base-100 drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content bg-base-100">
+      <div class="background-image drawer-content bg-base-100">
         <Header title={SITE_TITLE} />
         <div class="md:flex md:justify-center">
           <main class="p-6 pt-10 lg:max-w-[1000px] max-w-[100vw] content">
