@@ -15,13 +15,13 @@ const { page } = Astro.props;
 ---
 
 <BackgroundLayout title="Blog" sideBarActiveItemID="blog">
-  <div class="mb-5">
+  <div class="mb-5" style="position: relative;">
     <div class="text-3xl w-full font-bold">Blog</div>
   </div>
 
   {
     page.data.length === 0 ? (
-      <div class="bg-base-200 border-l-4 border-secondary w-full p-4 min-w-full">
+      <div class="bg-base-200 border-l-4 border-secondary w-full p-4 min-w-full" style="position: relative;">
         <p class="font-bold">Sorry!</p>
         <p>There are no blog posts to show at the moment. Check back later!</p>
       </div>
@@ -45,7 +45,7 @@ const { page } = Astro.props;
     )
   }
 
-  <div class="flex justify-between">
+  <div class="flex justify-between" style="position: relative;">
     {
       page.url.prev ? (
         <a href={page.url.prev} class="btn btn-ghost my-10 mx-5">
@@ -85,4 +85,4 @@ const { page } = Astro.props;
       )
     }
   </div>
-</BaseLayout>
+</BackgroundLayout>

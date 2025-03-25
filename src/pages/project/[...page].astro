@@ -56,20 +56,20 @@ const { page } = Astro.props;
 ---
 
 <BackgroundLayout title="Projects" sideBarActiveItemID="project">
-  <div class="mb-5">
+  <div class="mb-5" style="position: relative;">
     <div class="text-3xl w-full font-bold">Projects</div>
   </div>
 
   {
     page.data.length === 0 ? (
-      <div class="bg-base-200 border-l-4 border-secondary w-full p-4 min-w-full">
+      <div class="bg-base-200 border-l-4 border-secondary w-full p-4 min-w-full" style="position: relative;">
         <p class="font-bold">Sorry!</p>
         <p>There are no projects to show at the moment. Check back later!</p>
       </div>
     ) : (
       <>
       {/* Render Featured Projects */}
-      <div class="mb-5">
+      <div class="mb-5" style="position: relative;">
         <div class="text-xl font-bold mb-2">Favorite Projects</div>
         <div class="text-xl mb-2">These are my favorite projects, showcasing my expertise and passion for computer graphics programming.</div>
         <ul>
@@ -92,7 +92,7 @@ const { page } = Astro.props;
       </div>
 
       {/* Render Academic Projects */}
-      <div class="mb-5">
+      <div class="mb-5" style="position: relative;">
         <div class="text-xl font-bold mb-2">Academic Projects</div>
         <div class="text-xl mb-2"> Projects completed during my Bachelor's degree, demonstrating my educational background and foundational skills.</div>
         <ul>
@@ -115,7 +115,7 @@ const { page } = Astro.props;
       </div>
 
       {/* Render Personal Projects */}
-      <div class="mb-5">
+      <div class="mb-5" style="position: relative;">
         <div class="text-xl font-bold mb-2">Personal Projects</div>
         <div class="text-xl mb-2">Projects developed in my free time, driven by curiosity and a desire to explore new technologies and technics.</div>
         <ul>
@@ -138,7 +138,7 @@ const { page } = Astro.props;
       </div>
 
       {/* Render Game Jam Projects */}
-      <div class="mb-5">
+      <div class="mb-5" style="position: relative;">
         <div class="text-xl font-bold mb-2">Game Jam Projects</div>
         <div class="text-xl mb-2">Fast-paced, collaborative projects created during game jams, highlighting my ability to work under tight deadlines and contribute to team efforts.</div>
         <ul>
@@ -203,4 +203,4 @@ const { page } = Astro.props;
       )
     }
   </div>
-</BaseLayout>
+</BackgroundLayout>
