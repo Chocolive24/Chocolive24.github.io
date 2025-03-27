@@ -5,6 +5,8 @@ import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
 import { ViewTransitions } from "astro:transitions";
 
+import { useEffect } from "react";
+
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
 const {
@@ -17,36 +19,96 @@ const {
 } = Astro.props;
 ---
 
+<script>
+  function setupVideo() {
+    const video = document.getElementById("background-video");
+
+    if (!video) return;
+
+    function saveVideoProgress() {
+      sessionStorage.setItem("videoTime", video.currentTime);
+    }
+
+    function restoreVideoProgress() {
+      const savedTime = sessionStorage.getItem("videoTime");
+      video.pause();
+      if (savedTime) {
+        video.currentTime = parseFloat(savedTime);
+        video.onseeked = () => {
+          video.style.opacity = "1";
+          video.play();
+        };
+      } else {
+        video.style.opacity = "1";
+      }
+    }
+
+    restoreVideoProgress();
+
+    // Save video progress before navigating away
+    window.addEventListener("beforeunload", saveVideoProgress);
+  }
+
+  if (!window.backgroundVideoInitialized) {
+    window.backgroundVideoInitialized = true;
+    setupVideo();
+  }
+</script>
+
 <!doctype html>
 <html lang="en" data-theme="synthwave">
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
-    {TRANSITION_API && <ViewTransitions />}
+    {ViewTransitions && <ViewTransitions />}
     <style>
-      .background-image {
-        position: relative;
-        background-image: url('ruby/gifs/showcase.gif?v=1'); /* Add a version query string */
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-      }
-
-      .background-image::before {
-        content: '';
-        position: absolute;
+    /* Initially hide the video */
+    .background-video-container {
+        position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(20, 10, 55, 0.7)/* Color with transparency */
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        overflow: hidden;
+        background-color: rgba(20, 10, 55, 0.7); /* Dark fallback color */
+      }
+
+      .background-video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        opacity: 0; /* Hide video initially */
+        transition: opacity 0.5s; /* ease-in-out */
+      }
+
+      /* Dark Overlay */
+      .background-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(20, 10, 55, 0.7);
+        z-index: -1;
       }
     </style>
   </head>
   <body>
-    <div class="background-image bg-base-100 drawer lg:drawer-open">
+    <!-- Persistent Video Background -->
+    <div id="background-video-wrapper">
+      <div class="background-video-container">
+        <video class="background-video" autoplay muted loop playsinline transition:persist id="background-video">
+          <source src="/index/background_showcase_720p.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="background-overlay"></div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="background-image drawer-content bg-base-100">
-        <Header title={SITE_TITLE} />
+      <div class="drawer-content bg-transparent">
+        <Header title={title} />
         <div class="md:flex md:justify-center">
           <main class="p-6 pt-10 lg:max-w-[1000px] max-w-[100vw] content">
             <slot />
@@ -58,4 +120,3 @@ const {
     </div>
   </body>
 </html>
-
