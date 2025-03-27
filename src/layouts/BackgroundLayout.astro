@@ -5,8 +5,6 @@ import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
 import { ViewTransitions } from "astro:transitions";
 
-import { useEffect } from "react";
-
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
 const {
@@ -27,10 +25,12 @@ const {
 
     function saveVideoProgress() {
       sessionStorage.setItem("videoTime", video.currentTime);
+      video.style.opacity = "0.0";
     }
 
     function restoreVideoProgress() {
       const savedTime = sessionStorage.getItem("videoTime");
+      video.style.opacity = "0.0";
       video.pause();
       if (savedTime) {
         video.currentTime = parseFloat(savedTime);
@@ -44,10 +44,12 @@ const {
     }
 
     restoreVideoProgress();
-
-    // Save video progress before navigating away
     window.addEventListener("beforeunload", saveVideoProgress);
   }
+
+  // document.addEventListener("astro:page-load", () => {
+  //   setupVideo(); // Reapply video logic when switching pages
+  // });
 
   if (!window.backgroundVideoInitialized) {
     window.backgroundVideoInitialized = true;
@@ -59,7 +61,7 @@ const {
 <html lang="en" data-theme="synthwave">
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
-    {ViewTransitions && <ViewTransitions />}
+    {TRANSITION_API && <ViewTransitions />}
     <style>
     /* Initially hide the video */
     .background-video-container {
@@ -77,8 +79,8 @@ const {
         width: 100vw;
         height: 100vh;
         object-fit: cover;
-        opacity: 0; /* Hide video initially */
-        transition: opacity 0.5s; /* ease-in-out */
+        /* opacity: 0;  */
+        transition: opacity 0.5s; 
       }
 
       /* Dark Overlay */
@@ -98,7 +100,7 @@ const {
     <div id="background-video-wrapper">
       <div class="background-video-container">
         <video class="background-video" autoplay muted loop playsinline transition:persist id="background-video">
-          <source src="/index/background_showcase_720p.mp4" type="video/mp4">
+          <source src="/index/background_showcase_720p.webm" type="video/webm">
         </video>
       </div>
       <div class="background-overlay"></div>
@@ -118,5 +120,8 @@ const {
       </div>
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
+
+   
+
   </body>
 </html>
