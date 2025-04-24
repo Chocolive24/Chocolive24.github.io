@@ -25,7 +25,7 @@ We decided to make a **Bullet Hell game** where you control a goat attached by a
 - Joey Gugler Art
 - Leonar Sadriu SFX and Music
 - Me: Code
-- Constantin Vérine: Code
+- Constantin Verine: Code
 - Remy Lambert: Code
 - Alexis Haldy: Code
 

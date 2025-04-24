@@ -198,7 +198,7 @@ We were 3 teams with different training on the Game Art, Audio and Game Programm
     - Dylan Fracheboud
 - **Game Programming Team:**
     - Remy Lambert : Product Owner, Game & Level Designer
-    - Constantin Vérine : Producer, Audio Programmer
+    - Constantin Verine : Producer, Audio Programmer
     - Olivier Pachoud  : Lead Game Programmer, Graphics Programmer & Tech Artist
     - Alexis Haldy Gameplay Programmer
 

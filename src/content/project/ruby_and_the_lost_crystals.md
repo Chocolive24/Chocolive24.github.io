@@ -35,7 +35,7 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 - **Me (Olivier Pachoud)  : Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist**
 
 Game Programming Team:
-  - Constantin Vérine: Audio Programmer
+  - Constantin Verine: Audio Programmer
   - Alexis Haldy: Refactoring, Debugging
 
 **Main Game Art Team:**
