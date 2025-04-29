@@ -58,7 +58,6 @@ When the **game ends**, the **winner gains elo points** and the **loser loses el
 </div>
 
 ## Network code documentation.
-
 If you are intersted in the network code I made for my game, you can check the documentation : <br>
 [turn-based game network code documentation](/network_api_doc/html/index.html)
 
@@ -66,7 +65,7 @@ If you are intersted in the network code I made for my game, you can check the d
 - The basics of network programming.
   - sending and receiving packets.
   - making and handling HTTP requests using FastAPI (in python) and SFML (in C++).
-  - The theoretical basis of network layers
+  - The theoretical basis of network layers.
 - Creating my own network protocol for gameplay.
 - Implementing a simple lobby system.
 - Using a SQL database through an Object-Relational Mapper (ORM).

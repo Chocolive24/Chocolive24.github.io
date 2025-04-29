@@ -7,7 +7,9 @@ tags: ["Physics", "Optimization", "C++", "Engine", "2D", "SAE"]
 ---
 
 Hello, welcome to this blog dedicated to optimization. I'm a Swiss student at the Sae Institute in Geneva and as part of a graded assignment, we've been asked to program a 2D physics engine and optimize a part of it. This specific part is the detection of intersections between colliders in trigger state. We have a scene containing physical bodies to which colliders are attached in trigger mode. The aim is to make this scene with a thousand circles run as smoothly as possible.<br>
+
 In this blog, I'm going to do some research to optimize my engine, show and explain them, and then do some statistical tests to prove that the changes I've made do indeed make the program faster.<br>
+
 The software I will use to profile my engine is "Tracy": https://github.com/wolfpld/tracy<br>
 I already implemented some ZoneScoped in my code to be able to see the hot path of my program in tracy. I will not teach you how tracy works so I let you check the documentation of Tracy if your interested by this software.
 
@@ -182,40 +184,84 @@ void World::detectColliderPairs() noexcept
 To demonstrate that the collider trigger system works, I've made a sample that instantiates objects with random velocities and trigger colliders. The objects are initially red and turn green when they overlap another object.<br>
 Let's take a look at how this sample runs with 3 different total numbers of colliders, once with 100 colliders, then 500 and finally with 1000 colliders. :<br>
 
-![100 circle colliders](physics_engine_opti/gifs/100Circles.gif width=250px height=200px) ![500 circle colliders](physics_engine_opti/gifs/500Circles.gif width=250px height=200px) ![1000 circle colliders](physics_engine_opti/gifs/1000Circles.gif width=250px height=200px)
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/physics_engine_opti/gifs/100Circles.gif" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>100 circle colliders</em></p></td>
+        <td><img src="/physics_engine_opti/gifs/500Circles.gif" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>500 circle colliders</em></p></td>
+        <td><img src="/physics_engine_opti/gifs/1000Circles.gif" width="300" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>1000 circle colliders</em></p></td>
+    </tr>
+    </table>
+</div>
 
 As you can see, the sample runs fine with 100 objects, is a bit slow with 500 objects and very slow with 1000 objects. From now and till the end of this blogpost I'll use the sample with 1000 objects as a reference to compare the execution speed of my program after each optimization I make. My goal is to run my sample with 1000 objects or more.
 
 Creation of a broad-phase.
 ==============================================================
 When it comes to detecting contact or overlap between bodies in a physics engine, two distinct phases stand out.<br>
+
 The first one is the broad phase which is the first stage of collision detection and serves the purpose of quickly reducing the number of potential collision pairs to a manageable subset.<br>
+
 The second one is the narrow phase which is the second stage of collision detection and is responsible for determining the precise details of the collisions between pairs of objects identified in the broad phase.<br>
+
 By now I only have a sort of narrow phase that checks each collider with each other. The current complexity of my function is O(n^2). Let's try to reduce this complexity by removing the pairs that for sure will never overlap.
 
 Sub-dividing the world with a quad-tree.
 --------------------------------------------------------------
 For the moment, I'm comparing each collider with each other, even if they're far apart. It means that if a collider is in the bottom-left-corner of the world space and another one is in the up-right-corner, my function would compare them. But it is cleary uneccassary to check this pair.
 
-![Example where it's unecessary to check for an overlap](physics_engine_opti/images/farAwayCircles.png height=300px)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/farAwayCircles.png"/>
+  <p style="margin-top: -30px"><em>Example where it's unecessary to check for an overlap.</em></p>
+</div>
 
 It would be nice if I compare only the colliders that are in a same zone of the world space. So I need to subdivide the world space to have less check to do.<br>
 One way to do it is to subdivide the current world space in 4 subspaces and then compare only colliders in their subspace with other colliders in that subspace.
 
-![Here the colliders are in different subspaces so I don't check if they overlap](physics_engine_opti/images/2CirclesInDifferentZones.png height=300px) ![Here I only check if the colliders in the zone 2 overlap](physics_engine_opti/images/2CirclesInZone2.png height=300px)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/2CirclesInDifferentZones.png"/>
+  <p style="margin-top: -30px"><em>Here the colliders are in different subspaces so I don't check if they overlap.</em></p>
+</div>
+
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/2CirclesInZone2.png"/>
+  <p style="margin-top: -30px"><em>Here I only check if the colliders in the zone 2 overlap.</em></p>
+</div>
 
 Okay that's cool, like that I avoid unessary checks. At least as long as there aren't too many colliders in the same zone.
 
-![Here there are 4 colliders in zone 2, which makes me want to redivide this zone into 4 subspaces](physics_engine_opti/images/4CirclesInZone2.png height=300px)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/4CirclesInZone2.png"/>
+  <p style="margin-top: -30px"><em>Here there are 4 colliders in zone 2, which makes me want to redivide this zone into 4 subspaces.</em></p>
+</div>
 
 To be more efficient, I can subdivide the world recursively to have as few comparisons as possible. It will greatly reduces the number of potential collider pair to manage.<br>
 This method of space subdivision is called "quad-tree". I can represent a quad-tree as a tree with a root node with 4 children nodes that have 4 children nodes too etc recursively:
 
-![Here I recursively subdivided the space in function of the position of the colliders.<br> In this specific case the number of collider pair to check is equal to 0<br> because each collider is in a different subspace.](physics_engine_opti/images/RecursiveSubDivision.png height=300px) ![Quad-tree representation](physics_engine_opti/images/quadTree.png width=500px height=300px)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/RecursiveSubDivision.png"/>
+  <p style="margin-top: -30px"><em>Here I recursively subdivided the space in function of the position of the colliders.<br> In this specific case the number of collider pair to check is equal to 0<br> because each collider is in a different subspace.</em></p>
+</div>
+
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/quadTree.png"/>
+  <p style="margin-top: -30px"><em>Quad-tree representation.</em></p>
+</div>
 
 Before implementing a quad-tree in my engine, there is a last thing to take in considereration. It is the case where two colliders are perfectly between several sub-spaces. If I add them in each of the subspaces they touch, I'll check them several times in several subspaces. This would duplicate the pair in the different nodes and give us a bad result. That's why, in this case, it's better to add these colliders to the parent node.
 
-![Special case: Here there are colliders between the zone 1 and 3.<br> If I put them in both zone 1 and zone 3 there would be a duplication of the pair.](physics_engine_opti/images/SpecialCaseBlack.png height=300px) ![Instead I put them in the parent node, here it is the node 0](physics_engine_opti/images/SpecialCase.png height=300px)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/SpecialCaseBlack.png"/>
+  <p style="margin-top: -30px"><em>Special case: Here there are colliders between the zone 1 and 3.<br> If I put them in both zone 1 and zone 3 there would be a duplication of the pair.</em></p>
+</div>
+
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/SpecialCase.png"/>
+  <p style="margin-top: -30px"><em>Instead I put them in the parent node, here it is the node 0.</em></p>
+</div>
 
 Well, I don't think I've forgotten anything. I'll try to implement a quad-tree in my program.
 
@@ -386,12 +432,15 @@ struct SimplifiedCollider
 };
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-![representation of simplified colliders to detect in which node I have to insert them](physics_engine_opti/images/SimplifiedColliders.png height=300px)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/SimplifiedColliders.png"/>
+  <p style="margin-top: -30px"><em>representation of simplified colliders to detect in which node I have to insert them.</em></p>
+</div>
 
 I use 2 methods to insert colliders. A public method that takes a simplified collider and inserts it into the root node. This ensures that I never insert a collider anywhere other than the first node.<br>
 The other method is private and will be called recursively to insert colliders in the correct subspaces if they have been created.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 void QuadTree::Insert(Math::RectangleF simplifiedShape, ColliderRef colliderRef) noexcept
 {
     insertInNode(*_rootNode, simplifiedShape, colliderRef, 0);
@@ -659,17 +708,34 @@ Statistics after broad phase implementation
 So let's compare the old sample without the quad-tree and the new one with the quad-tree.<br>
 I created a function that draws the quad-tree by going down in each node recursively and that draws its boundary. You can check the sample's source code to see how I did if you want to do it too: https://github.com/Chocolive24/PhysicsEngine/blob/master/samples/src/TriggerColliderSample.cpp
 
-![1000 colliders without quad-tree](physics_engine_opti/gifs/1000Circles.gif width=250px height=200px) ![1000 colliders with quad-tree](physics_engine_opti/gifs/QuadTreeUniquePtr.gif width=250px height=200px) 
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/physics_engine_opti/gifs/1000Circles.gif" width="350" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>1000 colliders without quad-tree.</em></p></td>
+        <td><img src="/physics_engine_opti/gifs/QuadTreeUniquePtr.gif" width="350" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>1000 colliders with quad-tree.</em></p></td>
+    </tr>
+    </table>
+</div>
 
 Visually, there's a huge difference since the implementation of the quad-tree. Let's compare the values of these two samples with tracy and calculate how much faster the second version is.
 
-![One frame of the version without broad phase.](physics_engine_opti/images/noBroadFrame.png width) ![One frame of the version with broad phase.](physics_engine_opti/images/QuadTreeUniquePtrFrame.png)<br><br>
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/noBroadFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame of the version without broad phase.</em></p>
+</div>
+
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/QuadTreeUniquePtrFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame of the version with broad phase.</em></p>
+</div>
 
 | Sample              | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 | --------------------|-----------|--------------|--------------|-------------|
 | without broad phase |748.86     |  758.77      |   132.85     | 14          |
 | with broad phase    |27.57      |  27.25       |   3.41       | 203         |
-[Table: Comparisons of narrow-phase statistics between the non-quad-tree and quad-tree versions.]
+<p style="margin-top: -30px"><em>Table: Comparisons of narrow-phase statistics between the non-quad-tree and quad-tree versions.</em></p>
 
 The above values can be obtained directly using Tracy. However, we can't say with these values if there is a significant difference between the means of two groups, although here the result seems fairly obvious given the huge difference between the statistics.
 Normally, to prove that there is a significant difference, we need to use the student t-test. This test compares two groups and assesses whether the observed differences between them are likely due to random chance or if they are statistically significant.
@@ -678,7 +744,7 @@ The t-test defines a P value, usually at 5%, which is the probability that the n
 | P(T<=t) two-tail |
 |------------------|
 | 2.33e-17         |
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 The "P" result of the T-Test proves that the probability that the version without broad phase is better is extremely close to 0. This tells us that there is indeed a significant time difference between the two versions, but it doesn't tell us by how much.<br> 
 To know the magnitude of this difference, we need to calculate the confidence interval. This is a range of values within which we are reasonably sure the true population parameter lies. This will show us how much time we save by making our broad phase between the worst and best cases.
@@ -686,7 +752,8 @@ To know the magnitude of this difference, we need to calculate the confidence in
 | Mean Difference (ms) | Standard error (ms) | Margin of error (ms) | Lower limit (ms) | Greater Limit (ms) |
 |----------------------|---------------------|----------------------|------------------|--------------------|
 |753.6127898           |  12.37144189        |   26.72687524        | 726.8859145      | 780.339665         |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 The confidence interval therefore lies between 726 ms and 780 ms. This means that in the worst case, we gain 726 ms with the broad phase, and in the best case, 780 ms. We've proved that this addition statistically improves the program.
 
@@ -698,7 +765,10 @@ The three main part in the broad phase are:
 - Insert colliders in the quad-tree.
 - Calculate all possible pairs of colliders.
 
-![The broad phase functions in a frame.](physics_engine_opti/images/QuadTreeUniquePtrFrame.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/QuadTreeUniquePtrFrame.png"/>
+  <p style="margin-top: -30px"><em>The broad phase functions in a frame.</em></p>
+</div>
 
 Here is the different execution time of each part of the broad phase:
 
@@ -707,7 +777,7 @@ Here is the different execution time of each part of the broad phase:
 | Clear               |0.123      |  0.102       |   0.063      | 203         |
 | Insert colliders    |3.23       |  3.17        |   0.494      | 203         |
 | Calculate pairs     |2.59       |  2.53        |   0.477      | 203         |
-[Table: Statistics of each part of the broad phase]
+<p style="margin-top: -30px"><em>Table: Statistics of each part of the broad phase.</em></p>
 
 The longest part is the "Insert" one. So let's analyse and investigate it. Perhaps there is something to do with the allocations of that part of the quad-tree.
 
@@ -715,7 +785,10 @@ Memory usage optimization
 --------------------------------------------------------------
 If we take a closer look at the "Insert" section, which is the longest, we see that there is a lot of allocations. There is a high number of deallocation in the clear part and a lot of allocation in the insert part. It because we are deleting and recreating unique pointers each time. This as a cost:
 
-![The allocation pattern of the broad phase.](physics_engine_opti/images/UniquePtrAllocation.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/UniquePtrAllocation.png"/>
+  <p style="margin-top: -30px"><em>The allocation pattern of the broad phase.</em></p>
+</div>
 
 This allocations are made at each frame when we create the children nodes:<br>
 
@@ -846,7 +919,10 @@ void QuadTree::Clear() noexcept
 
 Let's see if I have shortened the execution time of these various functions:
 
-![One frame after the pre-allocation of data in the quad-tree.](physics_engine_opti/images/PreAllocFrame.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/PreAllocFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame after the pre-allocation of data in the quad-tree.</em></p>
+</div>
 
 There is cleary less allocations as you can see on the image. I removed the large portion of allocations that formed a "V" at the beginning of the frame. Let's analyse the statistics of the version 1 of the sample (without pre-allocation) and the version 2 (with pre-allocation):
 
@@ -858,14 +934,14 @@ There is cleary less allocations as you can see on the image. I removed the larg
 |  Version 2          | Insert colliders    |1.84       |  1.73        |   0.488      | 178         |
 |  Version 1          | Calculate pairs     |2.59       |  2.53        |   0.477      | 203         |
 |  Version 2          | Calculate pairs     |1.58       |  1.49        |   0.466      | 178         |
-[Table: Statistics of each part of the broad phase before and after the pre-allocation changes.]
+<p style="margin-top: -30px"><em>Table: Statistics of each part of the broad phase before and after the pre-allocation changes.</em></p>
 
 | Function name    | P(T<=t) two-tail |
 |------------------|------------------|
 | Clear            | 1.42e-64         |
 | Insert colliders | 1.99e-129        |
 | Calculate pairs  | 8.49E-100        |
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 The t-test tells us that each of the part of the broad phase has a significant difference as each value tends towards 0. So let's see what that difference is:
 
@@ -874,13 +950,17 @@ The t-test tells us that each of the part of the broad phase has a significant d
 | Clear            |0.111309962           |  0.004471630267     |   0.008815035396     | 0.1024949266     | 0.1201249974       |
 | Insert colliders |1.395021166           |  0.03710855138      |   0.0729662906       | 1.322054876      | 1.467987457        |
 | Calculate pairs  |1.009585563           |  0.03418671197      |   0.06722225855      | 0.9423633045     | 1.076807822        |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 Note that the "Insert colliders" and "Calculate pairs" sections are about 1ms faster, which isn't too bad. The "Clear" function, on the other hand, doesn't save much time, although 100 microseconds is already sufficient.
 
 The results are good, but if you look at the frame image, there are still a few allocations being made at the beginning of the broad phase.
 
-![The calls to the "Insert" function zoomed.](physics_engine_opti/images/remainColAlloc.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/remainColAlloc.png"/>
+  <p style="margin-top: -30px"><em>The calls to the "Insert" function zoomed.</em></p>
+</div>
 
 I think that I have a new goal. Let's try to remove those allocations.
 
@@ -966,7 +1046,10 @@ for (const auto& col : remainingColliders)
 
 Let's open Tracy and see if we've solved the problem:
 
-![The call to the "Insert" function zoomed after replacing vector with array.](physics_engine_opti/images/remainArray.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/remainArray.png"/>
+  <p style="margin-top: -30px"><em>The call to the "Insert" function zoomed after replacing vector with array.</em></p>
+</div>
 
 There are still a few allocations, but far fewer than before. The few remaining allocations are due to the fact that the deepest nodes will have a collision vector greater than the maximum number of colliders a node can contain before subdividing. This quantity therefore exceeds that reserved at the start of the program.<br>
 Let's see if this change reduces the execution time of the Insert function:<br>
@@ -976,17 +1059,18 @@ Note that the values are in nanoseconds because this is a very small function an
 |---------------------------------|-----------|--------------|--------------|-------------|
 | with vector                     |149        |  68          |   717        | 200         |
 | with array                      |117        |  72          |   1039       | 178         |
-[Table: Comparisons of narrow-phase statistics between the non-quad-tree and quad-tree versions.]
+<p style="margin-top: -30px"><em>Table: Comparisons of narrow-phase statistics between the non-quad-tree and quad-tree versions.</em></p>
 
 |P(T<=t) two-tail |
 |-----------------|
 |2.81e-20         | 
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 | Mean Difference (ns) | Standard error (ns) | Margin of error (ns) | Lower limit (ns) | Greater Limit (ns) |
 |----------------------|---------------------|----------------------|------------------|--------------------|
 |794.3585859           |  78.3347616         |   154.3280979        | 640.030488       | 948.6866837        |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 We save between 600 and 950 nanoseconds, which isn't too bad for a small function like this. It was worth it to remove these allowances. It also makes the code more real time safe.
 
@@ -999,16 +1083,18 @@ I think I've really improved my broad phase. Let's compare the statistics betwee
 |---------------------|-----------|--------------|--------------|-------------|
 |  First version      | 3.37      |  3.31        |   0.494      | 200         |
 |  Last version       | 2.16      |  2.06        |   0.596      | 178         |
+<p style="margin-top: -30px"><em>Table: Comparisons of the first and last version of the broad phase.</em></p>
 
 |P(T<=t) two-tail |
 |-----------------|
 |1.14e-58         | 
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 | Mean Difference (ms) | Standard error (ms) | Margin of error (ms) | Lower limit (ms) | Greater Limit (ms) |
 |----------------------|---------------------|----------------------|------------------|--------------------|
 |1.246780332           |  0.04787696109      |   0.09457076147      | 1.152209571      | 1.341351094        |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 Overall, I was able to save 1.2ms by better managing memory and allocations in my quad-tree. That's not too bad for a function that's called every frame. What's more, the code is more real time safe this way. I'm satisfied with the result for the broad phase. Now let's look at what we can do with the narrow phase.
 
@@ -1016,12 +1102,15 @@ Reduce narrow-phase execution.
 ==============================================================
 Now that the broad phase is fine as it is, let's take a closer look at the narrow phase:
 
-![One frame traced with tracy](physics_engine_opti/images/UnorderedFrame.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/UnorderedFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame traced with tracy.</em></p>
+</div>
 
 | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 |-----------|--------------|--------------|-------------|
 | 18.5      |  18.62       |   7.47       | 381         |
-[Table: resolveNarrowPhase function statistics.]
+<p style="margin-top: -30px"><em>Table: resolveNarrowPhase function statistics.</em></p>
 
 18ms to resolve the narrow phase is really too much. I need to find a way to reduce the time this part of the engine takes. As you can see, the unordered_set does a lot of allocations and deallocations. Is there a cheaper alternative?
 
@@ -1169,22 +1258,27 @@ _colliderPairs = newPairs;
 
 Let's look at the statistics to see if our change is profitable:
 
-![One frame using a vector instead of an unordered_set.](physics_engine_opti/images/VectorFrame.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/VectorFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame using a vector instead of an unordered_set.</em></p>
+</div>
 
 | resolveNarrowPhase  | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 |---------------------|-----------|--------------|--------------|-------------|
 |  First version      | 18.5      |  18.62       |   7.47       | 381         |
 |  Last version       | 7.95      |  7.85        |   1.29       | 515         |
+<p style="margin-top: -30px"><em>Table: Comparison of the first and last version of the narrow phase.</em></p>
 
 |P(T<=t) two-tail |
 |-----------------|
 |3.30e-92         | 
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 | Mean Difference (ms) | Standard error (ms) | Margin of error (ms) | Lower limit (ms) | Greater Limit (ms) |
 |----------------------|---------------------|----------------------|------------------|--------------------|
 |10.55676636           |  0.38869982         |   0.7641910525       | 9.792575305      | 11.32095741        |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 
 We notice a huge difference in time between the two versions of the narrow phase. Already thanks to the value of the t-test which proves it but above all thanks to the limits of the confidence interval which shows the time saving of around 10ms.<br>
@@ -1196,13 +1290,19 @@ To find an element in a data structure such as the vector, you have to go throug
 
 I used tracy's "ZoneValue" option to display the size of my possible pair vector coming out of the quad-tree:
 
-![The number of pairs over which the narrow phase iterate on a frame -> 98502](physics_engine_opti/images/100000Pairs.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/100000Pairs.png"/>
+  <p style="margin-top: -30px"><em>The number of pairs over which the narrow phase iterate on a frame -> 98502.</em></p>
+</div>
 
 I need to find a way to filter out pairs that really have overlap potential in the quad-tree.<br>
 Currently the quad-tree works as follows:
 The colliders of the parent nodes are compared with all the colliders of the child nodes. However, most of these comparisons are useless because the collider in question can be very far from the colliders of child nodes. Maybe it's easier to understand with a diagram:
 
-![Case where I generate useless pairs](physics_engine_opti/images/OptiCase.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/OptiCase.png"/>
+  <p style="margin-top: -30px"><em>Case where I generate useless pairs.</em></p>
+</div>
 
 So to avoid creating useless pairs, I can only interest the pair of colliders which have their simplified shape which overlaps. 
 This way we avoid a large number of unnecessary comparisons and can reduce my memory accesses:
@@ -1245,7 +1345,10 @@ for (const auto& nodeSimplCol : node.Colliders)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 Let's look at how many possible pairs are generated now:
 
-![The new number of pairs over which the narrow phase iterate on a frame -> 2184](physics_engine_opti/images/2184Pairs.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/2184Pairs.png"/>
+  <p style="margin-top: -30px"><em>The new number of pairs over which the narrow phase iterate on a frame -> 2184.</em></p>
+</div>
 
 Oh wow, this significantly reduces memory accesses. It's time to do the statistical tests to see how much time this saves us:
 
@@ -1253,16 +1356,18 @@ Oh wow, this significantly reduces memory accesses. It's time to do the statisti
 |---------------------|-----------|--------------|--------------|-------------|
 |  previous version   | 7.95      |  7.85        |   1.29       | 515         |
 |  new version        | 1.45      |  1.27        |   0.506      | 1291        |
+<p style="margin-top: -30px"><em>Table: Comparison of the previous and new version of the narrow phase.</em></p>
   
 |P(T<=t) two-tail |
 |-----------------|
 |0                | 
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 | Mean Difference (ms) | Standard error (ms) | Margin of error (ms) | Lower limit (ms) | Greater Limit (ms) |
 |----------------------|---------------------|----------------------|------------------|--------------------|
 |6,488111856           |  0.05908054316      |   0.1160378747       | 6.372073981      | 6.60414973         |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 The t-test returns the value 0. That says it all. There is no way that the previous version would be faster than the current one. The time saving is estimated at around 6.45ms with a very small margin of error. We have therefore indeed shortened the time taken by the narrow phase.
 
@@ -1270,22 +1375,27 @@ Final state of the narrow phase.
 --------------------------------------------------------------
 We have greatly improved the execution speed of the narrow phase. Let's analyze the statistical differences between the first implementation of the narrow phase and the last.
 
-![One frame with the final version of the narrow phase](physics_engine_opti/images/FullOptiFrame.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/FullOptiFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame with the final version of the narrow phase.</em></p>
+</div>
 
 | resolveNarrowPhase   | Mean (ms) | Median (ms)  | Std dev (ms) | Observations|
 |---------------------|-----------|--------------|--------------|-------------|
 |  First version      | 18.5      |  18.62       |   7.47       | 381         |
 |  Last version       | 1.45      |  1.27        |   0.506      | 1291        |
+<p style="margin-top: -30px"><em>Table: Comparison of the first and last version of the narrow phase.</em></p>
 
 |P(T<=t) two-tail |
 |-----------------|
 |1.08e-150        | 
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 | Mean Difference (ms) | Standard error (ms) | Margin of error (ms) | Lower limit (ms) | Greater Limit (ms) |
 |----------------------|---------------------|----------------------|------------------|--------------------|
 |17.02925156           |  0.3861128878       |   0.7592111286       | 16.27004043      | 17.78846269        |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 We can see that the narrow phase has been greatly improved. By choosing a less expensive data structure and having optimized the number of memory accesses, we were able to reduce the duration of the narrow phase by 16ms.
 
@@ -1293,12 +1403,28 @@ Conclusion
 ==============================================================
 Let's compare the state of the program before and after the optimizations applied to it:
 
-![1000 circle colliders before optimizations.](physics_engine_opti/gifs/1000Circles.gif width=250px height=200px) ![1000 circle colliders after optimizations.](physics_engine_opti/gifs/FullOpti.gif width=250px height=200px)
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td><img src="/physics_engine_opti/gifs/1000Circles.gif" width="350" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>1000 circle colliders before optimizations.</em></p></td>
+        <td><img src="/physics_engine_opti/gifs/FullOpti.gif" width="350" style="border: 1px solid black;">
+        <p style="margin-top: -30px"><em>1000 circle colliders after optimizations.</em></p></td>
+    </tr>
+    </table>
+</div>
 
 GIFs are at 30 fps, so it's hard to tell whether the right-hand version is actually fluid. So let's have a look at some frame images from Tracy:
 
-![One frame of the version without optimizations.](physics_engine_opti/images/noBroadFrame.png) 
-![One frame with the final version of the narrow phase](physics_engine_opti/images/FullOptiFrame.png)
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/noBroadFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame of the version without optimizations.</em></p>
+</div>
+
+<div style="text-align:center">
+  <img src="/physics_engine_opti/images/FullOptiFrame.png"/>
+  <p style="margin-top: -30px"><em>One frame with the final version of the narrow phase.</em></p>
+</div>
 
 Let's take a look at the time saved when executing the world's "Update" function:
 
@@ -1306,16 +1432,18 @@ Let's take a look at the time saved when executing the world's "Update" function
 |-----------------------|-----------|--------------|--------------|-------------|
 | without optimizations | 792.32    |  828.95      |  157.16      | 16          |
 | with optimizations    | 2.64      |  2.44        |  0.622       | 1291        |
+<p style="margin-top: -30px"><em>Table: Comparison of the first and last version of the world update.</em></p>
 
 |P(T<=t) two-tail |
 |-----------------|
 |1.20e-23         | 
-[Table: Student T-Test Values using P = 5%.]
+<p style="margin-top: -30px"><em>Table: Student T-Test Values using P = 5%.</em></p>
 
 | Mean Difference (ms) | Standard error (ms) | Margin of error (ms) | Lower limit (ms) | Greater Limit (ms) |
 |----------------------|---------------------|----------------------|------------------|--------------------|
 |808.3191733           |  23.20918389        |   47.70716026        | 760.612013       | 856.0263335        |
-[Table: Difference of means and confidance interval (confidence level 95%) [lower limit ; greater limit]]
+<p style="margin-top: -30px"><em>Table: Difference of means and confidance interval (confidence level 95%)<br>
+[lower limit ; greater limit].</em></p>
 
 With all the changes made to my engine I saved between 760ms and 856ms. I'm satisfied with the result.
 The main factors making my program slow were memory allocations and accesses. I was able to save a lot of time on my frames by allocating as much memory as possible at the start of the program to avoid allocating as much as possible during the update. I was also able to save a lot of time by doing a bigger sort on the colldier pairs I was generating, which shortened the time spent searching for data in memory. As a result, my code is more real time safe and, above all, much faster to execute. 
