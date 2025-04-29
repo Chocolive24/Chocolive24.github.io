@@ -31,7 +31,7 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 ## Organisation Chart
 
 **Main Game Programming Team:**
-- **Remy Lambert : Project Co-leader, Product Owner, Game & Level Designer**
+- **Remy Lambert : Project Co-leader, Product Owner, Game Programmer & Level Designer**
 - **Me (Olivier Pachoud)  : Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist**
 
 Game Programming Team:
@@ -91,11 +91,3 @@ Here is a **gameplay** video of the game:
 - Using AI to create concepts and creative ideas
 - Polishing a game
 - Pitching a game
-
-
-<!-- ## Blog Post  
-The games programming team has written a blog post to give an update on the development of the project:  [Read it here](/blog/ruby-and-the-lost-crystals-project-debrief)
-
-I wrote another blog post about my graphics stylisation process on the game:  [Read it here](/blog/my-stylization-process-for-ruby-and-the-lost-crystals-using-a-physically-based-cel-shader)
-
-Finally I wrote a post-mortem:  [Read it here](/blog/ruby-and-the-lost-crystals-post-mortem) -->
