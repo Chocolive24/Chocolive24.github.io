@@ -134,34 +134,36 @@ const blogs = await getCollection("blog");
   </main>
   
     {/* Fetch Related Blog Posts */}
-    {relatedBlogs && relatedBlogs.length > 0 && (
-      <section class="max-w-[750px] mt-8">
-        <h2 class="text-3xl font-bold mb-8">Related Blog Posts</h2>
-        
-        {relatedBlogs.map((post_title) => {
-          // Find the post with a matching title from all_posts
-          const relatedPost = blogs.find((post) => {
-            return post.data.title === post_title;
-          });
+{relatedBlogs && relatedBlogs.length > 0 && (
+  <section class="max-w-[750px] mt-8">
+    <h2 class="text-3xl font-bold mb-8">Related Blog Posts</h2>
 
-          // If the post exists, render it
-          if (relatedPost) {
-            return (
-              <HorizontalCard
-                key={relatedPost.data.slug}
-                title={relatedPost.data.title}
-                img={relatedPost.data.heroImage}
-                desc={relatedPost.data.description}
-                url={"/blog/" + createSlug(relatedPost.data.title, relatedPost.slug)}
-                badge={relatedPost.data.badge}
-                tags={relatedPost.data.tags}
-              />
-            );
-          } else {
-            return null; // If no match is found, render nothing
-          }
-        })}
-      </section>
+    <div class="space-y-3">
+      {relatedBlogs.map((post_title) => {
+        // Find the post with a matching title from all_posts
+        const relatedPost = blogs.find((post) => {
+          return post.data.title === post_title;
+        });
+
+        // If the post exists, render it
+        if (relatedPost) {
+          return (
+            <HorizontalCard
+              key={relatedPost.data.slug}
+              title={relatedPost.data.title}
+              img={relatedPost.data.heroImage}
+              desc={relatedPost.data.description}
+              url={"/blog/" + createSlug(relatedPost.data.title, relatedPost.slug)}
+              badge={relatedPost.data.badge}
+              tags={relatedPost.data.tags}
+            />
+          );
+        } else {
+          return null; // If no match is found, render nothing
+        }
+      })}
+    </div>
+  </section>
 )}
   
 </BaseLayout>

@@ -7,7 +7,19 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: 'https://chocolive24.github.io/',
   sitemap: {
-      hostname: 'https://chocolive24.github.io/',
+    hostname: 'https://chocolive24.github.io/',
   },
-  integrations: [mdx(), sitemap(), tailwind()]
+  integrations: [mdx(), sitemap(), tailwind()],
+  vite: {
+    server: {
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url && req.url.endsWith('.pdf')) {
+            res.setHeader('Content-Type', 'application/pdf');
+          }
+          next();
+        });
+      },
+    },
+  },
 });
