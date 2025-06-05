@@ -23,7 +23,7 @@ The **goal** was to create a **space shooter game** in **C++** with **SFML** as 
 
 ## Showcase
 Here is a gameplay video:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/cUDuVuuGcgM?si=EaIgB-Wb62VI0c6b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/cUDuVuuGcgM?si=EaIgB-Wb62VI0c6b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - The basics of C++ Programming

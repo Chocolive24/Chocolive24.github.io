@@ -80,7 +80,7 @@ The challenge of working with Unreal’s default graphics pipeline is that achie
 My primary reference for this decision and its technical implementation was Visual Tech Art’s video "Physically Based Cel Shading." It explains the challenges and constraints of creating a cel shader in Unreal while highlighting why most online resources fail to address all the necessary issues.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width="750" height="420" 
+    <iframe width="100%" height="420" 
         src="https://www.youtube.com/embed/eBS3BOI5KnM?si=-U11Qf4FGsl114r4" 
         title="YouTube video player" frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -96,7 +96,7 @@ My primary reference for this decision and its technical implementation was Visu
 To adhere to Unreal’s physically based rules, the first step is to properly set up the lighting and tonemapper. I based my approach on insights shared by Eros Dadoli, an Associate Lead Lighting Artist at Massive Entertainment A Ubisoft Studio, who was interviewed by Visual Tech Art.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width="750" height="420" 
+    <iframe width="100%" height="420" 
         src="https://www.youtube.com/embed/vbMvkEITTmo?si=WCXQfevQoFLW_oz2" 
         title="YouTube video player" frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -173,7 +173,7 @@ To create the characteristic color bands of a cel shader while preserving realis
 Once we have the EV values, the goal is to generate the color bands by quantizing them, rounding them to the nearest integer before converting them back into a brightness intensity. This is done by using the quantized EV values as exponents of a power of two, effectively reconstructing the light intensity in discrete steps, mimicking the banding effect of a cel shader while respecting physically based lighting principle.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width=750 height=660 
+    <iframe width=100% height=660 
         src="https://blueprintue.com/render/eevfpyq5/" 
         scrolling="no" allowfullscreen >
     </iframe>
@@ -190,7 +190,7 @@ Once we have the EV values, the goal is to generate the color bands by quantizin
 Next, we restore the original colors by dividing each pixel's value by its initial luminosity and then multiplying it by the calculated luminosity intensity. Additionally, we can control the number of color bands per EV value to adjust the level of quantization.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width=750 height=660 
+    <iframe width=100% height=660 
         src="https://blueprintue.com/render/flz82s0p/" 
         scrolling="no" allowfullscreen >
     </iframe>
@@ -210,7 +210,7 @@ Now that we know how to create color bands without breaking the scene luminosity
 First let’s remove the base color from the image to get the luminosity value as before but this time with pure color information including its color. This is done by dividing the pixel value by its base color. Then let’s break it up into its components but this time in HSV (Hue, Saturation, Value/Brightness). 
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width=750 height=660 
+    <iframe width=100% height=660 
         src="https://blueprintue.com/render/21d4atu5/" 
         scrolling="no" allowfullscreen >
     </iframe>
@@ -242,7 +242,7 @@ The second one simply blends back in a tiny bit of the original brightness value
 </div>
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width=750 height=660 
+    <iframe width=100% height=660 
         src="https://blueprintue.com/render/wn8uluiu/" 
         scrolling="no" allowfullscreen >
     </iframe>
@@ -269,7 +269,7 @@ We can see on the left image that the character isn't really stylized because th
 Finally I added a Rim light effect on the metallic objects, highlighting their top part and shading their bottom part. To do so I created a fresnel mask to separate parts which will receive fake reflection from parts which will be darkened. This mask is then multiplied by the scene texture metallic value to calculate the final value which will add or remove some EV from the base one resulting in brighter or darker areas.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width=750 height=660 
+    <iframe width=100% height=660 
         src="https://blueprintue.com/render/8t5mdq92/" 
         scrolling="no" allowfullscreen >
     </iframe>
@@ -301,7 +301,7 @@ What I did on the hue to increase the stylised look is to reduce the number of c
 </div>
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width=750 height=660 
+    <iframe width=100% height=660 
         src="https://blueprintue.com/render/8u_0fw38/" 
         scrolling="no" allowfullscreen >
     </iframe>
@@ -320,7 +320,7 @@ What I did on the hue to increase the stylised look is to reduce the number of c
 The outline is an excellent addition to the stylization of a graphical render. I decided to continue working in post-processing by applying a Circular Laplacian Filter algorithm, using Visual Tech Art’s video, “Outline Stylized Material”, as a reference. I won’t present the implementation here, as it would require an entire blog post, but rather focus on how I integrated it into my cel shader.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width="750" height="420" 
+    <iframe width="100%" height="420" 
         src="https://www.youtube.com/embed/Ptuw9mxekh0?si=33dMZpcCPqBXJcPF" 
         title="YouTube video player" frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -354,7 +354,7 @@ The idea for cross hatching came directly from Nicolas Vallée. He suggested thi
 I opted for procedural hatching rather than simply applying a texture to the shadows. This approach gave me full control over the number of lines, their thickness, and their color. Furthermore, I applied the effect in screen space to simulate the idea that someone had drawn over the game image with a pencil during post-processing. My research once again led me to a Visual Tech Art video, which greatly helped me during the creation process. I encourage you to watch it if you’re interested in understanding the underlying algorithms.
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width="750" height="420" 
+    <iframe width="100%" height="420" 
         src="https://www.youtube.com/embed/3Q6Ik1V75I8?si=Zk2dE9PQiU0AbRpH" 
         title="YouTube video player" frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -369,7 +369,7 @@ I encountered a challenge because the shader in the video worked only in black a
 
 
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <iframe width=750 height=660 
+    <iframe width=100% height=660 
         src="https://blueprintue.com/render/nejq88ds/" 
         scrolling="no" allowfullscreen >
     </iframe>

@@ -25,7 +25,7 @@ I decided to make a **platform game where gravity can go in all directions**. Th
 
 ## Showcase
 Here is a short gameplay video:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/s95d7DD5NvE?si=gSRjdner6eDXUoiz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/s95d7DD5NvE?si=gSRjdner6eDXUoiz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - The Basics of Unity Programming

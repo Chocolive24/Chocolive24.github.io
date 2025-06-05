@@ -28,7 +28,7 @@ We decided to make a **Tower Defence game** where, **instead of playing the stra
 
 ## Showcase
 Here is a short showcase video:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/W2wsck70J7U?si=BVcmhjlSSfAYBel5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/W2wsck70J7U?si=BVcmhjlSSfAYBel5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - To work under the stress of timing

@@ -31,7 +31,7 @@ The **result** was a **game** that took **6 hours** to make, where you simply ha
 
 ## Showcase
 Here is a short showcase video (Screamer Warning ! although not terrifying): 
-<iframe width="750" height="420" src="https://www.youtube.com/embed/Q1-N4XeqMns?si=AHQd9skOd9t0BOEF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/Q1-N4XeqMns?si=AHQd9skOd9t0BOEF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - To work under the stress of timing

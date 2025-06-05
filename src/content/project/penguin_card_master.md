@@ -29,7 +29,7 @@ For the game, I decided to make a **rogue lite deck builder with turn-based comb
 
 ## Showcase
 Here is a **gameplay** video of my game:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/PDqA6sDO2w4?si=_1s4FAUVp0fVSD3q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/PDqA6sDO2w4?si=_1s4FAUVp0fVSD3q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Procedural Generation
 My **procedural generation algorithm** is **inspired** by the one of **"The Binding of Isaac"**, which takes the form of the **dungeons** in the **2D Zelda games**. In short, it's a set of square rooms that connect to each other. **Several rooms** are special - there's always a **shop** and a **boss** on each floor, and a few other special rooms are also chosen at random.
@@ -37,7 +37,7 @@ My **procedural generation algorithm** is **inspired** by the one of **"The Bind
 To understand and implement the algorithm for the Binding of Isaac game I took **inspiration** from the **blog post** by ‘BorisTheBrave’: [Read it here](https://www.boristhebrave.com/2020/09/12/dungeon-generation-in-binding-of-isaac/)
 
 Here is a short **showcase** video of my **procedural dungeon generation tool in the Unity inspector**:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/tpkQND3AeNM?si=SzvakA5QO-oIHU8P" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/tpkQND3AeNM?si=SzvakA5QO-oIHU8P" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## IAs
 For the behaviour of my AIs, I chose to code **behaviour trees** because this is a mathematical model widely used in the behaviour of AIs in the video game industry. What's more, this type of model adapts very well to the turn-based combat gameplay of my game. The behaviour tree was **coded 100% by myself in C#** with the help of my teacher Sébastien Albert.
@@ -51,7 +51,7 @@ For the behaviour of my AIs, I chose to code **behaviour trees** because this is
 For the **pathfinding algorithm** I've coded an **A-Star** because it's one of the most popular and efficient pathfinding algorithms.
 
 Here's a short **video** showing the **behaviour of several AIs** in combat:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/Tc9xUMNvHec?si=B8jkFocYBZLCjGmN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/Tc9xUMNvHec?si=B8jkFocYBZLCjGmN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 ## GDD

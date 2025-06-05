@@ -29,16 +29,16 @@ This first Game I made with my custom game engine is a simple runner game.
 Apart from the game music, which is a hand-decoded .wav file, all sounds were made manually by sending frequencies (Hz) to the computer speakers (e.g. 440Hz to make the note A)
 
 Here is a short gameplay video of the game running on the web:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/Zedc5LV1wis?si=gq9xvxYm2tIFNYjB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/Zedc5LV1wis?si=gq9xvxYm2tIFNYjB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Bopy's Puzzle Adventure
 This Second Game I made with the custom game engine is a puzzle game where you have to create a path using the tilemap editor of my game engine. I found the idea of ​​reusing my level editor within the gameplay of the game very funny.
 
 Here is a short video demonstrating my tilemap editor running on the web:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/JeDvzgQOT0o?si=DDkkDsoQycle3qlt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/JeDvzgQOT0o?si=DDkkDsoQycle3qlt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Here is a short gameplay video of the game running on the web:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/e4Zd-XKW_zc?si=T9ct8GYQKrH3vPL3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/e4Zd-XKW_zc?si=T9ct8GYQKrH3vPL3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - Programming in low-level C++

@@ -23,7 +23,7 @@ The **goal** was to create a **Puzzle game inspired by 2D Zelda games**.
 
 ## Showcase
 Here is a short gameplay video:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/lMhO1iD9ZiQ?si=ROo05Sse1A2Qe2LG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/lMhO1iD9ZiQ?si=ROo05Sse1A2Qe2LG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - The Basics of Unity Programming

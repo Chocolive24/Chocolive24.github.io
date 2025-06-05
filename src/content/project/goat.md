@@ -31,7 +31,7 @@ We decided to make a **Bullet Hell game** where you control a goat attached by a
 
 ## Showcase
 Here is a short showcase video:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/isPShvAzVTQ?si=PyDxEOg5UwCubLFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/isPShvAzVTQ?si=PyDxEOg5UwCubLFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - To work under the stress of timing

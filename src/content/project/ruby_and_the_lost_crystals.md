@@ -60,23 +60,23 @@ Audio Team:
 
 ## Showcase
 Here is a **gameplay** video of the game:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/YNXXZ5jRn7E?si=2fGeLgE3zW_Po6mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/YNXXZ5jRn7E?si=2fGeLgE3zW_Po6mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Project status
 **July 2024**: very first game mechanics prototype:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/dJzH4OkNIiw?si=EZulL54fo9JTGmWB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/dJzH4OkNIiw?si=EZulL54fo9JTGmWB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **August 2024**: proof of concept:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/X0bnC_ms4Og?si=UUUXx-IuADwCqKzb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/X0bnC_ms4Og?si=UUUXx-IuADwCqKzb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **31 October**: 1st production prototype focused on game mechanics and feedbacks:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/zMjtl-OyK8k?si=uw2Kehp4z7V53wnD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/zMjtl-OyK8k?si=uw2Kehp4z7V53wnD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **19 December 2024**: 2nd production prototype focused on game experience, narration and level design:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=v76iF2ODPO_Gar9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=v76iF2ODPO_Gar9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **14 February 2025**: vertical slice for the school's submission deadline.:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/WXXpQHP8ShE?si=jYwIqfMaJSdFrCRD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/WXXpQHP8ShE?si=jYwIqfMaJSdFrCRD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - Developing a game on Unreal

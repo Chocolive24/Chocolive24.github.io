@@ -26,10 +26,10 @@ I was **personally in charge of** the **graphic code**, such as the **game's cam
 
 ## Showcase
 Here is a gameplay video of the game:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/NIFCpFLbMWY?si=sVnPXajlPtknl8Ay" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/NIFCpFLbMWY?si=sVnPXajlPtknl8Ay" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Here is a video demonstration of the game engine's Hot Reload system:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/EjKOrPznPmA?si=HGXVqrWm1sTXQisa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/EjKOrPznPmA?si=HGXVqrWm1sTXQisa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - Low Level C++ Programming

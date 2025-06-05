@@ -30,7 +30,7 @@ We decided to make a **Dungeon Crawler** in which there are rooms with enemies t
 Play as a robot whose mission is to make a choice about the fate of robots abandoned after a heavy battle organized by humans. Discover the 2 different factions of robots left behind in a derelict spaceship and listen to what they have to say to choose which side you will help.
 
 Here is a short showcase video (Unfortunately, the game has a bug that causes combat to crash and freezes the player):
-<iframe width="750" height="420" src="https://www.youtube.com/embed/_mlg-ngFzEs?si=Uw7NCskHyPoMqmLW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/_mlg-ngFzEs?si=Uw7NCskHyPoMqmLW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
 - To work under the stress of timing

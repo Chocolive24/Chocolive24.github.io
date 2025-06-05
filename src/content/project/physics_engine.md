@@ -34,7 +34,7 @@ We wrote our **own maths library** as well as **standard C++ classes** such as *
 
 ## Showcase
 Here is a short showcase video:
-<iframe width="750" height="420" src="https://www.youtube.com/embed/Z83k0WTJZsk?si=22S3ad54ErI-Jlrm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/Z83k0WTJZsk?si=22S3ad54ErI-Jlrm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 The main optimisations made to my engine are:
 - The creation of a broadphase with a Quadtree

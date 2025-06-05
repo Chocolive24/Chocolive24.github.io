@@ -231,25 +231,25 @@ We pitched the game and showed a prototype to our teachers : Farhan Elias who is
 We did a proof of concept following Nicolas Brière's feedback on our July prototype. The aim was to prove that the game is fun, to validate the key features and to show our creative ideas by placing placeholders in the game. We believed that if we started the new semester with a solid proof of concept, it would be easier to motivate the Art and Audio teams. It would also reassure Nicolas Brière about the project's future and demonstrate our strong commitment to creating an outstanding student game.
 
 Video of our Proof of Concept in August.
-<iframe width="750" height="420" src="https://www.youtube.com/embed/X0bnC_ms4Og?si=UUUXx-IuADwCqKzb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/X0bnC_ms4Og?si=UUUXx-IuADwCqKzb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 3.3 September to October
 We produced an initial production prototype to validate all the core features, work on gameplay feedback and draw up a first draft of the level design for the vertical slice.
 
 Video of our first Production Prototype which was focused on core mechanics and puzzles.
-<iframe width="750" height="420" src="https://www.youtube.com/embed/zMjtl-OyK8k?si=utdHB_2QaVlcJ-12" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/zMjtl-OyK8k?si=utdHB_2QaVlcJ-12" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 3.4 November to December: 
 We did the second Production Prototype which aimed to have 80% of the game experience as well as the final level design for the vertical slice. We also worked on the narration to add more context and life to the game.
 
 Video of our second Production Prototype which was focused on Game Experience and Storytelling
-<iframe width="750" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=IwW1h0k3m7cqI_hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=IwW1h0k3m7cqI_hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 3.5 January to 14 February
 We did the vertical slice for the school's submission deadline. Unfortunately, not all the content we would have liked to see was available, due to the fact that the scope of the project was changed at the end of October on the advice of Nicolas Brière.
 
 Video of our Preliminary Vertical Slice for the school's submission deadline.
-<iframe width="750" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=IwW1h0k3m7cqI_hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=IwW1h0k3m7cqI_hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 If we follow our desire to enter our game in awards, we have to finish the second part of the game, which lacks assets. We also need to do a lot of polishing and a trailer to show off our game. 
 # 4. Project Management
