@@ -9,7 +9,7 @@ state: "active"
 heroImage: "/ruby/gifs/showcase.gif"
 infos: {
   "/icones/people.svg": "5",
-  "/icones/clock.svg": "6 month",
+  "/icones/clock.svg": "6 months",
   "/icones/tools.svg": "Unreal/Perforce/Wwise",
   "/icones/calendar.svg": "10 March 2025",
 }
@@ -30,33 +30,27 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 
 ## Organisation Chart
 
-**Main Game Programming Team:**
-- **Remy Lambert : Project Co-leader, Product Owner, Game Programmer & Level Designer**
-- **Me (Olivier Pachoud)  : Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist**
+**Game Programming Team:**
+- Remy Lambert : Project Co-leader, Product Owner, Game Programmer & Level Designer
+- Me (Olivier Pachoud)  : Project Co-leader, Lead Game Programmer, <br> Graphics Programmer & Tech Artist
+- Constantin Verine : Producer, Game & Audio Programmer. <br>
+  <!-- He helped us a lot with implementing sounds using Wwise and took charge of project management towards the end, as well as organising events where we showcased the project. -->
 
-Game Programming Team:
-  - Constantin Verine: Audio Programmer
-  - Alexis Haldy: Refactoring, Debugging
+**Game Art Team:**
+- Isabelle Borcard: Lead Game Art
+- Eliot Depres: Level and Props Artist
 
-**Main Game Art Team:**
-- **Isabelle Borcard: Lead Game Art**
-- **Eliot Depres: Main Level Artist**
+**Audio Team:**
+- Samuel Rochat: Lead Audio & Wwise Implementation Expert
 
-Game Art Team
-  - Mélissa Houriet: Made Sapphire's model.
-  - Samuel Blanc: Made some gameplay models.
+**Special Thanks to:**
+- Diana Vadi: Graphic designer and 2D illustrator. <br>She notably created the poster for the game.
+- Bryan Mettraux: Content Creator Student. <br> He notably created the trailer for the game.
 
-**Main Audio Team:**
-- **Samuel Rochat: Lead Audio & Wwise Implementation Expert**
-
-Audio Team:
-- Johan Walder
-- Yannis von Will
-- Killian Rossier
-- Luca Prati
-- Arber haxidema
-- Louise Durmaz
-- Dylan Fracheboud
+**Contributors**
+- Prog: Alexis Haldy
+- Art: Mélissa Houriet, Samuel Blanc
+- Audio: Johan Walder, Yannis von Will, Killian Rossier, Luca Prati, Arber haxidema, Louise Durmaz, Dylan Fracheboud
 
 ## Showcase
 Here is a **gameplay** video of the game:
@@ -91,3 +85,78 @@ Here is a **gameplay** video of the game:
 - Using AI to create concepts and creative ideas
 - Polishing a game
 - Pitching a game
+
+## Events where we showcased our game
+### Fantasy Basel
+**Location:** Basel (Switzerland).<br>
+**Dates:** 29 to 31 May 2025.<br>
+**Team members on site:** Olivier and Constantin (all 3 days), Isabelle, Diana and Bryan (1 day).
+
+<div class="gallery">
+  <a href="/ruby/images/fantasy_basel/screens.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/screens.jpg" alt="Event photo 1" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/poster.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/poster.jpg" alt="Event photo 1" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players14.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players14.jpg" alt="Event photo 1" style="width: 100%; height: auto;">
+  </a>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; row-gap: 1%; column-gap: 1%;">
+  <a href="/ruby/images/fantasy_basel/players1.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players1.jpg" alt="Event photo 1" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players2.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players2.jpg" alt="Event photo 2" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players3.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players3.jpg" alt="Event photo 3" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players4.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players4.jpg" alt="Event photo 4" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players5.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players5.jpg" alt="Event photo 5" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players6.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players6.jpg" alt="Event photo 6" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players7.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players7.jpg" alt="Event photo 7" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players8.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players8.jpg" alt="Event photo 8" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players9.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players9.jpg" alt="Event photo 9" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players10.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players10.jpg" alt="Event photo 10" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players11.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players11.jpg" alt="Event photo 11" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players12.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players12.jpg" alt="Event photo 12" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players13.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players13.jpg" alt="Event photo 13" style="width: 100%; height: auto;">
+  </a>
+  <a href="/ruby/images/fantasy_basel/players14.jpg" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/players14.jpg" alt="Event photo 14" style="width: 100%; height: auto;">
+  </a>
+</div>
+
+### Statistics
+During the event and the week that followed, **our itch.io page** for the game **racked up 104 views**. 
+
+<div class="gallery">
+  <a href="/ruby/images/fantasy_basel/itch_views.png" target="_blank" style="flex: 0 0 49%;">
+    <img src="/ruby/images/fantasy_basel/itch_views.png" alt="Event photo 1" style="width: 100%; height: auto;">
+      <p style="margin-top: -30px"><em>Graph showing the number of views on our itch.io page.</em></p>
+  </a>
+</div>
+
+On the **last day** of the convention, following the success of our game, we had the idea of **creating a mailing list** to inform interested parties about the free release of our game on Steam. We managed to **collect 13 emails that day**.

@@ -53,7 +53,8 @@ This application contains both clients in the same window and uses a mock networ
     <source src="/rollback_game/videos/simul_app.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
-  <p style="margin-top: -30px"><em>The simulationApplication running two clients in the same window using the mock network.</em></p>
+  <p style="margin-top: -30px"><em>The simulationApplication running two clients in the same window using the mock network.<br>
+   I can easily change the delay and packet loss values to test my game in very poor network conditions.</em></p>
 </div>
 
 By the way, this application was extremely useful when I was making my rollback prototypes, so I could access the debugger on both clients at the same time.
@@ -72,8 +73,7 @@ This application is similar to the simulation application, but uses the implemen
     <source src="/rollback_game/videos/split_screen_app.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
-  <p style="margin-top: -30px"><em>The SplitScreenApplication running two clients in the same window using the network.<br>
-  I can easily change the delay and packet loss values to test my game in very poor network conditions.</em></p>
+  <p style="margin-top: -30px"><em>The SplitScreenApplication running two clients in the same window using the network.</em></p>
 </div>
 
 ### Client Application

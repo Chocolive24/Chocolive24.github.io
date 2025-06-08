@@ -2,8 +2,8 @@
 title: "PathTracer in CUDA"
 description: "A basic pathtracer made in CUDA in a few months during my free time."
 startDate: "08 June 2024"
-top: "3"
-type: "featured"
+top: "1"
+type: "personal"
 state: "active"
 heroImage: "/raytracing_next_week_cuda/images/final_HD_16_9.png"
 infos: {
