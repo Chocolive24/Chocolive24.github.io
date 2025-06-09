@@ -249,7 +249,7 @@ Video of our second Production Prototype which was focused on Game Experience an
 We did the vertical slice for the school's submission deadline. Unfortunately, not all the content we would have liked to see was available, due to the fact that the scope of the project was changed at the end of October on the advice of Nicolas Brière.
 
 Video of our Preliminary Vertical Slice for the school's submission deadline.
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=IwW1h0k3m7cqI_hs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/WXXpQHP8ShE?si=jYwIqfMaJSdFrCRD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 If we follow our desire to enter our game in awards, we have to finish the second part of the game, which lacks assets. We also need to do a lot of polishing and a trailer to show off our game. 
 # 4. Project Management

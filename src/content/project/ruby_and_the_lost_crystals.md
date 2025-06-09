@@ -8,7 +8,7 @@ type: "featured"
 state: "active"
 heroImage: "/ruby/gifs/showcase.gif"
 infos: {
-  "/icones/people.svg": "5",
+  "/icones/people.svg": "6",
   "/icones/clock.svg": "6 months",
   "/icones/tools.svg": "Unreal/Perforce/Wwise",
   "/icones/calendar.svg": "10 March 2025",
@@ -38,19 +38,19 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 
 **Game Art Team:**
 - Isabelle Borcard: Lead Game Art
-- Eliot Depres: Level and Props Artist
+- Eliot Depres: Level & Props Artist
 
 **Audio Team:**
-- Samuel Rochat: Lead Audio & Wwise Implementation Expert
+- Samuel Rochat: Lead Audio & Sound Integrator in Wwise.
 
 **Special Thanks to:**
 - Diana Vadi: Graphic designer and 2D illustrator. <br>She notably created the poster for the game.
-- Bryan Mettraux: Content Creator Student. <br> He notably created the trailer for the game.
+- Bryan Mettraux: Content Creator. <br> He notably created the trailer for the game.
 
 **Contributors**
 - Prog: Alexis Haldy
 - Art: Mélissa Houriet, Samuel Blanc
-- Audio: Johan Walder, Yannis von Will, Killian Rossier, Luca Prati, Arber haxidema, Louise Durmaz, Dylan Fracheboud
+- Audio: Johan Walder, Yannis von Will, Killian Rossier, Luca Prati, Arber haxidema,<br> Louise Durmaz, Dylan Fracheboud
 
 ## Showcase
 Here is a **gameplay** video of the game:

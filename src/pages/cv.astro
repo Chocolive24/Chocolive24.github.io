@@ -3,19 +3,30 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
 ---
 
-<BaseLayout title="Resume" sideBarActiveItemID="cv">
+<BaseLayout title="About me" sideBarActiveItemID="cv">
+
+  <div class="mb-10">
+    <img src="/cv/banniere.jpg" alt="About me" style="border-radius: 16px; width: 100%;" />
+  </div>
+
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Profile</div>
+    <div class="text-3xl w-full font-bold">Hello !</div>
   </div>
 
   <div class="mb-10 text-justify">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    My name is Olivier, I am a Games Programmer specialising in Computer Graphics. 
+    I am currently completing my bachelor's degree in video game programming.
   </div>
 
   <div class="mb-5">
+    <div class="text-3xl w-full font-bold">CV</div>
+  </div>
+
+ 
+  <iframe src="https://docs.google.com/gview?url=https://chocolive24.github.io/cv/CV_OlivierPachoud.pdf&embedded=true" 
+  style="width:100%; height:800px;" frameborder="0"></iframe>
+
+  <!-- <div class="mb-5">
     <div class="text-3xl w-full font-bold">Education</div>
   </div>
 
@@ -53,9 +64,9 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
     </TimeLineElement>
-  </div>
+  </div> -->
 
-  <div class="mb-5">
+  <!-- <div class="mb-5">
     <div class="text-3xl w-full font-bold">Certifications</div>
   </div>
 
@@ -89,8 +100,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
     <li>Photon Realtime</li>
     <li>Docker</li>
     <li>FastAPI</li>
-  </ul>
+  </ul> -->
 
-  <iframe src="/Dummy.pdf#navpanes=0&toolbar=0&statusbar=0&view=FitH" width="100%" height="1440px" />
 
 </BaseLayout>
