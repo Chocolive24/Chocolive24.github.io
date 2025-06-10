@@ -2,6 +2,7 @@
 title: "PathTracer in CUDA"
 description: "A basic pathtracer made in CUDA in a few months during my free time."
 startDate: "08 June 2024"
+endDate: "16 August 2024"
 top: "1"
 type: "personal"
 state: "active"

@@ -1,6 +1,52 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
+
+import BackgroundLayout from "../layouts/BackgroundLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug"
+
+// Importations...
+const projects = await getCollection("project");
+
+// Project selection
+const bachelor_project = projects.find(
+  (project) => project.data.title === "Bachelor's Project: Fluid Simulation Raytracing Rendering"
+);
+
+const ruby_project = projects.find(
+  (project) => project.data.title === "Ruby and The Lost Crystals"
+);
+
+const pathtracer_project = projects.find(
+  (project) => project.data.title === "PathTracer in CUDA"
+);
+
+const opengl_project = projects.find(
+  (project) => project.data.title === "OpenGL 3D Scene in PBR"
+);
+
+const minecraft_project = projects.find(
+  (project) => project.data.title === "Minecraft clone in DirectX11"
+);
+
+const rollback_project = projects.find(
+  (project) => project.data.title === "Penguin battle !"
+);
+
+const physics_project = projects.find(
+  (project) => project.data.title === "2D Physics Engine"
+);
+
+const selectedTitles = [
+  "Space Platformer",
+  "Penguin Card Master",
+];
+
+const games_projects = projects.filter((project) =>
+  selectedTitles.includes(project.data.title)
+);
 ---
 
 <BaseLayout title="About me" sideBarActiveItemID="cv">
@@ -48,26 +94,193 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
       title="Bachelor's Project: DXR Raytracing Rendering of Dynamic and Implicit Fluid"
       subtitle="From March 2025 to July 2025 at SAE-Institute."
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+      In my thesis and bachelor's project, I sought to answer the following question: ‘What are the challenges of representing a dynamic and implicit fluid in a raytracing pipeline with the DXR API?’
+      <br>To do this, I implemented raymarching in a custom intersection shader and also implemented the Marching Cubes algorithm to create a dynamic mesh for DXR acceleration structure.
+      {bachelor_project && (
+        <>
+          <HorizontalCard
+            title={bachelor_project.data.title}
+            img={bachelor_project.data.heroImage}
+            desc={bachelor_project.data.description}
+            url={`/project/${createSlug(bachelor_project.data.title, bachelor_project.slug)}`}
+            target="_self"
+            badge={bachelor_project.data.state}
+            infos={bachelor_project.data.infos}
+            frameImg="/index/frame_dialog.png"
+          />
+          <div class="divider my-0" />
+        </>
+      )}
     </TimeLineElement>
+
     <TimeLineElement
       title="Ruby and The Lost Crystals: Unreal Engine 5 Team Game Project"
-      subtitle="From September 2024 to February 2025 at SAE-Institute. Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist."
+      subtitle="From September 2024 to February 2025 at SAE-Institute."
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    During this group project, I had the following roles: <br>‘Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist.’
+    <br>As Lead Programmer, I was responsible for making technical decisions, assigning and managing the programming team, and building the project's code architecture.
+    <br>As Graphics Programmer and Tech Artist, I created a Cel-Shader following PBR rules in post-processing in Unreal to reinforce the stylised art direction of our game, and I did most of the VFX and visual feedback.
+      {ruby_project && (
+        <>
+          <HorizontalCard
+            title={ruby_project.data.title}
+            img={ruby_project.data.heroImage}
+            desc={ruby_project.data.description}
+            url={`/project/${createSlug(ruby_project.data.title, ruby_project.slug)}`}
+            target="_self"
+            badge={ruby_project.data.state}
+            infos={ruby_project.data.infos}
+            frameImg="/index/frame_dialog.png"
+          />
+          <div class="divider my-0" />
+        </>
+      )}
     </TimeLineElement>
     <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+      title="Pathtracer in CUDA"
+      subtitle="From June 2024 to August 2024 during my personal working time."
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    After reading and implementing the path tracer from the e-book ‘Raytracing in One Weekend’, I decided to reimplement it in CUDA and continue with the second book, ‘Raytracing the Next Week’.
+    <br>My goal was to learn the math and algorithms behind photorealistic images while testing a new GPU technology.
+    {pathtracer_project && (
+        <>
+          <HorizontalCard
+            title={pathtracer_project.data.title}
+            img={pathtracer_project.data.heroImage}
+            desc={pathtracer_project.data.description}
+            url={`/project/${createSlug(pathtracer_project.data.title, pathtracer_project.slug)}`}
+            target="_self"
+            badge={pathtracer_project.data.state}
+            infos={pathtracer_project.data.infos}
+            frameImg="/index/frame_dialog.png"
+          />
+          <div class="divider my-0" />
+        </>
+      )}
     </TimeLineElement>
     <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+      title="OpenGL 3D scene in Deferred Shading and PBR."
+      subtitle="From November 2023 to February 2024 at SAE-Institute."
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    During the computer graphics course module at SAE, we explored rasterization and implemented our own graphics engine in C++/OpenGL. 
+    <br>By the end, I was able to create a 3D scene from scratch using deferred shading with PBR and IBL shading.
+      {opengl_project && (
+        <>
+          <HorizontalCard
+            title={opengl_project.data.title}
+            img={opengl_project.data.heroImage}
+            desc={opengl_project.data.description}
+            url={`/project/${createSlug(opengl_project.data.title, opengl_project.slug)}`}
+            target="_self"
+            badge={opengl_project.data.state}
+            infos={opengl_project.data.infos}
+            frameImg="/index/frame_dialog.png"
+          />
+          <div class="divider my-0" />
+        </>
+      )}
     </TimeLineElement>
+    <TimeLineElement
+    title="Mini Minecraft clone in DirectX 11"
+    subtitle="During my personal working time in December 2023"
+  >
+  During my winter holidays, I created a small procedural Minecraft world using Perlin noise with the DirectX 11 API. I also implemented a first-person player controller with collisions and forces.
+  <br>This is my first concrete graphics project (I had already done some very basic programming in OpenGL).
+  {minecraft_project && (
+      <>
+        <HorizontalCard
+          title={minecraft_project.data.title}
+          img={minecraft_project.data.heroImage}
+          desc={minecraft_project.data.description}
+          url={`/project/${createSlug(minecraft_project.data.title, minecraft_project.slug)}`}
+          target="_self"
+          badge={minecraft_project.data.state}
+          infos={minecraft_project.data.infos}
+          frameImg="/index/frame_dialog.png"
+        />
+        <div class="divider my-0" />
+      </>
+    )}
+  </TimeLineElement>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-2xl w-full font-bold">Game and Engine Programming</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="Bachelor's Project: DXR Raytracing Rendering of Dynamic and Implicit Fluid"
+      subtitle="From March 2025 to July 2025 at SAE-Institute."
+    >
+      In my thesis and bachelor's project, I sought to answer the following question: ‘What are the challenges of representing a dynamic and implicit fluid in a raytracing pipeline with the DXR API?’
+      <br>To do this, I implemented raymarching in a custom intersection shader and also implemented the Marching Cubes algorithm to create a dynamic mesh for DXR acceleration structure.
+      {bachelor_project && (
+        <>
+          <HorizontalCard
+            title={rollback_project.data.title}
+            img={rollback_project.data.heroImage}
+            desc={rollback_project.data.description}
+            url={`/project/${createSlug(rollback_project.data.title, rollback_project.slug)}`}
+            target="_self"
+            badge={rollback_project.data.state}
+            infos={rollback_project.data.infos}
+            frameImg="/index/frame_dialog.png"
+          />
+          <div class="divider my-0" />
+        </>
+      )}
+    </TimeLineElement>
+
+    <TimeLineElement
+      title="Ruby and The Lost Crystals: Unreal Engine 5 Team Game Project"
+      subtitle="From September 2024 to February 2025 at SAE-Institute."
+    >
+    During this group project, I had the following roles: <br>‘Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist.’
+    <br>As Lead Programmer, I was responsible for making technical decisions, assigning and managing the programming team, and building the project's code architecture.
+    <br>As Graphics Programmer and Tech Artist, I created a Cel-Shader following PBR rules in post-processing in Unreal to reinforce the stylised art direction of our game, and I did most of the VFX and visual feedback.
+      {physics_project && (
+        <>
+          <HorizontalCard
+            title={physics_project.data.title}
+            img={physics_project.data.heroImage}
+            desc={physics_project.data.description}
+            url={`/project/${createSlug(physics_project.data.title, physics_project.slug)}`}
+            target="_self"
+            badge={physics_project.data.state}
+            infos={physics_project.data.infos}
+            frameImg="/index/frame_dialog.png"
+          />
+          <div class="divider my-0" />
+        </>
+      )}
+    </TimeLineElement>
+    <TimeLineElement
+    title="Job Title at Project or Company Name"
+    subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    {
+     games_projects.map((project) => (
+          // Add a condition to render only projects that meet specific criteria
+          project && (
+            <>
+              <HorizontalCard
+                title={project.data.title}
+                img={project.data.heroImage}
+                desc={project.data.description}
+                url={`/project/${createSlug(project.data.title, project.slug)}`}
+                target="_self"
+                badge={project.data.state}
+                infos={project.data.infos}
+                frameImg="/index/frame_dialog.png"
+              />
+              <div class="divider my-0" />
+            </>
+          )
+        ))
+    }
+  </TimeLineElement>
   </div>
 
   <div class="mb-5">
