@@ -10,23 +10,78 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
   </div>
 
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Hello !</div>
+    <div class="text-4xl w-full font-bold">Hello !</div>
   </div>
 
-  <div class="mb-10 text-justify">
-    My name is Olivier, I am a Games Programmer specialising in Computer Graphics. 
-    I am currently completing my bachelor's degree in video game programming.
+  <div class="mb-10 flex text-justify text-2xl w-full">
+    My name is Olivier, I am a game developer specialising in graphics programming, 
+    currently in my final year of a bachelor's degree at the SAE Institute in Geneva. 
+    Passionate about real-time rendering technologies, I am looking to put my technical skills 
+    at the disposal of a team to create memorable interactive experiences.
+  </div>
+
+   <div class="mb-5">
+    <div class="text-4xl w-full font-bold">Education</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="Bachelor of Science in Games Programming"
+      subtitle="2022 to 2025 at SAE-Institute, Geneva, Switzerland"
+    />
+    <TimeLineElement
+      title="Swiss Federal Baccalaureate (High School)"
+      subtitle="2019 to 2022 at Yverdon High School, Yverdon-les-Bains, Switzerland"
+    />
   </div>
 
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">CV</div>
+    <div class="text-4xl w-full font-bold">Experience</div>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-2xl w-full font-bold">Graphics Programming</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="Bachelor's Project: DXR Raytracing Rendering of Dynamic and Implicit Fluid"
+      subtitle="From March 2025 to July 2025 at SAE-Institute."
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Ruby and The Lost Crystals: Unreal Engine 5 Team Game Project"
+      subtitle="From September 2024 to February 2025 at SAE-Institute. Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist."
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Job Title at Project or Company Name"
+      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Job Title at Project or Company Name"
+      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    </TimeLineElement>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-4xl w-full font-bold">CV</div>
   </div>
 
   <div class="mb-5 flex justify-left mt-4" style="position: relative;">
-    <a href="/project" class="btn btn-outline text-lg w-full max-w-xs">
+    <a href="/cv/CV_OlivierPachoud.pdf" class="btn btn-outline text-lg w-full max-w-xs">
       Download my CV (PDF)
     </a>
   </div>
+
+  <iframe src="https://docs.google.com/gview?url=https://chocolive24.github.io/cv/CV_OlivierPachoud.pdf&embedded=true" 
+  style="width:100%; height:1240px;" frameborder="0"></iframe>
 
   <!-- <div class="mb-5">
     <p style="text-align: center; margin-top: 1rem;">
@@ -41,52 +96,10 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
   width='100%' height='1240px'>
 </object> -->
 
-
-  <iframe src="https://docs.google.com/gview?url=https://chocolive24.github.io/cv/CV_OlivierPachoud.pdf&embedded=true" 
-  style="width:100%; height:1240px;" frameborder="0"></iframe>
-
   <!-- <iframe src="http://docs.google.com/gview?url=http://chocolive24.github.io/cv/CV_OlivierPachoud.pdf&embedded=true" 
 style="width:600px; height:500px;" frameborder="0"></iframe> -->
 
-  <!-- <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Education</div>
-  </div>
-
-  <div class="time-line-container grid gap-4 mb-10">
-    <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
-    <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
-  </div>
-
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Experience</div>
-  </div>
-
-  <div class="time-line-container mb-10">
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    </TimeLineElement>
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    </TimeLineElement>
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    </TimeLineElement>
-  </div> -->
+ 
 
   <!-- <div class="mb-5">
     <div class="text-3xl w-full font-bold">Certifications</div>
