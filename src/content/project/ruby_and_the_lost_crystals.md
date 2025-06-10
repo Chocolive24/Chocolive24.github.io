@@ -77,7 +77,7 @@ Here is a **gameplay** video of the game:
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=v76iF2ODPO_Gar9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **14 February 2025**: vertical slice for the school's submission deadline. 
-<br>Although there is still a lot of greyboxing to be done, we managed to create a stylised art direction that is consistent with our goals of creating a calm and cute atmosphere. We also have a total game time of 40 minutes with in-game narration.
+<br>Although there is still a lot of graybox, we managed to create a stylised art direction that is consistent with our goals of creating a calm and cute atmosphere. We also have a total game time of 40 minutes with in-game narration.
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/WXXpQHP8ShE?si=jYwIqfMaJSdFrCRD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
