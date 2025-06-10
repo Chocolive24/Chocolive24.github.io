@@ -62,8 +62,9 @@ const games_projects = projects.filter((project) =>
   <div class="mb-10 flex text-justify text-2xl w-full">
     My name is Olivier, I am a game developer specialising in graphics programming, 
     currently in my final year of a bachelor's degree at the SAE Institute in Geneva. 
-    Passionate about real-time rendering technologies, I am looking to put my technical skills 
+    <br>Passionate about real-time rendering technologies, I am looking to put my technical skills 
     at the disposal of a team to create memorable interactive experiences.
+    <br>Although I am focused on graphics programming, I also thrive on all aspects of game development.
   </div>
 
    <div class="mb-5">
@@ -210,12 +211,12 @@ const games_projects = projects.filter((project) =>
 
   <div class="time-line-container mb-10">
     <TimeLineElement
-      title="Bachelor's Project: DXR Raytracing Rendering of Dynamic and Implicit Fluid"
-      subtitle="From March 2025 to July 2025 at SAE-Institute."
+      title="Rollback Game"
+      subtitle="During April 2024 at SAE-Institute."
     >
-      In my thesis and bachelor's project, I sought to answer the following question: ‘What are the challenges of representing a dynamic and implicit fluid in a raytracing pipeline with the DXR API?’
-      <br>To do this, I implemented raymarching in a custom intersection shader and also implemented the Marching Cubes algorithm to create a dynamic mesh for DXR acceleration structure.
-      {bachelor_project && (
+    During the Computer Networks course module, I created an online multiplayer brawler game with an integrated rollback system.
+    <br>In my opinion, this is the program with the best code architecture of all my projects.
+    {bachelor_project && (
         <>
           <HorizontalCard
             title={rollback_project.data.title}
@@ -233,13 +234,12 @@ const games_projects = projects.filter((project) =>
     </TimeLineElement>
 
     <TimeLineElement
-      title="Ruby and The Lost Crystals: Unreal Engine 5 Team Game Project"
-      subtitle="From September 2024 to February 2025 at SAE-Institute."
+      title="2D Physics Engine"
+      subtitle="From October 2023 to November 2023 at SAE-Institute."
     >
-    During this group project, I had the following roles: <br>‘Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist.’
-    <br>As Lead Programmer, I was responsible for making technical decisions, assigning and managing the programming team, and building the project's code architecture.
-    <br>As Graphics Programmer and Tech Artist, I created a Cel-Shader following PBR rules in post-processing in Unreal to reinforce the stylised art direction of our game, and I did most of the VFX and visual feedback.
-      {physics_project && (
+    During the course module on physics and CPU architecture as well as optimisation in C++, I created a 2D physics engine from scratch, optimising it as best I could.
+    <br>This is the most optimised project I have ever done.
+    {physics_project && (
         <>
           <HorizontalCard
             title={physics_project.data.title}
@@ -256,11 +256,13 @@ const games_projects = projects.filter((project) =>
       )}
     </TimeLineElement>
     <TimeLineElement
-    title="Job Title at Project or Company Name"
-    subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+    title="My beginnings as a Game Programmer"
+    subtitle="From 2022 to 2023 at SAE-Insitute."
   >
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    {
+  During the early stages of my studies, I created many games using C++ and Unity. The two games I am most proud of are listed below.
+  <br>Penguin Card Master is a rogue-lite game that taught me how to code AI, pathfinding, procedural dungeon generation, and how to maintain a GDD.
+  <br>Space Platformer is the game with the gameplay I am most proud of.
+  {
      games_projects.map((project) => (
           // Add a condition to render only projects that meet specific criteria
           project && (
@@ -281,6 +283,24 @@ const games_projects = projects.filter((project) =>
         ))
     }
   </TimeLineElement>
+  </div>
+
+  <div class="mb-5 flex justify-center mt-4" style="position: relative;">
+    <a href="/project" class="btn btn-outline text-lg w-full max-w-xs">
+      View all my projects
+    </a>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-4xl w-full font-bold">More about me</div>
+  </div>
+
+  <div class="mb-10 flex text-justify text-2xl w-full">
+    I am a 22-year-old junior who is thorough and optimistic. I love working in a team and learning more about other people's jobs and passions.
+    <br>My favourite games, and the ones that inspire me the most, are Mario Galaxy, Zelda Breath of the Wild and Xenoblade Chronicles 2.
+    <br>I also really enjoy strategy and card games such as Hearthstone and Slay the Spire.
+    <br>Outside of video games, my passions are cinema, travelling and swimming. 
+    <br>I also play a little piano.
   </div>
 
   <div class="mb-5">
