@@ -19,8 +19,10 @@ relatedBlogs: ["Ruby and the Lost Crystals: Project Debrief",
   "Ruby and The Lost Crystals: Post-Mortem."]
 ---
 
+<img src="/ruby/images/poster.jpg" alt="Poster of the game" style="width: 100%;">
+
 ## Context
-Ruby and the Lost Crystals is a **game project** produced as part of the **third year of the Bachelor's programme in Games Programming at SAE-Institut in Geneva**. The project is a **collaboration** between the school's **Game Programming, Game Art, and Audio Engineering departments**. It served as the **main project for the Game Programmers**, while for the Game Artists and Audio Engineers, it was a side project alongside their other coursework.
+Ruby and the Lost Crystals is a **game project** produced as part of the **third year of the Bachelor's programme in Games Programming at SAE-Institut in Geneva**. The project is a **collaboration** between the school's **Game Programming, Game Art, and Audio Engineering departments**. It served as the **main project for the Games Programmers**, while for the Game Artists and Audio Engineers, it was a side project alongside their other coursework.
 
 The aim was to produce a **vertical slice in six months** (from September to February), enabling us to demonstrate gameplay that is representative of the game's final concept.
 The aim of the project is to have a **semi-professional experience** where each discipline plays an essential role in production and where **students can specialise in one aspect of game development**.
@@ -53,23 +55,29 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 - Audio: Johan Walder, Yannis von Will, Killian Rossier, Luca Prati, Arber haxidema,<br> Louise Durmaz, Dylan Fracheboud
 
 ## Showcase
+This is the **trailer animatic** for the game:
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/f6huVYQWoVE?si=kNoJXcrDRyG7k3pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 Here is a **gameplay** video of the game:
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/YNXXZ5jRn7E?si=2fGeLgE3zW_Po6mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Project status
-**July 2024**: very first game mechanics prototype:
+**July 2024**: The very first game mechanics prototype made in two weeks. We were discovering Unreal:
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/dJzH4OkNIiw?si=EZulL54fo9JTGmWB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-**August 2024**: proof of concept:
+**August 2024**: We created this proof of concept during our summer holidays following feedback on our Jullet prototype from our main mentor Nicolas Brière (CEO at Old Skull Games).
+<br>The goal was to represent our creative ideas through placeholders, our gameplay ideas through grayboxing, and to prove that the game is fun. We also wanted to start the project on a solid foundation to motivate Game Art and Audio students to come and work on the
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/X0bnC_ms4Og?si=UUUXx-IuADwCqKzb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-**31 October**: 1st production prototype focused on game mechanics and feedbacks:
+**31 October**: 1st production prototype focused on game mechanics and feedbacks.
+<br> The objective of this milestone was to validate all the main features, work on gameplay feedback, and draft an initial level design for the vertical slice.
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/zMjtl-OyK8k?si=uw2Kehp4z7V53wnD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-**19 December 2024**: 2nd production prototype focused on game experience, narration and level design:
+**19 December 2024**: 2nd production prototype which aimed to have 80% of the game experience as well as the final level design for the vertical slice. We also worked on the narration to add more context and life to the game.:
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=v76iF2ODPO_Gar9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-**14 February 2025**: vertical slice for the school's submission deadline.:
+**14 February 2025**: vertical slice for the school's submission deadline. 
+<br>Although there is still a lot of greyboxing to be done, we managed to create a stylised art direction that is consistent with our goals of creating a calm and cute atmosphere. We also have a total game time of 40 minutes with in-game narration.
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/WXXpQHP8ShE?si=jYwIqfMaJSdFrCRD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## What did I learn ?
