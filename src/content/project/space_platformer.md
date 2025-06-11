@@ -29,7 +29,7 @@ Here is a short gameplay video:
 
 ## What did I learn ?
 - The Basics of Unity Programming
-- Introducing game mechanics with Rational Game Design
+- The Basics of Rational Game Design
 - Provide visual and audio game feedback
 - The basics of linear algebra to apply gravity of different directions to my player.
 - Create managers to handle the different game systems

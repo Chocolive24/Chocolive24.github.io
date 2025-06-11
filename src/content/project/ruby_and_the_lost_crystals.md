@@ -34,7 +34,7 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 
 **Game Programming Team:**
 - Remy Lambert : Project Co-leader, Product Owner, Game Programmer & Level Designer
-- Me (Olivier Pachoud)  : Project Co-leader, Lead Game Programmer, <br> Graphics Programmer & Tech Artist
+- **Me (Olivier Pachoud)  : Project Co-leader, Lead Game Programmer, <br> Graphics Programmer & Tech Artist**
 - Constantin Verine : Producer, Game & Audio Programmer. <br>
   <!-- He helped us a lot with implementing sounds using Wwise and took charge of project management towards the end, as well as organising events where we showcased the project. -->
 
@@ -56,7 +56,7 @@ In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire
 
 ## Showcase
 This is the **trailer animatic** for the game:
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/f6huVYQWoVE?si=kNoJXcrDRyG7k3pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/jH5nJ26D4qA?si=yFTSkghP8MX9v9R4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Here is a **gameplay** video of the game:
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/YNXXZ5jRn7E?si=2fGeLgE3zW_Po6mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
