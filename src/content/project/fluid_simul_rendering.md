@@ -21,11 +21,20 @@ This project is the **practical part** of my **bachelor's thesis**, which explor
 "**What are the challenges of representing a dynamic and implicit fluid in a raytracing pipeline using the DXR API?**"
 The analysis is **based on a particle-based fluid simulation**.
 
+The project is **still under development**.
+
 The **aim** of the project is to **evaluate** the **feasibility** and **limitations of** using the **DXR API** for **implicit surface rendering in real time**, and to better understand the **strengths and weaknesses of this new technology**.
 
 ## Showcase
 To investigate the question, I implemented **two distinct algorithmic approaches**. <br>
 The **first** uses a **raymarching algorithm** within a **custom intersection shader**, enabling fluid rendering without the need to build a mesh.
+
+Here is a **raymarching rendering** with a **large smoothing radius** for the particles:
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/i1z3RcGXBNA?si=gUeDuqKPVRSd2x3X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Here is another  **raymarching rendering** with a **smaller smoothing radius** for the particles.<br>
+The **physical simulation doesn't work very well**, but the **raymarching rendering is more realistic**:
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/jyAWnqkJfKQ?si=Js-CVOdkKFeZpufq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 The **second approach** constructs a mesh using the **marching cubes algorithm**, allowing the pipeline to leverage **hardware-accelerated ray-triangle intersections**.
 
