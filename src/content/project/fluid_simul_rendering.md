@@ -38,7 +38,7 @@ Here is a **raymarching prototype rendering** with a **large smoothing radius** 
 
 Here is another **raymarching prototype rendering** with a **smaller smoothing radius** for the particles.<br>
 The **physical simulation doesn't work very well**, but the **raymarching rendering is more realistic**:
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/jyAWnqkJfKQ?si=Js-CVOdkKFeZpufq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/RZBez64xHnQ?si=RsFfHan2QMAddUC1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 The **second approach** constructs a mesh using the **marching cubes algorithm**, allowing the pipeline to leverage **hardware-accelerated ray-triangle intersections**.
 
