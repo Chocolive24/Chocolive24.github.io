@@ -59,7 +59,7 @@ This is the **trailer animatic** for the game:
 <iframe width="100%" height="420" src="https://www.youtube.com/embed/jH5nJ26D4qA?si=yFTSkghP8MX9v9R4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Here is a **gameplay** video of the game:
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/YNXXZ5jRn7E?si=2fGeLgE3zW_Po6mc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/4d4-JtT6Mpo?si=yBA7_bJgOAWgEAsh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Project status
 **July 2024**: The very first game mechanics prototype made in two weeks. We were discovering Unreal:
