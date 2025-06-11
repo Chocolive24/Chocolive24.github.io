@@ -6,7 +6,7 @@ endDate: "18 July 2025"
 top: "2"
 type: "featured"
 state: "active"
-heroImage: "/fluid_simul_rendering/gifs/fluid_pp.gif"
+heroImage: "/fluid_simul_rendering/gifs/fluid_pp2.gif"
 infos: {
   "/icones/people.svg": "1",
   "/icones/clock.svg": "5 months",
@@ -24,6 +24,10 @@ The analysis is **based on a particle-based fluid simulation**.
 The project is **still under development**.
 
 The **aim** of the project is to **evaluate** the **feasibility** and **limitations of** using the **DXR API** for **implicit surface rendering in real time**, and to better understand the **strengths and weaknesses of this new technology**.
+
+The **SPH** simulation was originally **developed by fellow Games Programming student** at SAE Institute Geneva, **Constantin Verine**, as part of his bachelor's project.  
+[Click here to view his project](https://cochta.github.io/work/nested/sph/)  
+**Together**, we **converted his CPU-based simulation into a compute shader**, enabling me to render it using **DXR ray tracing**.
 
 ## Showcase
 To investigate the question, I implemented **two distinct algorithmic approaches**. <br>
