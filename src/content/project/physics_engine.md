@@ -108,13 +108,38 @@ With all the changes made to my engine I saved between 760ms and 856ms.
 
 <!-- <YoutubePlayer id="rNb0OLZd4wg" />
 
-<button id="playButton">Play Physics Engine 2D</button>
+<button id="playButton">Launch Physics Engine 2D</button> -->
 
-<div id="gameContainer" style="display:none;">
-  <iframe frameborder="0" src="https://itch.io/embed-upload/9943561?color=04476f" allowfullscreen="" width="750" height="750">
-    <a href="https://chocolive.itch.io/physics-engine-2d">Play Physics Engine 2D on itch.io</a>
-  </iframe>
+## Web version (still in prototype)
+
+<div class="mb-5 flex flex-col items-center mt-4" style="position: relative;">
+  <!-- Button -->
+  <button 
+    id="launchButton"
+    class="btn btn-outline text-lg w-full max-w-xs mb-4"
+    onclick="document.getElementById('iframeContainer').style.display = 'block'; this.style.display = 'none';"
+  >
+    Launch Physics Engine 2D
+  </button>
+
+  <!-- Hidden iframe container -->
+  <div id="iframeContainer" style="display: none; width: 100%;">
+    <iframe
+      frameborder="0"
+      src="https://itch.io/embed-upload/9943561?color=04476f"
+      width="100%"
+      height="750"
+    >
+    </iframe>
+  </div>
 </div>
+
+
+<!-- <div id="gameContainer" style="display:none;">
+  <iframe frameborder="0" src="https://itch.io/embed-upload/9943561?color=04476f" allowfullscreen="" width="100%" height="750">
+    <a href=>Play Physics Engine 2D on itch.io</a>
+  </iframe>
+</div> -->
 
 <style>
   /* Style the button */
@@ -153,7 +178,7 @@ With all the changes made to my engine I saved between 760ms and 856ms.
 </script>
 
 
-<iframe frameborder="0" src="https://itch.io/embed/2219858" width="552" height="167"><a href="https://chocolive.itch.io/card-master-penguin">Card Master Penguin by Chocolive</a></iframe> -->
+<!-- <iframe frameborder="0" src="https://itch.io/embed/2219858" width="552" height="167"><a href="https://chocolive.itch.io/card-master-penguin">Card Master Penguin by Chocolive</a></iframe> -->
 
 ## What did I learn ?
 - Basics of Calculus
