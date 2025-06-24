@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
 
 import BackgroundLayout from "../layouts/BackgroundLayout.astro";
-import HorizontalCard from "../components/HorizontalCard.astro";
+import TimelineHorizontalCard from "../components/TimelineHorizontalCard.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
 
@@ -48,23 +48,57 @@ const games_projects = projects.filter((project) =>
   selectedTitles.includes(project.data.title)
 );
 ---
+<style>
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
 
 <BaseLayout title="About me" sideBarActiveItemID="cv">
 
-  <div class="mb-10">
+  <div class="fade-in mb-10 mt-12">
     <img src="/cv/banniere.jpg" alt="About me" style="border-radius: 16px; width: 100%;" />
   </div>
-
+  
   <div class="mb-5">
     <div class="text-4xl w-full font-bold">Hello !</div>
   </div>
-
-  <div class="mb-10 flex text-justify text-2xl w-full">
-    My name is Olivier, I am a game developer specialising in graphics programming, 
-    currently in my final year of a bachelor's degree at the SAE Institute in Geneva. 
-    <br>Passionate about real-time rendering technologies, I am looking to put my technical skills 
-    at the disposal of a team to create memorable interactive experiences.
-    <br>Although I am focused on graphics programming, I also thrive on all aspects of game development.
+  
+  <div class="mb-10 flex flex-col md:flex-row gap-6 items-start">
+    <!-- Texte à gauche -->
+    <div class="text-justify text-2xl w-full md:flex-[3]">
+      My name is Olivier, I am a game developer specialising in graphics programming, 
+      currently in my final year of a bachelor's degree at the SAE Institute in Geneva. 
+      <br><br>
+      Passionate about real-time rendering technologies, I am looking to put my technical skills 
+      at the disposal of a team to create memorable interactive experiences.
+      <br><br>
+      Although I am focused on graphics programming, I also thrive on all aspects of game development.
+    </div>
+  
+    <!-- Photo à droite -->
+    <div class="fade-in w-full md:flex-[1] flex justify-center md:justify-end self-start">
+      <img 
+        src="/pp.jpg" 
+        alt="Olivier Pachoud"
+        style="
+          width: 100%;
+          height: auto;
+          border-radius: 24px;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+          object-fit: cover;
+        "
+      />
+    </div>
   </div>
 
    <div class="mb-5">
@@ -73,12 +107,12 @@ const games_projects = projects.filter((project) =>
 
   <div class="time-line-container grid gap-4 mb-10">
     <TimeLineElement
-      title="Bachelor of Science in Games Programming"
-      subtitle="2022 to 2025 at SAE-Institute, Geneva, Switzerland"
+      title="Bachelor of Science in Games Programming | 2022 to 2025 at SAE-Institute, Geneva, Switzerland."
+      subtitle="Throughout the program, I have acquired strong skills in C++, C#, Unity, Unreal Engine, OpenGL, and DirectX 11/12. The curriculum includes classical programming courses as well as specialized modules such as game engine architecture, physics simulation, assembly, performance optimization and profiling, computer graphics, computer networking (including rollback systems), and game design theory."
     />
     <TimeLineElement
-      title="Swiss Federal Baccalaureate (High School)"
-      subtitle="2019 to 2022 at Yverdon High School, Yverdon-les-Bains, Switzerland"
+      title="Swiss Federal Baccalaureate (High School) - 2019 to 2022 at Yverdon-les-Bains High School, Switzerland"
+      subtitle="I completed my Baccalaureate, with a specific focus on Economics and Law, and a complementary course in Computer Science. My final thesis was dedicated to programming my first video game using Python."
     />
   </div>
 
@@ -99,7 +133,8 @@ const games_projects = projects.filter((project) =>
       <br>To do this, I implemented raymarching in a custom intersection shader and also implemented the Marching Cubes algorithm to create a dynamic mesh for DXR acceleration structure.
       {bachelor_project && (
         <>
-          <HorizontalCard
+        <div class="mt-4">
+          <TimelineHorizontalCard
             title={bachelor_project.data.title}
             img={bachelor_project.data.heroImage}
             desc={bachelor_project.data.description}
@@ -109,7 +144,8 @@ const games_projects = projects.filter((project) =>
             infos={bachelor_project.data.infos}
             frameImg="/index/frame_dialog.png"
           />
-          <div class="divider my-0" />
+          <div class="divider my-4" />
+        </div>
         </>
       )}
     </TimeLineElement>
@@ -118,12 +154,13 @@ const games_projects = projects.filter((project) =>
       title="Ruby and The Lost Crystals: Unreal Engine 5 Team Game Project"
       subtitle="From September 2024 to February 2025 at SAE-Institute."
     >
-    During this group project, I had the following roles: <br>‘Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist.’
+    During this group project, I had the following roles: <br>Project Co-leader, Lead Game Programmer, Graphics Programmer & Tech Artist.’
     <br>As Lead Programmer, I was responsible for making technical decisions, assigning and managing the programming team, and building the project's code architecture.
     <br>As Graphics Programmer and Tech Artist, I created a Cel-Shader following PBR rules in post-processing in Unreal to reinforce the stylised art direction of our game, and I did most of the VFX and visual feedback.
       {ruby_project && (
         <>
-          <HorizontalCard
+        <div class="mt-4">
+          <TimelineHorizontalCard
             title={ruby_project.data.title}
             img={ruby_project.data.heroImage}
             desc={ruby_project.data.description}
@@ -133,7 +170,8 @@ const games_projects = projects.filter((project) =>
             infos={ruby_project.data.infos}
             frameImg="/index/frame_dialog.png"
           />
-          <div class="divider my-0" />
+          <div class="divider my-4" />
+        </div>
         </>
       )}
     </TimeLineElement>
@@ -145,7 +183,8 @@ const games_projects = projects.filter((project) =>
     <br>My goal was to learn the math and algorithms behind photorealistic images while testing a new GPU technology.
     {pathtracer_project && (
         <>
-          <HorizontalCard
+        <div class="mt-4">
+          <TimelineHorizontalCard
             title={pathtracer_project.data.title}
             img={pathtracer_project.data.heroImage}
             desc={pathtracer_project.data.description}
@@ -155,7 +194,8 @@ const games_projects = projects.filter((project) =>
             infos={pathtracer_project.data.infos}
             frameImg="/index/frame_dialog.png"
           />
-          <div class="divider my-0" />
+          <div class="divider my-4" />
+        </div>
         </>
       )}
     </TimeLineElement>
@@ -165,9 +205,11 @@ const games_projects = projects.filter((project) =>
     >
     During the computer graphics course module at SAE, we explored rasterization and implemented our own graphics engine in C++/OpenGL. 
     <br>By the end, I was able to create a 3D scene from scratch using deferred shading with PBR and IBL shading.
+   
       {opengl_project && (
         <>
-          <HorizontalCard
+        <div class="mt-4">
+          <TimelineHorizontalCard
             title={opengl_project.data.title}
             img={opengl_project.data.heroImage}
             desc={opengl_project.data.description}
@@ -177,7 +219,8 @@ const games_projects = projects.filter((project) =>
             infos={opengl_project.data.infos}
             frameImg="/index/frame_dialog.png"
           />
-          <div class="divider my-0" />
+          <div class="divider my-4" />
+        </div>
         </>
       )}
     </TimeLineElement>
@@ -189,7 +232,8 @@ const games_projects = projects.filter((project) =>
   <br>This is my first concrete graphics project (I had already done some very basic programming in OpenGL).
   {minecraft_project && (
       <>
-        <HorizontalCard
+       <div class="mt-4">
+        <TimelineHorizontalCard
           title={minecraft_project.data.title}
           img={minecraft_project.data.heroImage}
           desc={minecraft_project.data.description}
@@ -199,7 +243,8 @@ const games_projects = projects.filter((project) =>
           infos={minecraft_project.data.infos}
           frameImg="/index/frame_dialog.png"
         />
-        <div class="divider my-0" />
+        <div class="divider my-4" />
+      </div>
       </>
     )}
   </TimeLineElement>
@@ -216,9 +261,10 @@ const games_projects = projects.filter((project) =>
     >
     During the Computer Networks course module, I created an online multiplayer brawler game with an integrated rollback system.
     <br>In my opinion, this is the program with the best code architecture of all my projects.
-    {bachelor_project && (
+    {rollback_project && (
         <>
-          <HorizontalCard
+        <div class="mt-4">
+          <TimelineHorizontalCard
             title={rollback_project.data.title}
             img={rollback_project.data.heroImage}
             desc={rollback_project.data.description}
@@ -228,7 +274,8 @@ const games_projects = projects.filter((project) =>
             infos={rollback_project.data.infos}
             frameImg="/index/frame_dialog.png"
           />
-          <div class="divider my-0" />
+          <div class="divider my-4" />
+        </div>
         </>
       )}
     </TimeLineElement>
@@ -241,7 +288,8 @@ const games_projects = projects.filter((project) =>
     <br>This is the most optimised project I have ever done.
     {physics_project && (
         <>
-          <HorizontalCard
+        <div class="mt-4">
+          <TimelineHorizontalCard
             title={physics_project.data.title}
             img={physics_project.data.heroImage}
             desc={physics_project.data.description}
@@ -251,7 +299,8 @@ const games_projects = projects.filter((project) =>
             infos={physics_project.data.infos}
             frameImg="/index/frame_dialog.png"
           />
-          <div class="divider my-0" />
+          <div class="divider my-4" />
+        </div>
         </>
       )}
     </TimeLineElement>
@@ -267,7 +316,8 @@ const games_projects = projects.filter((project) =>
           // Add a condition to render only projects that meet specific criteria
           project && (
             <>
-              <HorizontalCard
+             <div class="mt-4">
+              <TimelineHorizontalCard
                 title={project.data.title}
                 img={project.data.heroImage}
                 desc={project.data.description}
@@ -277,7 +327,8 @@ const games_projects = projects.filter((project) =>
                 infos={project.data.infos}
                 frameImg="/index/frame_dialog.png"
               />
-              <div class="divider my-0" />
+              <div class="divider my-4" />
+            </div>
             </>
           )
         ))
@@ -299,8 +350,8 @@ const games_projects = projects.filter((project) =>
     I'm a 22-year-old junior developer, both rigorous and optimistic. I enjoy working as part of a team and love learning about others’ roles and passions.
     <br>My favorite and most inspiring games are Super Mario Galaxy, Zelda: Breath of the Wild, and Xenoblade Chronicles 2.
     <br>I also have a strong interest in strategy and card games, especially Hearthstone and Slay the Spire.
-    <br>Outside of video games, I'm passionate about cinema, travel, and swimming.
-    <br>I also play a bit of piano in my spare time.
+    <br>Outside of video games, I like going to the cinema, travelling, and swimming.
+    <br>I also play the piano a little in my spare time.
   </div>
 
   <div class="mb-5">

@@ -2,16 +2,19 @@
 const { title, subtitle } = Astro.props;
 ---
 
-<div class="flex">
+<div class="flex w-full">
   <div class="education__time">
     <span class="w-4 h-4 bg-primary block rounded-full mt-1"></span>
     <span class="education__line bg-primary block h-full w-[2px] translate-x-[7px]"></span>
   </div>
-  <div class="experience__data bd-grid px-5">
-    <h3 class="font-semibold mb-1">{title}</h3>
-    <span class="font-light text-sm">{subtitle}</span>
-    <p class="my-2 text-justify">
+
+  <div class="experience__data bd-grid px-5 flex-1 w-full">
+    <h3 class="font-semibold mb-2 text-2xl">{title}</h3>
+    <span class="font-light text-1xl">{subtitle}</span>
+
+    <!-- This wrapper ensures full-width slot layout -->
+    <div class="w-full">
       <slot />
-    </p>
+    </div>
   </div>
 </div>

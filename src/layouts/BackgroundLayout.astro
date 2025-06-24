@@ -16,105 +16,110 @@ const {
   ogType,
 } = Astro.props;
 ---
-<!-- 
-<script>
-  function setupVideo() {
-    const video = document.getElementById("background-video");
-
-    if (!video) return;
-
-    function saveVideoProgress() {
-      sessionStorage.setItem("videoTime", video.currentTime);
-      video.style.opacity = "0.0";
-    }
-
-    function restoreVideoProgress() {
-      const savedTime = sessionStorage.getItem("videoTime");
-      video.style.opacity = "0.0";
-      video.pause();
-      if (savedTime) {
-        video.currentTime = parseFloat(savedTime);
-        video.onseeked = () => {
-          video.style.opacity = "1";
-          video.play();
-        };
-      } else {
-        video.style.opacity = "1";
-      }
-    }
-
-    restoreVideoProgress();
-    window.addEventListener("beforeunload", saveVideoProgress);
-  }
-
-  // document.addEventListener("astro:page-load", () => {
-  //   setupVideo(); // Reapply video logic when switching pages
-  // });
-
-  if (!window.backgroundVideoInitialized) {
-    window.backgroundVideoInitialized = true;
-    setupVideo();
-  }
-</script> -->
 
 <!doctype html>
-<html lang="en" data-theme="synthwave">
+<html lang="en" data-theme="night">
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
     {TRANSITION_API && <ViewTransitions />}
     <style>
-    /* Initially hide the video */
-    .background-video-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        overflow: hidden;
-        background-color: rgba(20, 10, 55, 0.7); /* Dark fallback color */
+      .background-video-container {
+      position: absolute; /* <- au lieu de fixed */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      background-color: rgba(20, 10, 55, 0.7);
       }
 
       .background-video {
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        /* opacity: 0;  */
-        transition: opacity 0.5s; 
+        transition: opacity 0.5s;
       }
 
-      /* Dark Overlay */
       .background-overlay {
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(20, 10, 55, 0.7);
+        background-color: rgba(10, 5, 35, 0.7);
         z-index: -1;
       }
+
+      .hero-section {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        z-index: 1;
+        position: relative;
+        padding: 0 1rem;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* .main-content {
+        padding-top: 100vh;
+      } */
     </style>
   </head>
-  <body>
-    <!-- Persistent Video Background -->
-    <div id="background-video-wrapper">
-      <div class="background-video-container">
-        <!-- <img class="background-video" src="/ruby/gifs/showcase.gif" width="250">
-        </img> -->
-        <video class="background-video" autoplay muted loop playsinline transition:persist id="background-video">
-          <source src="/index/background_showcase_720p.webm" type="video/webm">
-        </video>
+
+  <body class="overflow-x-hidden">
+    <!-- Hero Section with background video -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 z-0"></div>
+    <section class="hero-wrapper relative h-screen">
+      <!-- Background video -->
+      <div id="background-video-wrapper">
+        <div class="background-video-container">
+          <video class="background-video" autoplay muted loop playsinline id="background-video">
+            <source src="/index/background_showcase_720p.webm" type="video/webm" />
+          </video>
+        </div>
+        <div class="background-overlay"></div>
       </div>
-      <div class="background-overlay"></div>
-    </div>
+
+      <!-- Hero Content -->
+      <div class="hero-section relative text-center px-6 bg-black/10 rounded-xl">
+        <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight mb-4">
+          Olivier Pachoud
+        </h1>
+        <div class="w-[80%] sm:w-[500px] h-px mx-auto mb-3 bg-white rounded"></div>
+
+        <p class="text-lg sm:text-2xl max-w-2xl mx-auto text-white font-light leading-relaxed">
+          Junior graphics programmer specialising in real-time rendering and the creation of games.
+        </p>
+
+        <!-- Scroll-down indicator -->
+        <a href="#main-content"
+        class="group absolute bottom-8 justify-content: center; align-items: center; animate-bounce text-white hover:text-primary transition"
+        aria-label="Scroll down">
+        <div class="w-14 h-14 rounded-lg bg-white/5 group-hover:bg-white/10 backdrop-blur-sm flex items-center justify-center transition duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white group-hover:text-primary transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+        </a>
+      </div>
+    </section>
+
 
     <!-- Page Content -->
-    <div class="drawer lg:drawer-open">
+    <div class="drawer lg:drawer-open main-content">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content bg-transparent">
         <Header title={title} />
         <div class="md:flex md:justify-center">
-          <main class="p-6 pt-10 lg:max-w-[1000px] max-w-[100vw] content">
+          <main id="main-content" class="p-6 pt-10 mx-auto px-4 w-full max-w-[1280px] content">
             <slot />
           </main>
         </div>
@@ -122,8 +127,5 @@ const {
       </div>
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
-
-   
-
   </body>
 </html>

@@ -2,9 +2,15 @@
 const today = new Date();
 ---
 
-<footer class="footer footer-center block mb-5 pt-10" style="position: relative;">
-  <div class="pb-2">
-    &copy; {today.getFullYear()} Pachoud Olivier
-  </div>
+<footer class="text-sm text-gray-400 flex justify-center items-center gap-2 py-6">
+  <span>
+    Designed & Developed with 
+    <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-primary no-underline">
+      Astro
+    </a>
+    <span class="inline-block">🚀</span>
+  </span>
+  <span class="mx-2">|</span>
+  <span>&copy; {new Date().getFullYear()} Pachoud Olivier</span>
 </footer>
-<style></style>
+

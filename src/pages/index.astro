@@ -6,7 +6,7 @@ import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
 
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const last_posts = posts.slice(0, 3);
+const last_posts = posts.slice(0, 2);
 
 const projects = (await getCollection("project")).sort((a, b) => {
   // Sort by type first
@@ -41,50 +41,47 @@ const projects = (await getCollection("project")).sort((a, b) => {
 
 // Take only the first two projects
 const featured_projects = projects.filter(project => project.data.type === 'featured').slice(0, 2); 
+
 const academic_projects = projects.filter(project => project.data.type === 'academic').slice(0, 2); 
+const rollback_project = projects.find(
+  (project) => project.data.title === "Penguin battle !"
+);
+
+const spaceplat_project = projects.find(
+  (project) => project.data.title === "Space Platformer"
+);
+
 const personal_projects = projects.filter(project => project.data.type === 'personal').slice(0, 2); 
-const gamejam_projects = projects.filter(project => project.data.type === 'gamejam').slice(0, 2); 
+const pathtracer_project = projects.find(
+  (project) => project.data.title === "PathTracer in CUDA"
+);
+
+const gamejam_projects = projects.filter(project => project.data.type === 'gamejam').slice(0, 1); 
 
 ---
 
 <BackgroundLayout sideBarActiveItemID="home">
-  <div style="display: flex; justify-content: center; align-items: center; margin-top: -100px;">
-    <!-- Girl image with beige tint -->
-    <div style="position: relative;">
-      <img src="/index/Sapphire.png" width="250">
-   </div>
+ <!--
+  <div style="display: flex; align-items: center; gap: 24px; margin-bottom: 40px;">
 
-    <!-- Speech bubble container -->
-    <div style="position: relative; display: inline-block; margin-top: 250px;">
-        <img src="/index/bulle_dialog_ps.png" width="1000" style="display: block; ">
-        
-        <!-- Text inside the speech bubble
-        <div style="
-            position: absolute; 
-            top: 22.5%; 
-            left: 5%; 
-            width: 92%;
-            text-align: left;
-            color: #000000;
-        ">
-            <p style="font-weight: bold; font-size: 1.75vw; margin: 0;">
-                Olivier Pachoud - Junior Graphics Programmer
-            </p>
-            <p style="font-size: 1.25vw; margin: 0;">
-                Hello, I'm a graphics programmer finishing my bachelor's degree in Games Programming at the SAE Institute in Geneva. <br> 
-                I'll be graduating in July 2025. <br> 
-                I'm also interested in game engine programming and game creation.
-            </p>
-        </div> -->
+    <img src="/index/Sapphire.png" alt="Sapphire" width="120" style="margin-left: 0px;">
+      <div style="
+      background: white;
+      color: black;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    ">
+      Explore a showcase of my projects!
     </div>
-</div>
+  </div>
+-->
+    <div class="text-4xl w-full font-bold mb-2" style="position: relative;">
+      Explore a showcase of my projects!
+    </div>  
 
-  <div class="mt-10" style="position: relative;">
-    <div class="text-3xl w-full font-bold mb-2">
-      Explore a showcase of my projects
-    </div>
-  
-    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
+    <div class="text-2xl w-full font-bold mb-2" style="position: relative;">
       Favorite Projects
     </div>
       {
@@ -107,55 +104,65 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
           )
         ))
       }
+
+    <div class="text-2xl w-full font-bold mt-4 mb-2" style="position: relative;">
+      Personal Projects
+    </div>
+      {
+          pathtracer_project && (
+            <>
+              <HorizontalCard
+                title={pathtracer_project.data.title}
+                img={pathtracer_project.data.heroImage}
+                desc={pathtracer_project.data.description}
+                url={`/project/${createSlug(pathtracer_project.data.title, pathtracer_project.slug)}`}
+                target="_self"
+                badge={pathtracer_project.data.state}
+                infos={pathtracer_project.data.infos}
+              />
+              <div class="divider my-0" />
+            </>
+          )
+      }
   
-    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
+    <div class="text-2xl w-full font-bold mt-4 mb-2" style="position: relative;">
       Academic Projects
     </div>
 
       {
-        academic_projects.map((project) => (
-          // Add a condition to render only projects that meet specific criteria
-          project.data.type === 'academic' && (
+         rollback_project && (
             <>
               <HorizontalCard
-                title={project.data.title}
-                img={project.data.heroImage}
-                desc={project.data.description}
-                url={`/project/${createSlug(project.data.title, project.slug)}`}
+                title={rollback_project.data.title}
+                img={rollback_project.data.heroImage}
+                desc={rollback_project.data.description}
+                url={`/project/${createSlug(rollback_project.data.title, rollback_project.slug)}`}
                 target="_self"
-                badge={project.data.state}
-                infos={project.data.infos}
+                badge={rollback_project.data.state}
+                infos={rollback_project.data.infos}
               />
               <div class="divider my-0" />
             </>
           )
-        ))
+      }
+      {
+            spaceplat_project && (
+            <>
+              <HorizontalCard
+                title={spaceplat_project.data.title}
+                img={spaceplat_project.data.heroImage}
+                desc={spaceplat_project.data.description}
+                url={`/project/${createSlug(spaceplat_project.data.title, spaceplat_project.slug)}`}
+                target="_self"
+                badge={spaceplat_project.data.state}
+                infos={spaceplat_project.data.infos}
+              />
+              <div class="divider my-0" />
+            </>
+          )
       }
   
-    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
-      Personal Projects
-    </div>
-      {
-        personal_projects.map((project) => (
-          // Add a condition to render only projects that meet specific criteria
-          project.data.type === 'personal' && (
-            <>
-              <HorizontalCard
-                title={project.data.title}
-                img={project.data.heroImage}
-                desc={project.data.description}
-                url={`/project/${createSlug(project.data.title, project.slug)}`}
-                target="_self"
-                badge={project.data.state}
-                infos={project.data.infos}
-              />
-              <div class="divider my-0" />
-            </>
-          )
-        ))
-      }
-
-    <div class="text-xl w-full font-bold mb-2" style="position: relative;">
+    <div class="text-2xl w-full font-bold mt-4 mb-2" style="position: relative;">
       Game Jam Projects
     </div>
       {
@@ -179,16 +186,17 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
       }
   </div>
   
-  <div class="flex justify-center mt-4" style="position: relative;">
-    <a href="/project" class="btn btn-outline text-lg w-full max-w-xs">
+  <div class="flex justify-center mt-8" style="position: relative;">
+    <a href="/project" class="btn btn-outline text-lg w-full max-w-xs border-white-500 text-white-500 hover:bg-blue-500 hover:text-white transition">
       View All Projects
     </a>
   </div>
   
+  
 
 
   <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10" style="position: relative;">My latest blog posts</div>
+    <div class="text-4xl w-full font-bold mb-5 mt-10" style="position: relative;">My latest blog posts</div>
   </div>
 
   {
@@ -207,8 +215,8 @@ const gamejam_projects = projects.filter(project => project.data.type === 'gamej
     ))
   }
 
-<div class="flex justify-center mt-4" style="position: relative;">
-  <a href="/blog" class="btn btn-outline text-lg w-full max-w-xs">
+<div class="flex justify-center mt-8" style="position: relative;">
+  <a href="/project" class="btn btn-outline text-lg w-full max-w-xs border-white-500 text-white-500 hover:bg-blue-500 hover:text-white transition">
     View All Blog Posts
   </a>
 </div>
