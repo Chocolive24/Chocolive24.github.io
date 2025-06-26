@@ -17,15 +17,26 @@ tags: ["Network", "Rollback", "Game", "2D", "C++", "Photon Realtime", "SAE"]
 relatedBlogs: ["How did I implement rollback for my online C++ game."]
 ---
 
-## Context
+# <div class="text-center mt-16">Context</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 This project was carried out during the **second half of a course module on Computer Network** at **SAE Institut Geneva** as part of the **second year of the Bachelor's degree in Games Programming**. This half of the module **focused on** **rollback and determinism in game simulation**.
 
 We had to make an **online game** **using** our [**from scratch physics engine**](/project/2d-physics-engine) created during the first course module of the same year. We had to **add rollback over our network protocol** and a **checksum** to **ensure** the **integrity of our simulation**.
 
 I decided to create a **brawler-style game** where you take on another player by **shooting snowballs** at them, with the aim of **pushing your opponent** to the **sharp edges** of the arena.
 
-## Showcase
+</div>
+
+# <div class="text-center mt-16">Showcase</div>
+
+<div class="max-w-4xl mx-auto text-center">
 Here's a quick gameplay of my game in real conditions:
+</div>
+
+
+
 <div style="text-align:center">
   <video controls>
     <source src="/rollback_game/videos/gameplay.mp4" type="video/mp4">
@@ -33,12 +44,22 @@ Here's a quick gameplay of my game in real conditions:
   </video>
 </div>
 
-## Project Architecture
+</div>
+
+# <div class="text-center mt-16">Project Architecture</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 I've put a lot of effort into having a well-structured code architecture so that I can easily create test and debug applications to lighten the complexity of implementing the rollback system:
+
+</div>
+
 <div style="text-align:center">
   <img src="/rollback_game/images/rollback_project_architecture.png" alt="My project architecture" />
   <p style="margin-top: -30px"><em>My project architecture</em></p>
 </div>
+
+<div class="max-w-4xl mx-auto text-justify">
 
 The architecture is divided into 4 modules:
 - The Game module, which follows a Model-View-Controller architecture
@@ -46,8 +67,16 @@ The architecture is divided into 4 modules:
 - The Client module, which provides the link between the game module and the network module
 - The Application module, which uses an interface to create several types of application, in particular to create debugging applications.
 
-### Simulation Application
+</div>
+
+## <div class="text-center mt-16">Simulation Application</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 This application contains both clients in the same window and uses a mock network implementation to create any type of network condition:
+
+</div>
+
 <div style="text-align:center">
   <video controls>
     <source src="/rollback_game/videos/simul_app.mp4" type="video/mp4">
@@ -57,7 +86,12 @@ This application contains both clients in the same window and uses a mock networ
    I can easily change the delay and packet loss values to test my game in very poor network conditions.</em></p>
 </div>
 
+<div class="max-w-4xl mx-auto text-justify">
+
 By the way, this application was extremely useful when I was making my rollback prototypes, so I could access the debugger on both clients at the same time.
+
+</div>
+
 <div style="text-align:center">
   <video controls>
     <source src="/rollback_game/videos/test_rollback.mp4" type="video/mp4">
@@ -66,8 +100,14 @@ By the way, this application was extremely useful when I was making my rollback 
   <p style="margin-top: -30px"><em>The rollback prototype using the SimulationApplication.</em></p>
 </div>
 
-### Split Screen Application
+## <div class="text-center mt-16">Split Screen Application</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 This application is similar to the simulation application, but uses the implementation of the real network to test the game under real network conditions.
+
+</div>
+
 <div style="text-align:center">
   <video controls>
     <source src="/rollback_game/videos/split_screen_app.mp4" type="video/mp4">
@@ -76,8 +116,14 @@ This application is similar to the simulation application, but uses the implemen
   <p style="margin-top: -30px"><em>The SplitScreenApplication running two clients in the same window using the network.</em></p>
 </div>
 
-### Client Application
+## <div class="text-center mt-16">Client Application</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 Finally the ClientApplication is the target build application which consists of a client using the real network implementation. This is the executable that is built in release and put online for anyone to play with.
+
+</div>
+
 <div style="text-align:center">
   <video controls>
     <source src="/rollback_game/videos/client_app.mp4" type="video/mp4">
@@ -86,7 +132,10 @@ Finally the ClientApplication is the target build application which consists of 
   <p style="margin-top: -30px"><em>Two ClientApplication each running one client using the network.</em></p>
 </div>
 
-## What did I learn ?
+# <div class="text-center mt-16">What did I learn ?</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 - Implement a rollback system
 - Ensure the integrity of a simulation via a checksum
 - Separate the various game systems to resimulate them individually
@@ -95,6 +144,4 @@ Finally the ClientApplication is the target build application which consists of 
 - Use photon real time
 - Use raylib
 
-<!-- ## Blog Post
-I've written a blog post on my rollback implementation and my code architecture.
-[Read it here](/blog/how-did-i-implement-rollback-for-my-online-c-game) -->
+</div>

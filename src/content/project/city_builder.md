@@ -17,23 +17,44 @@ infos: {
 tags: ["C++", "Low-Level Programming", "Game", "SAE", "Hot Reload", "Engine", "Group"]
 ---
 
-## Context
+# <div class="text-center mt-16">Context</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 This **group project** was carried out during a **course module on low-level C++ programming** and the creation of **game tools and engines** at **SAE Institut Geneva** in the **1st year of the Games Programming bachelor's degree**.
 
 The aim was to **continue developing** our [from scratch game engine](/project/bopys-puzzle-adventure--runner-game) that we had started at the **beginning of the same course module**. The **city builder was a pretext** for **adding new features** to the **game engine** such as: **Rule tiles** for our tilemap editor, **Hot Reload**, **data serialization** and a **bit of multithreading** for the game's IAs.
 
 I was **personally in charge of** the **graphic code**, such as the **game's camera and UI** as well as the **hot reload system**.
 
-## Showcase
+</div>
+
+# <div class="text-center mt-16">Showcase</div>
+
+<div class="max-w-4xl mx-auto text-center">
+
 Here is a gameplay video of the game:
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/NIFCpFLbMWY?si=sVnPXajlPtknl8Ay" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+</div>
+
+<iframe width="100%" height="608" src="https://www.youtube.com/embed/NIFCpFLbMWY?si=sVnPXajlPtknl8Ay" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<div class="max-w-4xl mx-auto text-center">
 
 Here is a video demonstration of the game engine's Hot Reload system:
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/EjKOrPznPmA?si=HGXVqrWm1sTXQisa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## What did I learn ?
+</div>
+
+<iframe width="100%" height="608" src="https://www.youtube.com/embed/EjKOrPznPmA?si=HGXVqrWm1sTXQisa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+# <div class="text-center mt-16">What did I learn ?</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 - Low Level C++ Programming
 - Hot Reload for Windows applications
 - Linear Algebra to create a Camera
 - Implementing and using ImGUI
 - Basics of multithreading
+
+</div>

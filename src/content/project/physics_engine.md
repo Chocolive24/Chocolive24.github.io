@@ -23,18 +23,29 @@ tags:
 relatedBlogs: ["The optimisations I made to my 2D C++ physics engine"]
 ---
 
-<!-- import YoutubePlayer from '/src/components/YoutubePlayer.astro'; -->
+# <div class="text-center mt-16">Context</div>
 
-## Context
+<div class="max-w-4xl mx-auto text-justify">
+
 This physics engine was programmed during a **course module** on **physics**, **maths**, **optimisation**, **CPU architecture**, **Assembly** and **profiling** at **SAE Institut Geneva** in the **2nd year of a bachelor's degree in Games Programming**.
 
 The **aim** was to **write** the engine as an **API** that anyone could use, and to **optimise it** accordingly. The engine had to be capable of **running** a sample with **1000 colliders in trigger** mode at a minimum of **60fps**.
 
 We wrote our **own maths library** as well as **standard C++ classes** such as **smart pointers** in order to use our **custom allocators** to **profile** the **program's memory management**.
 
-## Showcase
+</div>
+
+# <div class="text-center mt-16">Showcase</div>
+
+<div class="max-w-4xl mx-auto text-center">
+
 Here is a short showcase video:
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/Z83k0WTJZsk?si=22S3ad54ErI-Jlrm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+</div>
+
+<iframe width="100%" height="608" src="https://www.youtube.com/embed/Z83k0WTJZsk?si=22S3ad54ErI-Jlrm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<div class="max-w-4xl mx-auto text-justify">
 
 The main optimisations made to my engine are:
 - The creation of a broadphase with a Quadtree
@@ -43,6 +54,9 @@ The main optimisations made to my engine are:
 - Use data structures that store objects linearly in memory to speed up memory accesses.
 
 Here is a comparison of the performance of the sample of 1000 trigger colliders before and after optimisations:
+
+</div>
+
 <div style="text-align:center;">
     <table>
     <tr>
@@ -55,7 +69,12 @@ Here is a comparison of the performance of the sample of 1000 trigger colliders 
     <p style="margin-top: -60px"><em>GIFs are at 30 fps, so it's hard to tell whether the right-hand version is actually fluid. </em></p></td>
 </div>
 
+<div class="max-w-4xl mx-auto text-center">
+
 Let's have a look at some frame images from Tracy:
+
+</div>
+
 <div style="text-align:center">
   <img src="/physics_engine_opti/images/noBroadFrame.png">
   <p style="margin-top: -30px"><em>One frame of the version without optimizations.</em></p>
@@ -66,7 +85,11 @@ Let's have a look at some frame images from Tracy:
   <p style="margin-top: -30px"><em>One frame with the final version with optimizations.</em></p>
 </div>
 
+<div class="max-w-4xl mx-auto text-center">
+
 Let's take a look at the time saved when executing the world's "Update" function:
+
+</div>
 
 | **World Update**       | **Mean (ms)** | **Median (ms)** | **Std Dev (ms)** | **Observations** |
 |------------------------|---------------|-----------------|------------------|------------------|
@@ -79,9 +102,16 @@ Let's take a look at the time saved when executing the world's "Update" function
 | 808.32                   | 23.21                   | 47.71                    | 760.61               | 856.03                 |
 **Table: Difference of Means and Confidence Interval (95% Confidence Level)**
 
+<div class="max-w-4xl mx-auto text-center">
+
 With all the changes made to my engine I saved between 760ms and 856ms.
 
-## Features
+</div>
+
+# <div class="text-center mt-16">Features</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 - Creation of bodies.
   - Attributes:
     - Position
@@ -106,11 +136,9 @@ With all the changes made to my engine I saved between 760ms and 856ms.
   - Trigger mode
 - Broad Phase with Quadtree
 
-<!-- <YoutubePlayer id="rNb0OLZd4wg" />
+</div>
 
-<button id="playButton">Launch Physics Engine 2D</button> -->
-
-## Web version (still in prototype)
+# <div class="text-center mt-16">Web version (still in prototype)</div>
 
 <div class="mb-5 flex flex-col items-center mt-4" style="position: relative;">
   <!-- Button -->
@@ -128,7 +156,7 @@ With all the changes made to my engine I saved between 760ms and 856ms.
       frameborder="0"
       src="https://itch.io/embed-upload/9943561?color=04476f"
       width="100%"
-      height="750"
+      height="800"
     >
     </iframe>
   </div>
@@ -180,7 +208,10 @@ With all the changes made to my engine I saved between 760ms and 856ms.
 
 <!-- <iframe frameborder="0" src="https://itch.io/embed/2219858" width="552" height="167"><a href="https://chocolive.itch.io/card-master-penguin">Card Master Penguin by Chocolive</a></iframe> -->
 
-## What did I learn ?
+# <div class="text-center mt-16">What did I learn ?</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 - Basics of Calculus
 - Basics of Linear Algebra
 - Basics of Physics
@@ -197,6 +228,4 @@ With all the changes made to my engine I saved between 760ms and 856ms.
 - How a modern CPU works
 - Performing statistical tests
 
-<!-- ## Blog Post
-I've written a blog post on the various optimisations I've made to my programme.
-[Read it here](/blog/the-optimisations-i-made-to-my-2d-c-physics-engine/) -->
+</div>

@@ -16,26 +16,47 @@ infos: {
 tags: ["Game Jam", "Game", "Unreal", "Dungeon Crawler", "Combo", "Tactical", "3D", "Group"]
 ---
 
-## Context
+# <div class="text-center mt-16">Context</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 This game was created during the **Dungeon Crawler Jam 2023**. We had **one week** to make a **first person grid based dungeon crawler game**. The **theme** of the Jam was **"Duality"**. We used **Unreal 4** to develop the game. Personally, it was the **first time** I had **developed a game on Unreal**
 
 We decided to make a **Dungeon Crawler** in which there are rooms with enemies that we **fight in turn-based battle** using **attacks based on key combos**. For the **artistic direction**, we opted for a **pixelated 3D rendering** similar to **old PS1** games.
 
-## Organisation Chart
+</div>
+
+# <div class="text-center mt-16">Showcase</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
+Play as a robot whose mission is to make a choice about the fate of robots abandoned after a heavy battle organized by humans. Discover the 2 different factions of robots left behind in a derelict spaceship and listen to what they have to say to choose which side you will help.
+
+Here is a short showcase video (Unfortunately, the game has a bug that causes combat to crash and freezes the player):
+
+</div>
+
+<iframe width="100%" height="608" src="https://www.youtube.com/embed/_mlg-ngFzEs?si=Uw7NCskHyPoMqmLW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+# <div class="text-center mt-16">Organisation Chart</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 - Joey Gugler: Art and Code
 - Me: Code
 - Leonar Sadriu SFX and Music
 
-## Showcase
-Play as a robot whose mission is to make a choice about the fate of robots abandoned after a heavy battle organized by humans. Discover the 2 different factions of robots left behind in a derelict spaceship and listen to what they have to say to choose which side you will help.
+</div>
 
-Here is a short showcase video (Unfortunately, the game has a bug that causes combat to crash and freezes the player):
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/_mlg-ngFzEs?si=Uw7NCskHyPoMqmLW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+# <div class="text-center mt-16">What did I learn ?</div>
 
-## What did I learn ?
+<div class="max-w-4xl mx-auto text-justify">
+
 - To work under the stress of timing
 - To work as part of a team
   - Brainstorming as a group
   - Sharing tasks
   - Integrating my colleagues' assets
 - The basics of development with Unreal
+
+</div>
