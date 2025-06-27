@@ -6,7 +6,7 @@ endDate: "10 March 2025"
 top: "1"
 type: "featured"
 state: "active"
-heroImage: "/ruby/gifs/showcase.gif"
+heroImage: "/ruby/gifs/showcase2.gif"
 infos: {
   "/icones/people.svg": "6",
   "/icones/clock.svg": "6 months",
