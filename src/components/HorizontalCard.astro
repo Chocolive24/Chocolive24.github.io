@@ -19,13 +19,14 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
   <div class="relative w-full rounded-xl shadow-md transition-transform hover:scale-[1.05] flex flex-col lg:flex-row">
 
     <!-- Image section -->
+    <!-- group-hover:rotate-[-1deg] -->
     <div class="relative w-full md:w-1/2 h-[250px] md:h-[350px] overflow-hidden rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
       <Image
         src={img}
         alt={title}
         width={800}
         height={450}
-        class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-[1.025] group-hover:rotate-[-1deg]"
+        class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-[1.025]"  
       />
     </div>
 

@@ -19,12 +19,22 @@ relatedBlogs: ["Ruby and the Lost Crystals: Project Debrief",
   "Ruby and The Lost Crystals: Post-Mortem."]
 ---
 
+
+
 <div style="text-align:center">
-  <img src="/ruby/images/poster.jpg" alt="Poster of the game" style="width: 50%;">
+  <img src="/ruby/images/poster_16_9.jpg" alt="Poster of the game" style="width: 100%;">
   <p style="margin-top: -30px"><em>Poster of our game</em></p>
 </div>
 
-# <div class="text-center">Context</div>
+<div class="text-center mt-16">
+  <iframe style="border: 0; color-scheme: normal; display:block; margin:auto;"
+    src="https://store.steampowered.com/widget/3807810/"
+    width="85%"
+    height="190">
+  </iframe>
+</div>
+
+# <div class="text-center mt-16">Context</div>
 
 <div class="max-w-4xl mx-auto text-justify">
 
@@ -187,7 +197,7 @@ Here is a video showing all the tweakable parameters of my cel shader in Unreal.
 
 <iframe width="100%" height="608" src="https://www.youtube.com/embed/dJzH4OkNIiw?si=EZulL54fo9JTGmWB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<div class="max-w-4xl mx-auto text-justify">
+<div class="max-w-4xl mx-auto text-justify mt-16">
 
 **August 2024**: We created this proof of concept during our summer holidays following feedback on our Jullet prototype from our main mentor Nicolas Brière (CEO at Old Skull Games).
 <br>The goal was to represent our creative ideas through placeholders, our gameplay ideas through grayboxing, and to prove that the game is fun. We also wanted to start the project on a solid foundation to motivate Game Art and Audio students to come and work on the
@@ -196,7 +206,7 @@ Here is a video showing all the tweakable parameters of my cel shader in Unreal.
 
 <iframe width="100%" height="608" src="https://www.youtube.com/embed/X0bnC_ms4Og?si=UUUXx-IuADwCqKzb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<div class="max-w-4xl mx-auto text-justify">
+<div class="max-w-4xl mx-auto text-justify mt-16">
 
 **31 October**: 1st production prototype focused on game mechanics and feedbacks.
 <br> The objective of this milestone was to validate all the main features, work on gameplay feedback, and draft an initial level design for the vertical slice.
@@ -205,7 +215,7 @@ Here is a video showing all the tweakable parameters of my cel shader in Unreal.
 
 <iframe width="100%" height="608" src="https://www.youtube.com/embed/zMjtl-OyK8k?si=uw2Kehp4z7V53wnD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<div class="max-w-4xl mx-auto text-justify">
+<div class="max-w-4xl mx-auto text-justify mt-16">
 
 **19 December 2024**: 2nd production prototype which aimed to have 80% of the game experience as well as the final level design for the vertical slice. We also worked on the narration to add more context and life to the game.
 
@@ -213,7 +223,7 @@ Here is a video showing all the tweakable parameters of my cel shader in Unreal.
 
 <iframe width="100%" height="608" src="https://www.youtube.com/embed/FqNpRNgoEnc?si=v76iF2ODPO_Gar9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<div class="max-w-4xl mx-auto text-justify">
+<div class="max-w-4xl mx-auto text-justify mt-16">
 
 **14 February 2025**: vertical slice for the school's submission deadline. 
 <br>Although there is still a lot of graybox, we managed to create a stylised art direction that is consistent with our goals of creating a calm and cute atmosphere. We also have a total game time of 40 minutes with in-game narration.

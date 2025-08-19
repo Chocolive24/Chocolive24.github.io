@@ -6,7 +6,7 @@ endDate: "18 July 2025"
 top: "2"
 type: "featured"
 state: "active"
-heroImage: "/fluid_simul_rendering/gifs/fluid_pp2.gif"
+heroImage: "/fluid_simul_rendering/gifs/raymarching.gif"
 infos: {
   "/icones/people.svg": "1",
   "/icones/clock.svg": "5 months",
@@ -20,71 +20,69 @@ tags: ["Computer Graphics", "C++", "DirectX12", "DXR", "3D", "HLSL", "Compute Sh
 
 <div class="max-w-4xl mx-auto text-justify">
 
-This project is the **practical part** of my **bachelor's thesis**, which explores the question:<br>
-"**What are the challenges of representing a dynamic and implicit fluid in a raytracing pipeline using the DXR API?**"
-The analysis is **based on a particle-based fluid simulation**.
-
-The project is **still under development**.
-
-The **aim** of the project is to **evaluate** the **feasibility** and **limitations of** using the **DXR API** for **implicit surface rendering in real time**, and to better understand the **strengths and weaknesses of this new technology**.
+This project is the **practical component** of my **bachelor’s thesis**.
+Its goal was to explore **how to represent dynamic implicit fluids (SPH simulation) inside a real-time raytracing pipeline using the DXR API**.
+I compared **two rendering strategies**: **volumetric raymarching** and **surface reconstruction with marching cubes**. Both were fully integrated into a **DXR pipeline with recursive ray tracing** for realistic **reflection, refraction, and absorption.**
 
 The **SPH** simulation was originally **developed by fellow Games Programming student** at SAE Institute Geneva, **Constantin Verine**, as part of his bachelor's project.  
 [Click here to view his project](https://cochta.github.io/work/nested/sph/)  
+
 **Together**, we **converted his CPU-based simulation into a compute shader**, enabling me to render it using **DXR ray tracing**.
 
 </div>
 
-# <div class="text-center mt-16">Showcase</div>
+# <div class="text-center mt-16">Raymarching</div>
 
-<div class="max-w-4xl mx-auto text-justify">
+<div class="max-w-4xl mx-auto text-justifiy">
 
-To investigate the question, I implemented **two distinct algorithmic approaches**. <br>
-The **first** uses a **raymarching algorithm** within a **custom intersection shader**, enabling fluid rendering without the need to build a mesh.
+The raymarching approach directly samples the 3D density field of the SPH fluid, capturing fine volumetric details such as soft shadows, absorption, and smooth refractions.
+It produces visually rich results, though at a higher performance cost due to heavy sampling.
 
-Here is a **raymarching prototype rendering** with a **large smoothing radius** for the particles:
-
-</div>
-
-<iframe width="100%" height="608" src="https://www.youtube.com/embed/i1z3RcGXBNA?si=gUeDuqKPVRSd2x3X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-<div class="max-w-4xl mx-auto text-justify">
-
-Here is another **raymarching prototype rendering** with a **smaller smoothing radius** for the particles.<br>
-The **physical simulation doesn't work very well**, but the **raymarching rendering is more realistic**:
+Here is a video showcasing the final result of the Raymarching approach:
 
 </div>
 
-<iframe width="100%" height="608" src="https://www.youtube.com/embed/RZBez64xHnQ?si=RsFfHan2QMAddUC1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="608" src="https://www.youtube.com/embed/Pw_ZO3yZ1KA?si=nrDLmG1IJ5lLWNSa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 <div class="max-w-4xl mx-auto text-justify">
 
-The **second approach** constructs a mesh using the **marching cubes algorithm**, allowing the pipeline to leverage **hardware-accelerated ray-triangle intersections**.
+# <div class="text-center mt-16">Marching Cubes</div>
 
-Here is a **marching cubes prototype rendering** testing the normals of the mesh with reflection rays.<br>
-It **currently has visual bugs with triangles**. It is very **complicated to rebuild the DXR acceleration structure for each frame** for this type of dynamic mesh.
+The marching cubes approach reconstructs a dynamic mesh from the density field each frame.
+This method leverages DXR’s hardware-accelerated ray–triangle intersections, making it more efficient, but at the cost of less volumetric detail and flatter shadows.
+
+Here is a video showcasing the final result of the Marching Cubes approach:
 
 </div>
 
-<iframe width="100%" height="608" src="https://www.youtube.com/embed/0hONcy9ogoc?si=mkl2wOoTtwYymbU0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="100%" height="608" src="https://www.youtube.com/embed/p1g26_zB8Lo?si=l71Fzxm5sCajZ9rH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-# <div class="text-center mt-16">Development Screenshots</div>
+# <div class="text-center mt-16">Rendering Comparison</div>
 
-<img src="/fluid_simul_rendering/images/CubeAndGroundBuggy.png" alt="Poster of the game" style="width: 100%;">
-<img src="/fluid_simul_rendering/images/transform1.png" alt="Poster of the game" style="width: 100%;">
-<img src="/fluid_simul_rendering/images/c3.png" alt="Poster of the game" style="width: 100%;">
-<img src="/fluid_simul_rendering/images/c4.png" alt="Poster of the game" style="width: 100%;">
+<div style="text-align:center">
+    <table>
+    <tr>
+        <td> <img src="/fluid_simul_rendering/images/raymarching1.png" width=550/>
+        <td>  <img src="/fluid_simul_rendering/images/marchingcubes1.png" width=550/>
+    </tr>
+    <tr>
+        <td> <img src="/fluid_simul_rendering/images/raymarching2.png" width=550/>
+        <td>  <img src="/fluid_simul_rendering/images/marchingcubes2.png" width=550/>
+    </tr>
+    </table>
+</div>
 
 # <div class="text-center mt-16">What did I learn ?</div>
 
 <div class="max-w-4xl mx-auto text-justify">
 
 - Using the DXR raytracing pipeline
-- Creating custom intersection shaders
+- Creating custom intersection shaders to define a surface intersection.
+- Creating custom anyhit shaders to render volumetric shadows.
 - The main optical properties of a fluid and their implementation in raytracing
   - Reflection
   - Refraction
   - Absorption
-  - Scattering
 - The raymarching algorithm
 - The Marching Cubes algorithm
 - Change the values of a mesh's vertices in real time in the DXR acceleration structure
