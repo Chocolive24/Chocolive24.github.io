@@ -316,7 +316,7 @@ Here is a video showing all the tweakable parameters of my cel shader in Unreal.
   </a>
 </div>
 
-### Statistics
+<!-- ### Statistics
 During the event and the week that followed, **our itch.io page** for the game **racked up 104 views**. 
 
 <div class="gallery">
@@ -324,6 +324,6 @@ During the event and the week that followed, **our itch.io page** for the game *
     <img src="/ruby/images/fantasy_basel/itch_views.png" alt="Event photo 1" style="width: 100%; height: auto;">
       <p style="margin-top: -30px"><em>Graph showing the number of views on our itch.io page.</em></p>
   </a>
-</div>
+</div> -->
 
-On the **last day** of the convention, following the success of our game, we had the idea of **creating a mailing list** to inform interested parties about the free release of our game on Steam. We managed to **collect 13 emails that day**.
+<!-- On the **last day** of the convention, following the success of our game, we had the idea of **creating a mailing list** to inform interested parties about the free release of our game on Steam. We managed to **collect 13 emails that day**. -->

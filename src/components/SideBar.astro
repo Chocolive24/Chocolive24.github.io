@@ -15,17 +15,36 @@ import SideBarMenu from "./SideBarMenu.astro";
     
     <span class="font-semibold text-white hidden sm:inline">Olivier Pachoud</span>
   </div>
+
+
   <!-- Bloc centre : Menu -->
-  <div class="hidden md:flex flex gap-6 text-sm md:text-base font-medium items-center text-white">
+  <!-- <div class="hidden md:flex flex gap-6 text-sm md:text-base font-medium items-center text-white">
     <a href="/" class={sideBarActiveItemID === 'home' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>Home</a>
     <a href="/project" class={sideBarActiveItemID === 'project' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>Projects</a>
     <a href="/blog" class={sideBarActiveItemID === 'blog' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>Blog</a>
     <a href="/cv" class={sideBarActiveItemID === 'cv' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>About</a>
     <a href="mailto:olivierpachoud2@gmail.com" class={sideBarActiveItemID === 'contact' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>Contact</a>
-  </div>
+  </div>  -->
+
+  <!-- Navigation centrée -->
+    <div class="absolute left-1/2 transform -translate-x-1/2 flex hidden md:flex flex gap-6 text-sm md:text-base font-medium items-center text-white">
+      <a href="/" class={sideBarActiveItemID === 'home' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>Home</a>
+      <a href="/project" class={sideBarActiveItemID === 'project' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>Projects</a>
+      <a href="/blog" class={sideBarActiveItemID === 'blog' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>Blog</a>
+      <a href="/cv" class={sideBarActiveItemID === 'cv' ? 'border-b-2 border-primary pb-1' : 'hover:text-primary'}>About</a>
+    </div>
 
   <!-- Bloc droite : Icônes GitHub / Itch / LinkedIn -->
   <div class="flex gap-1">
+    <!-- Email -->
+    <a href="mailto:olivierpachoud2@gmail.com" class="mx-3" aria-label="Email" title="Email">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          viewBox="0 0 24 24" style="fill: currentColor;">
+        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 12 4 6.01V6h16zM4 18V8.236l7.382 5.536a1 1 0 0 0 1.236 0L20 8.236V18H4z"/>
+      </svg>
+    </a>
+
+
     <!-- Linkedin -->
     <a href="https://www.linkedin.com/in/olivier-pachoud-bba685237" target="_blank" class="mx-3" aria-label="Linkedin" title="Linkedin">
         <?xml version="1.0" ?><svg height="24" viewBox="0 0 72 72" width="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" fill="#FFF"/><path d="M62,62 L51.315625,62 L51.315625,43.8021149 C51.315625,38.8127542 49.4197917,36.0245323 45.4707031,36.0245323 C41.1746094,36.0245323 38.9300781,38.9261103 38.9300781,43.8021149 L38.9300781,62 L28.6333333,62 L28.6333333,27.3333333 L38.9300781,27.3333333 L38.9300781,32.0029283 C38.9300781,32.0029283 42.0260417,26.2742151 49.3825521,26.2742151 C56.7356771,26.2742151 62,30.7644705 62,40.051212 L62,62 Z M16.349349,22.7940133 C12.8420573,22.7940133 10,19.9296567 10,16.3970067 C10,12.8643566 12.8420573,10 16.349349,10 C19.8566406,10 22.6970052,12.8643566 22.6970052,16.3970067 C22.6970052,19.9296567 19.8566406,22.7940133 16.349349,22.7940133 Z M11.0325521,62 L21.769401,62 L21.769401,27.3333333 L11.0325521,27.3333333 L11.0325521,62 Z" fill="#000"/></g></svg>
@@ -76,6 +95,14 @@ import SideBarMenu from "./SideBarMenu.astro";
 
     <!-- Réseaux sociaux à droite -->
     <div class="flex gap-2">
+
+      <a href="mailto:olivierpachoud2@gmail.com" class="mx-3" aria-label="Email" title="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" style="fill: currentColor;">
+          <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 12 4 6.01V6h16zM4 18V8.236l7.382 5.536a1 1 0 0 0 1.236 0L20 8.236V18H4z"/>
+        </svg>
+      </a>
+
       <!-- Linkedin -->
       <a href="https://www.linkedin.com/in/olivier-pachoud-bba685237" target="_blank" class="mx-3" aria-label="Linkedin" title="Linkedin">
         <?xml version="1.0" ?><svg height="24" viewBox="0 0 72 72" width="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M8,72 L64,72 C68.418278,72 72,68.418278 72,64 L72,8 C72,3.581722 68.418278,-8.11624501e-16 64,0 L8,0 C3.581722,8.11624501e-16 -5.41083001e-16,3.581722 0,8 L0,64 C5.41083001e-16,68.418278 3.581722,72 8,72 Z" fill="#FFF"/><path d="M62,62 L51.315625,62 L51.315625,43.8021149 C51.315625,38.8127542 49.4197917,36.0245323 45.4707031,36.0245323 C41.1746094,36.0245323 38.9300781,38.9261103 38.9300781,43.8021149 L38.9300781,62 L28.6333333,62 L28.6333333,27.3333333 L38.9300781,27.3333333 L38.9300781,32.0029283 C38.9300781,32.0029283 42.0260417,26.2742151 49.3825521,26.2742151 C56.7356771,26.2742151 62,30.7644705 62,40.051212 L62,62 Z M16.349349,22.7940133 C12.8420573,22.7940133 10,19.9296567 10,16.3970067 C10,12.8643566 12.8420573,10 16.349349,10 C19.8566406,10 22.6970052,12.8643566 22.6970052,16.3970067 C22.6970052,19.9296567 19.8566406,22.7940133 16.349349,22.7940133 Z M11.0325521,62 L21.769401,62 L21.769401,27.3333333 L11.0325521,27.3333333 L11.0325521,62 Z" fill="#000"/></g></svg>
