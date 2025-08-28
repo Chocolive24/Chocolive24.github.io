@@ -1,5 +1,5 @@
 ---
-title: "Penguin battle !"
+title: "Penguins battle !"
 description: "A multiplayer online brawler-style game with rollback made in C++ where two penguins fight with snowballs. The game's physics engine is my own from scratch engine"
 startDate: "05 April 2024"
 endDate: "26 April 2024"

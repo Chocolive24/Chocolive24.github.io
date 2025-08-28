@@ -1,6 +1,6 @@
 ---
 title: "Ruby and The Lost Crystals"
-description: "A 3D stylized puzzle shooter set in the ancient ruins of the Crystalins, a lost race of living stones. Solve puzzles and use magic projectiles to restore their scattered crystals."
+description: "A 3D stylised puzzle shooter game set in the ancient ruins of the Crystalins, a lost race of living stones. Solve puzzles and use magic projectiles to restore their scattered crystals. Available on Steam"
 startDate: "04 September 2024"
 endDate: "10 March 2025"
 top: "1"

@@ -1,6 +1,6 @@
 ---
-title: "Bachelor's Project: Fluid Simulation Raytracing Rendering"
-description: "A SPH fluid simulation rendered with a DXR raytracing pipeline."
+title: "Bachelor's Project: DXR Fluid Simulation Rendering"
+description: "An SPH fluid simulation rendered with Raymarching and Marching Cubes in a custom DXR Pipeline."
 startDate: "14 Mars 2025"
 endDate: "18 July 2025"
 top: "2"
