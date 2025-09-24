@@ -43,8 +43,9 @@ const projects = (await getCollection("project")).sort((a, b) => {
 const featured_projects = projects.filter(project => project.data.type === 'featured').slice(0, 2); 
 
 const academic_projects = projects.filter(project => project.data.type === 'academic').slice(0, 2); 
+
 const rollback_project = projects.find(
-  (project) => project.data.title === "Penguin battle !"
+  (project) => project.data.title === "Penguins battle !"
 );
 
 const spaceplat_project = projects.find(
