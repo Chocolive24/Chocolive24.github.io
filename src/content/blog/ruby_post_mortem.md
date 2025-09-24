@@ -6,6 +6,19 @@ heroImage: "/ruby/gifs/showcase.gif"
 tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]
 ---
 
+<details class="group my-8 max-w-4xl mx-auto">
+  <summary class="list-none cursor-pointer inline-flex items-center gap-2 w-fit text-gray-300">
+    <!-- Flèche -->
+    <svg class="w-10 h-10 transition-transform group-open:rotate-90"
+         xmlns="http://www.w3.org/2000/svg" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5l7 7-7 7" /></svg>
+    <!-- Texte -->
+    <span class="text-4xl font-bold color-white">Content</span>
+  </summary>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 - [1. Introduction](#1-introduction)
 - [2. Technical Report](#2-technical-report)
     - [2.1 What worked well](#21-what-worked-well)
@@ -28,6 +41,7 @@ tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]
         - [3.2.3 Tasks Distribution](#323-tasks-distribution)
 - [4. What I'll Do Differently](#4-what-ill-do-differently)
 - [5. Conclusion](#5-conclusion)
+</details>
 
 # 1. Introduction
 Ruby and the Lost Crystals is a third-year game project developed at SAE Institute Geneva, in collaboration with Game Programming, Game Art, and Audio Engineering students. 

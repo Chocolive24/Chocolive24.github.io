@@ -20,7 +20,18 @@ In this post I'll talk about my implementation of rollback in my project. As thi
 
 From the various tools and implementation choices made for my project to the rollback implementation itself, we'll look at the technical challenges encountered when using this technique for your online game.
 
-# Contents
+<details class="group my-8 max-w-4xl mx-auto">
+  <summary class="list-none cursor-pointer inline-flex items-center gap-2 w-fit text-gray-300">
+    <!-- Flèche -->
+    <svg class="w-10 h-10 transition-transform group-open:rotate-90"
+         xmlns="http://www.w3.org/2000/svg" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5l7 7-7 7" /></svg>
+    <!-- Texte -->
+    <span class="text-4xl font-bold color-white">Content</span>
+  </summary>
+
+<div class="max-w-4xl mx-auto text-justify">
 
 - [Technical direction](#technical-direction)
 - [Project architecture](#project-architecture)
@@ -37,6 +48,7 @@ From the various tools and implementation choices made for my project to the rol
   - [Resimulate the game](#resimulate-the-game)
   - [Confirm frames](#confirm-frames)
 - [Conclusion](#conclusion)
+</details>
 
 # Technical direction.
 

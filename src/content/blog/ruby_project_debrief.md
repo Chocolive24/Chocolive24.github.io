@@ -6,7 +6,18 @@ heroImage: "/ruby/gifs/debrief.gif"
 tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]
 ---
 
-# Contents
+<details class="group my-8 max-w-4xl mx-auto">
+  <summary class="list-none cursor-pointer inline-flex items-center gap-2 w-fit text-gray-300">
+    <!-- Flèche -->
+    <svg class="w-10 h-10 transition-transform group-open:rotate-90"
+         xmlns="http://www.w3.org/2000/svg" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5l7 7-7 7" /></svg>
+    <!-- Texte -->
+    <span class="text-4xl font-bold color-white">Content</span>
+  </summary>
+
+<div class="max-w-4xl mx-auto text-justify">
 
 - [1. Context](#1-context)
   - [1.1 Game Pitch](#11-game-pitch)
@@ -53,13 +64,18 @@ tags: ["Game", "3D", "Unreal", "Perforce", "Wwise", "SAE", "Group"]
             - [5.4.1.3 November to December](#5413-november-to-december)
             - [5.4.1.4 January to February 14](#5414-january-to-february-14)
 - [6. Assessment of the Level of Ambition, Risks and Fears](#6-assessment-of-the-level-of-ambition-risks-and-fears)
+</details>
 
-# 1. Context
+
+
+# <div class="text-center mt-16">1. Context</div>
+
+<div class="max-w-4xl mx-auto text-justify">
 Ruby and the Lost Crystals is a game project produced as part of the third year of the Bachelor's programme in Games Programming at SAE-Institut in Geneva. The project is a collaboration between the school's Game Programming, Game Art, and Audio Engineering departments. It served as the main project for the Game Programmers, while for the Game Artists and Audio Engineers, it was a side project alongside their other coursework.
 
 The aim is to produce a vertical slice in six months (from September to February), enabling us to demonstrate gameplay that is representative of the game's final concept.
 The aim of the project is to have a semi-professional experience where each discipline plays an essential role in production and where students can specialise in one aspect of game development.
-## 1.1 Game Pitch
+## <div class="text-center mt-16">1.1 Game Pitch</div>
 “In a fantasy world strewn with ruins, Ruby and her mysterious companion Sapphire must work together to progress, with the sole mission of restoring the scattered crystals. To do this, Ruby is able to perform physical interactions, while Sapphire can fire projectiles with a variety of behaviours”.
 Ruby and the lost crystals is a game that combines exploration, reflection and shooting.” 
 
@@ -74,7 +90,7 @@ Ruby and the lost crystals is a game that combines exploration, reflection and s
     </table>
 </div>
           
-## 1.2 Game Pillars
+## <div class="text-center mt-16">1.2 Game Pillars</div>
 Our vision was a Relaxing and Feel Good experience. Inspired by the wholesome genre, the game aims to set a positive and restful context. This ambition is reflected not only in the design of the characters and their dynamic duo, but also in the design of the environment, music and user interface.
 
 This relaxing atmosphere is there for players to unwind and enjoy the experience at their own pace. As far as the gameplay is concerned, we've tried to reinforce a sense of satisfaction for the player. The game is paced so that the player faces a series of short, varied challenges. 
@@ -99,13 +115,13 @@ The challenge can be varied shooting phases with the different behaviour of the 
     </table>
 </div>
 
-## 1.3 Project Ambitions
+## <div class="text-center mt-16">1.3 Project Ambitions</div>
 Our goal for this project was to create a high-quality game that we could proudly showcase in our portfolios while demonstrating our ability to work as a team. We aimed for polished visuals, smooth and enjoyable gameplay, and engaging puzzles that provide a sense of reward and satisfaction. Our ambition was to craft a cozy atmosphere and deliver an experience that could even be worthy of award nominations.
 
-# 2. Project Environnement
+# <div class="text-center mt-16">2. Project Environnement</div>
 On the whole, we have been fairly free to choose the tools to be used and the roles of each person in the project. The aim was to teach us how to work together and make joint decisions.
 
-## 2.1 Technical Environnement
+## <div class="text-center mt-16">2.1 Technical Environnement</div>
 The technical softwares were the only logistical constraints we had. Unreal 5 was imposed on us as the game engine, Perforce as the version management tool, and finally, Wwise as the middleware for integrating and managing the game's audio.
 
 <div style="text-align:center">
@@ -116,7 +132,7 @@ The technical softwares were the only logistical constraints we had. Unreal 5 wa
 The Unreal project was initially set up in C++ to allow an easy mix of C++ and Blueprints. However, we worked entirely in Blueprints, except for modifying the default player code.
 We made this choice because we felt that our game mechanics didn’t require overly complex systems and that using Blueprints would significantly speed up development. Additionally, we anticipated the arrival of Game Audio students, who might need to integrate their sounds into the code.
 
-## 2.2 Organisational Environment
+## <div class="text-center mt-16">2.2 Organisational Environment</div>
 Our primary communication tool was Discord. We had a server with several channels dedicated to specific topics, where team members could ask for advice or assistance. We also encouraged people to share their progress in a 'share-your-work' channel to foster motivation and add some life to the project's development. Additionally, we had channels for project documentation, idea submissions, bug tracking, sprint goals, and creative feedback from teachers and experts.
 
 <div style="text-align:center">
@@ -145,8 +161,7 @@ Finally, we can mention the use of Jira during the first two months of work to a
   <p style="margin-top: -30px"><em>Screenshot of our Jira board, where we initially assigned sprint tasks at the beginning of the project.</em></p>
 </div>
 
-
-## 2.3 Creative Environnement
+## <div class="text-center mt-16">2.3 Creative Environnement</div>
 We used two different approaches for generating ideas and concepts. Since our team did not include a Concept Artist, Designer, or any similar role, we had to be resourceful in finding solutions. Our main source of ideas came from reference games, typically The Legend of Zelda series or The Witness.
 
 Our other method for finding inspiration was using AI, particularly ChatGPT, which greatly helped us with the game's narrative aspects and Concept Art generation.
@@ -156,7 +171,7 @@ Our other method for finding inspiration was using AI, particularly ChatGPT, whi
   <p style="margin-top: -30px"><em>Concept art for the game generated using ChatGPT.</em></p>
 </div>
 
-## 2.4 Documents
+## <div class="text-center mt-16">2.4 Documents</div>
 In addition to the management tools, we put in place several documents to structure the vision of the project and ensure good communication between the teams:
 - Game Design Document (GDD) (made on Google Doc): Listed the game mechanics and the artistic and audio asset requirements.
 - Global Vision Document (made on Miro): Served as a reference to ensure that all the teams were moving in the same direction.

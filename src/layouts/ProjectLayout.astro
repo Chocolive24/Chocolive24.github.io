@@ -29,7 +29,7 @@ const blogs = await getCollection("blog");
 
 <BaseLayout title={title} description={description} image={heroImage} ogType="article">
   <main class="md:flex md:justify-center pt-10">
-    <article class="prose prose-lg max-w-[1080px] prose-img:mx-auto">
+    <article class="markdown prose prose-lg max-w-[1080px] prose-img:mx-auto">
       {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6" />}
       
       <h1 class="title my-2 text-4xl font-bold">{title}</h1>

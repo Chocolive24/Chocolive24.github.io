@@ -5,3 +5,25 @@
 html {
     scroll-padding-top: 4rem;
 }
+
+.markdown h1, .markdown h2,.markdown h3,.markdown h4,.markdown h5,.markdown h6{ 
+    @apply text-center mt-16; 
+  }
+
+  .markdown h1.title {
+    @apply text-left mt-2;
+  }
+
+  .markdown p {
+    @apply max-w-4xl mx-auto text-justify;
+  }
+
+  /* Cible tout <em> qui est seul dans un <p>, pour l’utiliser comme légende */
+.markdown p > em {
+    @apply block text-center;
+    display: block;        /* pour forcer l’alignement */
+    text-align: center;    /* centrage du texte */
+    margin-top: 0.5rem;    /* petit espace au-dessus si tu veux */
+    color: #92959b;        /* optionnel : couleur grisée (tailwind: text-gray-400) */
+    font-size: 1.05rem;     /* optionnel : un peu plus petit */
+  }

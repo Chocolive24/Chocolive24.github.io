@@ -19,8 +19,6 @@ relatedBlogs: ["Ruby and the Lost Crystals: Project Debrief",
   "Ruby and The Lost Crystals: Post-Mortem."]
 ---
 
-
-
 <div style="text-align:center">
   <img src="/ruby/images/poster_16_9.jpg" alt="Poster of the game" style="width: 100%;">
   <p style="margin-top: -30px"><em>Poster of our game</em></p>
@@ -254,7 +252,7 @@ Here is a video showing all the tweakable parameters of my cel shader in Unreal.
 </div>
 
 ## Events where we showcased our game
-### Fantasy Basel
+## <div class="text-justify mt-16">Fantasy Basel</div>
 **Location:** Basel (Switzerland).<br>
 **Dates:** 29 to 31 May 2025.<br>
 **Team members on site:** Olivier and Constantin (all 3 days), Isabelle, Diana and Bryan (1 day).

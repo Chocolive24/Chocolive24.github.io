@@ -19,7 +19,17 @@ The first thing I did was to read Mark Harris' technial post: [An Even Easier In
 
 In this technical post I'm going to talk about the particularities I had to take into account when using CUDA in my project and my journey to get to the final result of the raytracing book. I'm not going to explain how raytracing works, as Peter Shirley's ebook will inevitably do that better than I can.  Nor do I claim to have found all the solutions to my CUDA-related problems on my own, since I've drawn heavily on the CUDA post. I will often reference chapters from the book so it may be beneficial to have read it.
 
-# Content
+<details class="group my-8 max-w-4xl mx-auto">
+  <summary class="list-none cursor-pointer inline-flex items-center gap-2 w-fit text-gray-300">
+    <!-- Flèche -->
+    <svg class="w-10 h-10 transition-transform group-open:rotate-90"
+         xmlns="http://www.w3.org/2000/svg" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5l7 7-7 7" /></svg>
+    <!-- Texte -->
+    <span class="text-4xl font-bold color-white">Content</span>
+  </summary>
+
 
 - [Render the first image](#render-the-first-image)
 - [Create classes that can be used on both the CPU and GPU](#create-classes-that-can-be-used-on-both-the-cpu-and-gpu)
@@ -32,6 +42,7 @@ In this technical post I'm going to talk about the particularities I had to take
 - [The material abstraction](#the-material-abstraction)
 - [Final result](#final-result)
 - [Conclusion](#conclusion)
+</details>
 
 # Render the first image
 

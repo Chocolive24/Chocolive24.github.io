@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "../layouts/CV_Layout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
 
 import BackgroundLayout from "../layouts/BackgroundLayout.astro";
@@ -69,40 +69,37 @@ const games_projects = projects.filter((project) =>
     <img src="/cv/banniere.jpg" alt="About me" style="border-radius: 16px; width: 100%;" />
   </div>
   
-
-  
-  <div class="mb-10 flex flex-col md:flex-row gap-6 items-center">
-    <!-- Texte à gauche -->
-    <div class="w-full md:flex-[3]">
+  <div class="mb-10 grid gap-8 md:grid-cols-12 items-stretch">
+    <!-- Texte -->
+    <div class="md:col-span-8 self-stretch">
       <h1 class="text-4xl font-bold mb-6">Hello !</h1>
-      <p class="text-justify text-2xl">
-        My name is Olivier, I am a video game developer specialising in graphics programming,
-        and I have just obtained my bachelor's degree in Games Programming from the SAE Institute Geneva.
-      </p>
-      <p class="text-justify text-2xl mt-6">
-        Passionate about real-time rendering technologies, I am looking to put my technical skills 
-        at the disposal of a team to create memorable interactive experiences.
-      </p>
-      <p class="text-justify text-2xl mt-6">
-        Although I am focused on graphics programming, I also thrive on all aspects of game development.
-      </p>
+      <div class="space-y-6 text-2xl max-w-prose">
+        <p class="text-justify">
+          My name is Olivier, I am a video game developer specialising in graphics programming,
+          and I have just obtained my bachelor's degree in Games Programming from the SAE Institute Geneva.
+        </p>
+        <p class="text-justify">
+          Passionate about real-time rendering technologies, I am looking to put my technical skills
+          at the disposal of a team to create memorable interactive experiences.
+        </p>
+        <p class="text-justify">
+          Although I am focused on graphics programming, I also thrive on all aspects of game development.
+        </p>
+      </div>
     </div>
   
-    <!-- Photo à droite -->
-    <div class="fade-in w-full md:flex-[1] flex justify-center md:justify-end self-start">
-      <img 
-        src="/pp2.jpg" 
-        alt="Olivier Pachoud"
-        style="
-          width: 100%;
-          height: auto;
-          border-radius: 24px;
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-          object-fit: cover;
-        "
-      />
+    <!-- Image -->
+    <div class="md:col-span-4">
+      <div class="h-full">
+        <img
+          src="/pp2.jpg"
+          alt="Olivier Pachoud"
+          class="h-full w-full object-cover rounded-3xl shadow-2xl"
+        />
+      </div>
     </div>
   </div>
+  
 
    <div class="mb-5">
     <div class="text-4xl w-full font-bold">Education</div>

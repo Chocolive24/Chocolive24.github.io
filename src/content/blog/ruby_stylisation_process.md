@@ -6,6 +6,19 @@ heroImage: "/ruby/images/cel_shader.png"
 tags: ["Game", "3D", "Unreal", "Computer Graphics", "Post-Processing", "SAE", "Group"]
 ---
 
+<details class="group my-8 max-w-4xl mx-auto">
+  <summary class="list-none cursor-pointer inline-flex items-center gap-2 w-fit text-gray-300">
+    <!-- Flèche -->
+    <svg class="w-10 h-10 transition-transform group-open:rotate-90"
+         xmlns="http://www.w3.org/2000/svg" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5l7 7-7 7" /></svg>
+    <!-- Texte -->
+    <span class="text-4xl font-bold color-white">Content</span>
+  </summary>
+
+<div class="max-w-4xl mx-auto text-justify">
+
 - [1. Context](#1-context)
 - [2. Why a Cel Shader?](#2-why-a-cel-shader)
 - [3. Technical Direction](#3-technical-direction)
@@ -24,6 +37,7 @@ tags: ["Game", "3D", "Unreal", "Computer Graphics", "Post-Processing", "SAE", "G
     - [7.2 Outline](#72-outline)
     - [7.3 Treatment of the Characters](#73-treatment-of-the-characters)
 - [8. Conclusion](#8-conclusion)
+</details>
 
 # 1. Context
 Ruby and the Lost Crystals is a third-year game project developed at SAE Institute Geneva, in collaboration with Game Programming, Game Art, and Audio Engineering students. 
