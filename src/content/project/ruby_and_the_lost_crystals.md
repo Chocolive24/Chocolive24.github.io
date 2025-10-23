@@ -41,6 +41,41 @@ Ruby and the Lost Crystals is a **game project** produced as part of the **third
 The aim was to produce a **vertical slice in six months** (from September to February), enabling us to demonstrate gameplay that is representative of the game's final concept.
 The aim of the project is to have a **semi-professional experience** where each discipline plays an essential role in production and where **students can specialise in one aspect of game development**.
 
+# <div class="text-center mt-16">SAE Awards 2025 - Best Student Game Project</div>
+
+<div class="max-w-4xl mx-auto text-justify">
+
+We’re incredibly proud to share that our project **won the “Best Student Game Project” award at the SAE Awards 2025**, held in Cologne, Germany.  
+It was a truly **special moment** to see our **work recognized** and to have the chance to **step on stage** and **share this experience with students from all over the world**.  
+**Huge thanks to our amazing team** for their passion and dedication, **and to SAE Institute** for giving us the opportunity to bring this project to life.
+
+<table style="margin:0 auto; border-collapse:separate; border-spacing:6px 2px; table-layout:fixed;">
+    <tbody>
+      <tr>
+        <td>
+          <img src="/ruby/images/sae_awards/award1.png"
+               alt=""
+               style="width:100%; max-width:550px; height:auto; border-radius:0px;">
+          <p style="margin-top: -5px"><em>Team photo on stage during the ceremony.</em></p>
+        </td>
+        <td>
+          <img src="/ruby/images/sae_awards/award2.png"
+               alt=""
+               style="width:100%; max-width:550px; height:auto; border-radius:0px;">
+          <p style="margin-top: -5px"><em>Photo taken while I was speaking on behalf of the entire team.</em></p>
+        </td>
+      </tr>
+    </tbody>
+    <thead>
+</table>
+
+<div style="text-align:center">
+  <img src="/ruby/images/sae_awards/award3.jpg" alt="Final photo of the ceremony with all the winners from each SAE school around the world." style="width: 100%;">
+  <p style="margin-top: -5px"><em>Final photo of the ceremony with all the winners from each SAE school around the world.</em></p>
+</div>
+
+</div>
+
 # <div class="text-center mt-16">Pitch</div>
 
 In a mystical world filled with ancient ruins and forgotten magic, Ruby and her enigmatic companion, Sapphire, must join forces to restore the scattered crystals that once brought life to the land.
